@@ -197,9 +197,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
+    <Compile Include="Controllers\Cash_Bottom_DayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Payment_MethodsController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
+    <Compile Include="Controllers\VatsController.cs" />
     <Compile Include="Data\Entity\AGE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -390,6 +396,36 @@
     <Content Include="Views\Home\Management.cshtml" />
     <Content Include="Views\Home\Transaction.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
+    <Content Include="Views\Brands\Create.cshtml" />
+    <Content Include="Views\Brands\Delete.cshtml" />
+    <Content Include="Views\Brands\Details.cshtml" />
+    <Content Include="Views\Brands\Edit.cshtml" />
+    <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\Cash_Bottom_Day\Create.cshtml" />
+    <Content Include="Views\Cash_Bottom_Day\Delete.cshtml" />
+    <Content Include="Views\Cash_Bottom_Day\Details.cshtml" />
+    <Content Include="Views\Cash_Bottom_Day\Edit.cshtml" />
+    <Content Include="Views\Cash_Bottom_Day\Index.cshtml" />
+    <Content Include="Views\Languages\Create.cshtml" />
+    <Content Include="Views\Languages\Delete.cshtml" />
+    <Content Include="Views\Languages\Details.cshtml" />
+    <Content Include="Views\Languages\Edit.cshtml" />
+    <Content Include="Views\Languages\Index.cshtml" />
+    <Content Include="Views\Payment_Methods\Create.cshtml" />
+    <Content Include="Views\Payment_Methods\Delete.cshtml" />
+    <Content Include="Views\Payment_Methods\Details.cshtml" />
+    <Content Include="Views\Payment_Methods\Edit.cshtml" />
+    <Content Include="Views\Payment_Methods\Index.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Delete.cshtml" />
+    <Content Include="Views\Roles\Details.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Vats\Create.cshtml" />
+    <Content Include="Views\Vats\Delete.cshtml" />
+    <Content Include="Views\Vats\Details.cshtml" />
+    <Content Include="Views\Vats\Edit.cshtml" />
+    <Content Include="Views\Vats\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

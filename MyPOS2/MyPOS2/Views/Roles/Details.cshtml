@@ -1,0 +1,26 @@
+﻿@model MyPOS2.Data.Entity.ROLE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ROLE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nameRole)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nameRole)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idRole }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
