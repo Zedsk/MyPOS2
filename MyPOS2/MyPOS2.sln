@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPOS2", "MyPOS2\MyPOS2.csproj", "{A04B8BA1-E0D2-42CA-BC6E-A8A5E688E7FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPOS2.Tests", "MyPOS2.Tests\MyPOS2.Tests.csproj", "{8811C066-80ED-4AFA-AE4C-22334398B00E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A04B8BA1-E0D2-42CA-BC6E-A8A5E688E7FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A04B8BA1-E0D2-42CA-BC6E-A8A5E688E7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A04B8BA1-E0D2-42CA-BC6E-A8A5E688E7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A04B8BA1-E0D2-42CA-BC6E-A8A5E688E7FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8811C066-80ED-4AFA-AE4C-22334398B00E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8811C066-80ED-4AFA-AE4C-22334398B00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8811C066-80ED-4AFA-AE4C-22334398B00E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8811C066-80ED-4AFA-AE4C-22334398B00E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7409F82-C90D-4044-B9DB-6A4679140339}
+	EndGlobalSection
+EndGlobal
