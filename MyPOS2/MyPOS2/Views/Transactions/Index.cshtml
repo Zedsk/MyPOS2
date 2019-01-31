@@ -20,11 +20,12 @@
         </div>
         <div>
             <label for="datetransaction">Date</label>
-            <input type="text" name="datetransaction" value="01/12/2018" size="8" />
+            <input type="text" name="datetransaction" value="@DateTime.Now.Date" size="6" />
+            
         </div>
         <div>
             <label for="heuretransaction">Heure</label>
-            <input type="text" name="heuretransaction" value="12:22:22" size="6" />
+            <input type="text" name="heuretransaction" value="@DateTime.Now.TimeOfDay" size="5" />
         </div>
         <div>
             <label for="vendeur">Vendeur</label>

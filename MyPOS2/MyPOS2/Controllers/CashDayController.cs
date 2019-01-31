@@ -10,18 +10,18 @@ using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
 {
-    public class Cash_Bottom_DayController : Controller
+    public class CashDayController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
-        // GET: Cash_Bottom_Day
+        // GET: CashDay
         public ActionResult Index()
         {
             var cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAY.Include(c => c.TERMINAL);
             return View(cASH_BOTTOM_DAY.ToList());
         }
 
-        // GET: Cash_Bottom_Day/Details/5
+        // GET: CashDay/Details/5
         public ActionResult Details(DateTime id)
         {
             if (id == null)
@@ -36,14 +36,14 @@ namespace MyPOS2.Controllers
             return View(cASH_BOTTOM_DAY);
         }
 
-        // GET: Cash_Bottom_Day/Create
+        // GET: CashDay/Create
         public ActionResult Create()
         {
             ViewBag.terminalId = new SelectList(db.TERMINAL, "idTerminal", "nameTerminal");
             return View();
         }
 
-        // POST: Cash_Bottom_Day/Create
+        // POST: CashDay/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -61,7 +61,7 @@ namespace MyPOS2.Controllers
             return View(cASH_BOTTOM_DAY);
         }
 
-        // GET: Cash_Bottom_Day/Edit/5
+        // GET: CashDay/Edit/5
         public ActionResult Edit(DateTime id)
         {
             if (id == null)
@@ -77,7 +77,7 @@ namespace MyPOS2.Controllers
             return View(cASH_BOTTOM_DAY);
         }
 
-        // POST: Cash_Bottom_Day/Edit/5
+        // POST: CashDay/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -94,7 +94,7 @@ namespace MyPOS2.Controllers
             return View(cASH_BOTTOM_DAY);
         }
 
-        // GET: Cash_Bottom_Day/Delete/5
+        // GET: CashDay/Delete/5
         public ActionResult Delete(DateTime id)
         {
             if (id == null)
@@ -109,7 +109,7 @@ namespace MyPOS2.Controllers
             return View(cASH_BOTTOM_DAY);
         }
 
-        // POST: Cash_Bottom_Day/Delete/5
+        // POST: CashDay/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(DateTime id)

@@ -198,7 +198,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
-    <Compile Include="Controllers\Cash_Bottom_DayController.cs" />
+    <Compile Include="Controllers\CashDayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -401,11 +401,6 @@
     <Content Include="Views\Brands\Details.cshtml" />
     <Content Include="Views\Brands\Edit.cshtml" />
     <Content Include="Views\Brands\Index.cshtml" />
-    <Content Include="Views\Cash_Bottom_Day\Create.cshtml" />
-    <Content Include="Views\Cash_Bottom_Day\Delete.cshtml" />
-    <Content Include="Views\Cash_Bottom_Day\Details.cshtml" />
-    <Content Include="Views\Cash_Bottom_Day\Edit.cshtml" />
-    <Content Include="Views\Cash_Bottom_Day\Index.cshtml" />
     <Content Include="Views\Languages\Create.cshtml" />
     <Content Include="Views\Languages\Delete.cshtml" />
     <Content Include="Views\Languages\Details.cshtml" />
@@ -426,6 +421,11 @@
     <Content Include="Views\Vats\Details.cshtml" />
     <Content Include="Views\Vats\Edit.cshtml" />
     <Content Include="Views\Vats\Index.cshtml" />
+    <Content Include="Views\CashDay\Create.cshtml" />
+    <Content Include="Views\CashDay\Delete.cshtml" />
+    <Content Include="Views\CashDay\Details.cshtml" />
+    <Content Include="Views\CashDay\Edit.cshtml" />
+    <Content Include="Views\CashDay\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

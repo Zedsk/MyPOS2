@@ -27,12 +27,12 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LANGUAGES lANGUAGES = db.LANGUAGES.Find(id);
-            if (lANGUAGES == null)
+            LANGUAGES language = db.LANGUAGES.Find(id);
+            if (language == null)
             {
                 return HttpNotFound();
             }
-            return View(lANGUAGES);
+            return View(language);
         }
 
         // GET: Languages/Create
@@ -46,16 +46,16 @@ namespace MyPOS2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idLanguage,nameLanguage")] LANGUAGES lANGUAGES)
+        public ActionResult Create([Bind(Include = "idLanguage,nameLanguage")] LANGUAGES language)
         {
             if (ModelState.IsValid)
             {
-                db.LANGUAGES.Add(lANGUAGES);
+                db.LANGUAGES.Add(language);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(lANGUAGES);
+            return View(language);
         }
 
         // GET: Languages/Edit/5
@@ -65,12 +65,12 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LANGUAGES lANGUAGES = db.LANGUAGES.Find(id);
-            if (lANGUAGES == null)
+            LANGUAGES language = db.LANGUAGES.Find(id);
+            if (language == null)
             {
                 return HttpNotFound();
             }
-            return View(lANGUAGES);
+            return View(language);
         }
 
         // POST: Languages/Edit/5
@@ -78,15 +78,15 @@ namespace MyPOS2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idLanguage,nameLanguage")] LANGUAGES lANGUAGES)
+        public ActionResult Edit([Bind(Include = "idLanguage,nameLanguage")] LANGUAGES language)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(lANGUAGES).State = EntityState.Modified;
+                db.Entry(language).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(lANGUAGES);
+            return View(language);
         }
 
         // GET: Languages/Delete/5
@@ -96,12 +96,12 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LANGUAGES lANGUAGES = db.LANGUAGES.Find(id);
-            if (lANGUAGES == null)
+            LANGUAGES language = db.LANGUAGES.Find(id);
+            if (language == null)
             {
                 return HttpNotFound();
             }
-            return View(lANGUAGES);
+            return View(language);
         }
 
         // POST: Languages/Delete/5
@@ -109,8 +109,8 @@ namespace MyPOS2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            LANGUAGES lANGUAGES = db.LANGUAGES.Find(id);
-            db.LANGUAGES.Remove(lANGUAGES);
+            LANGUAGES language = db.LANGUAGES.Find(id);
+            db.LANGUAGES.Remove(language);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
