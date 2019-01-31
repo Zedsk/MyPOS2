@@ -1,0 +1,67 @@
+.page {
+	margin: 0 auto;
+	padding: 1px 0;
+	max-width: 1280px;
+}
+.header1 {
+	overflow:auto;
+	max-width: 95%;
+	background-color: black;
+	display: flex;
+	justify-content: space-around;
+}
+.header1 > div {
+	padding: 1%;
+}
+
+.header1 > div > label {
+	color: white;
+}
+.mysection {
+	display: flex;
+}
+.containerLeft {
+	overflow: auto;
+	background-color: silver;
+	color: black;
+	min-width: 25%;
+	max-width: 30%;
+	display: flex;
+	flex-direction: column;
+}
+.containerLeft > input {
+	margin : 1%;
+}
+.containerRight {
+	overflow: auto;
+	background-color: orange;
+	max-width: 70%;
+	display: flex;
+	flex-direction: column;
+}
+.search > input {
+	margin: 1%;
+	width: 97%;
+}
+.close-image img {
+    display: block;
+	padding: 1%;
+    height: 90px;  
+    width: 90px;
+	
+}
+
+@media screen and (max-width:600px){
+	.header1  {
+		flex-direction: column;
+	}
+	.mysection {
+		flex-direction: column;
+	}
+	.containerLeft {
+		max-width: 95%;
+	}
+	.containerRight {
+		max-width: 95%;
+	}
+}

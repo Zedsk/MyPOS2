@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/test2.css")" rel="stylesheet" type="text/css" />
+}
+
+
+<div class="page">
+    <header class="header1">
+        <div>
+            <label for="numterminal">n° de caisse</label>
+            <input type="text" name="numterminal" value="1" size="1" />
+        </div>
+        <div>
+            <label for="numtransaction">n° Opération</label>
+            <input type="text" name="numtransaction" value="999" size="3" />
+        </div>
+        <div>
+            <label for="datetransaction">Date</label>
+            <input type="text" name="datetransaction" value="01/12/2018" size="8" />
+        </div>
+        <div>
+            <label for="heuretransaction">Heure</label>
+            <input type="text" name="heuretransaction" value="12:22:22" size="6" />
+        </div>
+        <div>
+            <label for="vendeur">Vendeur</label>
+            <input id="vendeur" type="text" name="vendeur" value="Toto" size="20" />
+        </div>
+    </header>
+    <section class="mysection">
+        <div class="containerLeft">
+            <input type="text" placeholder="Add..">
+            <div class="detail">
+                <table class="table">
+                    <tr>
+                        <th>Produit</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td>potter</td>
+                        <td>20</td>
+                        <td>1</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>pot</td>
+                        <td>200</td>
+                        <td>2</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td>por</td>
+                        <td>50</td>
+                        <td>3</td>
+                        <td>150</td>
+                    </tr>
+                    <tr>
+                        <td>per</td>
+                        <td>10</td>
+                        <td>1</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>poer</td>
+                        <td>20</td>
+                        <td>3</td>
+                        <td>60</td>
+                    </tr>
+                    <tr>
+                        <td>potter</td>
+                        <td>20</td>
+                        <td>1</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>pot</td>
+                        <td>200</td>
+                        <td>2</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td>por</td>
+                        <td>50</td>
+                        <td>3</td>
+                        <td>150</td>
+                    </tr>
+                    <tr>
+                        <td>per</td>
+                        <td>10</td>
+                        <td>1</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>poer</td>
+                        <td>20</td>
+                        <td>3</td>
+                        <td>60</td>
+                    </tr>
+                </table>
+            </div>
+            <span>------------------------------------------------</span>
+            <div class="Total">
+                <p><strong>Total </strong><input type="text" name="subTotal1" value="" /></p>
+                <p>Ristourne <input type="text" name="subTotal1" value="" /></p>
+                <p><strong>Sous-Total </strong><input type="text" name="subTotal2" value="" /></p>
+                <p>
+                    TVA <select>
+                        <option value="0.21">21%</option>
+                    </select>
+                    <input type="text" name="TVA" value="" />
+                </p>
+                <p><strong>TOTAL à payer </strong><input type="text" name="Total" value="" /></p>
+            </div>
+            <div class="calculator">
+                <table id="calc">
+
+                    <tr>
+                        <td>
+                            <Button ID="Button1" Class="calc_btn" Value="1" OnClick="Button1_Click">1</Button>
+                        </td>
+                        <td>
+                            <Button ID="Button2" Class="calc_btn" Value="2" OnClick="Button2_Click">2</Button>
+                        </td>
+                        <td>
+                            <Button ID="Button3" Class="calc_btn" Value="3" OnClick="Button3_Click">3</Button>
+                        </td>
+                        <td>
+                            <Button ID="ButtonPlus" Class="calc_btn" Value="+" OnClick="ButtonPlus_Click">+</Button>
+                        </td>
+                        <td colspan="4">
+                            <Button ID="ButtonCustomer" Class="calc_btn" Value="" OnClick="ButtonCustomer_Click">Customer</Button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Button ID="Button4" Class="calc_btn" Value="4" OnClick="Button4_Click">4</Button>
+                        </td>
+                        <td>
+                            <Button ID="Button5" Class="calc_btn" Value="5" OnClick="Button5_Click">5</Button>
+                        </td>
+                        <td>
+                            <Button ID="Button6" Class="calc_btn" Value="6" OnClick="Button6_Click">6</Button>
+                        </td>
+                        <td>
+                            <Button ID="ButtonMinus" Class="calc_btn" Value="-" OnClick="ButtonMinus_Click">-</Button>
+                        </td>
+                        <td colspan="4">
+                            <Button ID="ButtonPayment" Class="calc_btn" Value="" OnClick="ButtonPayment_Click">Payment</Button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Button ID="Button7" Class="calc_btn" Value="7" OnClick="Button7_Click">7</Button>
+                        </td>
+                        <td>
+                            <Button ID="Button8" Class="calc_btn" Value="8" OnClick="Button8_Click">8</Button>
+                        </td>
+                        <td>
+                            <Button ID="Button9" Class="calc_btn" Value="9" OnClick="Button9_Click">9</Button>
+                        </td>
+                        <td>
+                            <Button ID="ButtonMultiply" Class="calc_btn" Value="qty" OnClick="ButtonQty_Click">qty</Button>
+                        </td>
+                        <td colspan="4">
+                            <Button ID="ButtonSuspend" Class="calc_btn" Value="" OnClick="ButtonSuspend_Click">Suspend</Button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Button ID="ButtonPlusMinus" runat="server" Class="calc_btn" Value="&plusmn;" OnClick="ButtonPlusMinus_Click">&plusmn;</Button>
+                        </td>
+                        <td>
+                            <Button ID="Button0" runat="server" Class="calc_btn" Value="0" OnClick="Button0_Click">0</Button>
+                        </td>
+                        <td>
+                            <Button ID="ButtonComa" runat="server" Class="calc_btn" Value="," OnClick="ButtonComa_Click">,</Button>
+                        </td>
+                        <td>
+                            <Button ID="ButtonReturn" runat="server" Class="calc_btn" Value="&larr;" OnClick="ButtonReturn_Click">&larr;</Button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div> <!-- end containerLeft -->
+        <div class="containerRight">
+            <div class="search">
+                <input type="text" placeholder="Search..">
+            </div>
+            <div>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+                <button class="close-image"><img src="~/Content/Images/First_Order_Star_Destroyer.jpg"></button>
+            </div>
+        </div> <!-- end containerRight -->
+    </section>
+</div> <!-- end page -->
