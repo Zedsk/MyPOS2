@@ -1,0 +1,2248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AGE">
+          <Key>
+            <PropertyRef Name="idAge" />
+          </Key>
+          <Property Name="idAge" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AGE_TRANSLATION">
+          <Key>
+            <PropertyRef Name="ageId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="ageId" Type="int" Nullable="false" />
+          <Property Name="languageId" Type="int" Nullable="false" />
+          <Property Name="rangeAges" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BRAND">
+          <Key>
+            <PropertyRef Name="idBrand" />
+          </Key>
+          <Property Name="idBrand" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameBrand" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CASH_BOTTOM_DAY">
+          <Key>
+            <PropertyRef Name="dateDay" />
+            <PropertyRef Name="terminalId" />
+          </Key>
+          <Property Name="dateDay" Type="datetime" Nullable="false" />
+          <Property Name="terminalId" Type="int" Nullable="false" />
+          <Property Name="beginningCash" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="endCash" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="idCategory" />
+          </Key>
+          <Property Name="idCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imageCat" Type="image" />
+        </EntityType>
+        <EntityType Name="CATEGORY_TRANSLATION">
+          <Key>
+            <PropertyRef Name="categoryId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="languageId" Type="int" Nullable="false" />
+          <Property Name="nameCategory" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONTACT">
+          <Key>
+            <PropertyRef Name="contactId" />
+          </Key>
+          <Property Name="contactId" Type="int" Nullable="false" />
+          <Property Name="brandId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="int" Nullable="false" />
+          <Property Name="isGoodClient" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HERO">
+          <Key>
+            <PropertyRef Name="idHero" />
+          </Key>
+          <Property Name="idHero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HERO_TRANSLATION">
+          <Key>
+            <PropertyRef Name="heroId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="heroId" Type="int" Nullable="false" />
+          <Property Name="languageId" Type="int" Nullable="false" />
+          <Property Name="nameHero" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="LANGUAGES">
+          <Key>
+            <PropertyRef Name="idLanguage" />
+          </Key>
+          <Property Name="idLanguage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameLanguage" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAYMENT">
+          <Key>
+            <PropertyRef Name="idPayment" />
+          </Key>
+          <Property Name="idPayment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paymentMethodId" Type="int" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="transactionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAYMENT_METHOD">
+          <Key>
+            <PropertyRef Name="idPaymentMethod" />
+          </Key>
+          <Property Name="idPaymentMethod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="method" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERSON">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="namePerson" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="barcode" Type="varchar" MaxLength="100" />
+          <Property Name="purchasePrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="salesPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="discountRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="imageProduct" Type="image" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="ageId" Type="int" Nullable="false" />
+          <Property Name="brandId" Type="int" Nullable="false" />
+          <Property Name="heroId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCT_TRANSLATION">
+          <Key>
+            <PropertyRef Name="productId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="languageId" Type="int" Nullable="false" />
+          <Property Name="nameProduct" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="description" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="idRole" />
+          </Key>
+          <Property Name="idRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameRole" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SHOP">
+          <Key>
+            <PropertyRef Name="idShop" />
+          </Key>
+          <Property Name="idShop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="40" />
+          <Property Name="email" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="SHOP_PRODUCT">
+          <Key>
+            <PropertyRef Name="idShopProduct" />
+          </Key>
+          <Property Name="idShopProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="shopId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SHOP_TRANSLATION">
+          <Key>
+            <PropertyRef Name="shopId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="shopId" Type="int" Nullable="false" />
+          <Property Name="languageId" Type="int" Nullable="false" />
+          <Property Name="nameShop" Type="varchar" MaxLength="100" />
+          <Property Name="street" Type="varchar" MaxLength="100" />
+          <Property Name="city" Type="varchar" MaxLength="100" />
+          <Property Name="opening" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SUBCATEGORY">
+          <Key>
+            <PropertyRef Name="idSubcategory" />
+          </Key>
+          <Property Name="idSubcategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parentCategory" Type="int" Nullable="false" />
+          <Property Name="childCategory" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TERMINAL">
+          <Key>
+            <PropertyRef Name="idTerminal" />
+          </Key>
+          <Property Name="idTerminal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameTerminal" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="shopId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TICKET">
+          <Key>
+            <PropertyRef Name="idTicket" />
+          </Key>
+          <Property Name="idTicket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="messageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TICKET_MESSAGE">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TICKET_MESSAGE_TRANSLATION">
+          <Key>
+            <PropertyRef Name="messageId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="messageId" Type="int" Nullable="false" />
+          <Property Name="languageId" Type="int" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="message" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRANSACTION_DETAILS">
+          <Key>
+            <PropertyRef Name="idTransactionDetails" />
+          </Key>
+          <Property Name="idTransactionDetails" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="transactionId" Type="int" Nullable="false" />
+          <Property Name="vatId" Type="int" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="nameItem" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="TRANSACTIONS">
+          <Key>
+            <PropertyRef Name="idTransaction" />
+          </Key>
+          <Property Name="idTransaction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="transactionDate" Type="datetime" Nullable="false" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="isClose" Type="bit" Nullable="false" />
+          <Property Name="isCanceled" Type="bit" Nullable="false" />
+          <Property Name="isReturn" Type="bit" Nullable="false" />
+          <Property Name="vendorId" Type="int" Nullable="false" />
+          <Property Name="terminalId" Type="int" Nullable="false" />
+          <Property Name="languageId" Type="int" Nullable="false" />
+          <Property Name="shopId" Type="int" Nullable="false" />
+          <Property Name="customerId" Type="int" Nullable="false" />
+          <Property Name="ticketId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="street" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="zipCode" Type="int" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="roleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VAT">
+          <Key>
+            <PropertyRef Name="idVat" />
+          </Key>
+          <Property Name="idVat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appliedVat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENDOR_SHOP">
+          <Key>
+            <PropertyRef Name="shopId" />
+            <PropertyRef Name="vendorId" />
+          </Key>
+          <Property Name="shopId" Type="int" Nullable="false" />
+          <Property Name="vendorId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AGE_TRANSLATION_AGE">
+          <End Role="AGE" Type="Self.AGE" Multiplicity="1" />
+          <End Role="AGE_TRANSLATION" Type="Self.AGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGE">
+              <PropertyRef Name="idAge" />
+            </Principal>
+            <Dependent Role="AGE_TRANSLATION">
+              <PropertyRef Name="ageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGE_TRANSLATION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="AGE_TRANSLATION" Type="Self.AGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="AGE_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARD_TRANSACTION">
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="1" />
+          <End Role="PAYMENT" Type="Self.PAYMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACTIONS">
+              <PropertyRef Name="idTransaction" />
+            </Principal>
+            <Dependent Role="PAYMENT">
+              <PropertyRef Name="transactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CASH_BOTTOM_BEGIN_TERMINAL">
+          <End Role="TERMINAL" Type="Self.TERMINAL" Multiplicity="1" />
+          <End Role="CASH_BOTTOM_DAY" Type="Self.CASH_BOTTOM_DAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TERMINAL">
+              <PropertyRef Name="idTerminal" />
+            </Principal>
+            <Dependent Role="CASH_BOTTOM_DAY">
+              <PropertyRef Name="terminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORY_TRANSLATION_CATEGORY">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="CATEGORY_TRANSLATION" Type="Self.CATEGORY_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="CATEGORY_TRANSLATION">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORY_TRANSLATION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="CATEGORY_TRANSLATION" Type="Self.CATEGORY_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="CATEGORY_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_BRAND">
+          <End Role="BRAND" Type="Self.BRAND" Multiplicity="1" />
+          <End Role="CONTACT" Type="Self.CONTACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BRAND">
+              <PropertyRef Name="idBrand" />
+            </Principal>
+            <Dependent Role="CONTACT">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_PERSON">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
+          <End Role="CONTACT" Type="Self.CONTACT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="CONTACT">
+              <PropertyRef Name="contactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_PERSON">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="CUSTOMER">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HERO_TRANSLATION_HERO">
+          <End Role="HERO" Type="Self.HERO" Multiplicity="1" />
+          <End Role="HERO_TRANSLATION" Type="Self.HERO_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HERO">
+              <PropertyRef Name="idHero" />
+            </Principal>
+            <Dependent Role="HERO_TRANSLATION">
+              <PropertyRef Name="heroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HERO_TRANSLATION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="HERO_TRANSLATION" Type="Self.HERO_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="HERO_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAYMENT_PAYMENT_METHOD">
+          <End Role="PAYMENT_METHOD" Type="Self.PAYMENT_METHOD" Multiplicity="1" />
+          <End Role="PAYMENT" Type="Self.PAYMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYMENT_METHOD">
+              <PropertyRef Name="idPaymentMethod" />
+            </Principal>
+            <Dependent Role="PAYMENT">
+              <PropertyRef Name="paymentMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_AGE">
+          <End Role="AGE" Type="Self.AGE" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGE">
+              <PropertyRef Name="idAge" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="ageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_BRAND">
+          <End Role="BRAND" Type="Self.BRAND" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BRAND">
+              <PropertyRef Name="idBrand" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_CATEGORY">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_HERO">
+          <End Role="HERO" Type="Self.HERO" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HERO">
+              <PropertyRef Name="idHero" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="heroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_TRANSLATION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="PRODUCT_TRANSLATION" Type="Self.PRODUCT_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="PRODUCT_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_TRANSLATION_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="PRODUCT_TRANSLATION" Type="Self.PRODUCT_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="PRODUCT_TRANSLATION">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SHOP_PRODUCT_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="SHOP_PRODUCT" Type="Self.SHOP_PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="SHOP_PRODUCT">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SHOP_PRODUCT_SHOP">
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="SHOP_PRODUCT" Type="Self.SHOP_PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHOP">
+              <PropertyRef Name="idShop" />
+            </Principal>
+            <Dependent Role="SHOP_PRODUCT">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SHOP_TRANSLATION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="SHOP_TRANSLATION" Type="Self.SHOP_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="SHOP_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SHOP_TRANSLATION_SHOP">
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="SHOP_TRANSLATION" Type="Self.SHOP_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHOP">
+              <PropertyRef Name="idShop" />
+            </Principal>
+            <Dependent Role="SHOP_TRANSLATION">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBCATEGORY_Child">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="SUBCATEGORY" Type="Self.SUBCATEGORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="SUBCATEGORY">
+              <PropertyRef Name="childCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBCATEGORY_Parent">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="SUBCATEGORY" Type="Self.SUBCATEGORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="SUBCATEGORY">
+              <PropertyRef Name="parentCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TERMINAL_SHOP">
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="TERMINAL" Type="Self.TERMINAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHOP">
+              <PropertyRef Name="idShop" />
+            </Principal>
+            <Dependent Role="TERMINAL">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="TICKET_MESSAGE_TRANSLATION" Type="Self.TICKET_MESSAGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="TICKET_MESSAGE_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE">
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="TICKET_MESSAGE_TRANSLATION" Type="Self.TICKET_MESSAGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET_MESSAGE">
+              <PropertyRef Name="idMessage" />
+            </Principal>
+            <Dependent Role="TICKET_MESSAGE_TRANSLATION">
+              <PropertyRef Name="messageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TICKET_TICKET_MESSAGE">
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET_MESSAGE">
+              <PropertyRef Name="idMessage" />
+            </Principal>
+            <Dependent Role="TICKET">
+              <PropertyRef Name="messageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_DETAILS_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="TRANSACTION_DETAILS">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_DETAILS_TRANSACTION">
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="1" />
+          <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACTIONS">
+              <PropertyRef Name="idTransaction" />
+            </Principal>
+            <Dependent Role="TRANSACTION_DETAILS">
+              <PropertyRef Name="transactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_DETAILS_VAT">
+          <End Role="VAT" Type="Self.VAT" Multiplicity="1" />
+          <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VAT">
+              <PropertyRef Name="idVat" />
+            </Principal>
+            <Dependent Role="TRANSACTION_DETAILS">
+              <PropertyRef Name="vatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_POS">
+          <End Role="TERMINAL" Type="Self.TERMINAL" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TERMINAL">
+              <PropertyRef Name="idTerminal" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="terminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_SHOP">
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHOP">
+              <PropertyRef Name="idShop" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_VENDOR">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTIONS_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTIONS_TICKET">
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET">
+              <PropertyRef Name="idTicket" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="ticketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_PERSON">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_ROLE">
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="idRole" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDOR_SHOP_SHOP">
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="VENDOR_SHOP" Type="Self.VENDOR_SHOP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHOP">
+              <PropertyRef Name="idShop" />
+            </Principal>
+            <Dependent Role="VENDOR_SHOP">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDOR_SHOP_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="VENDOR_SHOP" Type="Self.VENDOR_SHOP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="VENDOR_SHOP">
+              <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Pos1ModelStoreContainer">
+          <EntitySet Name="AGE" EntityType="Self.AGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AGE_TRANSLATION" EntityType="Self.AGE_TRANSLATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BRAND" EntityType="Self.BRAND" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CASH_BOTTOM_DAY" EntityType="Self.CASH_BOTTOM_DAY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORY_TRANSLATION" EntityType="Self.CATEGORY_TRANSLATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTACT" EntityType="Self.CONTACT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HERO" EntityType="Self.HERO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HERO_TRANSLATION" EntityType="Self.HERO_TRANSLATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LANGUAGES" EntityType="Self.LANGUAGES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAYMENT" EntityType="Self.PAYMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAYMENT_METHOD" EntityType="Self.PAYMENT_METHOD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERSON" EntityType="Self.PERSON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT_TRANSLATION" EntityType="Self.PRODUCT_TRANSLATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SHOP" EntityType="Self.SHOP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SHOP_PRODUCT" EntityType="Self.SHOP_PRODUCT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SHOP_TRANSLATION" EntityType="Self.SHOP_TRANSLATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUBCATEGORY" EntityType="Self.SUBCATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TERMINAL" EntityType="Self.TERMINAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TICKET" EntityType="Self.TICKET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TICKET_MESSAGE" EntityType="Self.TICKET_MESSAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TICKET_MESSAGE_TRANSLATION" EntityType="Self.TICKET_MESSAGE_TRANSLATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANSACTION_DETAILS" EntityType="Self.TRANSACTION_DETAILS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANSACTIONS" EntityType="Self.TRANSACTIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VAT" EntityType="Self.VAT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENDOR_SHOP" EntityType="Self.VENDOR_SHOP" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AGE_TRANSLATION_AGE" Association="Self.FK_AGE_TRANSLATION_AGE">
+            <End Role="AGE" EntitySet="AGE" />
+            <End Role="AGE_TRANSLATION" EntitySet="AGE_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGE_TRANSLATION_LANGUAGE" Association="Self.FK_AGE_TRANSLATION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="AGE_TRANSLATION" EntitySet="AGE_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARD_TRANSACTION" Association="Self.FK_CARD_TRANSACTION">
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+            <End Role="PAYMENT" EntitySet="PAYMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CASH_BOTTOM_BEGIN_TERMINAL" Association="Self.FK_CASH_BOTTOM_BEGIN_TERMINAL">
+            <End Role="TERMINAL" EntitySet="TERMINAL" />
+            <End Role="CASH_BOTTOM_DAY" EntitySet="CASH_BOTTOM_DAY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORY_TRANSLATION_CATEGORY" Association="Self.FK_CATEGORY_TRANSLATION_CATEGORY">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="CATEGORY_TRANSLATION" EntitySet="CATEGORY_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORY_TRANSLATION_LANGUAGE" Association="Self.FK_CATEGORY_TRANSLATION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="CATEGORY_TRANSLATION" EntitySet="CATEGORY_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_BRAND" Association="Self.FK_CONTACT_BRAND">
+            <End Role="BRAND" EntitySet="BRAND" />
+            <End Role="CONTACT" EntitySet="CONTACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_PERSON" Association="Self.FK_CONTACT_PERSON">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="CONTACT" EntitySet="CONTACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_PERSON" Association="Self.FK_CUSTOMER_PERSON">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HERO_TRANSLATION_HERO" Association="Self.FK_HERO_TRANSLATION_HERO">
+            <End Role="HERO" EntitySet="HERO" />
+            <End Role="HERO_TRANSLATION" EntitySet="HERO_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HERO_TRANSLATION_LANGUAGE" Association="Self.FK_HERO_TRANSLATION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="HERO_TRANSLATION" EntitySet="HERO_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYMENT_PAYMENT_METHOD" Association="Self.FK_PAYMENT_PAYMENT_METHOD">
+            <End Role="PAYMENT_METHOD" EntitySet="PAYMENT_METHOD" />
+            <End Role="PAYMENT" EntitySet="PAYMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_AGE" Association="Self.FK_PRODUCT_AGE">
+            <End Role="AGE" EntitySet="AGE" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_BRAND" Association="Self.FK_PRODUCT_BRAND">
+            <End Role="BRAND" EntitySet="BRAND" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_CATEGORY" Association="Self.FK_PRODUCT_CATEGORY">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_HERO" Association="Self.FK_PRODUCT_HERO">
+            <End Role="HERO" EntitySet="HERO" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_TRANSLATION_LANGUAGE" Association="Self.FK_PRODUCT_TRANSLATION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="PRODUCT_TRANSLATION" EntitySet="PRODUCT_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_TRANSLATION_PRODUCT" Association="Self.FK_PRODUCT_TRANSLATION_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="PRODUCT_TRANSLATION" EntitySet="PRODUCT_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SHOP_PRODUCT_PRODUCT" Association="Self.FK_SHOP_PRODUCT_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="SHOP_PRODUCT" EntitySet="SHOP_PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SHOP_PRODUCT_SHOP" Association="Self.FK_SHOP_PRODUCT_SHOP">
+            <End Role="SHOP" EntitySet="SHOP" />
+            <End Role="SHOP_PRODUCT" EntitySet="SHOP_PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SHOP_TRANSLATION_LANGUAGE" Association="Self.FK_SHOP_TRANSLATION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="SHOP_TRANSLATION" EntitySet="SHOP_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SHOP_TRANSLATION_SHOP" Association="Self.FK_SHOP_TRANSLATION_SHOP">
+            <End Role="SHOP" EntitySet="SHOP" />
+            <End Role="SHOP_TRANSLATION" EntitySet="SHOP_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBCATEGORY_Child" Association="Self.FK_SUBCATEGORY_Child">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="SUBCATEGORY" EntitySet="SUBCATEGORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBCATEGORY_Parent" Association="Self.FK_SUBCATEGORY_Parent">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="SUBCATEGORY" EntitySet="SUBCATEGORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TERMINAL_SHOP" Association="Self.FK_TERMINAL_SHOP">
+            <End Role="SHOP" EntitySet="SHOP" />
+            <End Role="TERMINAL" EntitySet="TERMINAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES" Association="Self.FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="TICKET_MESSAGE_TRANSLATION" EntitySet="TICKET_MESSAGE_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE" Association="Self.FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE">
+            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
+            <End Role="TICKET_MESSAGE_TRANSLATION" EntitySet="TICKET_MESSAGE_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TICKET_TICKET_MESSAGE" Association="Self.FK_TICKET_TICKET_MESSAGE">
+            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
+            <End Role="TICKET" EntitySet="TICKET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_DETAILS_PRODUCT" Association="Self.FK_TRANSACTION_DETAILS_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_DETAILS_TRANSACTION" Association="Self.FK_TRANSACTION_DETAILS_TRANSACTION">
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+            <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_DETAILS_VAT" Association="Self.FK_TRANSACTION_DETAILS_VAT">
+            <End Role="VAT" EntitySet="VAT" />
+            <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_LANGUAGE" Association="Self.FK_TRANSACTION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_POS" Association="Self.FK_TRANSACTION_POS">
+            <End Role="TERMINAL" EntitySet="TERMINAL" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_SHOP" Association="Self.FK_TRANSACTION_SHOP">
+            <End Role="SHOP" EntitySet="SHOP" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_VENDOR" Association="Self.FK_TRANSACTION_VENDOR">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTIONS_CUSTOMER" Association="Self.FK_TRANSACTIONS_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTIONS_TICKET" Association="Self.FK_TRANSACTIONS_TICKET">
+            <End Role="TICKET" EntitySet="TICKET" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_PERSON" Association="Self.FK_USERS_PERSON">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_ROLE" Association="Self.FK_USERS_ROLE">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDOR_SHOP_SHOP" Association="Self.FK_VENDOR_SHOP_SHOP">
+            <End Role="SHOP" EntitySet="SHOP" />
+            <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDOR_SHOP_USERS" Association="Self.FK_VENDOR_SHOP_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Pos1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AGE">
+          <Key>
+            <PropertyRef Name="idAge" />
+          </Key>
+          <Property Name="idAge" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AGE_TRANSLATION" Relationship="Self.FK_AGE_TRANSLATION_AGE" FromRole="AGE" ToRole="AGE_TRANSLATION" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_AGE" FromRole="AGE" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="AGE_TRANSLATION">
+          <Key>
+            <PropertyRef Name="ageId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="ageId" Type="Int32" Nullable="false" />
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+          <Property Name="rangeAges" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AGE" Relationship="Self.FK_AGE_TRANSLATION_AGE" FromRole="AGE_TRANSLATION" ToRole="AGE" />
+          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_AGE_TRANSLATION_LANGUAGE" FromRole="AGE_TRANSLATION" ToRole="LANGUAGES" />
+        </EntityType>
+        <EntityType Name="BRAND">
+          <Key>
+            <PropertyRef Name="idBrand" />
+          </Key>
+          <Property Name="idBrand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameBrand" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_BRAND" FromRole="BRAND" ToRole="PRODUCT" />
+          <NavigationProperty Name="PERSON" Relationship="Self.CONTACT" FromRole="BRAND" ToRole="PERSON" />
+        </EntityType>
+        <EntityType Name="CASH_BOTTOM_DAY">
+          <Key>
+            <PropertyRef Name="dateDay" />
+            <PropertyRef Name="terminalId" />
+          </Key>
+          <Property Name="dateDay" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="terminalId" Type="Int32" Nullable="false" />
+          <Property Name="beginningCash" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="endCash" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="TERMINAL" Relationship="Self.FK_CASH_BOTTOM_BEGIN_TERMINAL" FromRole="CASH_BOTTOM_DAY" ToRole="TERMINAL" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="idCategory" />
+          </Key>
+          <Property Name="idCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imageCat" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="CATEGORY_TRANSLATION" Relationship="Self.FK_CATEGORY_TRANSLATION_CATEGORY" FromRole="CATEGORY" ToRole="CATEGORY_TRANSLATION" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_CATEGORY" FromRole="CATEGORY" ToRole="PRODUCT" />
+          <NavigationProperty Name="SUBCATEGORY" Relationship="Self.FK_SUBCATEGORY_Child" FromRole="CATEGORY" ToRole="SUBCATEGORY" />
+          <NavigationProperty Name="SUBCATEGORY1" Relationship="Self.FK_SUBCATEGORY_Parent" FromRole="CATEGORY" ToRole="SUBCATEGORY" />
+        </EntityType>
+        <EntityType Name="CATEGORY_TRANSLATION">
+          <Key>
+            <PropertyRef Name="categoryId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+          <Property Name="nameCategory" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CATEGORY" Relationship="Self.FK_CATEGORY_TRANSLATION_CATEGORY" FromRole="CATEGORY_TRANSLATION" ToRole="CATEGORY" />
+          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_CATEGORY_TRANSLATION_LANGUAGE" FromRole="CATEGORY_TRANSLATION" ToRole="LANGUAGES" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+          <Property Name="isGoodClient" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PERSON" Relationship="Self.FK_CUSTOMER_PERSON" FromRole="CUSTOMER" ToRole="PERSON" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTIONS_CUSTOMER" FromRole="CUSTOMER" ToRole="TRANSACTIONS" />
+        </EntityType>
+        <EntityType Name="HERO">
+          <Key>
+            <PropertyRef Name="idHero" />
+          </Key>
+          <Property Name="idHero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="HERO_TRANSLATION" Relationship="Self.FK_HERO_TRANSLATION_HERO" FromRole="HERO" ToRole="HERO_TRANSLATION" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_HERO" FromRole="HERO" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="HERO_TRANSLATION">
+          <Key>
+            <PropertyRef Name="heroId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="heroId" Type="Int32" Nullable="false" />
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+          <Property Name="nameHero" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HERO" Relationship="Self.FK_HERO_TRANSLATION_HERO" FromRole="HERO_TRANSLATION" ToRole="HERO" />
+          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_HERO_TRANSLATION_LANGUAGE" FromRole="HERO_TRANSLATION" ToRole="LANGUAGES" />
+        </EntityType>
+        <EntityType Name="LANGUAGES">
+          <Key>
+            <PropertyRef Name="idLanguage" />
+          </Key>
+          <Property Name="idLanguage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameLanguage" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AGE_TRANSLATION" Relationship="Self.FK_AGE_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="AGE_TRANSLATION" />
+          <NavigationProperty Name="CATEGORY_TRANSLATION" Relationship="Self.FK_CATEGORY_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="CATEGORY_TRANSLATION" />
+          <NavigationProperty Name="HERO_TRANSLATION" Relationship="Self.FK_HERO_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="HERO_TRANSLATION" />
+          <NavigationProperty Name="PRODUCT_TRANSLATION" Relationship="Self.FK_PRODUCT_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="PRODUCT_TRANSLATION" />
+          <NavigationProperty Name="SHOP_TRANSLATION" Relationship="Self.FK_SHOP_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="SHOP_TRANSLATION" />
+          <NavigationProperty Name="TICKET_MESSAGE_TRANSLATION" Relationship="Self.FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES" FromRole="LANGUAGES" ToRole="TICKET_MESSAGE_TRANSLATION" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_LANGUAGE" FromRole="LANGUAGES" ToRole="TRANSACTIONS" />
+        </EntityType>
+        <EntityType Name="PAYMENT">
+          <Key>
+            <PropertyRef Name="idPayment" />
+          </Key>
+          <Property Name="idPayment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paymentMethodId" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="transactionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_CARD_TRANSACTION" FromRole="PAYMENT" ToRole="TRANSACTIONS" />
+          <NavigationProperty Name="PAYMENT_METHOD" Relationship="Self.FK_PAYMENT_PAYMENT_METHOD" FromRole="PAYMENT" ToRole="PAYMENT_METHOD" />
+        </EntityType>
+        <EntityType Name="PAYMENT_METHOD">
+          <Key>
+            <PropertyRef Name="idPaymentMethod" />
+          </Key>
+          <Property Name="idPaymentMethod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="method" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PAYMENT" Relationship="Self.FK_PAYMENT_PAYMENT_METHOD" FromRole="PAYMENT_METHOD" ToRole="PAYMENT" />
+        </EntityType>
+        <EntityType Name="PERSON">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="namePerson" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_CUSTOMER_PERSON" FromRole="PERSON" ToRole="CUSTOMER" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK_USERS_PERSON" FromRole="PERSON" ToRole="USERS" />
+          <NavigationProperty Name="BRAND" Relationship="Self.CONTACT" FromRole="PERSON" ToRole="BRAND" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="purchasePrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="salesPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="discountRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="imageProduct" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="ageId" Type="Int32" Nullable="false" />
+          <Property Name="brandId" Type="Int32" Nullable="false" />
+          <Property Name="heroId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AGE" Relationship="Self.FK_PRODUCT_AGE" FromRole="PRODUCT" ToRole="AGE" />
+          <NavigationProperty Name="BRAND" Relationship="Self.FK_PRODUCT_BRAND" FromRole="PRODUCT" ToRole="BRAND" />
+          <NavigationProperty Name="CATEGORY" Relationship="Self.FK_PRODUCT_CATEGORY" FromRole="PRODUCT" ToRole="CATEGORY" />
+          <NavigationProperty Name="HERO" Relationship="Self.FK_PRODUCT_HERO" FromRole="PRODUCT" ToRole="HERO" />
+          <NavigationProperty Name="PRODUCT_TRANSLATION" Relationship="Self.FK_PRODUCT_TRANSLATION_PRODUCT" FromRole="PRODUCT" ToRole="PRODUCT_TRANSLATION" />
+          <NavigationProperty Name="SHOP_PRODUCT" Relationship="Self.FK_SHOP_PRODUCT_PRODUCT" FromRole="PRODUCT" ToRole="SHOP_PRODUCT" />
+          <NavigationProperty Name="TRANSACTION_DETAILS" Relationship="Self.FK_TRANSACTION_DETAILS_PRODUCT" FromRole="PRODUCT" ToRole="TRANSACTION_DETAILS" />
+        </EntityType>
+        <EntityType Name="PRODUCT_TRANSLATION">
+          <Key>
+            <PropertyRef Name="productId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+          <Property Name="nameProduct" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_PRODUCT_TRANSLATION_LANGUAGE" FromRole="PRODUCT_TRANSLATION" ToRole="LANGUAGES" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_TRANSLATION_PRODUCT" FromRole="PRODUCT_TRANSLATION" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="idRole" />
+          </Key>
+          <Property Name="idRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameRole" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK_USERS_ROLE" FromRole="ROLE" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="SHOP">
+          <Key>
+            <PropertyRef Name="idShop" />
+          </Key>
+          <Property Name="idShop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phone" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SHOP_PRODUCT" Relationship="Self.FK_SHOP_PRODUCT_SHOP" FromRole="SHOP" ToRole="SHOP_PRODUCT" />
+          <NavigationProperty Name="SHOP_TRANSLATION" Relationship="Self.FK_SHOP_TRANSLATION_SHOP" FromRole="SHOP" ToRole="SHOP_TRANSLATION" />
+          <NavigationProperty Name="TERMINAL" Relationship="Self.FK_TERMINAL_SHOP" FromRole="SHOP" ToRole="TERMINAL" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_SHOP" FromRole="SHOP" ToRole="TRANSACTIONS" />
+          <NavigationProperty Name="USERS" Relationship="Self.VENDOR_SHOP" FromRole="SHOP" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="SHOP_PRODUCT">
+          <Key>
+            <PropertyRef Name="idShopProduct" />
+          </Key>
+          <Property Name="idShopProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="shopId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_SHOP_PRODUCT_PRODUCT" FromRole="SHOP_PRODUCT" ToRole="PRODUCT" />
+          <NavigationProperty Name="SHOP" Relationship="Self.FK_SHOP_PRODUCT_SHOP" FromRole="SHOP_PRODUCT" ToRole="SHOP" />
+        </EntityType>
+        <EntityType Name="SHOP_TRANSLATION">
+          <Key>
+            <PropertyRef Name="shopId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="shopId" Type="Int32" Nullable="false" />
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+          <Property Name="nameShop" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="opening" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_SHOP_TRANSLATION_LANGUAGE" FromRole="SHOP_TRANSLATION" ToRole="LANGUAGES" />
+          <NavigationProperty Name="SHOP" Relationship="Self.FK_SHOP_TRANSLATION_SHOP" FromRole="SHOP_TRANSLATION" ToRole="SHOP" />
+        </EntityType>
+        <EntityType Name="SUBCATEGORY">
+          <Key>
+            <PropertyRef Name="idSubcategory" />
+          </Key>
+          <Property Name="idSubcategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parentCategory" Type="Int32" Nullable="false" />
+          <Property Name="childCategory" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CATEGORY" Relationship="Self.FK_SUBCATEGORY_Child" FromRole="SUBCATEGORY" ToRole="CATEGORY" />
+          <NavigationProperty Name="CATEGORY1" Relationship="Self.FK_SUBCATEGORY_Parent" FromRole="SUBCATEGORY" ToRole="CATEGORY" />
+        </EntityType>
+        <EntityType Name="TERMINAL">
+          <Key>
+            <PropertyRef Name="idTerminal" />
+          </Key>
+          <Property Name="idTerminal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameTerminal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shopId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CASH_BOTTOM_DAY" Relationship="Self.FK_CASH_BOTTOM_BEGIN_TERMINAL" FromRole="TERMINAL" ToRole="CASH_BOTTOM_DAY" />
+          <NavigationProperty Name="SHOP" Relationship="Self.FK_TERMINAL_SHOP" FromRole="TERMINAL" ToRole="SHOP" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_POS" FromRole="TERMINAL" ToRole="TRANSACTIONS" />
+        </EntityType>
+        <EntityType Name="TICKET">
+          <Key>
+            <PropertyRef Name="idTicket" />
+          </Key>
+          <Property Name="idTicket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="messageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.FK_TICKET_TICKET_MESSAGE" FromRole="TICKET" ToRole="TICKET_MESSAGE" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTIONS_TICKET" FromRole="TICKET" ToRole="TRANSACTIONS" />
+        </EntityType>
+        <EntityType Name="TICKET_MESSAGE">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="TICKET" Relationship="Self.FK_TICKET_TICKET_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="TICKET" />
+          <NavigationProperty Name="TICKET_MESSAGE_TRANSLATION" Relationship="Self.FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="TICKET_MESSAGE_TRANSLATION" />
+        </EntityType>
+        <EntityType Name="TICKET_MESSAGE_TRANSLATION">
+          <Key>
+            <PropertyRef Name="messageId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="messageId" Type="Int32" Nullable="false" />
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES" FromRole="TICKET_MESSAGE_TRANSLATION" ToRole="LANGUAGES" />
+          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE" FromRole="TICKET_MESSAGE_TRANSLATION" ToRole="TICKET_MESSAGE" />
+        </EntityType>
+        <EntityType Name="TRANSACTION_DETAILS">
+          <Key>
+            <PropertyRef Name="idTransactionDetails" />
+          </Key>
+          <Property Name="idTransactionDetails" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="transactionId" Type="Int32" Nullable="false" />
+          <Property Name="vatId" Type="Int32" Nullable="false" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="nameItem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_TRANSACTION_DETAILS_PRODUCT" FromRole="TRANSACTION_DETAILS" ToRole="PRODUCT" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_DETAILS_TRANSACTION" FromRole="TRANSACTION_DETAILS" ToRole="TRANSACTIONS" />
+          <NavigationProperty Name="VAT" Relationship="Self.FK_TRANSACTION_DETAILS_VAT" FromRole="TRANSACTION_DETAILS" ToRole="VAT" />
+        </EntityType>
+        <EntityType Name="TRANSACTIONS">
+          <Key>
+            <PropertyRef Name="idTransaction" />
+          </Key>
+          <Property Name="idTransaction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="transactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="isClose" Type="Boolean" Nullable="false" />
+          <Property Name="isCanceled" Type="Boolean" Nullable="false" />
+          <Property Name="isReturn" Type="Boolean" Nullable="false" />
+          <Property Name="vendorId" Type="Int32" Nullable="false" />
+          <Property Name="terminalId" Type="Int32" Nullable="false" />
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+          <Property Name="shopId" Type="Int32" Nullable="false" />
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+          <Property Name="ticketId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_TRANSACTIONS_CUSTOMER" FromRole="TRANSACTIONS" ToRole="CUSTOMER" />
+          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_TRANSACTION_LANGUAGE" FromRole="TRANSACTIONS" ToRole="LANGUAGES" />
+          <NavigationProperty Name="PAYMENT" Relationship="Self.FK_CARD_TRANSACTION" FromRole="TRANSACTIONS" ToRole="PAYMENT" />
+          <NavigationProperty Name="SHOP" Relationship="Self.FK_TRANSACTION_SHOP" FromRole="TRANSACTIONS" ToRole="SHOP" />
+          <NavigationProperty Name="TERMINAL" Relationship="Self.FK_TRANSACTION_POS" FromRole="TRANSACTIONS" ToRole="TERMINAL" />
+          <NavigationProperty Name="TICKET" Relationship="Self.FK_TRANSACTIONS_TICKET" FromRole="TRANSACTIONS" ToRole="TICKET" />
+          <NavigationProperty Name="TRANSACTION_DETAILS" Relationship="Self.FK_TRANSACTION_DETAILS_TRANSACTION" FromRole="TRANSACTIONS" ToRole="TRANSACTION_DETAILS" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK_TRANSACTION_VENDOR" FromRole="TRANSACTIONS" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="zipCode" Type="Int32" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PERSON" Relationship="Self.FK_USERS_PERSON" FromRole="USERS" ToRole="PERSON" />
+          <NavigationProperty Name="ROLE" Relationship="Self.FK_USERS_ROLE" FromRole="USERS" ToRole="ROLE" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_VENDOR" FromRole="USERS" ToRole="TRANSACTIONS" />
+          <NavigationProperty Name="SHOP" Relationship="Self.VENDOR_SHOP" FromRole="USERS" ToRole="SHOP" />
+        </EntityType>
+        <EntityType Name="VAT">
+          <Key>
+            <PropertyRef Name="idVat" />
+          </Key>
+          <Property Name="idVat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appliedVat" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="TRANSACTION_DETAILS" Relationship="Self.FK_TRANSACTION_DETAILS_VAT" FromRole="VAT" ToRole="TRANSACTION_DETAILS" />
+        </EntityType>
+        <Association Name="FK_AGE_TRANSLATION_AGE">
+          <End Role="AGE" Type="Self.AGE" Multiplicity="1" />
+          <End Role="AGE_TRANSLATION" Type="Self.AGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGE">
+              <PropertyRef Name="idAge" />
+            </Principal>
+            <Dependent Role="AGE_TRANSLATION">
+              <PropertyRef Name="ageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_AGE">
+          <End Role="AGE" Type="Self.AGE" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGE">
+              <PropertyRef Name="idAge" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="ageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGE_TRANSLATION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="AGE_TRANSLATION" Type="Self.AGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="AGE_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_BRAND">
+          <End Role="BRAND" Type="Self.BRAND" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BRAND">
+              <PropertyRef Name="idBrand" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CASH_BOTTOM_BEGIN_TERMINAL">
+          <End Role="TERMINAL" Type="Self.TERMINAL" Multiplicity="1" />
+          <End Role="CASH_BOTTOM_DAY" Type="Self.CASH_BOTTOM_DAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TERMINAL">
+              <PropertyRef Name="idTerminal" />
+            </Principal>
+            <Dependent Role="CASH_BOTTOM_DAY">
+              <PropertyRef Name="terminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORY_TRANSLATION_CATEGORY">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="CATEGORY_TRANSLATION" Type="Self.CATEGORY_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="CATEGORY_TRANSLATION">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_CATEGORY">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBCATEGORY_Child">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="SUBCATEGORY" Type="Self.SUBCATEGORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="SUBCATEGORY">
+              <PropertyRef Name="childCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBCATEGORY_Parent">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="SUBCATEGORY" Type="Self.SUBCATEGORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="SUBCATEGORY">
+              <PropertyRef Name="parentCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORY_TRANSLATION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="CATEGORY_TRANSLATION" Type="Self.CATEGORY_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="CATEGORY_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_PERSON">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="CUSTOMER">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTIONS_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HERO_TRANSLATION_HERO">
+          <End Role="HERO" Type="Self.HERO" Multiplicity="1" />
+          <End Role="HERO_TRANSLATION" Type="Self.HERO_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HERO">
+              <PropertyRef Name="idHero" />
+            </Principal>
+            <Dependent Role="HERO_TRANSLATION">
+              <PropertyRef Name="heroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_HERO">
+          <End Role="HERO" Type="Self.HERO" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HERO">
+              <PropertyRef Name="idHero" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="heroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HERO_TRANSLATION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="HERO_TRANSLATION" Type="Self.HERO_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="HERO_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_TRANSLATION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="PRODUCT_TRANSLATION" Type="Self.PRODUCT_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="PRODUCT_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SHOP_TRANSLATION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="SHOP_TRANSLATION" Type="Self.SHOP_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="SHOP_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="TICKET_MESSAGE_TRANSLATION" Type="Self.TICKET_MESSAGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="TICKET_MESSAGE_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_LANGUAGE">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARD_TRANSACTION">
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="1" />
+          <End Role="PAYMENT" Type="Self.PAYMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACTIONS">
+              <PropertyRef Name="idTransaction" />
+            </Principal>
+            <Dependent Role="PAYMENT">
+              <PropertyRef Name="transactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAYMENT_PAYMENT_METHOD">
+          <End Role="PAYMENT_METHOD" Type="Self.PAYMENT_METHOD" Multiplicity="1" />
+          <End Role="PAYMENT" Type="Self.PAYMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYMENT_METHOD">
+              <PropertyRef Name="idPaymentMethod" />
+            </Principal>
+            <Dependent Role="PAYMENT">
+              <PropertyRef Name="paymentMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_PERSON">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_TRANSLATION_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="PRODUCT_TRANSLATION" Type="Self.PRODUCT_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="PRODUCT_TRANSLATION">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SHOP_PRODUCT_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="SHOP_PRODUCT" Type="Self.SHOP_PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="SHOP_PRODUCT">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_DETAILS_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="TRANSACTION_DETAILS">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_ROLE">
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="idRole" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SHOP_PRODUCT_SHOP">
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="SHOP_PRODUCT" Type="Self.SHOP_PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHOP">
+              <PropertyRef Name="idShop" />
+            </Principal>
+            <Dependent Role="SHOP_PRODUCT">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SHOP_TRANSLATION_SHOP">
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="SHOP_TRANSLATION" Type="Self.SHOP_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHOP">
+              <PropertyRef Name="idShop" />
+            </Principal>
+            <Dependent Role="SHOP_TRANSLATION">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TERMINAL_SHOP">
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="TERMINAL" Type="Self.TERMINAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHOP">
+              <PropertyRef Name="idShop" />
+            </Principal>
+            <Dependent Role="TERMINAL">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_SHOP">
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHOP">
+              <PropertyRef Name="idShop" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_POS">
+          <End Role="TERMINAL" Type="Self.TERMINAL" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TERMINAL">
+              <PropertyRef Name="idTerminal" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="terminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TICKET_TICKET_MESSAGE">
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET_MESSAGE">
+              <PropertyRef Name="idMessage" />
+            </Principal>
+            <Dependent Role="TICKET">
+              <PropertyRef Name="messageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTIONS_TICKET">
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET">
+              <PropertyRef Name="idTicket" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="ticketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE">
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="TICKET_MESSAGE_TRANSLATION" Type="Self.TICKET_MESSAGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET_MESSAGE">
+              <PropertyRef Name="idMessage" />
+            </Principal>
+            <Dependent Role="TICKET_MESSAGE_TRANSLATION">
+              <PropertyRef Name="messageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_DETAILS_TRANSACTION">
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="1" />
+          <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACTIONS">
+              <PropertyRef Name="idTransaction" />
+            </Principal>
+            <Dependent Role="TRANSACTION_DETAILS">
+              <PropertyRef Name="transactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_DETAILS_VAT">
+          <End Role="VAT" Type="Self.VAT" Multiplicity="1" />
+          <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VAT">
+              <PropertyRef Name="idVat" />
+            </Principal>
+            <Dependent Role="TRANSACTION_DETAILS">
+              <PropertyRef Name="vatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTION_VENDOR">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTACT">
+          <End Role="BRAND" Type="Self.BRAND" Multiplicity="0..1" />
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
+        </Association>
+        <Association Name="VENDOR_SHOP">
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="*" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Pos1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AGE" EntityType="Self.AGE" />
+          <EntitySet Name="AGE_TRANSLATION" EntityType="Self.AGE_TRANSLATION" />
+          <EntitySet Name="BRAND" EntityType="Self.BRAND" />
+          <EntitySet Name="CASH_BOTTOM_DAY" EntityType="Self.CASH_BOTTOM_DAY" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" />
+          <EntitySet Name="CATEGORY_TRANSLATION" EntityType="Self.CATEGORY_TRANSLATION" />
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" />
+          <EntitySet Name="HERO" EntityType="Self.HERO" />
+          <EntitySet Name="HERO_TRANSLATION" EntityType="Self.HERO_TRANSLATION" />
+          <EntitySet Name="LANGUAGES" EntityType="Self.LANGUAGES" />
+          <EntitySet Name="PAYMENT" EntityType="Self.PAYMENT" />
+          <EntitySet Name="PAYMENT_METHOD" EntityType="Self.PAYMENT_METHOD" />
+          <EntitySet Name="PERSON" EntityType="Self.PERSON" />
+          <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" />
+          <EntitySet Name="PRODUCT_TRANSLATION" EntityType="Self.PRODUCT_TRANSLATION" />
+          <EntitySet Name="ROLE" EntityType="Self.ROLE" />
+          <EntitySet Name="SHOP" EntityType="Self.SHOP" />
+          <EntitySet Name="SHOP_PRODUCT" EntityType="Self.SHOP_PRODUCT" />
+          <EntitySet Name="SHOP_TRANSLATION" EntityType="Self.SHOP_TRANSLATION" />
+          <EntitySet Name="SUBCATEGORY" EntityType="Self.SUBCATEGORY" />
+          <EntitySet Name="TERMINAL" EntityType="Self.TERMINAL" />
+          <EntitySet Name="TICKET" EntityType="Self.TICKET" />
+          <EntitySet Name="TICKET_MESSAGE" EntityType="Self.TICKET_MESSAGE" />
+          <EntitySet Name="TICKET_MESSAGE_TRANSLATION" EntityType="Self.TICKET_MESSAGE_TRANSLATION" />
+          <EntitySet Name="TRANSACTION_DETAILS" EntityType="Self.TRANSACTION_DETAILS" />
+          <EntitySet Name="TRANSACTIONS" EntityType="Self.TRANSACTIONS" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" />
+          <EntitySet Name="VAT" EntityType="Self.VAT" />
+          <AssociationSet Name="FK_AGE_TRANSLATION_AGE" Association="Self.FK_AGE_TRANSLATION_AGE">
+            <End Role="AGE" EntitySet="AGE" />
+            <End Role="AGE_TRANSLATION" EntitySet="AGE_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_AGE" Association="Self.FK_PRODUCT_AGE">
+            <End Role="AGE" EntitySet="AGE" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGE_TRANSLATION_LANGUAGE" Association="Self.FK_AGE_TRANSLATION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="AGE_TRANSLATION" EntitySet="AGE_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_BRAND" Association="Self.FK_PRODUCT_BRAND">
+            <End Role="BRAND" EntitySet="BRAND" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CASH_BOTTOM_BEGIN_TERMINAL" Association="Self.FK_CASH_BOTTOM_BEGIN_TERMINAL">
+            <End Role="TERMINAL" EntitySet="TERMINAL" />
+            <End Role="CASH_BOTTOM_DAY" EntitySet="CASH_BOTTOM_DAY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORY_TRANSLATION_CATEGORY" Association="Self.FK_CATEGORY_TRANSLATION_CATEGORY">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="CATEGORY_TRANSLATION" EntitySet="CATEGORY_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_CATEGORY" Association="Self.FK_PRODUCT_CATEGORY">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBCATEGORY_Child" Association="Self.FK_SUBCATEGORY_Child">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="SUBCATEGORY" EntitySet="SUBCATEGORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBCATEGORY_Parent" Association="Self.FK_SUBCATEGORY_Parent">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="SUBCATEGORY" EntitySet="SUBCATEGORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORY_TRANSLATION_LANGUAGE" Association="Self.FK_CATEGORY_TRANSLATION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="CATEGORY_TRANSLATION" EntitySet="CATEGORY_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_PERSON" Association="Self.FK_CUSTOMER_PERSON">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTIONS_CUSTOMER" Association="Self.FK_TRANSACTIONS_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HERO_TRANSLATION_HERO" Association="Self.FK_HERO_TRANSLATION_HERO">
+            <End Role="HERO" EntitySet="HERO" />
+            <End Role="HERO_TRANSLATION" EntitySet="HERO_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_HERO" Association="Self.FK_PRODUCT_HERO">
+            <End Role="HERO" EntitySet="HERO" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HERO_TRANSLATION_LANGUAGE" Association="Self.FK_HERO_TRANSLATION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="HERO_TRANSLATION" EntitySet="HERO_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_TRANSLATION_LANGUAGE" Association="Self.FK_PRODUCT_TRANSLATION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="PRODUCT_TRANSLATION" EntitySet="PRODUCT_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SHOP_TRANSLATION_LANGUAGE" Association="Self.FK_SHOP_TRANSLATION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="SHOP_TRANSLATION" EntitySet="SHOP_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES" Association="Self.FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="TICKET_MESSAGE_TRANSLATION" EntitySet="TICKET_MESSAGE_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_LANGUAGE" Association="Self.FK_TRANSACTION_LANGUAGE">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARD_TRANSACTION" Association="Self.FK_CARD_TRANSACTION">
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+            <End Role="PAYMENT" EntitySet="PAYMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYMENT_PAYMENT_METHOD" Association="Self.FK_PAYMENT_PAYMENT_METHOD">
+            <End Role="PAYMENT_METHOD" EntitySet="PAYMENT_METHOD" />
+            <End Role="PAYMENT" EntitySet="PAYMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_PERSON" Association="Self.FK_USERS_PERSON">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_TRANSLATION_PRODUCT" Association="Self.FK_PRODUCT_TRANSLATION_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="PRODUCT_TRANSLATION" EntitySet="PRODUCT_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SHOP_PRODUCT_PRODUCT" Association="Self.FK_SHOP_PRODUCT_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="SHOP_PRODUCT" EntitySet="SHOP_PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_DETAILS_PRODUCT" Association="Self.FK_TRANSACTION_DETAILS_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_ROLE" Association="Self.FK_USERS_ROLE">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SHOP_PRODUCT_SHOP" Association="Self.FK_SHOP_PRODUCT_SHOP">
+            <End Role="SHOP" EntitySet="SHOP" />
+            <End Role="SHOP_PRODUCT" EntitySet="SHOP_PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SHOP_TRANSLATION_SHOP" Association="Self.FK_SHOP_TRANSLATION_SHOP">
+            <End Role="SHOP" EntitySet="SHOP" />
+            <End Role="SHOP_TRANSLATION" EntitySet="SHOP_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TERMINAL_SHOP" Association="Self.FK_TERMINAL_SHOP">
+            <End Role="SHOP" EntitySet="SHOP" />
+            <End Role="TERMINAL" EntitySet="TERMINAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_SHOP" Association="Self.FK_TRANSACTION_SHOP">
+            <End Role="SHOP" EntitySet="SHOP" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_POS" Association="Self.FK_TRANSACTION_POS">
+            <End Role="TERMINAL" EntitySet="TERMINAL" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TICKET_TICKET_MESSAGE" Association="Self.FK_TICKET_TICKET_MESSAGE">
+            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
+            <End Role="TICKET" EntitySet="TICKET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTIONS_TICKET" Association="Self.FK_TRANSACTIONS_TICKET">
+            <End Role="TICKET" EntitySet="TICKET" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE" Association="Self.FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE">
+            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
+            <End Role="TICKET_MESSAGE_TRANSLATION" EntitySet="TICKET_MESSAGE_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_DETAILS_TRANSACTION" Association="Self.FK_TRANSACTION_DETAILS_TRANSACTION">
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+            <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_DETAILS_VAT" Association="Self.FK_TRANSACTION_DETAILS_VAT">
+            <End Role="VAT" EntitySet="VAT" />
+            <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTION_VENDOR" Association="Self.FK_TRANSACTION_VENDOR">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="CONTACT" Association="Self.CONTACT">
+            <End Role="BRAND" EntitySet="BRAND" />
+            <End Role="PERSON" EntitySet="PERSON" />
+          </AssociationSet>
+          <AssociationSet Name="VENDOR_SHOP" Association="Self.VENDOR_SHOP">
+            <End Role="SHOP" EntitySet="SHOP" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Pos1ModelStoreContainer" CdmEntityContainer="Pos1Entities">
+          <EntitySetMapping Name="AGE">
+            <EntityTypeMapping TypeName="Pos1Model.AGE">
+              <MappingFragment StoreEntitySet="AGE">
+                <ScalarProperty Name="idAge" ColumnName="idAge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AGE_TRANSLATION">
+            <EntityTypeMapping TypeName="Pos1Model.AGE_TRANSLATION">
+              <MappingFragment StoreEntitySet="AGE_TRANSLATION">
+                <ScalarProperty Name="ageId" ColumnName="ageId" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="rangeAges" ColumnName="rangeAges" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BRAND">
+            <EntityTypeMapping TypeName="Pos1Model.BRAND">
+              <MappingFragment StoreEntitySet="BRAND">
+                <ScalarProperty Name="idBrand" ColumnName="idBrand" />
+                <ScalarProperty Name="nameBrand" ColumnName="nameBrand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CASH_BOTTOM_DAY">
+            <EntityTypeMapping TypeName="Pos1Model.CASH_BOTTOM_DAY">
+              <MappingFragment StoreEntitySet="CASH_BOTTOM_DAY">
+                <ScalarProperty Name="dateDay" ColumnName="dateDay" />
+                <ScalarProperty Name="terminalId" ColumnName="terminalId" />
+                <ScalarProperty Name="beginningCash" ColumnName="beginningCash" />
+                <ScalarProperty Name="endCash" ColumnName="endCash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORY">
+            <EntityTypeMapping TypeName="Pos1Model.CATEGORY">
+              <MappingFragment StoreEntitySet="CATEGORY">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="imageCat" ColumnName="imageCat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORY_TRANSLATION">
+            <EntityTypeMapping TypeName="Pos1Model.CATEGORY_TRANSLATION">
+              <MappingFragment StoreEntitySet="CATEGORY_TRANSLATION">
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMER">
+            <EntityTypeMapping TypeName="Pos1Model.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="isGoodClient" ColumnName="isGoodClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HERO">
+            <EntityTypeMapping TypeName="Pos1Model.HERO">
+              <MappingFragment StoreEntitySet="HERO">
+                <ScalarProperty Name="idHero" ColumnName="idHero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HERO_TRANSLATION">
+            <EntityTypeMapping TypeName="Pos1Model.HERO_TRANSLATION">
+              <MappingFragment StoreEntitySet="HERO_TRANSLATION">
+                <ScalarProperty Name="heroId" ColumnName="heroId" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="nameHero" ColumnName="nameHero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LANGUAGES">
+            <EntityTypeMapping TypeName="Pos1Model.LANGUAGES">
+              <MappingFragment StoreEntitySet="LANGUAGES">
+                <ScalarProperty Name="idLanguage" ColumnName="idLanguage" />
+                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAYMENT">
+            <EntityTypeMapping TypeName="Pos1Model.PAYMENT">
+              <MappingFragment StoreEntitySet="PAYMENT">
+                <ScalarProperty Name="idPayment" ColumnName="idPayment" />
+                <ScalarProperty Name="paymentMethodId" ColumnName="paymentMethodId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAYMENT_METHOD">
+            <EntityTypeMapping TypeName="Pos1Model.PAYMENT_METHOD">
+              <MappingFragment StoreEntitySet="PAYMENT_METHOD">
+                <ScalarProperty Name="idPaymentMethod" ColumnName="idPaymentMethod" />
+                <ScalarProperty Name="method" ColumnName="method" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSON">
+            <EntityTypeMapping TypeName="Pos1Model.PERSON">
+              <MappingFragment StoreEntitySet="PERSON">
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="namePerson" ColumnName="namePerson" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCT">
+            <EntityTypeMapping TypeName="Pos1Model.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCT">
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="purchasePrice" ColumnName="purchasePrice" />
+                <ScalarProperty Name="salesPrice" ColumnName="salesPrice" />
+                <ScalarProperty Name="discountRate" ColumnName="discountRate" />
+                <ScalarProperty Name="imageProduct" ColumnName="imageProduct" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="ageId" ColumnName="ageId" />
+                <ScalarProperty Name="brandId" ColumnName="brandId" />
+                <ScalarProperty Name="heroId" ColumnName="heroId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCT_TRANSLATION">
+            <EntityTypeMapping TypeName="Pos1Model.PRODUCT_TRANSLATION">
+              <MappingFragment StoreEntitySet="PRODUCT_TRANSLATION">
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLE">
+            <EntityTypeMapping TypeName="Pos1Model.ROLE">
+              <MappingFragment StoreEntitySet="ROLE">
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
+                <ScalarProperty Name="nameRole" ColumnName="nameRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SHOP">
+            <EntityTypeMapping TypeName="Pos1Model.SHOP">
+              <MappingFragment StoreEntitySet="SHOP">
+                <ScalarProperty Name="idShop" ColumnName="idShop" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SHOP_PRODUCT">
+            <EntityTypeMapping TypeName="Pos1Model.SHOP_PRODUCT">
+              <MappingFragment StoreEntitySet="SHOP_PRODUCT">
+                <ScalarProperty Name="idShopProduct" ColumnName="idShopProduct" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="shopId" ColumnName="shopId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SHOP_TRANSLATION">
+            <EntityTypeMapping TypeName="Pos1Model.SHOP_TRANSLATION">
+              <MappingFragment StoreEntitySet="SHOP_TRANSLATION">
+                <ScalarProperty Name="shopId" ColumnName="shopId" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="nameShop" ColumnName="nameShop" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="opening" ColumnName="opening" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUBCATEGORY">
+            <EntityTypeMapping TypeName="Pos1Model.SUBCATEGORY">
+              <MappingFragment StoreEntitySet="SUBCATEGORY">
+                <ScalarProperty Name="idSubcategory" ColumnName="idSubcategory" />
+                <ScalarProperty Name="parentCategory" ColumnName="parentCategory" />
+                <ScalarProperty Name="childCategory" ColumnName="childCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TERMINAL">
+            <EntityTypeMapping TypeName="Pos1Model.TERMINAL">
+              <MappingFragment StoreEntitySet="TERMINAL">
+                <ScalarProperty Name="idTerminal" ColumnName="idTerminal" />
+                <ScalarProperty Name="nameTerminal" ColumnName="nameTerminal" />
+                <ScalarProperty Name="shopId" ColumnName="shopId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TICKET">
+            <EntityTypeMapping TypeName="Pos1Model.TICKET">
+              <MappingFragment StoreEntitySet="TICKET">
+                <ScalarProperty Name="idTicket" ColumnName="idTicket" />
+                <ScalarProperty Name="messageId" ColumnName="messageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TICKET_MESSAGE">
+            <EntityTypeMapping TypeName="Pos1Model.TICKET_MESSAGE">
+              <MappingFragment StoreEntitySet="TICKET_MESSAGE">
+                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TICKET_MESSAGE_TRANSLATION">
+            <EntityTypeMapping TypeName="Pos1Model.TICKET_MESSAGE_TRANSLATION">
+              <MappingFragment StoreEntitySet="TICKET_MESSAGE_TRANSLATION">
+                <ScalarProperty Name="messageId" ColumnName="messageId" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSACTION_DETAILS">
+            <EntityTypeMapping TypeName="Pos1Model.TRANSACTION_DETAILS">
+              <MappingFragment StoreEntitySet="TRANSACTION_DETAILS">
+                <ScalarProperty Name="idTransactionDetails" ColumnName="idTransactionDetails" />
+                <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+                <ScalarProperty Name="vatId" ColumnName="vatId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="nameItem" ColumnName="nameItem" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSACTIONS">
+            <EntityTypeMapping TypeName="Pos1Model.TRANSACTIONS">
+              <MappingFragment StoreEntitySet="TRANSACTIONS">
+                <ScalarProperty Name="idTransaction" ColumnName="idTransaction" />
+                <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="isClose" ColumnName="isClose" />
+                <ScalarProperty Name="isCanceled" ColumnName="isCanceled" />
+                <ScalarProperty Name="isReturn" ColumnName="isReturn" />
+                <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+                <ScalarProperty Name="terminalId" ColumnName="terminalId" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="shopId" ColumnName="shopId" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="Pos1Model.USERS">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VAT">
+            <EntityTypeMapping TypeName="Pos1Model.VAT">
+              <MappingFragment StoreEntitySet="VAT">
+                <ScalarProperty Name="idVat" ColumnName="idVat" />
+                <ScalarProperty Name="appliedVat" ColumnName="appliedVat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CONTACT" TypeName="Pos1Model.CONTACT" StoreEntitySet="CONTACT">
+            <EndProperty Name="BRAND">
+              <ScalarProperty Name="idBrand" ColumnName="brandId" />
+            </EndProperty>
+            <EndProperty Name="PERSON">
+              <ScalarProperty Name="idPerson" ColumnName="contactId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="VENDOR_SHOP" TypeName="Pos1Model.VENDOR_SHOP" StoreEntitySet="VENDOR_SHOP">
+            <EndProperty Name="SHOP">
+              <ScalarProperty Name="idShop" ColumnName="shopId" />
+            </EndProperty>
+            <EndProperty Name="USERS">
+              <ScalarProperty Name="userId" ColumnName="vendorId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
