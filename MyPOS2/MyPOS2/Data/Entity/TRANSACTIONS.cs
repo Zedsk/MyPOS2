@@ -22,27 +22,28 @@ namespace MyPOS2.Data.Entity
         }
     
         public int idTransaction { get; set; }
-        public System.DateTime transactionDate { get; set; }
+        public System.DateTime transactionDateBegin { get; set; }
+        public System.DateTime transactionDateEnd { get; set; }
         public decimal total { get; set; }
-        public bool isClose { get; set; }
-        public bool isCanceled { get; set; }
+        public Nullable<decimal> discountGlobal { get; set; }
         public bool isReturn { get; set; }
         public int vendorId { get; set; }
         public int terminalId { get; set; }
-        public int languageId { get; set; }
         public int shopId { get; set; }
         public int customerId { get; set; }
-        public int ticketId { get; set; }
+        public int statusId { get; set; }
+        public int messageId { get; set; }
+        public int languageTr { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual LANGUAGES LANGUAGES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PAYMENT> PAYMENT { get; set; }
         public virtual SHOP SHOP { get; set; }
+        public virtual STATUS STATUS { get; set; }
         public virtual TERMINAL TERMINAL { get; set; }
-        public virtual TICKET TICKET { get; set; }
+        public virtual TICKET_MESSAGE TICKET_MESSAGE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRANSACTION_DETAILS> TRANSACTION_DETAILS { get; set; }
-        public virtual USERS USERS { get; set; }
+        public virtual USERINFO USERINFO { get; set; }
     }
 }

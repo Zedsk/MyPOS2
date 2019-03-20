@@ -17,7 +17,7 @@ namespace MyPOS2.Controllers
         // GET: Roles
         public ActionResult Index()
         {
-            return View(db.ROLE.ToList());
+            return View(db.ROLEs.ToList());
         }
 
         // GET: Roles/Details/5
@@ -27,7 +27,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ROLE rOLE = db.ROLE.Find(id);
+            ROLE rOLE = db.ROLEs.Find(id);
             if (rOLE == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ROLE.Add(rOLE);
+                db.ROLEs.Add(rOLE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ROLE rOLE = db.ROLE.Find(id);
+            ROLE rOLE = db.ROLEs.Find(id);
             if (rOLE == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ROLE rOLE = db.ROLE.Find(id);
+            ROLE rOLE = db.ROLEs.Find(id);
             if (rOLE == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace MyPOS2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ROLE rOLE = db.ROLE.Find(id);
-            db.ROLE.Remove(rOLE);
+            ROLE rOLE = db.ROLEs.Find(id);
+            db.ROLEs.Remove(rOLE);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -12,27 +12,18 @@ namespace MyPOS2.Data.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class USERS
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USERS()
+        public AspNetRoles()
         {
-            this.TRANSACTIONS = new HashSet<TRANSACTIONS>();
-            this.SHOP = new HashSet<SHOP>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
-        public int userId { get; set; }
-        public string password { get; set; }
-        public string street { get; set; }
-        public int zipCode { get; set; }
-        public string city { get; set; }
-        public int roleId { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
-        public virtual PERSON PERSON { get; set; }
-        public virtual ROLE ROLE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TRANSACTIONS> TRANSACTIONS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SHOP> SHOP { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

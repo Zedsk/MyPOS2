@@ -25,33 +25,36 @@ namespace MyPOS2.Data.Entity
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AGE> AGE { get; set; }
-        public virtual DbSet<AGE_TRANSLATION> AGE_TRANSLATION { get; set; }
-        public virtual DbSet<BRAND> BRAND { get; set; }
-        public virtual DbSet<CASH_BOTTOM_DAY> CASH_BOTTOM_DAY { get; set; }
-        public virtual DbSet<CATEGORY> CATEGORY { get; set; }
-        public virtual DbSet<CATEGORY_TRANSLATION> CATEGORY_TRANSLATION { get; set; }
-        public virtual DbSet<CUSTOMER> CUSTOMER { get; set; }
-        public virtual DbSet<HERO> HERO { get; set; }
-        public virtual DbSet<HERO_TRANSLATION> HERO_TRANSLATION { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AGE> AGEs { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<BRAND> BRANDs { get; set; }
+        public virtual DbSet<CASH_BOTTOM_DAY> CASH_BOTTOM_DAYs { get; set; }
+        public virtual DbSet<CATEGORY> CATEGORYs { get; set; }
+        public virtual DbSet<CATEGORY_TRANSLATION> CATEGORY_TRANSLATIONs { get; set; }
+        public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
+        public virtual DbSet<HERO> HEROs { get; set; }
+        public virtual DbSet<HERO_TRANSLATION> HERO_TRANSLATIONs { get; set; }
         public virtual DbSet<LANGUAGES> LANGUAGES { get; set; }
-        public virtual DbSet<PAYMENT> PAYMENT { get; set; }
-        public virtual DbSet<PAYMENT_METHOD> PAYMENT_METHOD { get; set; }
-        public virtual DbSet<PERSON> PERSON { get; set; }
-        public virtual DbSet<PRODUCT> PRODUCT { get; set; }
-        public virtual DbSet<PRODUCT_TRANSLATION> PRODUCT_TRANSLATION { get; set; }
-        public virtual DbSet<ROLE> ROLE { get; set; }
-        public virtual DbSet<SHOP> SHOP { get; set; }
-        public virtual DbSet<SHOP_PRODUCT> SHOP_PRODUCT { get; set; }
-        public virtual DbSet<SHOP_TRANSLATION> SHOP_TRANSLATION { get; set; }
-        public virtual DbSet<SUBCATEGORY> SUBCATEGORY { get; set; }
-        public virtual DbSet<TERMINAL> TERMINAL { get; set; }
-        public virtual DbSet<TICKET> TICKET { get; set; }
-        public virtual DbSet<TICKET_MESSAGE> TICKET_MESSAGE { get; set; }
-        public virtual DbSet<TICKET_MESSAGE_TRANSLATION> TICKET_MESSAGE_TRANSLATION { get; set; }
-        public virtual DbSet<TRANSACTION_DETAILS> TRANSACTION_DETAILS { get; set; }
-        public virtual DbSet<TRANSACTIONS> TRANSACTIONS { get; set; }
-        public virtual DbSet<USERS> USERS { get; set; }
-        public virtual DbSet<VAT> VAT { get; set; }
+        public virtual DbSet<PAYMENT> PAYMENTs { get; set; }
+        public virtual DbSet<PAYMENT_METHOD> PAYMENT_METHODs { get; set; }
+        public virtual DbSet<PERSON> PERSONs { get; set; }
+        public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
+        public virtual DbSet<PRODUCT_TRANSLATION> PRODUCT_TRANSLATIONs { get; set; }
+        public virtual DbSet<ROLE> ROLEs { get; set; }
+        public virtual DbSet<SHOP> SHOPs { get; set; }
+        public virtual DbSet<SHOP_PRODUCT> SHOP_PRODUCTs { get; set; }
+        public virtual DbSet<SHOP_TRANSLATION> SHOP_TRANSLATIONs { get; set; }
+        public virtual DbSet<STATUS> STATUSs { get; set; }
+        public virtual DbSet<SUBCATEGORY> SUBCATEGORYs { get; set; }
+        public virtual DbSet<TERMINAL> TERMINALs { get; set; }
+        public virtual DbSet<TICKET_MESSAGE> TICKET_MESSAGEs { get; set; }
+        public virtual DbSet<TRANSACTION_DETAILS> TRANSACTION_DETAILSs { get; set; }
+        public virtual DbSet<TRANSACTIONS> TRANSACTIONSs { get; set; }
+        public virtual DbSet<USERINFO> USERINFOs { get; set; }
+        public virtual DbSet<VAT> VATs { get; set; }
     }
 }

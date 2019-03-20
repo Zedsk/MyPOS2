@@ -21,7 +21,7 @@ namespace MyPOS2.Data.Entity
             this.SHOP_TRANSLATION = new HashSet<SHOP_TRANSLATION>();
             this.TERMINAL = new HashSet<TERMINAL>();
             this.TRANSACTIONS = new HashSet<TRANSACTIONS>();
-            this.USERS = new HashSet<USERS>();
+            this.USERINFO = new HashSet<USERINFO>();
         }
     
         public int idShop { get; set; }
@@ -37,6 +37,6 @@ namespace MyPOS2.Data.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRANSACTIONS> TRANSACTIONS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USERS> USERS { get; set; }
+        public virtual ICollection<USERINFO> USERINFO { get; set; }
     }
 }

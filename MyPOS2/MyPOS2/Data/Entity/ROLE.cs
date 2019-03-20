@@ -17,13 +17,13 @@ namespace MyPOS2.Data.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ROLE()
         {
-            this.USERS = new HashSet<USERS>();
+            this.USERINFO = new HashSet<USERINFO>();
         }
     
         public int idRole { get; set; }
         public string nameRole { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USERS> USERS { get; set; }
+        public virtual ICollection<USERINFO> USERINFO { get; set; }
     }
 }

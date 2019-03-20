@@ -12,19 +12,27 @@ namespace MyPOS2.Data.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class TICKET
+    public partial class USERINFO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TICKET()
+        public USERINFO()
         {
             this.TRANSACTIONS = new HashSet<TRANSACTIONS>();
+            this.SHOP = new HashSet<SHOP>();
         }
     
-        public int idTicket { get; set; }
-        public int messageId { get; set; }
+        public int userId { get; set; }
+        public string password { get; set; }
+        public string street { get; set; }
+        public int zipCode { get; set; }
+        public string city { get; set; }
+        public int roleId { get; set; }
     
-        public virtual TICKET_MESSAGE TICKET_MESSAGE { get; set; }
+        public virtual PERSON PERSON { get; set; }
+        public virtual ROLE ROLE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRANSACTIONS> TRANSACTIONS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SHOP> SHOP { get; set; }
     }
 }

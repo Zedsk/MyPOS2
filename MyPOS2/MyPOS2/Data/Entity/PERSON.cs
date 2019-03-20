@@ -21,7 +21,7 @@ namespace MyPOS2.Data.Entity
         public string email { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual USERS USERS { get; set; }
+        public virtual USERINFO USERINFO { get; set; }
         public virtual BRAND BRAND { get; set; }
     }
 }

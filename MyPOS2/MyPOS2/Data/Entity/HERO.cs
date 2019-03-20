@@ -22,6 +22,7 @@ namespace MyPOS2.Data.Entity
         }
     
         public int idHero { get; set; }
+        public string imageHero { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HERO_TRANSLATION> HERO_TRANSLATION { get; set; }

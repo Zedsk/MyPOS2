@@ -24,14 +24,14 @@ namespace MyPOS2.Data.Entity
     
         public int idProduct { get; set; }
         public string barcode { get; set; }
-        public decimal purchasePrice { get; set; }
         public decimal salesPrice { get; set; }
         public Nullable<decimal> discountRate { get; set; }
-        public byte[] imageProduct { get; set; }
+        public string imageProduct { get; set; }
         public int categoryId { get; set; }
         public int ageId { get; set; }
         public int brandId { get; set; }
-        public int heroId { get; set; }
+        public Nullable<int> heroId { get; set; }
+        public int vatId { get; set; }
     
         public virtual AGE AGE { get; set; }
         public virtual BRAND BRAND { get; set; }
@@ -39,6 +39,7 @@ namespace MyPOS2.Data.Entity
         public virtual HERO HERO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCT_TRANSLATION> PRODUCT_TRANSLATION { get; set; }
+        public virtual VAT VAT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHOP_PRODUCT> SHOP_PRODUCT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

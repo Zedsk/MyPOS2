@@ -12,13 +12,11 @@ namespace MyPOS2.Data.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class AGE_TRANSLATION
+    public partial class C__MigrationHistory
     {
-        public int ageId { get; set; }
-        public int languageId { get; set; }
-        public string rangeAges { get; set; }
-    
-        public virtual AGE AGE { get; set; }
-        public virtual LANGUAGES LANGUAGES { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

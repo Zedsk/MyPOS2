@@ -23,6 +23,7 @@ namespace MyPOS2.Data.Entity
     
         public int idBrand { get; set; }
         public string nameBrand { get; set; }
+        public string imageBrand { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCT> PRODUCT { get; set; }

@@ -12,15 +12,12 @@ namespace MyPOS2.Data.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class PAYMENT
+    public partial class AspNetUserLogins
     {
-        public int idPayment { get; set; }
-        public int paymentMethodId { get; set; }
-        public decimal amount { get; set; }
-        public System.DateTime momentPay { get; set; }
-        public int transactionId { get; set; }
+        public string LoginProvider { get; set; }
+        public string ProviderKey { get; set; }
+        public string UserId { get; set; }
     
-        public virtual TRANSACTIONS TRANSACTIONS { get; set; }
-        public virtual PAYMENT_METHOD PAYMENT_METHOD { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

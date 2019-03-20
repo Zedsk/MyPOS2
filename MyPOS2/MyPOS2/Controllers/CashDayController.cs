@@ -17,7 +17,7 @@ namespace MyPOS2.Controllers
         // GET: CashDay
         public ActionResult Index()
         {
-            var cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAY.Include(c => c.TERMINAL);
+            var cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAYs.Include(c => c.TERMINAL);
             return View(cASH_BOTTOM_DAY.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CASH_BOTTOM_DAY cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAY.Find(id);
+            CASH_BOTTOM_DAY cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAYs.Find(id);
             if (cASH_BOTTOM_DAY == null)
             {
                 return HttpNotFound();
@@ -39,7 +39,9 @@ namespace MyPOS2.Controllers
         // GET: CashDay/Create
         public ActionResult Create()
         {
-            ViewBag.terminalId = new SelectList(db.TERMINAL, "idTerminal", "nameTerminal");
+            ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal");
+            ViewBag.dateTr = DateTime.Now.Date;
+            
             return View();
         }
 
@@ -48,17 +50,18 @@ namespace MyPOS2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dateDay,terminalId,beginningCash,endCash")] CASH_BOTTOM_DAY cASH_BOTTOM_DAY)
+        public ActionResult Create([Bind(Include = "dateDay,terminalId,beginningCash")] CASH_BOTTOM_DAY cashDay)
         {
             if (ModelState.IsValid)
             {
-                db.CASH_BOTTOM_DAY.Add(cASH_BOTTOM_DAY);
+                db.CASH_BOTTOM_DAYs.Add(cashDay);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                
+                return RedirectToAction("Index","Transaction");
             }
 
-            ViewBag.terminalId = new SelectList(db.TERMINAL, "idTerminal", "nameTerminal", cASH_BOTTOM_DAY.terminalId);
-            return View(cASH_BOTTOM_DAY);
+            ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal", cashDay.terminalId);
+            return View(cashDay);
         }
 
         // GET: CashDay/Edit/5
@@ -68,12 +71,12 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CASH_BOTTOM_DAY cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAY.Find(id);
+            CASH_BOTTOM_DAY cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAYs.Find(id);
             if (cASH_BOTTOM_DAY == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.terminalId = new SelectList(db.TERMINAL, "idTerminal", "nameTerminal", cASH_BOTTOM_DAY.terminalId);
+            ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal", cASH_BOTTOM_DAY.terminalId);
             return View(cASH_BOTTOM_DAY);
         }
 
@@ -90,7 +93,7 @@ namespace MyPOS2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.terminalId = new SelectList(db.TERMINAL, "idTerminal", "nameTerminal", cASH_BOTTOM_DAY.terminalId);
+            ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal", cASH_BOTTOM_DAY.terminalId);
             return View(cASH_BOTTOM_DAY);
         }
 
@@ -101,7 +104,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CASH_BOTTOM_DAY cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAY.Find(id);
+            CASH_BOTTOM_DAY cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAYs.Find(id);
             if (cASH_BOTTOM_DAY == null)
             {
                 return HttpNotFound();
@@ -114,8 +117,8 @@ namespace MyPOS2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(DateTime id)
         {
-            CASH_BOTTOM_DAY cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAY.Find(id);
-            db.CASH_BOTTOM_DAY.Remove(cASH_BOTTOM_DAY);
+            CASH_BOTTOM_DAY cASH_BOTTOM_DAY = db.CASH_BOTTOM_DAYs.Find(id);
+            db.CASH_BOTTOM_DAYs.Remove(cASH_BOTTOM_DAY);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

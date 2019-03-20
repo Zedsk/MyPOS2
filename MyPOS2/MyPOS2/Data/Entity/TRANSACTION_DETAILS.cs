@@ -16,15 +16,14 @@ namespace MyPOS2.Data.Entity
     {
         public int idTransactionDetails { get; set; }
         public int transactionId { get; set; }
-        public int vatId { get; set; }
         public int productId { get; set; }
         public string nameItem { get; set; }
         public decimal price { get; set; }
         public int quantity { get; set; }
         public Nullable<decimal> Discount { get; set; }
+        public Nullable<decimal> vatItem { get; set; }
     
         public virtual PRODUCT PRODUCT { get; set; }
         public virtual TRANSACTIONS TRANSACTIONS { get; set; }
-        public virtual VAT VAT { get; set; }
     }
 }

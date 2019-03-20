@@ -17,7 +17,7 @@ namespace MyPOS2.Controllers
         // GET: Payment_Methods
         public ActionResult Index()
         {
-            return View(db.PAYMENT_METHOD.ToList());
+            return View(db.PAYMENT_METHODs.ToList());
         }
 
         // GET: Payment_Methods/Details/5
@@ -27,7 +27,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PAYMENT_METHOD pAYMENT_METHOD = db.PAYMENT_METHOD.Find(id);
+            PAYMENT_METHOD pAYMENT_METHOD = db.PAYMENT_METHODs.Find(id);
             if (pAYMENT_METHOD == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.PAYMENT_METHOD.Add(pAYMENT_METHOD);
+                db.PAYMENT_METHODs.Add(pAYMENT_METHOD);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PAYMENT_METHOD pAYMENT_METHOD = db.PAYMENT_METHOD.Find(id);
+            PAYMENT_METHOD pAYMENT_METHOD = db.PAYMENT_METHODs.Find(id);
             if (pAYMENT_METHOD == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PAYMENT_METHOD pAYMENT_METHOD = db.PAYMENT_METHOD.Find(id);
+            PAYMENT_METHOD pAYMENT_METHOD = db.PAYMENT_METHODs.Find(id);
             if (pAYMENT_METHOD == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace MyPOS2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PAYMENT_METHOD pAYMENT_METHOD = db.PAYMENT_METHOD.Find(id);
-            db.PAYMENT_METHOD.Remove(pAYMENT_METHOD);
+            PAYMENT_METHOD pAYMENT_METHOD = db.PAYMENT_METHODs.Find(id);
+            db.PAYMENT_METHODs.Remove(pAYMENT_METHOD);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

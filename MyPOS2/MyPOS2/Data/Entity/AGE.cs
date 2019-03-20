@@ -17,14 +17,13 @@ namespace MyPOS2.Data.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AGE()
         {
-            this.AGE_TRANSLATION = new HashSet<AGE_TRANSLATION>();
             this.PRODUCT = new HashSet<PRODUCT>();
         }
     
         public int idAge { get; set; }
+        public string imageAge { get; set; }
+        public string rangeAges { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AGE_TRANSLATION> AGE_TRANSLATION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCT> PRODUCT { get; set; }
     }

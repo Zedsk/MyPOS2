@@ -17,7 +17,7 @@ namespace MyPOS2.Controllers
         // GET: Brands
         public ActionResult Index()
         {
-            return View(db.BRAND.ToList());
+            return View(db.BRANDs.ToList());
         }
 
         // GET: Brands/Details/5
@@ -27,7 +27,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BRAND bRAND = db.BRAND.Find(id);
+            BRAND bRAND = db.BRANDs.Find(id);
             if (bRAND == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.BRAND.Add(bRAND);
+                db.BRANDs.Add(bRAND);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BRAND bRAND = db.BRAND.Find(id);
+            BRAND bRAND = db.BRANDs.Find(id);
             if (bRAND == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BRAND bRAND = db.BRAND.Find(id);
+            BRAND bRAND = db.BRANDs.Find(id);
             if (bRAND == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace MyPOS2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BRAND bRAND = db.BRAND.Find(id);
-            db.BRAND.Remove(bRAND);
+            BRAND bRAND = db.BRANDs.Find(id);
+            db.BRANDs.Remove(bRAND);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

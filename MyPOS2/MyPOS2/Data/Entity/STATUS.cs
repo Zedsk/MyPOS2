@@ -12,15 +12,18 @@ namespace MyPOS2.Data.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class PAYMENT
+    public partial class STATUS
     {
-        public int idPayment { get; set; }
-        public int paymentMethodId { get; set; }
-        public decimal amount { get; set; }
-        public System.DateTime momentPay { get; set; }
-        public int transactionId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public STATUS()
+        {
+            this.TRANSACTIONS = new HashSet<TRANSACTIONS>();
+        }
     
-        public virtual TRANSACTIONS TRANSACTIONS { get; set; }
-        public virtual PAYMENT_METHOD PAYMENT_METHOD { get; set; }
+        public int idStatus { get; set; }
+        public string nameStatus { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TRANSACTIONS> TRANSACTIONS { get; set; }
     }
 }

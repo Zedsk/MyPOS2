@@ -12,14 +12,13 @@ namespace MyPOS2.Data.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class TICKET_MESSAGE_TRANSLATION
+    public partial class AspNetUserClaims
     {
-        public int messageId { get; set; }
-        public int languageId { get; set; }
-        public string title { get; set; }
-        public string message { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
     
-        public virtual LANGUAGES LANGUAGES { get; set; }
-        public virtual TICKET_MESSAGE TICKET_MESSAGE { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

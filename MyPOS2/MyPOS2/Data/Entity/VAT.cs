@@ -17,13 +17,13 @@ namespace MyPOS2.Data.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public VAT()
         {
-            this.TRANSACTION_DETAILS = new HashSet<TRANSACTION_DETAILS>();
+            this.PRODUCT = new HashSet<PRODUCT>();
         }
     
         public int idVat { get; set; }
         public decimal appliedVat { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TRANSACTION_DETAILS> TRANSACTION_DETAILS { get; set; }
+        public virtual ICollection<PRODUCT> PRODUCT { get; set; }
     }
 }

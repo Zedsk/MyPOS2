@@ -17,7 +17,7 @@ namespace MyPOS2.Controllers
         // GET: Vats
         public ActionResult Index()
         {
-            return View(db.VAT.ToList());
+            return View(db.VATs.ToList());
         }
 
         // GET: Vats/Details/5
@@ -27,7 +27,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VAT vAT = db.VAT.Find(id);
+            VAT vAT = db.VATs.Find(id);
             if (vAT == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.VAT.Add(vAT);
+                db.VATs.Add(vAT);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VAT vAT = db.VAT.Find(id);
+            VAT vAT = db.VATs.Find(id);
             if (vAT == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VAT vAT = db.VAT.Find(id);
+            VAT vAT = db.VATs.Find(id);
             if (vAT == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace MyPOS2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            VAT vAT = db.VAT.Find(id);
-            db.VAT.Remove(vAT);
+            VAT vAT = db.VATs.Find(id);
+            db.VATs.Remove(vAT);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

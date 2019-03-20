@@ -5,20 +5,74 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="AGE">
           <Key>
             <PropertyRef Name="idAge" />
           </Key>
           <Property Name="idAge" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AGE_TRANSLATION">
-          <Key>
-            <PropertyRef Name="ageId" />
-            <PropertyRef Name="languageId" />
-          </Key>
-          <Property Name="ageId" Type="int" Nullable="false" />
-          <Property Name="languageId" Type="int" Nullable="false" />
+          <Property Name="imageAge" Type="varchar" MaxLength="200" />
           <Property Name="rangeAges" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="BRAND">
           <Key>
@@ -26,6 +80,7 @@
           </Key>
           <Property Name="idBrand" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nameBrand" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="imageBrand" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="CASH_BOTTOM_DAY">
           <Key>
@@ -34,15 +89,15 @@
           </Key>
           <Property Name="dateDay" Type="datetime" Nullable="false" />
           <Property Name="terminalId" Type="int" Nullable="false" />
-          <Property Name="beginningCash" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="endCash" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="beginningCash" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="endCash" Type="decimal" Precision="8" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="idCategory" />
           </Key>
           <Property Name="idCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="imageCat" Type="image" />
+          <Property Name="imageCat" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="CATEGORY_TRANSLATION">
           <Key>
@@ -72,6 +127,7 @@
             <PropertyRef Name="idHero" />
           </Key>
           <Property Name="idHero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imageHero" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="HERO_TRANSLATION">
           <Key>
@@ -95,7 +151,8 @@
           </Key>
           <Property Name="idPayment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="paymentMethodId" Type="int" Nullable="false" />
-          <Property Name="amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="momentPay" Type="datetime" Nullable="false" />
           <Property Name="transactionId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PAYMENT_METHOD">
@@ -121,14 +178,14 @@
           </Key>
           <Property Name="idProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="barcode" Type="varchar" MaxLength="100" />
-          <Property Name="purchasePrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="salesPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="discountRate" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="imageProduct" Type="image" />
+          <Property Name="salesPrice" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="discountRate" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="imageProduct" Type="varchar" MaxLength="200" />
           <Property Name="categoryId" Type="int" Nullable="false" />
           <Property Name="ageId" Type="int" Nullable="false" />
           <Property Name="brandId" Type="int" Nullable="false" />
-          <Property Name="heroId" Type="int" Nullable="false" />
+          <Property Name="heroId" Type="int" />
+          <Property Name="vatId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PRODUCT_TRANSLATION">
           <Key>
@@ -175,6 +232,13 @@
           <Property Name="city" Type="varchar" MaxLength="100" />
           <Property Name="opening" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="STATUS">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameStatus" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
         <EntityType Name="SUBCATEGORY">
           <Key>
             <PropertyRef Name="idSubcategory" />
@@ -191,25 +255,12 @@
           <Property Name="nameTerminal" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="shopId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="TICKET">
-          <Key>
-            <PropertyRef Name="idTicket" />
-          </Key>
-          <Property Name="idTicket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="messageId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="TICKET_MESSAGE">
           <Key>
             <PropertyRef Name="idMessage" />
-          </Key>
-          <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TICKET_MESSAGE_TRANSLATION">
-          <Key>
-            <PropertyRef Name="messageId" />
             <PropertyRef Name="languageId" />
           </Key>
-          <Property Name="messageId" Type="int" Nullable="false" />
+          <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="languageId" Type="int" Nullable="false" />
           <Property Name="title" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="message" Type="text" Nullable="false" />
@@ -220,31 +271,32 @@
           </Key>
           <Property Name="idTransactionDetails" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="transactionId" Type="int" Nullable="false" />
-          <Property Name="vatId" Type="int" Nullable="false" />
           <Property Name="productId" Type="int" Nullable="false" />
           <Property Name="nameItem" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
-          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="vatItem" Type="decimal" Precision="4" Scale="2" />
         </EntityType>
         <EntityType Name="TRANSACTIONS">
           <Key>
             <PropertyRef Name="idTransaction" />
           </Key>
           <Property Name="idTransaction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="transactionDate" Type="datetime" Nullable="false" />
-          <Property Name="total" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="isClose" Type="bit" Nullable="false" />
-          <Property Name="isCanceled" Type="bit" Nullable="false" />
+          <Property Name="transactionDateBegin" Type="datetime" Nullable="false" />
+          <Property Name="transactionDateEnd" Type="datetime" Nullable="false" />
+          <Property Name="total" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="discountGlobal" Type="decimal" Precision="8" Scale="2" />
           <Property Name="isReturn" Type="bit" Nullable="false" />
           <Property Name="vendorId" Type="int" Nullable="false" />
           <Property Name="terminalId" Type="int" Nullable="false" />
-          <Property Name="languageId" Type="int" Nullable="false" />
           <Property Name="shopId" Type="int" Nullable="false" />
           <Property Name="customerId" Type="int" Nullable="false" />
-          <Property Name="ticketId" Type="int" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="messageId" Type="int" Nullable="false" />
+          <Property Name="languageTr" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="USERS">
+        <EntityType Name="USERINFO">
           <Key>
             <PropertyRef Name="userId" />
           </Key>
@@ -260,7 +312,7 @@
             <PropertyRef Name="idVat" />
           </Key>
           <Property Name="idVat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="appliedVat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="appliedVat" Type="decimal" Precision="4" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="VENDOR_SHOP">
           <Key>
@@ -270,30 +322,6 @@
           <Property Name="shopId" Type="int" Nullable="false" />
           <Property Name="vendorId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_AGE_TRANSLATION_AGE">
-          <End Role="AGE" Type="Self.AGE" Multiplicity="1" />
-          <End Role="AGE_TRANSLATION" Type="Self.AGE_TRANSLATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AGE">
-              <PropertyRef Name="idAge" />
-            </Principal>
-            <Dependent Role="AGE_TRANSLATION">
-              <PropertyRef Name="ageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AGE_TRANSLATION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
-          <End Role="AGE_TRANSLATION" Type="Self.AGE_TRANSLATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LANGUAGES">
-              <PropertyRef Name="idLanguage" />
-            </Principal>
-            <Dependent Role="AGE_TRANSLATION">
-              <PropertyRef Name="languageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CARD_TRANSACTION">
           <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="1" />
           <End Role="PAYMENT" Type="Self.PAYMENT" Multiplicity="*" />
@@ -378,6 +406,62 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HERO_TRANSLATION_HERO">
           <End Role="HERO" Type="Self.HERO" Multiplicity="1" />
           <End Role="HERO_TRANSLATION" Type="Self.HERO_TRANSLATION" Multiplicity="*" />
@@ -451,7 +535,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PRODUCT_HERO">
-          <End Role="HERO" Type="Self.HERO" Multiplicity="1" />
+          <End Role="HERO" Type="Self.HERO" Multiplicity="0..1" />
           <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HERO">
@@ -483,6 +567,18 @@
             </Principal>
             <Dependent Role="PRODUCT_TRANSLATION">
               <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_VAT">
+          <End Role="VAT" Type="Self.VAT" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VAT">
+              <PropertyRef Name="idVat" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="vatId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -572,37 +668,13 @@
         </Association>
         <Association Name="FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES">
           <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
-          <End Role="TICKET_MESSAGE_TRANSLATION" Type="Self.TICKET_MESSAGE_TRANSLATION" Multiplicity="*" />
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
               <PropertyRef Name="idLanguage" />
             </Principal>
-            <Dependent Role="TICKET_MESSAGE_TRANSLATION">
+            <Dependent Role="TICKET_MESSAGE">
               <PropertyRef Name="languageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE">
-          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
-          <End Role="TICKET_MESSAGE_TRANSLATION" Type="Self.TICKET_MESSAGE_TRANSLATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TICKET_MESSAGE">
-              <PropertyRef Name="idMessage" />
-            </Principal>
-            <Dependent Role="TICKET_MESSAGE_TRANSLATION">
-              <PropertyRef Name="messageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TICKET_TICKET_MESSAGE">
-          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
-          <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TICKET_MESSAGE">
-              <PropertyRef Name="idMessage" />
-            </Principal>
-            <Dependent Role="TICKET">
-              <PropertyRef Name="messageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -627,30 +699,6 @@
             </Principal>
             <Dependent Role="TRANSACTION_DETAILS">
               <PropertyRef Name="transactionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TRANSACTION_DETAILS_VAT">
-          <End Role="VAT" Type="Self.VAT" Multiplicity="1" />
-          <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VAT">
-              <PropertyRef Name="idVat" />
-            </Principal>
-            <Dependent Role="TRANSACTION_DETAILS">
-              <PropertyRef Name="vatId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TRANSACTION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
-          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LANGUAGES">
-              <PropertyRef Name="idLanguage" />
-            </Principal>
-            <Dependent Role="TRANSACTIONS">
-              <PropertyRef Name="languageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -679,10 +727,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TRANSACTION_VENDOR">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="USERINFO" Type="Self.USERINFO" Multiplicity="1" />
           <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="USERS">
+            <Principal Role="USERINFO">
               <PropertyRef Name="userId" />
             </Principal>
             <Dependent Role="TRANSACTIONS">
@@ -702,38 +750,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TRANSACTIONS_TICKET">
-          <End Role="TICKET" Type="Self.TICKET" Multiplicity="1" />
+        <Association Name="FK_TRANSACTIONS_STATUS">
+          <End Role="STATUS" Type="Self.STATUS" Multiplicity="1" />
           <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TICKET">
-              <PropertyRef Name="idTicket" />
+            <Principal Role="STATUS">
+              <PropertyRef Name="idStatus" />
             </Principal>
             <Dependent Role="TRANSACTIONS">
-              <PropertyRef Name="ticketId" />
+              <PropertyRef Name="statusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_USERS_PERSON">
+        <Association Name="FK_TRANSACTIONS_TICKET_MESSAGE">
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET_MESSAGE">
+              <PropertyRef Name="idMessage" />
+              <PropertyRef Name="languageId" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="messageId" />
+              <PropertyRef Name="languageTr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERINFO_PERSON">
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
-          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="USERINFO" Type="Self.USERINFO" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="PERSON">
               <PropertyRef Name="idPerson" />
             </Principal>
-            <Dependent Role="USERS">
+            <Dependent Role="USERINFO">
               <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_USERS_ROLE">
+        <Association Name="FK_USERINFO_ROLE">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
-          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <End Role="USERINFO" Type="Self.USERINFO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ROLE">
               <PropertyRef Name="idRole" />
             </Principal>
-            <Dependent Role="USERS">
+            <Dependent Role="USERINFO">
               <PropertyRef Name="roleId" />
             </Dependent>
           </ReferentialConstraint>
@@ -750,11 +812,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VENDOR_SHOP_USERS">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+        <Association Name="FK_VENDOR_SHOP_USERINFO">
+          <End Role="USERINFO" Type="Self.USERINFO" Multiplicity="1" />
           <End Role="VENDOR_SHOP" Type="Self.VENDOR_SHOP" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="USERS">
+            <Principal Role="USERINFO">
               <PropertyRef Name="userId" />
             </Principal>
             <Dependent Role="VENDOR_SHOP">
@@ -763,8 +825,13 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Pos1ModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AGE" EntityType="Self.AGE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AGE_TRANSLATION" EntityType="Self.AGE_TRANSLATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BRAND" EntityType="Self.BRAND" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CASH_BOTTOM_DAY" EntityType="Self.CASH_BOTTOM_DAY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
@@ -783,24 +850,15 @@
           <EntitySet Name="SHOP" EntityType="Self.SHOP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SHOP_PRODUCT" EntityType="Self.SHOP_PRODUCT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SHOP_TRANSLATION" EntityType="Self.SHOP_TRANSLATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATUS" EntityType="Self.STATUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SUBCATEGORY" EntityType="Self.SUBCATEGORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TERMINAL" EntityType="Self.TERMINAL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TICKET" EntityType="Self.TICKET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TICKET_MESSAGE" EntityType="Self.TICKET_MESSAGE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TICKET_MESSAGE_TRANSLATION" EntityType="Self.TICKET_MESSAGE_TRANSLATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRANSACTION_DETAILS" EntityType="Self.TRANSACTION_DETAILS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRANSACTIONS" EntityType="Self.TRANSACTIONS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERINFO" EntityType="Self.USERINFO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VAT" EntityType="Self.VAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VENDOR_SHOP" EntityType="Self.VENDOR_SHOP" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AGE_TRANSLATION_AGE" Association="Self.FK_AGE_TRANSLATION_AGE">
-            <End Role="AGE" EntitySet="AGE" />
-            <End Role="AGE_TRANSLATION" EntitySet="AGE_TRANSLATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AGE_TRANSLATION_LANGUAGE" Association="Self.FK_AGE_TRANSLATION_LANGUAGE">
-            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
-            <End Role="AGE_TRANSLATION" EntitySet="AGE_TRANSLATION" />
-          </AssociationSet>
           <AssociationSet Name="FK_CARD_TRANSACTION" Association="Self.FK_CARD_TRANSACTION">
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
             <End Role="PAYMENT" EntitySet="PAYMENT" />
@@ -828,6 +886,22 @@
           <AssociationSet Name="FK_CUSTOMER_PERSON" Association="Self.FK_CUSTOMER_PERSON">
             <End Role="PERSON" EntitySet="PERSON" />
             <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_HERO_TRANSLATION_HERO" Association="Self.FK_HERO_TRANSLATION_HERO">
             <End Role="HERO" EntitySet="HERO" />
@@ -865,6 +939,10 @@
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="PRODUCT_TRANSLATION" EntitySet="PRODUCT_TRANSLATION" />
           </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_VAT" Association="Self.FK_PRODUCT_VAT">
+            <End Role="VAT" EntitySet="VAT" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
           <AssociationSet Name="FK_SHOP_PRODUCT_PRODUCT" Association="Self.FK_SHOP_PRODUCT_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="SHOP_PRODUCT" EntitySet="SHOP_PRODUCT" />
@@ -895,15 +973,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES" Association="Self.FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES">
             <End Role="LANGUAGES" EntitySet="LANGUAGES" />
-            <End Role="TICKET_MESSAGE_TRANSLATION" EntitySet="TICKET_MESSAGE_TRANSLATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE" Association="Self.FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE">
             <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
-            <End Role="TICKET_MESSAGE_TRANSLATION" EntitySet="TICKET_MESSAGE_TRANSLATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TICKET_TICKET_MESSAGE" Association="Self.FK_TICKET_TICKET_MESSAGE">
-            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
-            <End Role="TICKET" EntitySet="TICKET" />
           </AssociationSet>
           <AssociationSet Name="FK_TRANSACTION_DETAILS_PRODUCT" Association="Self.FK_TRANSACTION_DETAILS_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
@@ -912,14 +982,6 @@
           <AssociationSet Name="FK_TRANSACTION_DETAILS_TRANSACTION" Association="Self.FK_TRANSACTION_DETAILS_TRANSACTION">
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
             <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANSACTION_DETAILS_VAT" Association="Self.FK_TRANSACTION_DETAILS_VAT">
-            <End Role="VAT" EntitySet="VAT" />
-            <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANSACTION_LANGUAGE" Association="Self.FK_TRANSACTION_LANGUAGE">
-            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
-            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
           <AssociationSet Name="FK_TRANSACTION_POS" Association="Self.FK_TRANSACTION_POS">
             <End Role="TERMINAL" EntitySet="TERMINAL" />
@@ -930,31 +992,35 @@
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
           <AssociationSet Name="FK_TRANSACTION_VENDOR" Association="Self.FK_TRANSACTION_VENDOR">
-            <End Role="USERS" EntitySet="USERS" />
+            <End Role="USERINFO" EntitySet="USERINFO" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
           <AssociationSet Name="FK_TRANSACTIONS_CUSTOMER" Association="Self.FK_TRANSACTIONS_CUSTOMER">
             <End Role="CUSTOMER" EntitySet="CUSTOMER" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
-          <AssociationSet Name="FK_TRANSACTIONS_TICKET" Association="Self.FK_TRANSACTIONS_TICKET">
-            <End Role="TICKET" EntitySet="TICKET" />
+          <AssociationSet Name="FK_TRANSACTIONS_STATUS" Association="Self.FK_TRANSACTIONS_STATUS">
+            <End Role="STATUS" EntitySet="STATUS" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
-          <AssociationSet Name="FK_USERS_PERSON" Association="Self.FK_USERS_PERSON">
-            <End Role="PERSON" EntitySet="PERSON" />
-            <End Role="USERS" EntitySet="USERS" />
+          <AssociationSet Name="FK_TRANSACTIONS_TICKET_MESSAGE" Association="Self.FK_TRANSACTIONS_TICKET_MESSAGE">
+            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
-          <AssociationSet Name="FK_USERS_ROLE" Association="Self.FK_USERS_ROLE">
+          <AssociationSet Name="FK_USERINFO_PERSON" Association="Self.FK_USERINFO_PERSON">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="USERINFO" EntitySet="USERINFO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERINFO_ROLE" Association="Self.FK_USERINFO_ROLE">
             <End Role="ROLE" EntitySet="ROLE" />
-            <End Role="USERS" EntitySet="USERS" />
+            <End Role="USERINFO" EntitySet="USERINFO" />
           </AssociationSet>
           <AssociationSet Name="FK_VENDOR_SHOP_SHOP" Association="Self.FK_VENDOR_SHOP_SHOP">
             <End Role="SHOP" EntitySet="SHOP" />
             <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
           </AssociationSet>
-          <AssociationSet Name="FK_VENDOR_SHOP_USERS" Association="Self.FK_VENDOR_SHOP_USERS">
-            <End Role="USERS" EntitySet="USERS" />
+          <AssociationSet Name="FK_VENDOR_SHOP_USERINFO" Association="Self.FK_VENDOR_SHOP_USERINFO">
+            <End Role="USERINFO" EntitySet="USERINFO" />
             <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
           </AssociationSet>
         </EntityContainer>
@@ -963,24 +1029,73 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pos1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="AGE">
           <Key>
             <PropertyRef Name="idAge" />
           </Key>
           <Property Name="idAge" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="AGE_TRANSLATION" Relationship="Self.FK_AGE_TRANSLATION_AGE" FromRole="AGE" ToRole="AGE_TRANSLATION" />
+          <Property Name="imageAge" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="rangeAges" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_AGE" FromRole="AGE" ToRole="PRODUCT" />
         </EntityType>
-        <EntityType Name="AGE_TRANSLATION">
+        <EntityType Name="AspNetRoles">
           <Key>
-            <PropertyRef Name="ageId" />
-            <PropertyRef Name="languageId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ageId" Type="Int32" Nullable="false" />
-          <Property Name="languageId" Type="Int32" Nullable="false" />
-          <Property Name="rangeAges" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="AGE" Relationship="Self.FK_AGE_TRANSLATION_AGE" FromRole="AGE_TRANSLATION" ToRole="AGE" />
-          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_AGE_TRANSLATION_LANGUAGE" FromRole="AGE_TRANSLATION" ToRole="LANGUAGES" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="BRAND">
           <Key>
@@ -988,6 +1103,7 @@
           </Key>
           <Property Name="idBrand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nameBrand" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="imageBrand" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_BRAND" FromRole="BRAND" ToRole="PRODUCT" />
           <NavigationProperty Name="PERSON" Relationship="Self.CONTACT" FromRole="BRAND" ToRole="PERSON" />
         </EntityType>
@@ -998,8 +1114,8 @@
           </Key>
           <Property Name="dateDay" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="terminalId" Type="Int32" Nullable="false" />
-          <Property Name="beginningCash" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="endCash" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="beginningCash" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="endCash" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <NavigationProperty Name="TERMINAL" Relationship="Self.FK_CASH_BOTTOM_BEGIN_TERMINAL" FromRole="CASH_BOTTOM_DAY" ToRole="TERMINAL" />
         </EntityType>
         <EntityType Name="CATEGORY">
@@ -1007,7 +1123,7 @@
             <PropertyRef Name="idCategory" />
           </Key>
           <Property Name="idCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="imageCat" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="imageCat" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CATEGORY_TRANSLATION" Relationship="Self.FK_CATEGORY_TRANSLATION_CATEGORY" FromRole="CATEGORY" ToRole="CATEGORY_TRANSLATION" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_CATEGORY" FromRole="CATEGORY" ToRole="PRODUCT" />
           <NavigationProperty Name="SUBCATEGORY" Relationship="Self.FK_SUBCATEGORY_Child" FromRole="CATEGORY" ToRole="SUBCATEGORY" />
@@ -1038,6 +1154,7 @@
             <PropertyRef Name="idHero" />
           </Key>
           <Property Name="idHero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imageHero" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="HERO_TRANSLATION" Relationship="Self.FK_HERO_TRANSLATION_HERO" FromRole="HERO" ToRole="HERO_TRANSLATION" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_HERO" FromRole="HERO" ToRole="PRODUCT" />
         </EntityType>
@@ -1058,13 +1175,11 @@
           </Key>
           <Property Name="idLanguage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nameLanguage" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="AGE_TRANSLATION" Relationship="Self.FK_AGE_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="AGE_TRANSLATION" />
           <NavigationProperty Name="CATEGORY_TRANSLATION" Relationship="Self.FK_CATEGORY_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="CATEGORY_TRANSLATION" />
           <NavigationProperty Name="HERO_TRANSLATION" Relationship="Self.FK_HERO_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="HERO_TRANSLATION" />
           <NavigationProperty Name="PRODUCT_TRANSLATION" Relationship="Self.FK_PRODUCT_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="PRODUCT_TRANSLATION" />
           <NavigationProperty Name="SHOP_TRANSLATION" Relationship="Self.FK_SHOP_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="SHOP_TRANSLATION" />
-          <NavigationProperty Name="TICKET_MESSAGE_TRANSLATION" Relationship="Self.FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES" FromRole="LANGUAGES" ToRole="TICKET_MESSAGE_TRANSLATION" />
-          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_LANGUAGE" FromRole="LANGUAGES" ToRole="TRANSACTIONS" />
+          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES" FromRole="LANGUAGES" ToRole="TICKET_MESSAGE" />
         </EntityType>
         <EntityType Name="PAYMENT">
           <Key>
@@ -1072,7 +1187,8 @@
           </Key>
           <Property Name="idPayment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="paymentMethodId" Type="Int32" Nullable="false" />
-          <Property Name="amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="momentPay" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="transactionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_CARD_TRANSACTION" FromRole="PAYMENT" ToRole="TRANSACTIONS" />
           <NavigationProperty Name="PAYMENT_METHOD" Relationship="Self.FK_PAYMENT_PAYMENT_METHOD" FromRole="PAYMENT" ToRole="PAYMENT_METHOD" />
@@ -1095,7 +1211,7 @@
           <Property Name="phone" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_CUSTOMER_PERSON" FromRole="PERSON" ToRole="CUSTOMER" />
-          <NavigationProperty Name="USERS" Relationship="Self.FK_USERS_PERSON" FromRole="PERSON" ToRole="USERS" />
+          <NavigationProperty Name="USERINFO" Relationship="Self.FK_USERINFO_PERSON" FromRole="PERSON" ToRole="USERINFO" />
           <NavigationProperty Name="BRAND" Relationship="Self.CONTACT" FromRole="PERSON" ToRole="BRAND" />
         </EntityType>
         <EntityType Name="PRODUCT">
@@ -1104,19 +1220,20 @@
           </Key>
           <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="purchasePrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="salesPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="discountRate" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="imageProduct" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="salesPrice" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="discountRate" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="imageProduct" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="categoryId" Type="Int32" Nullable="false" />
           <Property Name="ageId" Type="Int32" Nullable="false" />
           <Property Name="brandId" Type="Int32" Nullable="false" />
-          <Property Name="heroId" Type="Int32" Nullable="false" />
+          <Property Name="heroId" Type="Int32" />
+          <Property Name="vatId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AGE" Relationship="Self.FK_PRODUCT_AGE" FromRole="PRODUCT" ToRole="AGE" />
           <NavigationProperty Name="BRAND" Relationship="Self.FK_PRODUCT_BRAND" FromRole="PRODUCT" ToRole="BRAND" />
           <NavigationProperty Name="CATEGORY" Relationship="Self.FK_PRODUCT_CATEGORY" FromRole="PRODUCT" ToRole="CATEGORY" />
           <NavigationProperty Name="HERO" Relationship="Self.FK_PRODUCT_HERO" FromRole="PRODUCT" ToRole="HERO" />
           <NavigationProperty Name="PRODUCT_TRANSLATION" Relationship="Self.FK_PRODUCT_TRANSLATION_PRODUCT" FromRole="PRODUCT" ToRole="PRODUCT_TRANSLATION" />
+          <NavigationProperty Name="VAT" Relationship="Self.FK_PRODUCT_VAT" FromRole="PRODUCT" ToRole="VAT" />
           <NavigationProperty Name="SHOP_PRODUCT" Relationship="Self.FK_SHOP_PRODUCT_PRODUCT" FromRole="PRODUCT" ToRole="SHOP_PRODUCT" />
           <NavigationProperty Name="TRANSACTION_DETAILS" Relationship="Self.FK_TRANSACTION_DETAILS_PRODUCT" FromRole="PRODUCT" ToRole="TRANSACTION_DETAILS" />
         </EntityType>
@@ -1138,7 +1255,7 @@
           </Key>
           <Property Name="idRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nameRole" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="USERS" Relationship="Self.FK_USERS_ROLE" FromRole="ROLE" ToRole="USERS" />
+          <NavigationProperty Name="USERINFO" Relationship="Self.FK_USERINFO_ROLE" FromRole="ROLE" ToRole="USERINFO" />
         </EntityType>
         <EntityType Name="SHOP">
           <Key>
@@ -1151,7 +1268,7 @@
           <NavigationProperty Name="SHOP_TRANSLATION" Relationship="Self.FK_SHOP_TRANSLATION_SHOP" FromRole="SHOP" ToRole="SHOP_TRANSLATION" />
           <NavigationProperty Name="TERMINAL" Relationship="Self.FK_TERMINAL_SHOP" FromRole="SHOP" ToRole="TERMINAL" />
           <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_SHOP" FromRole="SHOP" ToRole="TRANSACTIONS" />
-          <NavigationProperty Name="USERS" Relationship="Self.VENDOR_SHOP" FromRole="SHOP" ToRole="USERS" />
+          <NavigationProperty Name="USERINFO" Relationship="Self.VENDOR_SHOP" FromRole="SHOP" ToRole="USERINFO" />
         </EntityType>
         <EntityType Name="SHOP_PRODUCT">
           <Key>
@@ -1177,6 +1294,14 @@
           <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_SHOP_TRANSLATION_LANGUAGE" FromRole="SHOP_TRANSLATION" ToRole="LANGUAGES" />
           <NavigationProperty Name="SHOP" Relationship="Self.FK_SHOP_TRANSLATION_SHOP" FromRole="SHOP_TRANSLATION" ToRole="SHOP" />
         </EntityType>
+        <EntityType Name="STATUS">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameStatus" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTIONS_STATUS" FromRole="STATUS" ToRole="TRANSACTIONS" />
+        </EntityType>
         <EntityType Name="SUBCATEGORY">
           <Key>
             <PropertyRef Name="idSubcategory" />
@@ -1198,34 +1323,17 @@
           <NavigationProperty Name="SHOP" Relationship="Self.FK_TERMINAL_SHOP" FromRole="TERMINAL" ToRole="SHOP" />
           <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_POS" FromRole="TERMINAL" ToRole="TRANSACTIONS" />
         </EntityType>
-        <EntityType Name="TICKET">
-          <Key>
-            <PropertyRef Name="idTicket" />
-          </Key>
-          <Property Name="idTicket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="messageId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.FK_TICKET_TICKET_MESSAGE" FromRole="TICKET" ToRole="TICKET_MESSAGE" />
-          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTIONS_TICKET" FromRole="TICKET" ToRole="TRANSACTIONS" />
-        </EntityType>
         <EntityType Name="TICKET_MESSAGE">
           <Key>
             <PropertyRef Name="idMessage" />
-          </Key>
-          <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="TICKET" Relationship="Self.FK_TICKET_TICKET_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="TICKET" />
-          <NavigationProperty Name="TICKET_MESSAGE_TRANSLATION" Relationship="Self.FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="TICKET_MESSAGE_TRANSLATION" />
-        </EntityType>
-        <EntityType Name="TICKET_MESSAGE_TRANSLATION">
-          <Key>
-            <PropertyRef Name="messageId" />
             <PropertyRef Name="languageId" />
           </Key>
-          <Property Name="messageId" Type="Int32" Nullable="false" />
+          <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="languageId" Type="Int32" Nullable="false" />
           <Property Name="title" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES" FromRole="TICKET_MESSAGE_TRANSLATION" ToRole="LANGUAGES" />
-          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE" FromRole="TICKET_MESSAGE_TRANSLATION" ToRole="TICKET_MESSAGE" />
+          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES" FromRole="TICKET_MESSAGE" ToRole="LANGUAGES" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTIONS_TICKET_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="TRANSACTIONS" />
         </EntityType>
         <EntityType Name="TRANSACTION_DETAILS">
           <Key>
@@ -1233,42 +1341,42 @@
           </Key>
           <Property Name="idTransactionDetails" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="transactionId" Type="Int32" Nullable="false" />
-          <Property Name="vatId" Type="Int32" Nullable="false" />
           <Property Name="productId" Type="Int32" Nullable="false" />
           <Property Name="nameItem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="quantity" Type="Int32" Nullable="false" />
-          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="vatItem" Type="Decimal" Precision="4" Scale="2" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_TRANSACTION_DETAILS_PRODUCT" FromRole="TRANSACTION_DETAILS" ToRole="PRODUCT" />
           <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_DETAILS_TRANSACTION" FromRole="TRANSACTION_DETAILS" ToRole="TRANSACTIONS" />
-          <NavigationProperty Name="VAT" Relationship="Self.FK_TRANSACTION_DETAILS_VAT" FromRole="TRANSACTION_DETAILS" ToRole="VAT" />
         </EntityType>
         <EntityType Name="TRANSACTIONS">
           <Key>
             <PropertyRef Name="idTransaction" />
           </Key>
           <Property Name="idTransaction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="transactionDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="total" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="isClose" Type="Boolean" Nullable="false" />
-          <Property Name="isCanceled" Type="Boolean" Nullable="false" />
+          <Property Name="transactionDateBegin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="transactionDateEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="total" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="discountGlobal" Type="Decimal" Precision="8" Scale="2" />
           <Property Name="isReturn" Type="Boolean" Nullable="false" />
           <Property Name="vendorId" Type="Int32" Nullable="false" />
           <Property Name="terminalId" Type="Int32" Nullable="false" />
-          <Property Name="languageId" Type="Int32" Nullable="false" />
           <Property Name="shopId" Type="Int32" Nullable="false" />
           <Property Name="customerId" Type="Int32" Nullable="false" />
-          <Property Name="ticketId" Type="Int32" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="messageId" Type="Int32" Nullable="false" />
+          <Property Name="languageTr" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_TRANSACTIONS_CUSTOMER" FromRole="TRANSACTIONS" ToRole="CUSTOMER" />
-          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_TRANSACTION_LANGUAGE" FromRole="TRANSACTIONS" ToRole="LANGUAGES" />
           <NavigationProperty Name="PAYMENT" Relationship="Self.FK_CARD_TRANSACTION" FromRole="TRANSACTIONS" ToRole="PAYMENT" />
           <NavigationProperty Name="SHOP" Relationship="Self.FK_TRANSACTION_SHOP" FromRole="TRANSACTIONS" ToRole="SHOP" />
+          <NavigationProperty Name="STATUS" Relationship="Self.FK_TRANSACTIONS_STATUS" FromRole="TRANSACTIONS" ToRole="STATUS" />
           <NavigationProperty Name="TERMINAL" Relationship="Self.FK_TRANSACTION_POS" FromRole="TRANSACTIONS" ToRole="TERMINAL" />
-          <NavigationProperty Name="TICKET" Relationship="Self.FK_TRANSACTIONS_TICKET" FromRole="TRANSACTIONS" ToRole="TICKET" />
+          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.FK_TRANSACTIONS_TICKET_MESSAGE" FromRole="TRANSACTIONS" ToRole="TICKET_MESSAGE" />
           <NavigationProperty Name="TRANSACTION_DETAILS" Relationship="Self.FK_TRANSACTION_DETAILS_TRANSACTION" FromRole="TRANSACTIONS" ToRole="TRANSACTION_DETAILS" />
-          <NavigationProperty Name="USERS" Relationship="Self.FK_TRANSACTION_VENDOR" FromRole="TRANSACTIONS" ToRole="USERS" />
+          <NavigationProperty Name="USERINFO" Relationship="Self.FK_TRANSACTION_VENDOR" FromRole="TRANSACTIONS" ToRole="USERINFO" />
         </EntityType>
-        <EntityType Name="USERS">
+        <EntityType Name="USERINFO">
           <Key>
             <PropertyRef Name="userId" />
           </Key>
@@ -1278,31 +1386,19 @@
           <Property Name="zipCode" Type="Int32" Nullable="false" />
           <Property Name="city" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="roleId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PERSON" Relationship="Self.FK_USERS_PERSON" FromRole="USERS" ToRole="PERSON" />
-          <NavigationProperty Name="ROLE" Relationship="Self.FK_USERS_ROLE" FromRole="USERS" ToRole="ROLE" />
-          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_VENDOR" FromRole="USERS" ToRole="TRANSACTIONS" />
-          <NavigationProperty Name="SHOP" Relationship="Self.VENDOR_SHOP" FromRole="USERS" ToRole="SHOP" />
+          <NavigationProperty Name="PERSON" Relationship="Self.FK_USERINFO_PERSON" FromRole="USERINFO" ToRole="PERSON" />
+          <NavigationProperty Name="ROLE" Relationship="Self.FK_USERINFO_ROLE" FromRole="USERINFO" ToRole="ROLE" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_VENDOR" FromRole="USERINFO" ToRole="TRANSACTIONS" />
+          <NavigationProperty Name="SHOP" Relationship="Self.VENDOR_SHOP" FromRole="USERINFO" ToRole="SHOP" />
         </EntityType>
         <EntityType Name="VAT">
           <Key>
             <PropertyRef Name="idVat" />
           </Key>
           <Property Name="idVat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="appliedVat" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <NavigationProperty Name="TRANSACTION_DETAILS" Relationship="Self.FK_TRANSACTION_DETAILS_VAT" FromRole="VAT" ToRole="TRANSACTION_DETAILS" />
+          <Property Name="appliedVat" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_VAT" FromRole="VAT" ToRole="PRODUCT" />
         </EntityType>
-        <Association Name="FK_AGE_TRANSLATION_AGE">
-          <End Role="AGE" Type="Self.AGE" Multiplicity="1" />
-          <End Role="AGE_TRANSLATION" Type="Self.AGE_TRANSLATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AGE">
-              <PropertyRef Name="idAge" />
-            </Principal>
-            <Dependent Role="AGE_TRANSLATION">
-              <PropertyRef Name="ageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PRODUCT_AGE">
           <End Role="AGE" Type="Self.AGE" Multiplicity="1" />
           <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
@@ -1315,15 +1411,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AGE_TRANSLATION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
-          <End Role="AGE_TRANSLATION" Type="Self.AGE_TRANSLATION" Multiplicity="*" />
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LANGUAGES">
-              <PropertyRef Name="idLanguage" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AGE_TRANSLATION">
-              <PropertyRef Name="languageId" />
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1448,7 +1560,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PRODUCT_HERO">
-          <End Role="HERO" Type="Self.HERO" Multiplicity="1" />
+          <End Role="HERO" Type="Self.HERO" Multiplicity="0..1" />
           <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HERO">
@@ -1497,24 +1609,12 @@
         </Association>
         <Association Name="FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES">
           <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
-          <End Role="TICKET_MESSAGE_TRANSLATION" Type="Self.TICKET_MESSAGE_TRANSLATION" Multiplicity="*" />
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
               <PropertyRef Name="idLanguage" />
             </Principal>
-            <Dependent Role="TICKET_MESSAGE_TRANSLATION">
-              <PropertyRef Name="languageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TRANSACTION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
-          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LANGUAGES">
-              <PropertyRef Name="idLanguage" />
-            </Principal>
-            <Dependent Role="TRANSACTIONS">
+            <Dependent Role="TICKET_MESSAGE">
               <PropertyRef Name="languageId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1543,14 +1643,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_USERS_PERSON">
+        <Association Name="FK_USERINFO_PERSON">
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
-          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="USERINFO" Type="Self.USERINFO" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="PERSON">
               <PropertyRef Name="idPerson" />
             </Principal>
-            <Dependent Role="USERS">
+            <Dependent Role="USERINFO">
               <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1564,6 +1664,18 @@
             </Principal>
             <Dependent Role="PRODUCT_TRANSLATION">
               <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_VAT">
+          <End Role="VAT" Type="Self.VAT" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VAT">
+              <PropertyRef Name="idVat" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="vatId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1591,14 +1703,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_USERS_ROLE">
+        <Association Name="FK_USERINFO_ROLE">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
-          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <End Role="USERINFO" Type="Self.USERINFO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ROLE">
               <PropertyRef Name="idRole" />
             </Principal>
-            <Dependent Role="USERS">
+            <Dependent Role="USERINFO">
               <PropertyRef Name="roleId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1651,6 +1763,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TRANSACTIONS_STATUS">
+          <End Role="STATUS" Type="Self.STATUS" Multiplicity="1" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUS">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TRANSACTION_POS">
           <End Role="TERMINAL" Type="Self.TERMINAL" Multiplicity="1" />
           <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
@@ -1663,39 +1787,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TICKET_TICKET_MESSAGE">
+        <Association Name="FK_TRANSACTIONS_TICKET_MESSAGE">
           <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
-          <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TICKET_MESSAGE">
-              <PropertyRef Name="idMessage" />
-            </Principal>
-            <Dependent Role="TICKET">
-              <PropertyRef Name="messageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TRANSACTIONS_TICKET">
-          <End Role="TICKET" Type="Self.TICKET" Multiplicity="1" />
           <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TICKET">
-              <PropertyRef Name="idTicket" />
-            </Principal>
-            <Dependent Role="TRANSACTIONS">
-              <PropertyRef Name="ticketId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE">
-          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
-          <End Role="TICKET_MESSAGE_TRANSLATION" Type="Self.TICKET_MESSAGE_TRANSLATION" Multiplicity="*" />
-          <ReferentialConstraint>
             <Principal Role="TICKET_MESSAGE">
               <PropertyRef Name="idMessage" />
+              <PropertyRef Name="languageId" />
             </Principal>
-            <Dependent Role="TICKET_MESSAGE_TRANSLATION">
+            <Dependent Role="TRANSACTIONS">
               <PropertyRef Name="messageId" />
+              <PropertyRef Name="languageTr" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1711,23 +1813,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TRANSACTION_DETAILS_VAT">
-          <End Role="VAT" Type="Self.VAT" Multiplicity="1" />
-          <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VAT">
-              <PropertyRef Name="idVat" />
-            </Principal>
-            <Dependent Role="TRANSACTION_DETAILS">
-              <PropertyRef Name="vatId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TRANSACTION_VENDOR">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="USERINFO" Type="Self.USERINFO" Multiplicity="1" />
           <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="USERS">
+            <Principal Role="USERINFO">
               <PropertyRef Name="userId" />
             </Principal>
             <Dependent Role="TRANSACTIONS">
@@ -1735,17 +1825,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
         <Association Name="CONTACT">
           <End Role="BRAND" Type="Self.BRAND" Multiplicity="0..1" />
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
         </Association>
         <Association Name="VENDOR_SHOP">
           <End Role="SHOP" Type="Self.SHOP" Multiplicity="*" />
-          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <End Role="USERINFO" Type="Self.USERINFO" Multiplicity="*" />
         </Association>
         <EntityContainer Name="Pos1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="AGE" EntityType="Self.AGE" />
-          <EntitySet Name="AGE_TRANSLATION" EntityType="Self.AGE_TRANSLATION" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="BRAND" EntityType="Self.BRAND" />
           <EntitySet Name="CASH_BOTTOM_DAY" EntityType="Self.CASH_BOTTOM_DAY" />
           <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" />
@@ -1763,26 +1861,25 @@
           <EntitySet Name="SHOP" EntityType="Self.SHOP" />
           <EntitySet Name="SHOP_PRODUCT" EntityType="Self.SHOP_PRODUCT" />
           <EntitySet Name="SHOP_TRANSLATION" EntityType="Self.SHOP_TRANSLATION" />
+          <EntitySet Name="STATUS" EntityType="Self.STATUS" />
           <EntitySet Name="SUBCATEGORY" EntityType="Self.SUBCATEGORY" />
           <EntitySet Name="TERMINAL" EntityType="Self.TERMINAL" />
-          <EntitySet Name="TICKET" EntityType="Self.TICKET" />
           <EntitySet Name="TICKET_MESSAGE" EntityType="Self.TICKET_MESSAGE" />
-          <EntitySet Name="TICKET_MESSAGE_TRANSLATION" EntityType="Self.TICKET_MESSAGE_TRANSLATION" />
           <EntitySet Name="TRANSACTION_DETAILS" EntityType="Self.TRANSACTION_DETAILS" />
           <EntitySet Name="TRANSACTIONS" EntityType="Self.TRANSACTIONS" />
-          <EntitySet Name="USERS" EntityType="Self.USERS" />
+          <EntitySet Name="USERINFO" EntityType="Self.USERINFO" />
           <EntitySet Name="VAT" EntityType="Self.VAT" />
-          <AssociationSet Name="FK_AGE_TRANSLATION_AGE" Association="Self.FK_AGE_TRANSLATION_AGE">
-            <End Role="AGE" EntitySet="AGE" />
-            <End Role="AGE_TRANSLATION" EntitySet="AGE_TRANSLATION" />
-          </AssociationSet>
           <AssociationSet Name="FK_PRODUCT_AGE" Association="Self.FK_PRODUCT_AGE">
             <End Role="AGE" EntitySet="AGE" />
             <End Role="PRODUCT" EntitySet="PRODUCT" />
           </AssociationSet>
-          <AssociationSet Name="FK_AGE_TRANSLATION_LANGUAGE" Association="Self.FK_AGE_TRANSLATION_LANGUAGE">
-            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
-            <End Role="AGE_TRANSLATION" EntitySet="AGE_TRANSLATION" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
           <AssociationSet Name="FK_PRODUCT_BRAND" Association="Self.FK_PRODUCT_BRAND">
             <End Role="BRAND" EntitySet="BRAND" />
@@ -1842,11 +1939,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES" Association="Self.FK_TICKET_MESSAGE_TRANSLATION_LANGUAGES">
             <End Role="LANGUAGES" EntitySet="LANGUAGES" />
-            <End Role="TICKET_MESSAGE_TRANSLATION" EntitySet="TICKET_MESSAGE_TRANSLATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANSACTION_LANGUAGE" Association="Self.FK_TRANSACTION_LANGUAGE">
-            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
-            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
           </AssociationSet>
           <AssociationSet Name="FK_CARD_TRANSACTION" Association="Self.FK_CARD_TRANSACTION">
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
@@ -1856,13 +1949,17 @@
             <End Role="PAYMENT_METHOD" EntitySet="PAYMENT_METHOD" />
             <End Role="PAYMENT" EntitySet="PAYMENT" />
           </AssociationSet>
-          <AssociationSet Name="FK_USERS_PERSON" Association="Self.FK_USERS_PERSON">
+          <AssociationSet Name="FK_USERINFO_PERSON" Association="Self.FK_USERINFO_PERSON">
             <End Role="PERSON" EntitySet="PERSON" />
-            <End Role="USERS" EntitySet="USERS" />
+            <End Role="USERINFO" EntitySet="USERINFO" />
           </AssociationSet>
           <AssociationSet Name="FK_PRODUCT_TRANSLATION_PRODUCT" Association="Self.FK_PRODUCT_TRANSLATION_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="PRODUCT_TRANSLATION" EntitySet="PRODUCT_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_VAT" Association="Self.FK_PRODUCT_VAT">
+            <End Role="VAT" EntitySet="VAT" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
           </AssociationSet>
           <AssociationSet Name="FK_SHOP_PRODUCT_PRODUCT" Association="Self.FK_SHOP_PRODUCT_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
@@ -1872,9 +1969,9 @@
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
           </AssociationSet>
-          <AssociationSet Name="FK_USERS_ROLE" Association="Self.FK_USERS_ROLE">
+          <AssociationSet Name="FK_USERINFO_ROLE" Association="Self.FK_USERINFO_ROLE">
             <End Role="ROLE" EntitySet="ROLE" />
-            <End Role="USERS" EntitySet="USERS" />
+            <End Role="USERINFO" EntitySet="USERINFO" />
           </AssociationSet>
           <AssociationSet Name="FK_SHOP_PRODUCT_SHOP" Association="Self.FK_SHOP_PRODUCT_SHOP">
             <End Role="SHOP" EntitySet="SHOP" />
@@ -1892,33 +1989,29 @@
             <End Role="SHOP" EntitySet="SHOP" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTIONS_STATUS" Association="Self.FK_TRANSACTIONS_STATUS">
+            <End Role="STATUS" EntitySet="STATUS" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
           <AssociationSet Name="FK_TRANSACTION_POS" Association="Self.FK_TRANSACTION_POS">
             <End Role="TERMINAL" EntitySet="TERMINAL" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
-          <AssociationSet Name="FK_TICKET_TICKET_MESSAGE" Association="Self.FK_TICKET_TICKET_MESSAGE">
+          <AssociationSet Name="FK_TRANSACTIONS_TICKET_MESSAGE" Association="Self.FK_TRANSACTIONS_TICKET_MESSAGE">
             <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
-            <End Role="TICKET" EntitySet="TICKET" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANSACTIONS_TICKET" Association="Self.FK_TRANSACTIONS_TICKET">
-            <End Role="TICKET" EntitySet="TICKET" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE" Association="Self.FK_TICKET_MESSAGE_TRANSLATION_TICKET_MESSAGE">
-            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
-            <End Role="TICKET_MESSAGE_TRANSLATION" EntitySet="TICKET_MESSAGE_TRANSLATION" />
           </AssociationSet>
           <AssociationSet Name="FK_TRANSACTION_DETAILS_TRANSACTION" Association="Self.FK_TRANSACTION_DETAILS_TRANSACTION">
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
             <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
           </AssociationSet>
-          <AssociationSet Name="FK_TRANSACTION_DETAILS_VAT" Association="Self.FK_TRANSACTION_DETAILS_VAT">
-            <End Role="VAT" EntitySet="VAT" />
-            <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
-          </AssociationSet>
           <AssociationSet Name="FK_TRANSACTION_VENDOR" Association="Self.FK_TRANSACTION_VENDOR">
-            <End Role="USERS" EntitySet="USERS" />
+            <End Role="USERINFO" EntitySet="USERINFO" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <AssociationSet Name="CONTACT" Association="Self.CONTACT">
             <End Role="BRAND" EntitySet="BRAND" />
@@ -1926,7 +2019,7 @@
           </AssociationSet>
           <AssociationSet Name="VENDOR_SHOP" Association="Self.VENDOR_SHOP">
             <End Role="SHOP" EntitySet="SHOP" />
-            <End Role="USERS" EntitySet="USERS" />
+            <End Role="USERINFO" EntitySet="USERINFO" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1935,19 +2028,67 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Pos1ModelStoreContainer" CdmEntityContainer="Pos1Entities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="Pos1Model.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AGE">
             <EntityTypeMapping TypeName="Pos1Model.AGE">
               <MappingFragment StoreEntitySet="AGE">
                 <ScalarProperty Name="idAge" ColumnName="idAge" />
+                <ScalarProperty Name="imageAge" ColumnName="imageAge" />
+                <ScalarProperty Name="rangeAges" ColumnName="rangeAges" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AGE_TRANSLATION">
-            <EntityTypeMapping TypeName="Pos1Model.AGE_TRANSLATION">
-              <MappingFragment StoreEntitySet="AGE_TRANSLATION">
-                <ScalarProperty Name="ageId" ColumnName="ageId" />
-                <ScalarProperty Name="languageId" ColumnName="languageId" />
-                <ScalarProperty Name="rangeAges" ColumnName="rangeAges" />
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Pos1Model.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="Pos1Model.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="Pos1Model.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Pos1Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1956,6 +2097,7 @@
               <MappingFragment StoreEntitySet="BRAND">
                 <ScalarProperty Name="idBrand" ColumnName="idBrand" />
                 <ScalarProperty Name="nameBrand" ColumnName="nameBrand" />
+                <ScalarProperty Name="imageBrand" ColumnName="imageBrand" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1998,6 +2140,7 @@
             <EntityTypeMapping TypeName="Pos1Model.HERO">
               <MappingFragment StoreEntitySet="HERO">
                 <ScalarProperty Name="idHero" ColumnName="idHero" />
+                <ScalarProperty Name="imageHero" ColumnName="imageHero" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2024,6 +2167,7 @@
                 <ScalarProperty Name="idPayment" ColumnName="idPayment" />
                 <ScalarProperty Name="paymentMethodId" ColumnName="paymentMethodId" />
                 <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="momentPay" ColumnName="momentPay" />
                 <ScalarProperty Name="transactionId" ColumnName="transactionId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2052,7 +2196,6 @@
               <MappingFragment StoreEntitySet="PRODUCT">
                 <ScalarProperty Name="idProduct" ColumnName="idProduct" />
                 <ScalarProperty Name="barcode" ColumnName="barcode" />
-                <ScalarProperty Name="purchasePrice" ColumnName="purchasePrice" />
                 <ScalarProperty Name="salesPrice" ColumnName="salesPrice" />
                 <ScalarProperty Name="discountRate" ColumnName="discountRate" />
                 <ScalarProperty Name="imageProduct" ColumnName="imageProduct" />
@@ -2060,6 +2203,7 @@
                 <ScalarProperty Name="ageId" ColumnName="ageId" />
                 <ScalarProperty Name="brandId" ColumnName="brandId" />
                 <ScalarProperty Name="heroId" ColumnName="heroId" />
+                <ScalarProperty Name="vatId" ColumnName="vatId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2111,6 +2255,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="STATUS">
+            <EntityTypeMapping TypeName="Pos1Model.STATUS">
+              <MappingFragment StoreEntitySet="STATUS">
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="nameStatus" ColumnName="nameStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SUBCATEGORY">
             <EntityTypeMapping TypeName="Pos1Model.SUBCATEGORY">
               <MappingFragment StoreEntitySet="SUBCATEGORY">
@@ -2129,25 +2281,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TICKET">
-            <EntityTypeMapping TypeName="Pos1Model.TICKET">
-              <MappingFragment StoreEntitySet="TICKET">
-                <ScalarProperty Name="idTicket" ColumnName="idTicket" />
-                <ScalarProperty Name="messageId" ColumnName="messageId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TICKET_MESSAGE">
             <EntityTypeMapping TypeName="Pos1Model.TICKET_MESSAGE">
               <MappingFragment StoreEntitySet="TICKET_MESSAGE">
                 <ScalarProperty Name="idMessage" ColumnName="idMessage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TICKET_MESSAGE_TRANSLATION">
-            <EntityTypeMapping TypeName="Pos1Model.TICKET_MESSAGE_TRANSLATION">
-              <MappingFragment StoreEntitySet="TICKET_MESSAGE_TRANSLATION">
-                <ScalarProperty Name="messageId" ColumnName="messageId" />
                 <ScalarProperty Name="languageId" ColumnName="languageId" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="message" ColumnName="message" />
@@ -2159,12 +2296,12 @@
               <MappingFragment StoreEntitySet="TRANSACTION_DETAILS">
                 <ScalarProperty Name="idTransactionDetails" ColumnName="idTransactionDetails" />
                 <ScalarProperty Name="transactionId" ColumnName="transactionId" />
-                <ScalarProperty Name="vatId" ColumnName="vatId" />
                 <ScalarProperty Name="productId" ColumnName="productId" />
                 <ScalarProperty Name="nameItem" ColumnName="nameItem" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="vatItem" ColumnName="vatItem" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2172,23 +2309,24 @@
             <EntityTypeMapping TypeName="Pos1Model.TRANSACTIONS">
               <MappingFragment StoreEntitySet="TRANSACTIONS">
                 <ScalarProperty Name="idTransaction" ColumnName="idTransaction" />
-                <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+                <ScalarProperty Name="transactionDateBegin" ColumnName="transactionDateBegin" />
+                <ScalarProperty Name="transactionDateEnd" ColumnName="transactionDateEnd" />
                 <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="isClose" ColumnName="isClose" />
-                <ScalarProperty Name="isCanceled" ColumnName="isCanceled" />
+                <ScalarProperty Name="discountGlobal" ColumnName="discountGlobal" />
                 <ScalarProperty Name="isReturn" ColumnName="isReturn" />
                 <ScalarProperty Name="vendorId" ColumnName="vendorId" />
                 <ScalarProperty Name="terminalId" ColumnName="terminalId" />
-                <ScalarProperty Name="languageId" ColumnName="languageId" />
                 <ScalarProperty Name="shopId" ColumnName="shopId" />
                 <ScalarProperty Name="customerId" ColumnName="customerId" />
-                <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="messageId" ColumnName="messageId" />
+                <ScalarProperty Name="languageTr" ColumnName="languageTr" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="USERS">
-            <EntityTypeMapping TypeName="Pos1Model.USERS">
-              <MappingFragment StoreEntitySet="USERS">
+          <EntitySetMapping Name="USERINFO">
+            <EntityTypeMapping TypeName="Pos1Model.USERINFO">
+              <MappingFragment StoreEntitySet="USERINFO">
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="street" ColumnName="street" />
@@ -2206,6 +2344,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Pos1Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="CONTACT" TypeName="Pos1Model.CONTACT" StoreEntitySet="CONTACT">
             <EndProperty Name="BRAND">
               <ScalarProperty Name="idBrand" ColumnName="brandId" />
@@ -2218,7 +2364,7 @@
             <EndProperty Name="SHOP">
               <ScalarProperty Name="idShop" ColumnName="shopId" />
             </EndProperty>
-            <EndProperty Name="USERS">
+            <EndProperty Name="USERINFO">
               <ScalarProperty Name="userId" ColumnName="vendorId" />
             </EndProperty>
           </AssociationSetMapping>

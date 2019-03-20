@@ -17,15 +17,16 @@ namespace MyPOS2.Data.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TICKET_MESSAGE()
         {
-            this.TICKET = new HashSet<TICKET>();
-            this.TICKET_MESSAGE_TRANSLATION = new HashSet<TICKET_MESSAGE_TRANSLATION>();
+            this.TRANSACTIONS = new HashSet<TRANSACTIONS>();
         }
     
         public int idMessage { get; set; }
+        public int languageId { get; set; }
+        public string title { get; set; }
+        public string message { get; set; }
     
+        public virtual LANGUAGES LANGUAGES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TICKET> TICKET { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TICKET_MESSAGE_TRANSLATION> TICKET_MESSAGE_TRANSLATION { get; set; }
+        public virtual ICollection<TRANSACTIONS> TRANSACTIONS { get; set; }
     }
 }
