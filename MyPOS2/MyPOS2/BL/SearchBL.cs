@@ -60,11 +60,30 @@ namespace MyPOS2.BL
             }
         }
 
-        internal static IList<CATEGORY> FindCatsList()
+        internal static IList<CATEGORY> FindCatsParentList()
         {
             using (IDalSearch dal = new DalSearch())
             {
                 return dal.GetAllCats();
+            }
+        }
+
+        internal static IList<SPP_ParentCategories_Result> FindCatsParentList(string language)
+        {
+            using (IDalSearch dal = new DalSearch())
+            {
+                int lang = int.Parse(language);
+                return dal.GetAllCats(lang);
+            }
+        }
+
+        internal static IList<SPP_ChildCategories_Result> FindCatsChildList(string argument, string language)
+        {
+            using (IDalSearch dal = new DalSearch())
+            {
+                int id = int.Parse(argument);
+                int lang = int.Parse(language);
+                return dal.GetAllCats(id, lang);
             }
         }
 
@@ -76,5 +95,6 @@ namespace MyPOS2.BL
                 return dal.GetAllProductByIdCat(id);
             }
         }
+                
     }
 }

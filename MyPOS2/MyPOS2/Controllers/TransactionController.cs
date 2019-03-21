@@ -25,27 +25,16 @@ namespace MyPOS2.Controllers
                 TrIndexViewModel vm = new TrIndexViewModel
                 {
                     ////terminal name or id
-                    //vm.TerminalsNames = TransactionBL.FindTerminalsNames(); // list names terminals
-                    //vm.TerminalsList = TransactionBL.FindTerminalsList();  // list terminals
                     TerminalId = terminal,
 
                     ////transaction num = id
-                    //vm.NumTransaction = "9999";
-                    // To do -> vérification si transaction en cours
                     // to do --> provisoire vendorId = 1, shopId = 1, customerId = 1
                     NumTransaction = TransactionBL.InitializeNewTransaction(terminal, currentId),
 
                     // to do --> quid date et heure?
                     DateDay = DateTime.Now.Date.ToString("d"),
                     HourDay = DateTime.Now.ToString("T"),
-
-                    /*Vendor = "Toto",*/ // --> id = 1
-
-                    //detail vide ->  provisoire
-                    //vm.TransactionDetailsListById = TransactionBL.InitializeTransactionDetails();
-                    //VatsList = TransactionBL.FindVatsList()
                 };
-                //ViewBag.subTot1 = 0;
                 return View(vm);
             }
 
@@ -93,57 +82,12 @@ namespace MyPOS2.Controllers
 
         }
 
-        //[HttpGet]
-        //public ActionResult IndexContinue()
-        //{
-        //    try
-        //    {
-        //        int terminal = TransactionBL.FindTerminalIdByDate();
-        //        TrIndexViewModel vm = new TrIndexViewModel
-        //        {
-        //            ////terminal name or id
-        //            //vm.TerminalsNames = TransactionBL.FindTerminalsNames(); // list names terminals
-        //            //vm.TerminalsList = TransactionBL.FindTerminalsList();  // list terminals
-        //            TerminalId = terminal,
-
-        //            ////transaction num = id
-        //            //vm.NumTransaction = "9999";
-        //            // To do -> vérification si transaction en cours
-        //            // to do --> provisoire vendorId = 1, shopId = 1, customerId = 1
-        //            NumTransaction = TransactionBL.InitializeNewTransaction(terminal),
-
-        //            // to do --> quid date et heure?
-        //            DateDay = DateTime.Now.Date.ToString("d"),
-        //            HourDay = DateTime.Now.ToString("T"),
-
-        //            Vendor = "Toto", // --> id = 1
-
-        //            //detail vide ->  provisoire
-        //            //vm.TransactionDetailsListById = TransactionBL.InitializeTransactionDetails();
-        //            VatsList = TransactionBL.FindVatsList()
-        //        };
-        //        //ViewBag.subTot1 = 0;
-        //        return View("Index", vm);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Il y a un eu une erreur : " + ex.ToString());
-        //        throw;
-        //    }
-
-        //}
-
         [HandleError]
         public ActionResult TransacReturn(TrPaymentMenuViewModel vmodel)
         {
             try
             {
-                //to do --> check if detailsListTot count = 0 
                 var detailsListTot = TransactionBL.ListDetailsWithTot(vmodel.NumTransaction);
-                //if (detailsListTot.Count == 0)
-                //{
-                //    throw "";
-                //}
                 var transac = TransactionBL.FindTransactionById(vmodel.NumTransaction);
                 TrIndexViewModel vm = new TrIndexViewModel
                 {
@@ -159,7 +103,6 @@ namespace MyPOS2.Controllers
                     Vendor = (transac.userId).ToString(),
                     //to do or not--> transac.discountGlobal à afficher
                     //to do or not--> with transac.vatId  return appliedVat
-                    //VatsList = TransactionBL.FindVatsList(),
                     DetailsListWithTot = detailsListTot
                 };
                 //Sum subTotItems 
@@ -191,43 +134,9 @@ namespace MyPOS2.Controllers
 
         }
 
-        ////POST:
-        //[HttpPost]
-        ////public ActionResult PaymentTransaction(string numTransaction, string terminalId, string vendor, string subTotitem, string discountG, string subTot, string vat, string globalTotal)
-        ////public ActionResult PaymentTransaction(string subTotitem, string discountG, string subTot, string vat, TrIndexViewModel vmodel)
-        //public ActionResult Index(string globalDiscount, TrIndexViewModel vmodel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        //save part of transaction
-        //        //var discountG = vm.GlobalDiscount.ToString();
-        //        TransactionBL.SaveTransactionBeforePayment(vmodel.NumTransaction, vmodel.GlobalTot, globalDiscount, vmodel.GlobalVAT);
-
-        //        //TrPaymentMenuViewModel vm = new TrPaymentMenuViewModel
-        //        //{
-        //        //    GlobalTot = vmodel.GlobalTot,
-        //        //    NumTransaction = vmodel.NumTransaction
-        //        //};
-        //        //return View("PaymentMenu", vm);
-
-        //        //return RedirectToAction("Index", "Pay", new TrPaymentMenuViewModel { GlobalTot = vmodel.GlobalTot, NumTransaction = vmodel.NumTransaction });
-        //        var gt = vmodel.GlobalTot;
-        //        var nt = vmodel.NumTransaction;
-        //        return RedirectToAction("Index", "Pay", new { gt, nt });
-        //    }
-        //    var detailsListTot = TransactionBL.ListDetailsWithTot(vmodel.NumTransaction);
-        //    //Sum subTotItems 
-        //    ViewBag.subTot1 = TransactionBL.SumItemsSubTot(detailsListTot);
-        //    vmodel.DetailsListWithTot = detailsListTot;
-        //    vmodel.VatsList = TransactionBL.FindVatsList();
-        //    return View(vmodel);
-        //}
-
         //POST:
         [HandleError]
         [HttpPost]
-        //public ActionResult PaymentTransaction(string numTransaction, string terminalId, string vendor, string subTotitem, string discountG, string subTot, string vat, string globalTotal)
-        //public ActionResult PaymentTransaction(string subTotitem, string discountG, string subTot, string vat, TrIndexViewModel vmodel)
         public ActionResult Index(string submitButton, string globalDiscount, TrIndexViewModel vmodel)
         {
             try
@@ -265,36 +174,14 @@ namespace MyPOS2.Controllers
         #region Detail
         [HandleError]
         [HttpPost]
-        //public ActionResult RefreshDetails(string addProduct, string numTransaction, string terminalId, bool minus, TrIndexViewModel vmodel)
         public ActionResult RefreshDetails(string numTransaction, string terminalId, TrDetailsViewModel vmodel)
         {
-            //TrDetailsViewModel vm = new TrDetailsViewModel();
-            ////Add detail
-            //TransactionBL.AddNewTransactionDetail(addProduct, terminalId, numTransaction, minus);
-            ////Find details with id transaction  + Add itemSubTotal
-            //var detailsList = TransactionBL.FindTransactionDetailsListById(numTransaction);
-            //var detailsListTot = TransactionBL.AddSubTotalPerDetailToList(detailsList);
-            ////Sum subTotItems 
-            //ViewBag.subTot1 = TransactionBL.SumItemsSubTot(detailsListTot);
-            //vm.DetailsListWithTot = detailsListTot;
-            ////vm.DetailsListById = detailsList;
-
-            //return PartialView("_PartialTransactionDetail", vm);
             try
             {
                 if (ModelState.IsValid)
                 {
-                    //TrDetailsViewModel vm = new TrDetailsViewModel();
                     ////Add detail
                     TransactionBL.AddNewTransactionDetail(vmodel.AddProduct, terminalId, numTransaction, vmodel.Minus);
-                    ////Find details with id transaction  + Add itemSubTotal
-                    //var detailsListTot = TransactionBL.ListDetailsWithTot(numTransaction);
-                    ////Sum subTotItems 
-                    //ViewBag.subTot1 = TransactionBL.SumItemsSubTot(detailsListTot);
-                    //vm.DetailsListWithTot = detailsListTot;
-                    //vm.DetailsListById = detailsList;
-
-                    //return PartialView("_PartialTransactionDetail", vm);
                 }
                 //Find details with id transaction  + Add itemSubTotal
                 var detailsListTot = TransactionBL.ListDetailsWithTot(numTransaction);
@@ -342,19 +229,10 @@ namespace MyPOS2.Controllers
                 {
                     if (int.TryParse(product, out int codeP))
                     {
-                        //var item = TransactionBL.FindProductByCode(product);
-                        //vm.Product = item.barcode;
-                        //vm.Image = item.imageProduct;
-                        //vm.Price = (item.salesPrice).ToString();
                         vm.Products = ProductBL.FindAllProductByCode(product);
                     }
                     else
                     {
-                        //var item = TransactionBL.FindProductByName(product);
-                        //vm.Product = item.barcode;
-                        //vm.Image = item.imageProduct;
-                        //vm.Price = (item.salesPrice).ToString();
-
                         //to do
                         //vm.Products = TransactionBL.FindAllProductByName(product);
                     }
@@ -429,7 +307,10 @@ namespace MyPOS2.Controllers
 
         private ActionResult SearchByCat(TrSearchViewModel vm)
         {
-            vm.Cats = SearchBL.FindCatsList();
+            //vm.Cats = SearchBL.FindCatsParentList();
+            //to do --> provisoire language = 1 = French
+            var language = "1";
+            vm.Cats = SearchBL.FindCatsParentList(language);
             return PartialView("_PartialTransactionSearch", vm);
         }
 
@@ -511,10 +392,21 @@ namespace MyPOS2.Controllers
 
         private ActionResult ProductByCat(string argument, TrSearchViewModel vmodel)
         {
-            vmodel.Products = SearchBL.FindProductListByIdCat(argument);
+            //search if cat have child cat
+            //to do --> provisoire language = 1 = French
+            var language = "1";
+            var children = SearchBL.FindCatsChildList(argument, language);
+            if (children.Count() == 0)
+            {
+                vmodel.Products = SearchBL.FindProductListByIdCat(argument);
+            }
+            else
+            {
+                vmodel.CatsChild = children;
+                
+            }
             return PartialView("_PartialTransactionSearch", vmodel);
         }
-
         #endregion
 
         #region Payment
@@ -523,17 +415,7 @@ namespace MyPOS2.Controllers
             if (ModelState.IsValid)
             {
                 //save part of transaction
-                //var discountG = vm.GlobalDiscount.ToString();
                 TransactionBL.SaveTransactionBeforePayment(vmodel.NumTransaction, vmodel.GlobalTot, globalDiscount);
-
-                //TrPaymentMenuViewModel vm = new TrPaymentMenuViewModel
-                //{
-                //    GlobalTot = vmodel.GlobalTot,
-                //    NumTransaction = vmodel.NumTransaction
-                //};
-                //return View("PaymentMenu", vm);
-
-                //return RedirectToAction("Index", "Pay", new TrPaymentMenuViewModel { GlobalTot = vmodel.GlobalTot, NumTransaction = vmodel.NumTransaction });
                 var gTot = vmodel.GlobalTot;
                 var nTransac = vmodel.NumTransaction;
                 return RedirectToAction("Index", "Pay", new { gTot, nTransac });
@@ -542,7 +424,6 @@ namespace MyPOS2.Controllers
             //Sum subTotItems 
             ViewBag.subTot1 = TransactionBL.SumItemsSubTot(detailsListTot);
             vmodel.DetailsListWithTot = detailsListTot;
-            //vmodel.VatsList = TransactionBL.FindVatsList();
             return View(vmodel);
         }
         #endregion
@@ -556,12 +437,10 @@ namespace MyPOS2.Controllers
                 //Sum subTotItems 
                 ViewBag.subTot1 = TransactionBL.SumItemsSubTot(detailsListTot);
                 vmodel.DetailsListWithTot = detailsListTot;
-                //vmodel.VatsList = TransactionBL.FindVatsList();
                 return View("Index", vmodel);
             }
             TransactionBL.CancelTransac(vmodel.NumTransaction);
             return RedirectToAction("Transaction", "Home");
-
         }
         #endregion
     }

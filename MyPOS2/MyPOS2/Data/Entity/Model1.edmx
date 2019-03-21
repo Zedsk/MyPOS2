@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -808,6 +808,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SPP_ChildCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cat" Type="int" Mode="In" />
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPP_ParentCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="Pos1ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AGE" EntityType="Self.AGE" Schema="dbo" store:Type="Tables" />
@@ -1003,8 +1010,7 @@
             <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pos1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1977,7 +1983,24 @@
             <End Role="SHOP" EntitySet="SHOP" />
             <End Role="USERINFO" EntitySet="USERINFO" />
           </AssociationSet>
+          <FunctionImport Name="SPP_ParentCategories" ReturnType="Collection(Pos1Model.SPP_ParentCategories_Result)">
+          <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_ChildCategories" ReturnType="Collection(Pos1Model.SPP_ChildCategories_Result)">
+            <Parameter Name="cat" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="SPP_ParentCategories_Result">
+          <Property Type="Int32" Name="idCategory" Nullable="false" />
+          <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_ChildCategories_Result">
+          <Property Type="Int32" Name="idCategory" Nullable="false" />
+          <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2319,6 +2342,24 @@
               <ScalarProperty Name="userId" ColumnName="userId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ParentCategories" FunctionName="Pos1Model.Store.SPP_ParentCategories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ParentCategories_Result">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="imageCat" ColumnName="imageCat" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ChildCategories" FunctionName="Pos1Model.Store.SPP_ChildCategories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ChildCategories_Result">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="imageCat" ColumnName="imageCat" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

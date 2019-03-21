@@ -26,7 +26,10 @@ namespace MyPOS2.Models.Transactions
 
         public IList<AGE> Ages { get; set; }
 
-        public IList<CATEGORY> Cats { get; set; }
+        //public IList<CATEGORY> Cats { get; set; }
+        public IList<SPP_ParentCategories_Result> Cats { get; set; }
 
+        public IList<SPP_ChildCategories_Result> CatsChild { get; set; }
+        
     }
 }

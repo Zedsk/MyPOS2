@@ -12,6 +12,8 @@ namespace MyPOS2.Data.Entity
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Pos1Entities : DbContext
     {
@@ -55,5 +57,27 @@ namespace MyPOS2.Data.Entity
         public virtual DbSet<TRANSACTIONS> TRANSACTIONSs { get; set; }
         public virtual DbSet<USERINFO> USERINFOs { get; set; }
         public virtual DbSet<VAT> VATs { get; set; }
+    
+        public virtual ObjectResult<SPP_ParentCategories_Result> SPP_ParentCategories(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ParentCategories_Result>("SPP_ParentCategories", languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ChildCategories_Result> SPP_ChildCategories(Nullable<int> cat, Nullable<int> language)
+        {
+            var catParameter = cat.HasValue ?
+                new ObjectParameter("cat", cat) :
+                new ObjectParameter("cat", typeof(int));
+    
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ChildCategories_Result>("SPP_ChildCategories", catParameter, languageParameter);
+        }
     }
 }

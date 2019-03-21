@@ -64,6 +64,22 @@ namespace MyPOS2.Dal
             return db.CATEGORYs.ToList();
         }
 
+        public IList<SPP_ParentCategories_Result> GetAllCats(int language)
+        {
+            //return all parents category            
+            List<SPP_ParentCategories_Result> parents = null;
+            parents = db.SPP_ParentCategories(language).ToList();
+            return parents;
+        }
+
+        public IList<SPP_ChildCategories_Result> GetAllCats(int id, int language)
+        {
+            //return all parents category            
+            List<SPP_ChildCategories_Result> children = null;
+            children = db.SPP_ChildCategories(id, language).ToList();
+            return children;
+        }
+
         public IList<PRODUCT> GetAllProductByIdCat(int id)
         {
             List<PRODUCT> productList = new List<PRODUCT>();
@@ -71,5 +87,6 @@ namespace MyPOS2.Dal
             return productList;
         }
 
+        
     }
 }

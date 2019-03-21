@@ -78,10 +78,23 @@
             <button type="button" class="close-image" value="@cat.idCategory" onclick="ProductBy(this, 'cat')">
 
                 <img src="@Url.Content(cat.imageCat)" alt="Logo de la catégorie" />
-                <p>@cat.idCategory</p>
+                <p>@cat.nameCategory</p>
             </button>
         }
     }
+
+    @if (Model.CatsChild != null)
+    {
+        foreach (var cat in Model.CatsChild)
+        {
+            <button type="button" class="close-image" value="@cat.idCategory" onclick="ProductBy(this, 'cat')">
+
+                <img src="@Url.Content(cat.imageCat)" alt="Logo de la catégorie" />
+                <p>@cat.nameCategory</p>
+            </button>
+        }
+    }
+
     @if (Model.Products != null)
     {
         foreach (var item in Model.Products)
