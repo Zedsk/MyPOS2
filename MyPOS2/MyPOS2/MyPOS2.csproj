@@ -196,16 +196,43 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BL\PaymentBL.cs" />
+    <Compile Include="BL\ProductBL.cs" />
+    <Compile Include="BL\SearchBL.cs" />
+    <Compile Include="BL\TerminalBL.cs" />
+    <Compile Include="BL\TicketBL.cs" />
+    <Compile Include="BL\TransactionBL.cs" />
+    <Compile Include="BL\UserBL.cs" />
+    <Compile Include="BL\VatBL.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
-    <Compile Include="Controllers\CashDayController.cs" />
+    <Compile Include="Controllers\CashController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\Payment_MethodsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\TransactionsController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\VatsController.cs" />
+    <Compile Include="Dal\DalCashDay.cs" />
+    <Compile Include="Dal\DalPayment.cs" />
+    <Compile Include="Dal\DalProduct.cs" />
+    <Compile Include="Dal\DalSearch.cs" />
+    <Compile Include="Dal\DalTerminal.cs" />
+    <Compile Include="Dal\DalTicket.cs" />
+    <Compile Include="Dal\DalTransaction.cs" />
+    <Compile Include="Dal\DalUser.cs" />
+    <Compile Include="Dal\DalVat.cs" />
+    <Compile Include="Dal\IDalCashDay.cs" />
+    <Compile Include="Dal\IDalPayment.cs" />
+    <Compile Include="Dal\IDalProduct.cs" />
+    <Compile Include="Dal\IDalSearch.cs" />
+    <Compile Include="Dal\IDalTerminal.cs" />
+    <Compile Include="Dal\IDalTicket.cs" />
+    <Compile Include="Dal\IDalTransaction.cs" />
+    <Compile Include="Dal\IDalUser.cs" />
+    <Compile Include="Dal\IDalVat.cs" />
     <Compile Include="Data\Entity\AGE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -317,6 +344,11 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Transactions\TrDetailsViewModel.cs" />
+    <Compile Include="Models\Transactions\TrIndexViewModel.cs" />
+    <Compile Include="Models\Transactions\TrPaymentMenuViewModel.cs" />
+    <Compile Include="Models\Transactions\TrSearchViewModel.cs" />
+    <Compile Include="Models\Transactions\TrTicketViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -325,9 +357,44 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\First_Order_Star_Destroyer.jpg" />
-    <Content Include="Content\Images\le_train_de_passagers.jpg" />
-    <Content Include="Content\test2.css" />
+    <Content Include="Content\image\age\logo_age1.png" />
+    <Content Include="Content\image\age\logo_age2.png" />
+    <Content Include="Content\image\age\logo_age3.png" />
+    <Content Include="Content\image\age\logo_age4.png" />
+    <Content Include="Content\image\age\logo_age5.png" />
+    <Content Include="Content\image\age\logo_age6.png" />
+    <Content Include="Content\image\age\logo_age7.png" />
+    <Content Include="Content\image\age\logo_age8.png" />
+    <Content Include="Content\image\age\logo_age9.png" />
+    <Content Include="Content\image\brand\Logo_Lego.png" />
+    <Content Include="Content\image\brand\Logo_Mattel.png" />
+    <Content Include="Content\image\brand\Logo_Nikko.png" />
+    <Content Include="Content\image\brand\Logo_Nintendo.png" />
+    <Content Include="Content\image\category\logoCat1.png" />
+    <Content Include="Content\image\category\logoCat2.jpg" />
+    <Content Include="Content\image\category\logoCat3.jpg" />
+    <Content Include="Content\image\category\logoCat4.jpg" />
+    <Content Include="Content\image\category\logoCat5.jpg" />
+    <Content Include="Content\image\category\logoCat6.jpg" />
+    <Content Include="Content\image\category\logoCat7.jpg" />
+    <Content Include="Content\image\category\logoCat8.jpg" />
+    <Content Include="Content\image\category\logoCat9.jpg" />
+    <Content Include="Content\image\hero\harry_potter_logo_2.png" />
+    <Content Include="Content\image\hero\Logo_Hotwheels.png" />
+    <Content Include="Content\image\hero\Logo_Schtroumpf.jpg" />
+    <Content Include="Content\image\hero\Logo_StarWars.jpg" />
+    <Content Include="Content\image\logo_magasin.png" />
+    <Content Include="Content\image\product\First_Order_Star_Destroyer.jpg" />
+    <Content Include="Content\image\product\GarageHotWheelsMattel.jpg" />
+    <Content Include="Content\image\product\harry_potter_logo_2.png" />
+    <Content Include="Content\image\product\LapinCretin3DS.jpg" />
+    <Content Include="Content\image\product\Le_camion_pizza.jpg" />
+    <Content Include="Content\image\product\Le_Faucon_Millenium_du_raid_de_Kessel.jpg" />
+    <Content Include="Content\image\product\le_train_de_passagers.jpg" />
+    <Content Include="Content\image\product\VoitureHotWheelsNikko.jpg" />
+    <Content Include="Content\image\product\ZeldaSwitch.jpg" />
+    <Content Include="Content\pos2.css" />
+    <Content Include="Content\ticketprint.css" />
     <Content Include="Data\Entity\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -365,6 +432,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pos2.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -401,7 +469,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Management.cshtml" />
     <Content Include="Views\Home\Transaction.cshtml" />
-    <Content Include="Views\Transactions\Index.cshtml" />
     <Content Include="Views\Brands\Create.cshtml" />
     <Content Include="Views\Brands\Delete.cshtml" />
     <Content Include="Views\Brands\Details.cshtml" />
@@ -427,11 +494,17 @@
     <Content Include="Views\Vats\Details.cshtml" />
     <Content Include="Views\Vats\Edit.cshtml" />
     <Content Include="Views\Vats\Index.cshtml" />
-    <Content Include="Views\CashDay\Create.cshtml" />
-    <Content Include="Views\CashDay\Delete.cshtml" />
-    <Content Include="Views\CashDay\Details.cshtml" />
-    <Content Include="Views\CashDay\Edit.cshtml" />
-    <Content Include="Views\CashDay\Index.cshtml" />
+    <Content Include="Views\Cash\Create.cshtml" />
+    <Content Include="Views\Cash\Delete.cshtml" />
+    <Content Include="Views\Cash\Details.cshtml" />
+    <Content Include="Views\Cash\Edit.cshtml" />
+    <Content Include="Views\Cash\End.cshtml" />
+    <Content Include="Views\Cash\Index.cshtml" />
+    <Content Include="Views\Pay\Index.cshtml" />
+    <Content Include="Views\Pay\_PartialTicket.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Transaction\_PartialTransactionDetail.cshtml" />
+    <Content Include="Views\Transaction\_PartialTransactionSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

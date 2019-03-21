@@ -79,6 +79,38 @@ namespace MyPOS2.Models
         [Display(Name = "Confirmer le mot de passe ")]
         [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Nom: *")]
+        public string Name { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Prénom: *")]
+        public string Firstname { get; set; }
+
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Rue: *")]
+        public string Street { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Code postal: *")]
+        public string Zipcode { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Ville: *")]
+        public string City { get; set; }
+
+
+        [StringLength(20, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 9)]
+        [DataType(DataType.Text)]
+        [Display(Name = "N° de téléphone: *")]
+        public string Phone { get; set; }
     }
 
     public class ResetPasswordViewModel

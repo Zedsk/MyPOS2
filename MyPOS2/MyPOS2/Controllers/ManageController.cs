@@ -70,7 +70,14 @@ namespace MyPOS2.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Name = BL.UserBL.FindNameByAspId(userId),
+                Firstname = BL.UserBL.FindFirstnameByAspId(userId),
+                Street = BL.UserBL.FindStreetByAspId(userId),
+                Zipcode = BL.UserBL.FindZipcodeByAspId(userId),
+                City = BL.UserBL.FindCityByAspId(userId),
+                Phone = BL.UserBL.FindPhoneByAspId(userId),
+                Email = BL.UserBL.FindEmailByAspId(userId)
             };
             return View(model);
         }

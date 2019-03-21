@@ -1,0 +1,180 @@
+﻿@using MyPOS2.Models.Transactions
+@model  TrPaymentMenuViewModel
+
+@{
+    ViewBag.Title = "PaymentMenu";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/ticketprint.css")" rel="stylesheet" type="text/css" media="print" />
+}
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/pos2.js")" type="text/javascript"></script>
+}
+
+
+<h2 style="color: red; font-weight: bold">@ViewBag.nopay</h2>
+<h2 style="color: red; font-weight: bold">@ViewBag.Error</h2>
+
+<div id="pagepay">
+    <div id="noprintpart">
+        @using (Html.BeginForm("Index", "Pay", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div id="navButton" class="navbar">
+                <ul class="nav nav-pills nav-justified">
+                    @*<li class="nav-item"><button type="button" id="ButtonEndTransac" class="btn btn-outline" value="" onclick="EndTransac()">Fin de la transaction</button></li>*@
+                    @*<li class="nav-item"><a type="button" id="ButtonEndTransac" class="btn btn-outline" href="@Url.Action("EndTransac")">Fin de la transaction</a></li>*@
+                    @if (ViewBag.ticket)
+                    {
+                        <li class="nav-item"><input type="submit" name="submitButton" class="btn btn-outline" value="End"></li>
+                        <li class="nav-item"><input type="submit" name="submitButton" class="btn btn-danger" value="Cancel" disabled></li>
+                        <li class="nav-item"><input type="submit" name="submitButton" class="btn btn-outline" value="Back" disabled></li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><input type="submit" name="submitButton" class="btn btn-outline" value="End" disabled></li>
+                        <li class="nav-item"><input type="submit" name="submitButton" class="btn btn-danger" value="Cancel" onclick="return confirm('Etes-vous sur de vouloir supprimer la transaction?');"></li>
+                        <li class="nav-item"><input type="submit" name="submitButton" class="btn btn-outline" value="Back" onclick="return confirm('Voulez-vous retourner à la transaction?');"></li>
+                    }
+                    @*<li class="nav-item"><button type="button" id="ButtonCancelTransac" class="btn btn-danger" value="" onclick="CancelTransac()">Annuler la transaction</button></li>
+                    <li class="nav-item"><button type="button" id="ButtonBackTransac" class="btn btn-outline" value="" onclick="BackTransac()">Retour à la transaction</button></li>*@
+                </ul>
+            </div>
+            <div style="visibility:visible">
+                @Html.LabelFor(m => m.NumTransaction)
+                @Html.TextBoxFor(m => m.NumTransaction, new { size = "3", @readonly = "readonly" })
+                @Html.ValidationMessageFor(m => m.NumTransaction, "", new { @class = "text-danger" })
+                @*@ViewBag.transac*@
+                <div style="visibility:hidden">
+                    @Html.TextBoxFor(m => m.NumTicket, new { @Value = ViewBag.NumT, size = "3", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.NumTicket, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="containerPay">
+                <div class="cellPay">
+                    <h2>@Html.LabelFor(m => m.GlobalTotal)</h2>
+                    @*<p>258.99</p>*@
+                    @*@Html.TextBoxFor(m => m.GlobalTotal, new { @class = "totToPay", @readonly = "readonly" , @style="visibility:hidden"})*@
+                    <div>
+                        @if (ViewBag.tot == "0")
+                        {
+                            @Html.TextBoxFor(m => m.GlobalTotal, new { @Value = ViewBag.tot, @class = "totToPay", @readonly = "readonly", @style = "border-color:green" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.GlobalTotal, new { @Value = ViewBag.tot, @class = "totToPay", @readonly = "readonly" })
+                        }
+                        @*<input id="GlobalTotal" name="GlobalTotal" type="text" class ="totToPay" value="@Html.DisplayFor(m => m.GlobalTotal)" />*@
+                    </div>
+
+                    @Html.ValidationMessageFor(m => m.GlobalTotal, "", new { @class = "text-danger" })
+                    @*@ViewBag.tot*@
+                </div>
+
+                <div class="cellPay">
+                    <h2>@Html.LabelFor(m => m.CashReturn)</h2>
+                    <div>
+                        @if (ViewBag.cashBack == "0" || ViewBag.cashBack == "" || ViewBag.cashBack == null)
+                        {
+                            <div>
+                                @Html.TextBoxFor(m => m.CashReturn, new { @Value = ViewBag.cashBack, @class = "totToPay", @readonly = "readonly", @style = "border-color:green" })
+                                @*@Html.DisplayFor(m => m.CashReturn)*@
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                @Html.TextBoxFor(m => m.CashReturn, new { @Value = ViewBag.cashBack, @class = "totToPay", @readonly = "readonly" })
+                                @*@Html.DisplayFor(m => m.CashReturn)*@
+                            </div>
+                        }
+                        @Html.ValidationMessageFor(m => m.CashReturn, "", new { @class = "text-danger" })
+                        @*@ViewBag.cashBack*@
+                    </div>
+                </div>
+            </div> <!-- end containerPay -->
+            @*<div id="respBank">
+                @if (Model.Resp == 1)
+                {
+                    <p style="color:green">@ViewBag.messageCard</p>
+                }
+                else
+                {
+                    <p style="color:red">@ViewBag.messageCard</p>
+                }
+
+            </div>*@
+            <div class="containerPay">
+                <div class="cellPay">
+                    <h2>@Html.LabelFor(m => m.Amount)</h2>
+                    <p style="color:red">@ViewBag.limitCash</p>
+                    <div>
+                        @Html.TextBoxFor(m => m.Amount, new { @Value = ViewBag.amount, @class = "totToPay", @style = "border-color:silver" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Amount, "", new { @class = "text-danger" })
+                </div>
+                <div class="cellPay">
+                    <h2>@Html.LabelFor(m => m.AmountsPaid)</h2>
+                    <p style="color:red"> </p>
+                    <div>
+                        @if (Model.AmountsPaid != null)
+                        {
+                            @*<ol class="totToPayList">
+                                @for (int i = 0; i < Model.AmountsPaid.Count; i++)
+                                {
+                                    <li>@Html.TextBoxFor(m => m.AmountsPaid, new { @Value = Model.AmountsPaid[i] })</li>
+                                }
+                            </ol>*@
+
+                            <ol class="totToPayList">
+                                @for (int i = 0; i < Model.AmountsPaid.Count; i++)
+                                {
+                                    <li>@Model.AmountsPaid[i]<span class="glyphicon glyphicon-euro"></span></li>
+                                }
+                            </ol>
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(m => m.AmountsPaid, "", new { @class = "text-danger" })
+                </div>
+            </div> <!-- end containerPay -->
+
+            <div id="paymentMethods">
+                <h2>@Html.LabelFor(m => m.MethodP)</h2>
+                <div>
+                    @Html.DropDownListFor(m => m.MethodP, new SelectList(Model.MethodsP, "idPaymentMethod", "method"), "Choix de la méthode de paiment")
+                    @Html.ValidationMessageFor(m => m.MethodP, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div id="paymentZone">
+                @if (!ViewBag.ticket)
+                {
+                    <div><input type="submit" name="submitButton" class="btn btn-outline" value="Payment"></div>
+
+                    if (Model.PayCardToConfirm)
+                    {
+                        <div id="divCardConfirmed">@Html.LabelFor(m => m.PayCardConfirmed, new { @class = "custom-control-label" })</div>
+                        <div>@Html.CheckBoxFor(m => m.PayCardConfirmed, new { @class = "custom-control-input" })</div>
+
+                    }
+                }
+
+                @*<input type="submit" id="ButtonPayment" class="fct_btn" value="Payment">*@
+            </div>
+        }
+    </div>
+    @if (ViewBag.ticket) 
+    {
+        <div id="myTicket">
+            @Html.Partial("_PartialTicket", Model.Ticket)
+        </div>
+        <div id="optionsTicket">
+
+        </div>
+    }
+</div>
+
+

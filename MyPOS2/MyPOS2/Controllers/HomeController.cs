@@ -35,8 +35,15 @@ namespace MyPOS2.Controllers
 
         public ActionResult Transaction()
         {
-            ViewBag.Message = "Faites vos transactions.";
-            return View();
+            if (TempData["Error"] == null)
+            {
+                return View("Transaction");
+            }
+            else
+            {
+                ViewBag.Error = TempData["Error"].ToString();
+                return View("Transaction");
+            }
         }
     }
 }
