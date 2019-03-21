@@ -27,13 +27,13 @@ namespace MyPOS2.Data.Entity
         public decimal total { get; set; }
         public Nullable<decimal> discountGlobal { get; set; }
         public bool isReturn { get; set; }
-        public int vendorId { get; set; }
         public int terminalId { get; set; }
         public int shopId { get; set; }
         public int customerId { get; set; }
         public int statusId { get; set; }
         public int messageId { get; set; }
-        public int languageTr { get; set; }
+        public int languageId { get; set; }
+        public string userId { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

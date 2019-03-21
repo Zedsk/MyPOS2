@@ -19,9 +19,9 @@ namespace MyPOS2.Data.Entity
         public string firstname { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
+        public System.DateTime creationDate { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual USERINFO USERINFO { get; set; }
         public virtual BRAND BRAND { get; set; }
     }
 }

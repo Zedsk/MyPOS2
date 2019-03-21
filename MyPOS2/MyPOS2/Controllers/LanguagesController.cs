@@ -17,7 +17,7 @@ namespace MyPOS2.Controllers
         // GET: Languages
         public ActionResult Index()
         {
-            return View(db.LANGUAGES.ToList());
+            return View(db.LANGUAGESs.ToList());
         }
 
         // GET: Languages/Details/5
@@ -27,7 +27,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LANGUAGES language = db.LANGUAGES.Find(id);
+            LANGUAGES language = db.LANGUAGESs.Find(id);
             if (language == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.LANGUAGES.Add(language);
+                db.LANGUAGESs.Add(language);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LANGUAGES language = db.LANGUAGES.Find(id);
+            LANGUAGES language = db.LANGUAGESs.Find(id);
             if (language == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LANGUAGES language = db.LANGUAGES.Find(id);
+            LANGUAGES language = db.LANGUAGESs.Find(id);
             if (language == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace MyPOS2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            LANGUAGES language = db.LANGUAGES.Find(id);
-            db.LANGUAGES.Remove(language);
+            LANGUAGES language = db.LANGUAGESs.Find(id);
+            db.LANGUAGESs.Remove(language);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

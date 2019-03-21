@@ -17,7 +17,7 @@ namespace MyPOS2.Controllers
         // GET: Roles
         public ActionResult Index()
         {
-            return View(db.ROLEs.ToList());
+            return View(db.AspNetRoles.ToList());
         }
 
         // GET: Roles/Details/5
@@ -27,7 +27,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ROLE rOLE = db.ROLEs.Find(id);
+            AspNetRoles rOLE = db.AspNetRoles.Find(id);
             if (rOLE == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace MyPOS2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idRole,nameRole")] ROLE rOLE)
+        public ActionResult Create([Bind(Include = "idRole,nameRole")] AspNetRoles rOLE)
         {
             if (ModelState.IsValid)
             {
-                db.ROLEs.Add(rOLE);
+                db.AspNetRoles.Add(rOLE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ROLE rOLE = db.ROLEs.Find(id);
+            AspNetRoles rOLE = db.AspNetRoles.Find(id);
             if (rOLE == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace MyPOS2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idRole,nameRole")] ROLE rOLE)
+        public ActionResult Edit([Bind(Include = "idRole,nameRole")] AspNetRoles rOLE)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ROLE rOLE = db.ROLEs.Find(id);
+            AspNetRoles rOLE = db.AspNetRoles.Find(id);
             if (rOLE == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace MyPOS2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ROLE rOLE = db.ROLEs.Find(id);
-            db.ROLEs.Remove(rOLE);
+            AspNetRoles rOLE = db.AspNetRoles.Find(id);
+            db.AspNetRoles.Remove(rOLE);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

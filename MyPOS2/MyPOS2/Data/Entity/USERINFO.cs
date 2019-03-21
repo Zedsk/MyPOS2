@@ -21,15 +21,16 @@ namespace MyPOS2.Data.Entity
             this.SHOP = new HashSet<SHOP>();
         }
     
-        public int userId { get; set; }
-        public string password { get; set; }
+        public string userId { get; set; }
+        public string nameUser { get; set; }
+        public string firstname { get; set; }
         public string street { get; set; }
-        public int zipCode { get; set; }
+        public string zipCode { get; set; }
         public string city { get; set; }
-        public int roleId { get; set; }
+        public string phone { get; set; }
+        public System.DateTime creationDate { get; set; }
     
-        public virtual PERSON PERSON { get; set; }
-        public virtual ROLE ROLE { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRANSACTIONS> TRANSACTIONS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -31,7 +31,7 @@ namespace MyPOS2.Data.Entity
         public int ageId { get; set; }
         public int brandId { get; set; }
         public Nullable<int> heroId { get; set; }
-        public int vatId { get; set; }
+        public Nullable<int> vatId { get; set; }
     
         public virtual AGE AGE { get; set; }
         public virtual BRAND BRAND { get; set; }

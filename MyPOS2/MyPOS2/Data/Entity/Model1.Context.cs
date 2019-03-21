@@ -38,13 +38,12 @@ namespace MyPOS2.Data.Entity
         public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
         public virtual DbSet<HERO> HEROs { get; set; }
         public virtual DbSet<HERO_TRANSLATION> HERO_TRANSLATIONs { get; set; }
-        public virtual DbSet<LANGUAGES> LANGUAGES { get; set; }
+        public virtual DbSet<LANGUAGES> LANGUAGESs { get; set; }
         public virtual DbSet<PAYMENT> PAYMENTs { get; set; }
         public virtual DbSet<PAYMENT_METHOD> PAYMENT_METHODs { get; set; }
         public virtual DbSet<PERSON> PERSONs { get; set; }
         public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
         public virtual DbSet<PRODUCT_TRANSLATION> PRODUCT_TRANSLATIONs { get; set; }
-        public virtual DbSet<ROLE> ROLEs { get; set; }
         public virtual DbSet<SHOP> SHOPs { get; set; }
         public virtual DbSet<SHOP_PRODUCT> SHOP_PRODUCTs { get; set; }
         public virtual DbSet<SHOP_TRANSLATION> SHOP_TRANSLATIONs { get; set; }
