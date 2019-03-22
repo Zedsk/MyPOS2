@@ -33,15 +33,29 @@ namespace MyPOS2.Dal
             throw new NotImplementedException();
         }
 
-        public List<PRODUCT> GetAllProductByCode(string codeProduct)
+        //public List<PRODUCT> GetAllProductByCode(string codeProduct)
+        //{
+        //    return db.PRODUCTs.Where(p => p.barcode.Contains(codeProduct)).ToList();
+        //}
+
+        public List<SPP_ProductTrans_Result> GetAllProductByCode(string codeProduct, int language)
         {
-            return db.PRODUCTs.Where(p => p.barcode.Contains(codeProduct)).ToList();
+            List<SPP_ProductTrans_Result> productList = new List<SPP_ProductTrans_Result>();
+            productList = db.SPP_ProductTrans(language).Where(p => p.barcode.Contains(codeProduct)).ToList();
+            return productList;
         }
 
-        public List<PRODUCT> GetAllProductByName(string codeProduct)
+        public List<SPP_ProductTrans_Result> GetAllProductByName(string codeProduct, int language)
         {
-            throw new NotImplementedException();
+            List<SPP_ProductTrans_Result> productList = new List<SPP_ProductTrans_Result>();
+            productList = db.SPP_ProductTrans(language).Where(p => p.nameProduct.Contains(codeProduct)).ToList();
+            return productList;
         }
 
+        public string GetNameProductById(int idProduct, int language)
+        {
+            PRODUCT_TRANSLATION prod = db.PRODUCT_TRANSLATIONs.Where(p => p.productId == idProduct && p.languageId == language).Single();
+            return prod.nameProduct;
+        }
     }
 }

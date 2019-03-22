@@ -79,5 +79,14 @@ namespace MyPOS2.Data.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ChildCategories_Result>("SPP_ChildCategories", catParameter, languageParameter);
         }
+    
+        public virtual ObjectResult<SPP_ProductTrans_Result> SPP_ProductTrans(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ProductTrans_Result>("SPP_ProductTrans", languageParameter);
+        }
     }
 }

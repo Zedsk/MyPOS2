@@ -815,6 +815,9 @@
         <Function Name="SPP_ParentCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
+        <Function Name="SPP_ProductTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="Pos1ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AGE" EntityType="Self.AGE" Schema="dbo" store:Type="Tables" />
@@ -1990,6 +1993,9 @@
             <Parameter Name="cat" Mode="In" Type="Int32" />
             <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SPP_ProductTrans" ReturnType="Collection(Pos1Model.SPP_ProductTrans_Result)">
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPP_ParentCategories_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
@@ -2000,6 +2006,20 @@
           <Property Type="Int32" Name="idCategory" Nullable="false" />
           <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_ProductTrans_Result">
+          <Property Type="Int32" Name="idProduct" Nullable="false" />
+          <Property Type="String" Name="barcode" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="salesPrice" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="Decimal" Name="discountRate" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="String" Name="imageProduct" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="categoryId" Nullable="false" />
+          <Property Type="Int32" Name="ageId" Nullable="false" />
+          <Property Type="Int32" Name="brandId" Nullable="false" />
+          <Property Type="Int32" Name="heroId" Nullable="true" />
+          <Property Type="Int32" Name="vatId" Nullable="true" />
+          <Property Type="String" Name="nameProduct" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="Max" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2357,6 +2377,24 @@
                 <ScalarProperty Name="idCategory" ColumnName="idCategory" />
                 <ScalarProperty Name="imageCat" ColumnName="imageCat" />
                 <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ProductTrans" FunctionName="Pos1Model.Store.SPP_ProductTrans">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ProductTrans_Result">
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="salesPrice" ColumnName="salesPrice" />
+                <ScalarProperty Name="discountRate" ColumnName="discountRate" />
+                <ScalarProperty Name="imageProduct" ColumnName="imageProduct" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="ageId" ColumnName="ageId" />
+                <ScalarProperty Name="brandId" ColumnName="brandId" />
+                <ScalarProperty Name="heroId" ColumnName="heroId" />
+                <ScalarProperty Name="vatId" ColumnName="vatId" />
+                <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
+                <ScalarProperty Name="description" ColumnName="description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -14,6 +14,7 @@ namespace MyPOS2.Dal
         List<TRANSACTION_DETAILS> GetAllDetailsByTransactionId(int id);
         TRANSACTIONS GetTransactionById(int transactionId);
         void CreateDetail(PRODUCT prod, int transactionId, int terminalId, decimal vat);
+        void CreateDetail(PRODUCT prod, int transactionId, int terminalId, decimal vat, string nameProd);
         void EditQtyToDetailById(int id, int qty);
         void DeleteDetail(int id);
         void UpdateTransaction(int transactionId, decimal globalTotal, decimal? discountG);

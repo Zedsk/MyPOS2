@@ -32,7 +32,7 @@
 <div id="search">
     @if (Model.Product != null)
     {
-        <button type="button" class="close-image" onclick="AddItem(@Model.Product)">
+        <button type="button" class="close-image buttonProd" onclick="AddItem(@Model.Product)">
             @Html.DisplayFor(p => p.Product)
             <img src="@Url.Content(Model.Image)" alt="image du jouet" />
             @Html.DisplayFor(p => p.Price)<span class="glyphicon glyphicon-euro"></span>
@@ -42,7 +42,7 @@
     {
         foreach (var brand in Model.Brands)
         {
-            <button type="button" class="close-image" value="@brand.idBrand" onclick="ProductBy(this, 'brand')">
+            <button type="button" class="close-image buttonProd" value="@brand.idBrand" onclick="ProductBy(this, 'brand')">
 
                 <img src="@Url.Content(brand.imageBrand)" alt="Logo de la marque" />
 
@@ -53,7 +53,7 @@
     {
         foreach (var hero in Model.Heros)
         {
-            <button type="button" class="close-image" value="@hero.idHero" onclick="ProductBy(this, 'hero')">
+            <button type="button" class="close-image buttonProd" value="@hero.idHero" onclick="ProductBy(this, 'hero')">
 
                 <img src="@Url.Content(hero.imageHero)" alt="Logo du héro" />
 
@@ -64,7 +64,7 @@
     {
         foreach (var age in Model.Ages)
         {
-            <button type="button" class="close-image" value="@age.idAge" onclick="ProductBy(this, 'age')">
+            <button type="button" class="close-image buttonProd" value="@age.idAge" onclick="ProductBy(this, 'age')">
 
                 <img src="@Url.Content(age.imageAge)" alt="Logo de l'age" />
 
@@ -75,7 +75,7 @@
     {
         foreach (var cat in Model.Cats)
         {
-            <button type="button" class="close-image" value="@cat.idCategory" onclick="ProductBy(this, 'cat')">
+            <button type="button" class="close-image buttonProd" value="@cat.idCategory" onclick="ProductBy(this, 'cat')">
 
                 <img src="@Url.Content(cat.imageCat)" alt="Logo de la catégorie" />
                 <p>@cat.nameCategory</p>
@@ -87,7 +87,7 @@
     {
         foreach (var cat in Model.CatsChild)
         {
-            <button type="button" class="close-image" value="@cat.idCategory" onclick="ProductBy(this, 'cat')">
+            <button type="button" class="close-image buttonProd" value="@cat.idCategory" onclick="ProductBy(this, 'cat')">
 
                 <img src="@Url.Content(cat.imageCat)" alt="Logo de la catégorie" />
                 <p>@cat.nameCategory</p>
@@ -99,9 +99,9 @@
     {
         foreach (var item in Model.Products)
         {
-            <button type="button" class="close-image" onclick="AddItem(@item.barcode)">
+            <button type="button" class="close-image buttonProd" onclick="AddItem(@item.barcode)">
                 @*@Html.Display(item.barcode)*@
-                <p>@item.barcode</p>
+                <p>@item.nameProduct</p>
                 <img src="@Url.Content(item.imageProduct)" alt="image du jouet" />
                 @*@Html.Display((item.salesPrice).ToString())*@
                 <p>@item.salesPrice<span class="glyphicon glyphicon-euro"></span></p>

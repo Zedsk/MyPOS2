@@ -17,13 +17,24 @@ namespace MyPOS2.BL
             }
         }
 
-        internal static List<PRODUCT> FindAllProductByCode(string codeProduct)
+        //internal static List<PRODUCT> FindAllProductByCode(string codeProduct)
+        //{
+        //    using (IDalProduct dal = new DalProduct())
+        //    {
+        //        return dal.GetAllProductByCode(codeProduct);
+        //    }
+        //}
+
+        internal static List<SPP_ProductTrans_Result> FindAllProductByCode(string codeProduct, string language)
         {
             using (IDalProduct dal = new DalProduct())
             {
-                return dal.GetAllProductByCode(codeProduct);
+                int lang = int.Parse(language);
+                return dal.GetAllProductByCode(codeProduct, lang);
             }
         }
+
+
 
         internal static object FindProductByName(string product)
         {
@@ -33,11 +44,20 @@ namespace MyPOS2.BL
             }
         }
 
-        internal static List<PRODUCT> FindAllProductByName(string product)
+        //internal static List<PRODUCT> FindAllProductByName(string product)
+        //{
+        //    using (IDalProduct dal = new DalProduct())
+        //    {
+        //        return dal.GetAllProductByName(product);
+        //    }
+        //}
+
+        internal static List<SPP_ProductTrans_Result> FindAllProductByName(string product, string language)
         {
             using (IDalProduct dal = new DalProduct())
             {
-                return dal.GetAllProductByName(product);
+                int lang = int.Parse(language);
+                return dal.GetAllProductByName(product, lang);
             }
         }
     }

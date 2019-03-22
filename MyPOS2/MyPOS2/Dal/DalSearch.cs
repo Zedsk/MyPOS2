@@ -35,6 +35,13 @@ namespace MyPOS2.Dal
             return productList;
         }
 
+        public IList<SPP_ProductTrans_Result> GetAllProductByIdBrand(int id, int language)
+        {
+            List<SPP_ProductTrans_Result> productList = new List<SPP_ProductTrans_Result>();
+            productList = db.SPP_ProductTrans(language).Where(p => p.brandId == id).ToList();
+            return productList;
+        }
+
         public IList<HERO> GetAllHeros()
         {
             return db.HEROs.ToList();
@@ -47,6 +54,13 @@ namespace MyPOS2.Dal
             return productList;
         }
 
+        public IList<SPP_ProductTrans_Result> GetAllProductByIdHero(int id, int language)
+        {
+            List<SPP_ProductTrans_Result> productList = new List<SPP_ProductTrans_Result>();
+            productList = db.SPP_ProductTrans(language).Where(p => p.heroId == id).ToList();
+            return productList;
+        }
+
         public IList<AGE> GetAllAges()
         {
             return db.AGEs.ToList();
@@ -56,6 +70,13 @@ namespace MyPOS2.Dal
         {
             List<PRODUCT> productList = new List<PRODUCT>();
             productList = db.PRODUCTs.Where(p => p.ageId == id).ToList();
+            return productList;
+        }
+
+        public IList<SPP_ProductTrans_Result> GetAllProductByIdAge(int id, int language)
+        {
+            List<SPP_ProductTrans_Result> productList = new List<SPP_ProductTrans_Result>();
+            productList = db.SPP_ProductTrans(language).Where(p => p.ageId == id).ToList();
             return productList;
         }
 
@@ -87,6 +108,11 @@ namespace MyPOS2.Dal
             return productList;
         }
 
-        
+        public IList<SPP_ProductTrans_Result> GetAllProductByIdCat(int id, int language)
+        {
+            List<SPP_ProductTrans_Result> productList = new List<SPP_ProductTrans_Result>();
+            productList = db.SPP_ProductTrans(language).Where(p => p.categoryId == id).ToList();
+            return productList;
+        }
     }
 }

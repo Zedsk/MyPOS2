@@ -10,7 +10,8 @@ namespace MyPOS2.Models.Transactions
     {
         public string Product { get; set; }
 
-        public IList<PRODUCT> Products { get; set; }
+        //public IList<PRODUCT> Products { get; set; }
+        public IList<SPP_ProductTrans_Result> Products { get; set; }
 
         public string Price { get; set; }
 

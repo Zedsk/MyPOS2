@@ -90,7 +90,15 @@ namespace MyPOS2.BL
                     }
                     int terminalId = int.Parse(terminal);
                     int transactionId = int.Parse(transaction);
-                    dal.CreateDetail(prod, terminalId, transactionId, vatItem);
+                    //to do --> change code product with nameproduct 
+                    //to do --> provisoire language = 1 = French
+                    int language = 1;
+                    string name;
+                    using (IDalProduct dalP = new DalProduct())
+                    {
+                        name = dalP.GetNameProductById(prod.idProduct, language);
+                    }
+                    dal.CreateDetail(prod, terminalId, transactionId, vatItem, name);
                 }
             }
         }

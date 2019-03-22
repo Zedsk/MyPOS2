@@ -181,6 +181,8 @@ namespace MyPOS2.Controllers
                 if (ModelState.IsValid)
                 {
                     ////Add detail
+                    //to do --> provisoire language = 1 = French
+                    //var language = "1";
                     TransactionBL.AddNewTransactionDetail(vmodel.AddProduct, terminalId, numTransaction, vmodel.Minus);
                 }
                 //Find details with id transaction  + Add itemSubTotal
@@ -229,12 +231,16 @@ namespace MyPOS2.Controllers
                 {
                     if (int.TryParse(product, out int codeP))
                     {
-                        vm.Products = ProductBL.FindAllProductByCode(product);
+                        //vm.Products = ProductBL.FindAllProductByCode(product);
+                        //to do --> provisoire language = 1 = French
+                        var language = "1";
+                        vm.Products = ProductBL.FindAllProductByCode(product, language);
                     }
                     else
                     {
-                        //to do
-                        //vm.Products = TransactionBL.FindAllProductByName(product);
+                        //to do --> provisoire language = 1 = French
+                        var language = "1";
+                        vm.Products = ProductBL.FindAllProductByName(product, language);
                     }
                 }
                 return PartialView("_PartialTransactionSearch", vm);
@@ -374,19 +380,28 @@ namespace MyPOS2.Controllers
 
         private ActionResult ProductByBrand(string argument, TrSearchViewModel vmodel)
         {
-            vmodel.Products = SearchBL.FindProductListByIdBrand(argument);
+            //vmodel.Products = SearchBL.FindProductListByIdBrand(argument);
+            //to do --> provisoire language = 1 = French
+            var language = "1";
+            vmodel.Products = SearchBL.FindProductListByIdBrand(argument, language);
             return PartialView("_PartialTransactionSearch", vmodel);
         }
 
         private ActionResult ProductByHero(string argument, TrSearchViewModel vmodel)
         {
-            vmodel.Products = SearchBL.FindProductListByIdHero(argument);
+            //vmodel.Products = SearchBL.FindProductListByIdHero(argument);
+            //to do --> provisoire language = 1 = French
+            var language = "1";
+            vmodel.Products = SearchBL.FindProductListByIdHero(argument,language);
             return PartialView("_PartialTransactionSearch", vmodel);
         }
 
         private ActionResult ProductByAge(string argument, TrSearchViewModel vmodel)
         {
-            vmodel.Products = SearchBL.FindProductListByIdAge(argument);
+            //vmodel.Products = SearchBL.FindProductListByIdAge(argument);
+            //to do --> provisoire language = 1 = French
+            var language = "1";
+            vmodel.Products = SearchBL.FindProductListByIdAge(argument, language);
             return PartialView("_PartialTransactionSearch", vmodel);
         }
 
@@ -398,7 +413,8 @@ namespace MyPOS2.Controllers
             var children = SearchBL.FindCatsChildList(argument, language);
             if (children.Count() == 0)
             {
-                vmodel.Products = SearchBL.FindProductListByIdCat(argument);
+                //vmodel.Products = SearchBL.FindProductListByIdCat(argument);
+                vmodel.Products = SearchBL.FindProductListByIdCat(argument, language);
             }
             else
             {
