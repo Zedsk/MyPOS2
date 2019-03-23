@@ -21,22 +21,28 @@
         <header id="header1">
             <div style="visibility: hidden">
                 @*@Html.Raw(ViewBag.Error)
-                    @Html.LabelFor(m => m.TerminalName)*@
+            @Html.LabelFor(m => m.TerminalName)*@
                 @*@Html.DropDownListFor(m => m.TerminalName, new SelectList(Model.TerminalsNames), new { size = "1" })*@
 
                 @*<select name="listTerminals" id="listTerminals">
-                    @foreach (var item in Model.TerminalsList)
-                    {
-                        <option id="tId" value="@item.idTerminal">
-                            @item.nameTerminal
-                        </option>
-                    }
-                    </select>*@
+            @foreach (var item in Model.TerminalsList)
+            {
+                <option id="tId" value="@item.idTerminal">
+                    @item.nameTerminal
+                </option>
+            }
+            </select>*@
 
                 @*@Html.Raw(ViewBag.Error)*@
                 @Html.LabelFor(m => m.TerminalId)
                 @Html.TextBoxFor(m => m.TerminalId, new { size = "1", @readonly = "readonly" })
                 @Html.ValidationMessageFor(m => m.TerminalId, "", new { @class = "text-danger" })
+            </div>
+            <div style="visibility: hidden">
+                @*@Html.Raw(ViewBag.Error)*@
+                @Html.LabelFor(m => m.Vendor)
+                @Html.TextBoxFor(m => m.Vendor, new { @readonly = "readonly" })
+                @Html.ValidationMessageFor(m => m.Vendor, "", new { @class = "text-danger" })
             </div>
             <div>
                 @*@Html.Raw(ViewBag.Error)*@
@@ -49,12 +55,6 @@
                 @Html.LabelFor(m => m.HourDay)
                 @Html.TextBoxFor(m => m.HourDay, new { size = "6", @readonly = "readonly" })
                 @Html.ValidationMessageFor(m => m.HourDay, "", new { @class = "text-danger" })
-            </div>
-            <div>
-                @*@Html.Raw(ViewBag.Error)*@
-                @Html.LabelFor(m => m.Vendor)
-                @Html.TextBoxFor(m => m.Vendor, new { @readonly = "readonly" })
-                @Html.ValidationMessageFor(m => m.Vendor, "", new { @class = "text-danger" })
             </div>
             <div style="visibility: visible">
                 @*@Html.Raw(ViewBag.Error)*@
@@ -107,17 +107,18 @@
                             <span id="errorGlobalDiscount" class="text-danger" style=" visibility:hidden"></span>
                             <div>
                                 <label for="globalDiscount"><strong>Remise globale (%)</strong></label>
-                                <input type="text" id="globalDiscount" name="globalDiscount" placeholder="Remise en %" value="@Model.GlobalDiscount" onchange="AddDiscount()" />
+                                <input type="text" id="globalDiscount" name="globalDiscount" class= "inputsLeft", placeholder="en %" value="@Model.GlobalDiscount" onchange="AddDiscount()" />
                             </div>
                         </div>
                     </div>
 
                     @Html.LabelFor(m => m.GlobalTot)
-                    @Html.TextBoxFor(m => m.GlobalTot, new { @readonly = "readonly" })
+                    @Html.TextBoxFor(m => m.GlobalTot, new {@class= "inputsLeft", @readonly = "readonly" })
                     @Html.ValidationMessageFor(m => m.GlobalTot, "", new { @Value = ViewBag.subTot1, @class = "text-danger" })
                 </div>
                 <div id="calculator">
-                    <table>
+                    <div>
+                        <table>
                         <tr>
                             <td>
                                 <input type="button" id="Button1" class="calc_btn" value="1" onclick="ButtonCalc_Click(this)">
@@ -196,6 +197,7 @@
                             </td>
                         </tr>
                     </table>
+                    </div>
                 </div> <!-- end calculator -->
             </div>  <!-- end containerLeft -->
             <div id="containerRight">

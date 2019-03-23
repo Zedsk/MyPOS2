@@ -166,9 +166,13 @@ namespace MyPOS2.BL
                     st = (p * q) - temp;
                 }
 
+                //find code product
+                int id = item.productId;
+                string code = ProductBL.FindCodeProductById(id);
                 TrDetailsViewModel vm = new TrDetailsViewModel
                 {
                     ProductName = item.nameItem,
+                    ProductCode = code,
                     Price = p,
                     Quantity = q,
                     ProductVat = item.vatItem,
@@ -180,7 +184,7 @@ namespace MyPOS2.BL
 
             return vmList;
         }
-
+                
         internal static decimal? SumItemsSubTot(IList<TrDetailsViewModel> detailsListTot)
         {
             decimal? result = 0;

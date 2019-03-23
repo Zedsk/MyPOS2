@@ -126,6 +126,28 @@ function SearchByCodeOrName() {
     }
 }
 
+function SearchAllProduct() {
+    try {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('containerRight').innerHTML = xhr.responseText;
+            }
+        }
+
+        //Get Method
+        var url = "/Transaction/SearchAllProduct" 
+	    xhr.open("GET", url);
+	    xhr.send();
+
+
+    } catch (e) {
+        document.getElementById('errorSearchProduct').textContent = e;
+        document.getElementById('errorSearchProduct').style.visibility = "visible";
+        console.log(e);
+    }
+}
+
 function AddItem(item) {
     document.getElementById('addProduct').value = item;
 }

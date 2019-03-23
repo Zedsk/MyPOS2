@@ -4,37 +4,38 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2439ab3188114522a31c5e95161f714e" Name="Diagram1">
-        <EntityTypeShape EntityType="Pos1Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.AGE" Width="1.5" PointX="1.5" PointY="24.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.AspNetRoles" Width="1.5" PointX="1.5" PointY="43.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.AspNetUserClaims" Width="1.5" PointX="3" PointY="50.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.AspNetUserLogins" Width="1.5" PointX="3" PointY="53" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.AspNetUsers" Width="1.5" PointX="0.75" PointY="38.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.BRAND" Width="1.5" PointX="1.5" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.CASH_BOTTOM_DAY" Width="1.5" PointX="5.25" PointY="35.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.CATEGORY" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.CATEGORY_TRANSLATION" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.CUSTOMER" Width="1.5" PointX="3" PointY="32.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.HERO" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.HERO_TRANSLATION" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.LANGUAGES" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.PAYMENT" Width="1.5" PointX="7.5" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.PAYMENT_METHOD" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.PERSON" Width="1.5" PointX="0.75" PointY="32" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.PRODUCT" Width="1.5" PointX="0.75" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.PRODUCT_TRANSLATION" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.SHOP" Width="1.5" PointX="3.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.SHOP_PRODUCT" Width="1.5" PointX="6" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.SHOP_TRANSLATION" Width="1.5" PointX="6" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.STATUS" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.SUBCATEGORY" Width="1.5" PointX="3" PointY="46.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.TERMINAL" Width="1.5" PointX="3" PointY="35.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.TICKET_MESSAGE" Width="1.5" PointX="3" PointY="21.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.TRANSACTION_DETAILS" Width="1.5" PointX="10.5" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.TRANSACTIONS" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.USERINFO" Width="1.5" PointX="3" PointY="39" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pos1Model.VAT" Width="1.5" PointX="1.5" PointY="29.375" IsExpanded="true" />
+      <Diagram DiagramId="8a9f261925a64a04851f603a078ba41f" Name="Diagram1">
+        <EntityTypeShape EntityType="Pos1Model.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.AGE" Width="1.5" PointX="1.5" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.AspNetRoles" Width="1.5" PointX="1.5" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.AspNetUserClaims" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.AspNetUserLogins" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.AspNetUsers" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.BRAND" Width="1.5" PointX="1.5" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.CASH_BOTTOM_DAY" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.CATEGORY" Width="1.5" PointX="1.5" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.CATEGORY_TRANSLATION" Width="1.5" PointX="5.75" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.CUSTOMER" Width="1.5" PointX="3" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.HERO" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.HERO_TRANSLATION" Width="1.5" PointX="8.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.LANGUAGES" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.MESSAGE_TRANSLATION" Width="1.5" PointX="5.25" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.PAYMENT" Width="1.5" PointX="7.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.PAYMENT_METHOD" Width="1.5" PointX="5.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.PERSON" Width="1.5" PointX="0.75" PointY="35.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.PRODUCT" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.PRODUCT_TRANSLATION" Width="1.5" PointX="8" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.SHOP" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.SHOP_PRODUCT" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.SHOP_TRANSLATION" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.STATUS" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.SUBCATEGORY" Width="1.5" PointX="3.75" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.TERMINAL" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.TICKET_MESSAGE" Width="1.5" PointX="3" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.TRANSACTION_DETAILS" Width="1.5" PointX="10.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.TRANSACTIONS" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.USERINFO" Width="1.5" PointX="6" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pos1Model.VAT" Width="1.5" PointX="1.5" PointY="32.625" IsExpanded="true" />
         <AssociationConnector Association="Pos1Model.FK_PRODUCT_AGE" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.AspNetUserClaims_dboAspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.AspNetUserLogins_dboAspNetUsers_UserId" ManuallyRouted="false" />
@@ -51,9 +52,10 @@
         <AssociationConnector Association="Pos1Model.FK_HERO_TRANSLATION_HERO" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_PRODUCT_HERO" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_HERO_TRANSLATION_LANGUAGE" ManuallyRouted="false" />
+        <AssociationConnector Association="Pos1Model.FK_MESSAGE_TRANSLATION_LANGUAGES" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_PRODUCT_TRANSLATION_LANGUAGE" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_SHOP_TRANSLATION_LANGUAGE" ManuallyRouted="false" />
-        <AssociationConnector Association="Pos1Model.FK_TICKET_MESSAGE_LANGUAGES" ManuallyRouted="false" />
+        <AssociationConnector Association="Pos1Model.FK_MESSAGE_TRANSLATION_TICKET_MESSAGE" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_CARD_TRANSACTION" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_PAYMENT_PAYMENT_METHOD" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_PRODUCT_TRANSLATION_PRODUCT" ManuallyRouted="false" />
@@ -66,11 +68,11 @@
         <AssociationConnector Association="Pos1Model.FK_TRANSACTION_SHOP" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_TRANSACTIONS_STATUS" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_TRANSACTION_POS" ManuallyRouted="false" />
-        <AssociationConnector Association="Pos1Model.FK_TRANSACTIONS_TICKET_MESSAGE" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_TRANSACTION_DETAILS_TRANSACTION" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.FK_TRANSACTION_VENDOR" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.CONTACT" ManuallyRouted="false" />
+        <AssociationConnector Association="Pos1Model.TRANSACTIONS_MESSAGE" ManuallyRouted="false" />
         <AssociationConnector Association="Pos1Model.VENDOR_SHOP" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

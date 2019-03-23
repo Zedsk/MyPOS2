@@ -60,5 +60,22 @@ namespace MyPOS2.BL
                 return dal.GetAllProductByName(product, lang);
             }
         }
+
+        internal static IList<SPP_ProductTrans_Result> FindAllProduct(string language)
+        {
+            using (IDalProduct dal = new DalProduct())
+            {
+                int lang = int.Parse(language);
+                return dal.GetAllProduct(lang);
+            }
+        }
+
+        internal static string FindCodeProductById(int id)
+        {
+            using (IDalProduct dal = new DalProduct())
+            {
+                return dal.GetCodeProductById(id);
+            }
+        }
     }
 }

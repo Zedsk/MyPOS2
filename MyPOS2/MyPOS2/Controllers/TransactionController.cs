@@ -83,7 +83,7 @@ namespace MyPOS2.Controllers
         }
 
         [HandleError]
-        public ActionResult TransacReturn(TrPaymentMenuViewModel vmodel)
+        public ActionResult TransacBack(TrPaymentMenuViewModel vmodel)
         {
             try
             {
@@ -268,6 +268,16 @@ namespace MyPOS2.Controllers
 
                 return View("Error");
             }
+        }
+
+        [HttpGet]
+        public ActionResult SearchAllProduct()
+        {
+            TrSearchViewModel vm = new TrSearchViewModel();
+            //to do --> provisoire language = 1 = French
+            var language = "1";
+            vm.Products = ProductBL.FindAllProduct(language);
+            return PartialView("_PartialTransactionSearch", vm);
         }
 
         //POST:

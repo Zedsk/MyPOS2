@@ -13,6 +13,10 @@ namespace MyPOS2.Models.Transactions
         public string ProductName { get; set; }
 
         [DataType(DataType.Text)]
+        [Display(Name = "Code Produit")]
+        public string ProductCode { get; set; }
+
+        [DataType(DataType.Text)]
         [Display(Name = "Prix")]
         public decimal Price { get; set; }
 

@@ -19,7 +19,7 @@ namespace MyPOS2.Dal
         void DeleteDetail(int id);
         void UpdateTransaction(int transactionId, decimal globalTotal, decimal? discountG);
         void CancelTransactionById(int transactionId);
-        void UpdateTransactionMessageId(int transactionId, int idTicket);
+        //void UpdateTransactionMessageId(int transactionId, int idTicket);
         void CloseTransaction(int transac);
         #endregion
     }

@@ -26,8 +26,7 @@ namespace MyPOS2.Dal
         public int CreateTransaction(int terminal, string vendorId, int shop, int customer)
         {
             STATUS status = db.STATUSs.Where(s => s.nameStatus.ToLower() == "open").Single();
-            // to do --> provisoire messageId = 1 languageId = 1
-            TRANSACTIONS tr = new TRANSACTIONS { transactionDateBegin = DateTime.Now, transactionDateEnd = DateTime.Parse("2000-01-01 00:00:00"), terminalId = terminal, userId = vendorId, shopId = shop, statusId = status.idStatus, customerId = customer, messageId = 1, languageId = 1 };
+            TRANSACTIONS tr = new TRANSACTIONS { transactionDateBegin = DateTime.Now, transactionDateEnd = DateTime.Parse("2000-01-01 00:00:00"), terminalId = terminal, userId = vendorId, shopId = shop, statusId = status.idStatus, customerId = customer};
             db.TRANSACTIONSs.Add(tr);
             db.SaveChanges();
             return tr.idTransaction;
@@ -86,15 +85,22 @@ namespace MyPOS2.Dal
             }
         }
 
-        public void UpdateTransactionMessageId(int transactionId, int idMessage)
-        {
+        //public void UpdateTransactionMessageId(int transactionId, int idMessage)
+        //{
 
-            var transac = db.TRANSACTIONSs.First(t => t.idTransaction == transactionId);
-            if (transac != null)
-            {
-                transac.messageId = idMessage;
-                db.SaveChanges();
-            }
+        //    var transac = db.TRANSACTIONSs.First(t => t.idTransaction == transactionId);
+        //    if (transac != null)
+        //    {
+        //        transac.messageId = idMessage;
+        //        db.SaveChanges();
+        //    }
+        //}
+
+        public void CreateTransactionMessageId(int transacId, int messageId)
+        {
+            var transac = db.TRANSACTIONSs.Where(t => t.idTransaction == transacId).Single();
+            db.TICKET_MESSAGEs.Where(t => t.idMessage == messageId).Single().TRANSACTIONS.Add(transac);
+            db.SaveChanges();
         }
 
         public void CancelTransactionById(int transactionId)

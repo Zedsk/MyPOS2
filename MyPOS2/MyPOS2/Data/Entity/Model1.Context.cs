@@ -41,6 +41,7 @@ namespace MyPOS2.Data.Entity
         public virtual DbSet<HERO> HEROs { get; set; }
         public virtual DbSet<HERO_TRANSLATION> HERO_TRANSLATIONs { get; set; }
         public virtual DbSet<LANGUAGES> LANGUAGESs { get; set; }
+        public virtual DbSet<MESSAGE_TRANSLATION> MESSAGE_TRANSLATIONs { get; set; }
         public virtual DbSet<PAYMENT> PAYMENTs { get; set; }
         public virtual DbSet<PAYMENT_METHOD> PAYMENT_METHODs { get; set; }
         public virtual DbSet<PERSON> PERSONs { get; set; }
@@ -58,15 +59,6 @@ namespace MyPOS2.Data.Entity
         public virtual DbSet<USERINFO> USERINFOs { get; set; }
         public virtual DbSet<VAT> VATs { get; set; }
     
-        public virtual ObjectResult<SPP_ParentCategories_Result> SPP_ParentCategories(Nullable<int> language)
-        {
-            var languageParameter = language.HasValue ?
-                new ObjectParameter("language", language) :
-                new ObjectParameter("language", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ParentCategories_Result>("SPP_ParentCategories", languageParameter);
-        }
-    
         public virtual ObjectResult<SPP_ChildCategories_Result> SPP_ChildCategories(Nullable<int> cat, Nullable<int> language)
         {
             var catParameter = cat.HasValue ?
@@ -80,6 +72,15 @@ namespace MyPOS2.Data.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ChildCategories_Result>("SPP_ChildCategories", catParameter, languageParameter);
         }
     
+        public virtual ObjectResult<SPP_ParentCategories_Result> SPP_ParentCategories(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ParentCategories_Result>("SPP_ParentCategories", languageParameter);
+        }
+    
         public virtual ObjectResult<SPP_ProductTrans_Result> SPP_ProductTrans(Nullable<int> language)
         {
             var languageParameter = language.HasValue ?
@@ -87,6 +88,15 @@ namespace MyPOS2.Data.Entity
                 new ObjectParameter("language", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ProductTrans_Result>("SPP_ProductTrans", languageParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SPP_TransactionMessageIds(Nullable<int> idTransac)
+        {
+            var idTransacParameter = idTransac.HasValue ?
+                new ObjectParameter("idTransac", idTransac) :
+                new ObjectParameter("idTransac", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TransactionMessageIds", idTransacParameter);
         }
     }
 }

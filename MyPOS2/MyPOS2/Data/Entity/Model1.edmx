@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -145,6 +145,16 @@
           <Property Name="idLanguage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nameLanguage" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
+        <EntityType Name="MESSAGE_TRANSLATION">
+          <Key>
+            <PropertyRef Name="messageId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="messageId" Type="int" Nullable="false" />
+          <Property Name="languageId" Type="int" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="message" Type="text" Nullable="false" />
+        </EntityType>
         <EntityType Name="PAYMENT">
           <Key>
             <PropertyRef Name="idPayment" />
@@ -252,12 +262,8 @@
         <EntityType Name="TICKET_MESSAGE">
           <Key>
             <PropertyRef Name="idMessage" />
-            <PropertyRef Name="languageId" />
           </Key>
           <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="languageId" Type="int" Nullable="false" />
-          <Property Name="title" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="message" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="TRANSACTION_DETAILS">
           <Key>
@@ -286,9 +292,15 @@
           <Property Name="shopId" Type="int" Nullable="false" />
           <Property Name="customerId" Type="int" Nullable="false" />
           <Property Name="statusId" Type="int" Nullable="false" />
-          <Property Name="messageId" Type="int" Nullable="false" />
-          <Property Name="languageId" Type="int" Nullable="false" />
           <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRANSACTIONS_MESSAGE">
+          <Key>
+            <PropertyRef Name="transactionId" />
+            <PropertyRef Name="messageId" />
+          </Key>
+          <Property Name="transactionId" Type="int" Nullable="false" />
+          <Property Name="messageId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="USERINFO">
           <Key>
@@ -482,6 +494,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MESSAGE_TRANSLATION_LANGUAGES">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="MESSAGE_TRANSLATION" Type="Self.MESSAGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="MESSAGE_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESSAGE_TRANSLATION_TICKET_MESSAGE">
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="MESSAGE_TRANSLATION" Type="Self.MESSAGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET_MESSAGE">
+              <PropertyRef Name="idMessage" />
+            </Principal>
+            <Dependent Role="MESSAGE_TRANSLATION">
+              <PropertyRef Name="messageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PAYMENT_PAYMENT_METHOD">
           <End Role="PAYMENT_METHOD" Type="Self.PAYMENT_METHOD" Multiplicity="1" />
           <End Role="PAYMENT" Type="Self.PAYMENT" Multiplicity="*" />
@@ -662,18 +698,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TICKET_MESSAGE_LANGUAGES">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
-          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LANGUAGES">
-              <PropertyRef Name="idLanguage" />
-            </Principal>
-            <Dependent Role="TICKET_MESSAGE">
-              <PropertyRef Name="languageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TRANSACTION_DETAILS_PRODUCT">
           <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
           <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
@@ -746,6 +770,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TRANSACTIONS_MESSAGE_TICKET_MESSAGE">
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="TRANSACTIONS_MESSAGE" Type="Self.TRANSACTIONS_MESSAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET_MESSAGE">
+              <PropertyRef Name="idMessage" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS_MESSAGE">
+              <PropertyRef Name="messageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACTIONS_MESSAGE_TRANSACTIONS">
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="1" />
+          <End Role="TRANSACTIONS_MESSAGE" Type="Self.TRANSACTIONS_MESSAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACTIONS">
+              <PropertyRef Name="idTransaction" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS_MESSAGE">
+              <PropertyRef Name="transactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TRANSACTIONS_STATUS">
           <End Role="STATUS" Type="Self.STATUS" Multiplicity="1" />
           <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
@@ -755,20 +803,6 @@
             </Principal>
             <Dependent Role="TRANSACTIONS">
               <PropertyRef Name="statusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TRANSACTIONS_TICKET_MESSAGE">
-          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
-          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TICKET_MESSAGE">
-              <PropertyRef Name="idMessage" />
-              <PropertyRef Name="languageId" />
-            </Principal>
-            <Dependent Role="TRANSACTIONS">
-              <PropertyRef Name="messageId" />
-              <PropertyRef Name="languageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -818,6 +852,9 @@
         <Function Name="SPP_ProductTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
+        <Function Name="SPP_TransactionMessageIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTransac" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="Pos1ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AGE" EntityType="Self.AGE" Schema="dbo" store:Type="Tables" />
@@ -835,6 +872,7 @@
           <EntitySet Name="HERO" EntityType="Self.HERO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HERO_TRANSLATION" EntityType="Self.HERO_TRANSLATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LANGUAGES" EntityType="Self.LANGUAGES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MESSAGE_TRANSLATION" EntityType="Self.MESSAGE_TRANSLATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAYMENT" EntityType="Self.PAYMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAYMENT_METHOD" EntityType="Self.PAYMENT_METHOD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PERSON" EntityType="Self.PERSON" Schema="dbo" store:Type="Tables" />
@@ -849,6 +887,7 @@
           <EntitySet Name="TICKET_MESSAGE" EntityType="Self.TICKET_MESSAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRANSACTION_DETAILS" EntityType="Self.TRANSACTION_DETAILS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRANSACTIONS" EntityType="Self.TRANSACTIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANSACTIONS_MESSAGE" EntityType="Self.TRANSACTIONS_MESSAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERINFO" EntityType="Self.USERINFO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VAT" EntityType="Self.VAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VENDOR_SHOP" EntityType="Self.VENDOR_SHOP" Schema="dbo" store:Type="Tables" />
@@ -903,6 +942,14 @@
           <AssociationSet Name="FK_HERO_TRANSLATION_LANGUAGE" Association="Self.FK_HERO_TRANSLATION_LANGUAGE">
             <End Role="LANGUAGES" EntitySet="LANGUAGES" />
             <End Role="HERO_TRANSLATION" EntitySet="HERO_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESSAGE_TRANSLATION_LANGUAGES" Association="Self.FK_MESSAGE_TRANSLATION_LANGUAGES">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="MESSAGE_TRANSLATION" EntitySet="MESSAGE_TRANSLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESSAGE_TRANSLATION_TICKET_MESSAGE" Association="Self.FK_MESSAGE_TRANSLATION_TICKET_MESSAGE">
+            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
+            <End Role="MESSAGE_TRANSLATION" EntitySet="MESSAGE_TRANSLATION" />
           </AssociationSet>
           <AssociationSet Name="FK_PAYMENT_PAYMENT_METHOD" Association="Self.FK_PAYMENT_PAYMENT_METHOD">
             <End Role="PAYMENT_METHOD" EntitySet="PAYMENT_METHOD" />
@@ -964,10 +1011,6 @@
             <End Role="SHOP" EntitySet="SHOP" />
             <End Role="TERMINAL" EntitySet="TERMINAL" />
           </AssociationSet>
-          <AssociationSet Name="FK_TICKET_MESSAGE_LANGUAGES" Association="Self.FK_TICKET_MESSAGE_LANGUAGES">
-            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
-            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
-          </AssociationSet>
           <AssociationSet Name="FK_TRANSACTION_DETAILS_PRODUCT" Association="Self.FK_TRANSACTION_DETAILS_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
@@ -992,12 +1035,16 @@
             <End Role="CUSTOMER" EntitySet="CUSTOMER" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTIONS_MESSAGE_TICKET_MESSAGE" Association="Self.FK_TRANSACTIONS_MESSAGE_TICKET_MESSAGE">
+            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
+            <End Role="TRANSACTIONS_MESSAGE" EntitySet="TRANSACTIONS_MESSAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTIONS_MESSAGE_TRANSACTIONS" Association="Self.FK_TRANSACTIONS_MESSAGE_TRANSACTIONS">
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+            <End Role="TRANSACTIONS_MESSAGE" EntitySet="TRANSACTIONS_MESSAGE" />
+          </AssociationSet>
           <AssociationSet Name="FK_TRANSACTIONS_STATUS" Association="Self.FK_TRANSACTIONS_STATUS">
             <End Role="STATUS" EntitySet="STATUS" />
-            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANSACTIONS_TICKET_MESSAGE" Association="Self.FK_TRANSACTIONS_TICKET_MESSAGE">
-            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
           <AssociationSet Name="FK_USERINFO_AspNetUsers" Association="Self.FK_USERINFO_AspNetUsers">
@@ -1013,7 +1060,8 @@
             <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pos1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1166,9 +1214,21 @@
           <Property Name="nameLanguage" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CATEGORY_TRANSLATION" Relationship="Self.FK_CATEGORY_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="CATEGORY_TRANSLATION" />
           <NavigationProperty Name="HERO_TRANSLATION" Relationship="Self.FK_HERO_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="HERO_TRANSLATION" />
+          <NavigationProperty Name="MESSAGE_TRANSLATION" Relationship="Self.FK_MESSAGE_TRANSLATION_LANGUAGES" FromRole="LANGUAGES" ToRole="MESSAGE_TRANSLATION" />
           <NavigationProperty Name="PRODUCT_TRANSLATION" Relationship="Self.FK_PRODUCT_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="PRODUCT_TRANSLATION" />
           <NavigationProperty Name="SHOP_TRANSLATION" Relationship="Self.FK_SHOP_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="SHOP_TRANSLATION" />
-          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.FK_TICKET_MESSAGE_LANGUAGES" FromRole="LANGUAGES" ToRole="TICKET_MESSAGE" />
+        </EntityType>
+        <EntityType Name="MESSAGE_TRANSLATION">
+          <Key>
+            <PropertyRef Name="messageId" />
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="messageId" Type="Int32" Nullable="false" />
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_MESSAGE_TRANSLATION_LANGUAGES" FromRole="MESSAGE_TRANSLATION" ToRole="LANGUAGES" />
+          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.FK_MESSAGE_TRANSLATION_TICKET_MESSAGE" FromRole="MESSAGE_TRANSLATION" ToRole="TICKET_MESSAGE" />
         </EntityType>
         <EntityType Name="PAYMENT">
           <Key>
@@ -1307,14 +1367,10 @@
         <EntityType Name="TICKET_MESSAGE">
           <Key>
             <PropertyRef Name="idMessage" />
-            <PropertyRef Name="languageId" />
           </Key>
           <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="languageId" Type="Int32" Nullable="false" />
-          <Property Name="title" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_TICKET_MESSAGE_LANGUAGES" FromRole="TICKET_MESSAGE" ToRole="LANGUAGES" />
-          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTIONS_TICKET_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="TRANSACTIONS" />
+          <NavigationProperty Name="MESSAGE_TRANSLATION" Relationship="Self.FK_MESSAGE_TRANSLATION_TICKET_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="MESSAGE_TRANSLATION" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.TRANSACTIONS_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="TRANSACTIONS" />
         </EntityType>
         <EntityType Name="TRANSACTION_DETAILS">
           <Key>
@@ -1345,17 +1401,15 @@
           <Property Name="shopId" Type="Int32" Nullable="false" />
           <Property Name="customerId" Type="Int32" Nullable="false" />
           <Property Name="statusId" Type="Int32" Nullable="false" />
-          <Property Name="messageId" Type="Int32" Nullable="false" />
-          <Property Name="languageId" Type="Int32" Nullable="false" />
           <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_TRANSACTIONS_CUSTOMER" FromRole="TRANSACTIONS" ToRole="CUSTOMER" />
           <NavigationProperty Name="PAYMENT" Relationship="Self.FK_CARD_TRANSACTION" FromRole="TRANSACTIONS" ToRole="PAYMENT" />
           <NavigationProperty Name="SHOP" Relationship="Self.FK_TRANSACTION_SHOP" FromRole="TRANSACTIONS" ToRole="SHOP" />
           <NavigationProperty Name="STATUS" Relationship="Self.FK_TRANSACTIONS_STATUS" FromRole="TRANSACTIONS" ToRole="STATUS" />
           <NavigationProperty Name="TERMINAL" Relationship="Self.FK_TRANSACTION_POS" FromRole="TRANSACTIONS" ToRole="TERMINAL" />
-          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.FK_TRANSACTIONS_TICKET_MESSAGE" FromRole="TRANSACTIONS" ToRole="TICKET_MESSAGE" />
           <NavigationProperty Name="TRANSACTION_DETAILS" Relationship="Self.FK_TRANSACTION_DETAILS_TRANSACTION" FromRole="TRANSACTIONS" ToRole="TRANSACTION_DETAILS" />
           <NavigationProperty Name="USERINFO" Relationship="Self.FK_TRANSACTION_VENDOR" FromRole="TRANSACTIONS" ToRole="USERINFO" />
+          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.TRANSACTIONS_MESSAGE" FromRole="TRANSACTIONS" ToRole="TICKET_MESSAGE" />
         </EntityType>
         <EntityType Name="USERINFO">
           <Key>
@@ -1577,6 +1631,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MESSAGE_TRANSLATION_LANGUAGES">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="MESSAGE_TRANSLATION" Type="Self.MESSAGE_TRANSLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="idLanguage" />
+            </Principal>
+            <Dependent Role="MESSAGE_TRANSLATION">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PRODUCT_TRANSLATION_LANGUAGE">
           <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
           <End Role="PRODUCT_TRANSLATION" Type="Self.PRODUCT_TRANSLATION" Multiplicity="*" />
@@ -1601,15 +1667,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TICKET_MESSAGE_LANGUAGES">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
-          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="*" />
+        <Association Name="FK_MESSAGE_TRANSLATION_TICKET_MESSAGE">
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="MESSAGE_TRANSLATION" Type="Self.MESSAGE_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LANGUAGES">
-              <PropertyRef Name="idLanguage" />
+            <Principal Role="TICKET_MESSAGE">
+              <PropertyRef Name="idMessage" />
             </Principal>
-            <Dependent Role="TICKET_MESSAGE">
-              <PropertyRef Name="languageId" />
+            <Dependent Role="MESSAGE_TRANSLATION">
+              <PropertyRef Name="messageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1757,20 +1823,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TRANSACTIONS_TICKET_MESSAGE">
-          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
-          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TICKET_MESSAGE">
-              <PropertyRef Name="idMessage" />
-              <PropertyRef Name="languageId" />
-            </Principal>
-            <Dependent Role="TRANSACTIONS">
-              <PropertyRef Name="messageId" />
-              <PropertyRef Name="languageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TRANSACTION_DETAILS_TRANSACTION">
           <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="1" />
           <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
@@ -1803,6 +1855,10 @@
           <End Role="BRAND" Type="Self.BRAND" Multiplicity="0..1" />
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
         </Association>
+        <Association Name="TRANSACTIONS_MESSAGE">
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="*" />
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
+        </Association>
         <Association Name="VENDOR_SHOP">
           <End Role="SHOP" Type="Self.SHOP" Multiplicity="*" />
           <End Role="USERINFO" Type="Self.USERINFO" Multiplicity="*" />
@@ -1822,6 +1878,7 @@
           <EntitySet Name="HERO" EntityType="Self.HERO" />
           <EntitySet Name="HERO_TRANSLATION" EntityType="Self.HERO_TRANSLATION" />
           <EntitySet Name="LANGUAGES" EntityType="Self.LANGUAGES" />
+          <EntitySet Name="MESSAGE_TRANSLATION" EntityType="Self.MESSAGE_TRANSLATION" />
           <EntitySet Name="PAYMENT" EntityType="Self.PAYMENT" />
           <EntitySet Name="PAYMENT_METHOD" EntityType="Self.PAYMENT_METHOD" />
           <EntitySet Name="PERSON" EntityType="Self.PERSON" />
@@ -1902,6 +1959,10 @@
             <End Role="LANGUAGES" EntitySet="LANGUAGES" />
             <End Role="HERO_TRANSLATION" EntitySet="HERO_TRANSLATION" />
           </AssociationSet>
+          <AssociationSet Name="FK_MESSAGE_TRANSLATION_LANGUAGES" Association="Self.FK_MESSAGE_TRANSLATION_LANGUAGES">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="MESSAGE_TRANSLATION" EntitySet="MESSAGE_TRANSLATION" />
+          </AssociationSet>
           <AssociationSet Name="FK_PRODUCT_TRANSLATION_LANGUAGE" Association="Self.FK_PRODUCT_TRANSLATION_LANGUAGE">
             <End Role="LANGUAGES" EntitySet="LANGUAGES" />
             <End Role="PRODUCT_TRANSLATION" EntitySet="PRODUCT_TRANSLATION" />
@@ -1910,9 +1971,9 @@
             <End Role="LANGUAGES" EntitySet="LANGUAGES" />
             <End Role="SHOP_TRANSLATION" EntitySet="SHOP_TRANSLATION" />
           </AssociationSet>
-          <AssociationSet Name="FK_TICKET_MESSAGE_LANGUAGES" Association="Self.FK_TICKET_MESSAGE_LANGUAGES">
-            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+          <AssociationSet Name="FK_MESSAGE_TRANSLATION_TICKET_MESSAGE" Association="Self.FK_MESSAGE_TRANSLATION_TICKET_MESSAGE">
             <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
+            <End Role="MESSAGE_TRANSLATION" EntitySet="MESSAGE_TRANSLATION" />
           </AssociationSet>
           <AssociationSet Name="FK_CARD_TRANSACTION" Association="Self.FK_CARD_TRANSACTION">
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
@@ -1962,10 +2023,6 @@
             <End Role="TERMINAL" EntitySet="TERMINAL" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
-          <AssociationSet Name="FK_TRANSACTIONS_TICKET_MESSAGE" Association="Self.FK_TRANSACTIONS_TICKET_MESSAGE">
-            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
-            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
-          </AssociationSet>
           <AssociationSet Name="FK_TRANSACTION_DETAILS_TRANSACTION" Association="Self.FK_TRANSACTION_DETAILS_TRANSACTION">
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
             <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
@@ -1982,27 +2039,34 @@
             <End Role="BRAND" EntitySet="BRAND" />
             <End Role="PERSON" EntitySet="PERSON" />
           </AssociationSet>
+          <AssociationSet Name="TRANSACTIONS_MESSAGE" Association="Self.TRANSACTIONS_MESSAGE">
+            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
           <AssociationSet Name="VENDOR_SHOP" Association="Self.VENDOR_SHOP">
             <End Role="SHOP" EntitySet="SHOP" />
             <End Role="USERINFO" EntitySet="USERINFO" />
           </AssociationSet>
-          <FunctionImport Name="SPP_ParentCategories" ReturnType="Collection(Pos1Model.SPP_ParentCategories_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="SPP_ChildCategories" ReturnType="Collection(Pos1Model.SPP_ChildCategories_Result)">
             <Parameter Name="cat" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_ParentCategories" ReturnType="Collection(Pos1Model.SPP_ParentCategories_Result)">
             <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ProductTrans" ReturnType="Collection(Pos1Model.SPP_ProductTrans_Result)">
             <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SPP_TransactionMessageIds" ReturnType="Collection(Int32)">
+            <Parameter Name="idTransac" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="SPP_ParentCategories_Result">
+        <ComplexType Name="SPP_ChildCategories_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
           <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
         </ComplexType>
-        <ComplexType Name="SPP_ChildCategories_Result">
+        <ComplexType Name="SPP_ParentCategories_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
           <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
@@ -2160,6 +2224,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MESSAGE_TRANSLATION">
+            <EntityTypeMapping TypeName="Pos1Model.MESSAGE_TRANSLATION">
+              <MappingFragment StoreEntitySet="MESSAGE_TRANSLATION">
+                <ScalarProperty Name="messageId" ColumnName="messageId" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PAYMENT">
             <EntityTypeMapping TypeName="Pos1Model.PAYMENT">
               <MappingFragment StoreEntitySet="PAYMENT">
@@ -2277,9 +2351,6 @@
             <EntityTypeMapping TypeName="Pos1Model.TICKET_MESSAGE">
               <MappingFragment StoreEntitySet="TICKET_MESSAGE">
                 <ScalarProperty Name="idMessage" ColumnName="idMessage" />
-                <ScalarProperty Name="languageId" ColumnName="languageId" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="message" ColumnName="message" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2310,8 +2381,6 @@
                 <ScalarProperty Name="shopId" ColumnName="shopId" />
                 <ScalarProperty Name="customerId" ColumnName="customerId" />
                 <ScalarProperty Name="statusId" ColumnName="statusId" />
-                <ScalarProperty Name="messageId" ColumnName="messageId" />
-                <ScalarProperty Name="languageId" ColumnName="languageId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2354,6 +2423,14 @@
               <ScalarProperty Name="idPerson" ColumnName="contactId" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="TRANSACTIONS_MESSAGE" TypeName="Pos1Model.TRANSACTIONS_MESSAGE" StoreEntitySet="TRANSACTIONS_MESSAGE">
+            <EndProperty Name="TICKET_MESSAGE">
+              <ScalarProperty Name="idMessage" ColumnName="messageId" />
+            </EndProperty>
+            <EndProperty Name="TRANSACTIONS">
+              <ScalarProperty Name="idTransaction" ColumnName="transactionId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="VENDOR_SHOP" TypeName="Pos1Model.VENDOR_SHOP" StoreEntitySet="VENDOR_SHOP">
             <EndProperty Name="SHOP">
               <ScalarProperty Name="idShop" ColumnName="shopId" />
@@ -2362,18 +2439,18 @@
               <ScalarProperty Name="userId" ColumnName="userId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="SPP_ParentCategories" FunctionName="Pos1Model.Store.SPP_ParentCategories">
+          <FunctionImportMapping FunctionImportName="SPP_ChildCategories" FunctionName="Pos1Model.Store.SPP_ChildCategories">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Pos1Model.SPP_ParentCategories_Result">
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ChildCategories_Result">
                 <ScalarProperty Name="idCategory" ColumnName="idCategory" />
                 <ScalarProperty Name="imageCat" ColumnName="imageCat" />
                 <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPP_ChildCategories" FunctionName="Pos1Model.Store.SPP_ChildCategories">
+          <FunctionImportMapping FunctionImportName="SPP_ParentCategories" FunctionName="Pos1Model.Store.SPP_ParentCategories">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Pos1Model.SPP_ChildCategories_Result">
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ParentCategories_Result">
                 <ScalarProperty Name="idCategory" ColumnName="idCategory" />
                 <ScalarProperty Name="imageCat" ColumnName="imageCat" />
                 <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
@@ -2398,6 +2475,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_TransactionMessageIds" FunctionName="Pos1Model.Store.SPP_TransactionMessageIds" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

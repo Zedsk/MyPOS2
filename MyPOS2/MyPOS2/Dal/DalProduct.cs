@@ -57,5 +57,18 @@ namespace MyPOS2.Dal
             PRODUCT_TRANSLATION prod = db.PRODUCT_TRANSLATIONs.Where(p => p.productId == idProduct && p.languageId == language).Single();
             return prod.nameProduct;
         }
+
+        public IList<SPP_ProductTrans_Result> GetAllProduct(int language)
+        {
+            List<SPP_ProductTrans_Result> productList = new List<SPP_ProductTrans_Result>();
+            productList = db.SPP_ProductTrans(language).ToList();
+            return productList;
+        }
+
+        public string GetCodeProductById(int id)
+        {
+            PRODUCT prod = db.PRODUCTs.Where(p => p.idProduct == id).Single();
+            return prod.barcode;
+        }
     }
 }

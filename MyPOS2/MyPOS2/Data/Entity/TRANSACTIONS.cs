@@ -19,6 +19,7 @@ namespace MyPOS2.Data.Entity
         {
             this.PAYMENT = new HashSet<PAYMENT>();
             this.TRANSACTION_DETAILS = new HashSet<TRANSACTION_DETAILS>();
+            this.TICKET_MESSAGE = new HashSet<TICKET_MESSAGE>();
         }
     
         public int idTransaction { get; set; }
@@ -31,8 +32,6 @@ namespace MyPOS2.Data.Entity
         public int shopId { get; set; }
         public int customerId { get; set; }
         public int statusId { get; set; }
-        public int messageId { get; set; }
-        public int languageId { get; set; }
         public string userId { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }
@@ -41,9 +40,10 @@ namespace MyPOS2.Data.Entity
         public virtual SHOP SHOP { get; set; }
         public virtual STATUS STATUS { get; set; }
         public virtual TERMINAL TERMINAL { get; set; }
-        public virtual TICKET_MESSAGE TICKET_MESSAGE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRANSACTION_DETAILS> TRANSACTION_DETAILS { get; set; }
         public virtual USERINFO USERINFO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TICKET_MESSAGE> TICKET_MESSAGE { get; set; }
     }
 }

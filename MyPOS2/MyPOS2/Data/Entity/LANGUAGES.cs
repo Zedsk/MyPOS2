@@ -19,9 +19,9 @@ namespace MyPOS2.Data.Entity
         {
             this.CATEGORY_TRANSLATION = new HashSet<CATEGORY_TRANSLATION>();
             this.HERO_TRANSLATION = new HashSet<HERO_TRANSLATION>();
+            this.MESSAGE_TRANSLATION = new HashSet<MESSAGE_TRANSLATION>();
             this.PRODUCT_TRANSLATION = new HashSet<PRODUCT_TRANSLATION>();
             this.SHOP_TRANSLATION = new HashSet<SHOP_TRANSLATION>();
-            this.TICKET_MESSAGE = new HashSet<TICKET_MESSAGE>();
         }
     
         public int idLanguage { get; set; }
@@ -32,10 +32,10 @@ namespace MyPOS2.Data.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HERO_TRANSLATION> HERO_TRANSLATION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MESSAGE_TRANSLATION> MESSAGE_TRANSLATION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCT_TRANSLATION> PRODUCT_TRANSLATION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHOP_TRANSLATION> SHOP_TRANSLATION { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TICKET_MESSAGE> TICKET_MESSAGE { get; set; }
     }
 }

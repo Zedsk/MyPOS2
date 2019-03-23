@@ -48,19 +48,37 @@ namespace MyPOS2.BL
                 //payment method & amount
                 vm.Payments = PaymentBL.FindPaymentsByTransacId(numTransaction);
 
-                //message
-                var message = FindTicketMessageById(transac.messageId, transac.languageId);
-                vm.Message = message;
+                ////message
+                //var message = FindTicketMessageById(transac.messageId, transac.languageId);
+                //to do --> provisoire language = 1 = French
+                int language = 1;
+                var messages = FindTicketMessageById(transac.idTransaction, language);
+                vm.Messages = messages;
 
                 return vm;
             }
         }
 
-        private static string FindTicketMessageById(int messageId, int languageMessage)
+        //private static string FindTicketMessageById(int messageId, int languageMessage)
+        //{
+        //    using (IDalTicket dal = new DalTicket())
+        //    {
+        //        return dal.GetTicketMessagesByIdsAndLanguage(messageId, languageMessage);
+        //    }
+        //}
+
+        private static List<string> FindTicketMessageById(int transacId, int languageMessage)
         {
             using (IDalTicket dal = new DalTicket())
             {
-                return dal.GetTicketMessageByIdAndLanguage(messageId, languageMessage);
+                List<int?> messageIds = dal.GetListMessagesId(transacId);
+                if (messageIds.Count == 0 || messageIds == null)
+                {
+                    //message par défaut
+                    messageIds.Add(1);
+                    dal.UpdateTransactionMessage(transacId, 1);
+                }
+                return dal.GetListTicketMessageByIdAndLanguage(messageIds, languageMessage);
             }
         }
     }

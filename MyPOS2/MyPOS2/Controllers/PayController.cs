@@ -259,7 +259,7 @@ namespace MyPOS2.Controllers
 
         private ActionResult BackTransac(TrPaymentMenuViewModel vmodel)
         {
-            return RedirectToAction("TransacReturn", "Transaction", vmodel);
+            return RedirectToAction("TransacBack", "Transaction", vmodel);
         }
 
         private ActionResult PayCash(TrPaymentMenuViewModel vmodel)

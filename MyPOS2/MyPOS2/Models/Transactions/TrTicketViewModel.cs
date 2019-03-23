@@ -56,6 +56,9 @@ namespace MyPOS2.Models.Transactions
         [DataType(DataType.Text)]
         public string MessageId { get; set; }
 
+        [DataType(DataType.Text)]
+        public List<string> Messages { get; set; }
+
         ////------
         //public SHOP Shop { get; set; }
 

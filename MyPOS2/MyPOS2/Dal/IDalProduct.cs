@@ -15,5 +15,7 @@ namespace MyPOS2.Dal
         PRODUCT GetProductByName(string product);
         List<SPP_ProductTrans_Result> GetAllProductByName(string codeProduct, int language);
         string GetNameProductById(int idProduct, int language);
+        IList<SPP_ProductTrans_Result> GetAllProduct(int language);
+        string GetCodeProductById(int id);
     }
 }
