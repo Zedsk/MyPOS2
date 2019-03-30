@@ -21,6 +21,7 @@ namespace MyPOS2.Dal
         void CancelTransactionById(int transactionId);
         //void UpdateTransactionMessageId(int transactionId, int idTicket);
         void CloseTransaction(int transac);
+        void CloseTransaction(int transac, DateTime date);
         #endregion
     }
 }

@@ -7,7 +7,7 @@ using System.Data.Entity.Core;
 using Microsoft.AspNet.Identity;
 using MyPOS2.BL;
 using MyPOS2.Models.Transactions;
-
+using System.Configuration;
 
 namespace MyPOS2.Controllers
 {
@@ -19,8 +19,32 @@ namespace MyPOS2.Controllers
         {
             try
             {
-                // tot do --> modifier si plusieur cashday diff terminaux
-                int terminal = TerminalBL.FindTerminalIdByDate();
+                //récupération du terminal
+                int terminal = 0;
+
+                //var T = System.Net.Dns.GetHostName();
+
+                if (Session["sessTerminalId"] != null)
+                {
+                    //terminal = int.Parse(Session["sessTerminalId"].ToString());
+                    terminal = Convert.ToInt32(Session["sessTerminalId"]);
+                }
+                else
+                {
+                    terminal = TerminalBL.FindTerminalIdByDate();
+                    // tot do --> modifier si plusieur cashday diff terminaux
+                }
+
+                ////récupération de la langue
+                if (Session["Language"] == null)
+                {
+                    Session["Language"] = ConfigurationManager.AppSettings["Language"];
+                }
+                //string L = ConfigurationManager.AppSettings["Language"];
+                //ConfigurationManager.AppSettings["Language"] = "Nl";
+                //var L2 = ConfigurationManager.AppSettings["Language"];
+                
+                //récupération de l'utilisateur
                 string currentId = User.Identity.GetUserId();
                 TrIndexViewModel vm = new TrIndexViewModel
                 {
@@ -183,7 +207,12 @@ namespace MyPOS2.Controllers
                     ////Add detail
                     //to do --> provisoire language = 1 = French
                     //var language = "1";
-                    TransactionBL.AddNewTransactionDetail(vmodel.AddProduct, terminalId, numTransaction, vmodel.Minus);
+                    if (Session["Language"] == null)
+                    {
+                        Session["Language"] = ConfigurationManager.AppSettings["Language"];
+                    }
+                    string language = Session["Language"].ToString();
+                    TransactionBL.AddNewTransactionDetail(vmodel.AddProduct, terminalId, numTransaction, vmodel.Minus, language);
                 }
                 //Find details with id transaction  + Add itemSubTotal
                 var detailsListTot = TransactionBL.ListDetailsWithTot(numTransaction);
@@ -229,17 +258,18 @@ namespace MyPOS2.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (Session["Language"] == null)
+                    {
+                        Session["Language"] = ConfigurationManager.AppSettings["Language"];
+                    }
+                    string language = Session["Language"].ToString();
                     if (int.TryParse(product, out int codeP))
                     {
                         //vm.Products = ProductBL.FindAllProductByCode(product);
-                        //to do --> provisoire language = 1 = French
-                        var language = "1";
                         vm.Products = ProductBL.FindAllProductByCode(product, language);
                     }
                     else
                     {
-                        //to do --> provisoire language = 1 = French
-                        var language = "1";
                         vm.Products = ProductBL.FindAllProductByName(product, language);
                     }
                 }
@@ -274,8 +304,11 @@ namespace MyPOS2.Controllers
         public ActionResult SearchAllProduct()
         {
             TrSearchViewModel vm = new TrSearchViewModel();
-            //to do --> provisoire language = 1 = French
-            var language = "1";
+            if (Session["Language"] == null)
+            {
+                Session["Language"] = ConfigurationManager.AppSettings["Language"];
+            }
+            string language = Session["Language"].ToString();
             vm.Products = ProductBL.FindAllProduct(language);
             return PartialView("_PartialTransactionSearch", vm);
         }
@@ -287,6 +320,11 @@ namespace MyPOS2.Controllers
             try
             {
                 TrSearchViewModel vm = new TrSearchViewModel();
+                if (Session["Language"] == null)
+                {
+                    Session["Language"] = ConfigurationManager.AppSettings["Language"];
+                }
+                string language = Session["Language"].ToString();
                 string meth = method.ToLower();
                 switch (meth)
                 {
@@ -300,7 +338,7 @@ namespace MyPOS2.Controllers
                         return (SearchByAge(vm));
 
                     case "cat":
-                        return (SearchByCat(vm));
+                        return (SearchByCat(vm, language));
 
                     default:
                         ViewBag.ticket = false;
@@ -321,11 +359,9 @@ namespace MyPOS2.Controllers
             }
         }
 
-        private ActionResult SearchByCat(TrSearchViewModel vm)
+        private ActionResult SearchByCat(TrSearchViewModel vm, string language)
         {
             //vm.Cats = SearchBL.FindCatsParentList();
-            //to do --> provisoire language = 1 = French
-            var language = "1";
             vm.Cats = SearchBL.FindCatsParentList(language);
             return PartialView("_PartialTransactionSearch", vm);
         }
@@ -354,20 +390,25 @@ namespace MyPOS2.Controllers
         {
             try
             {
+                if (Session["Language"] == null)
+                {
+                    Session["Language"] = ConfigurationManager.AppSettings["Language"];
+                }
+                string language = Session["Language"].ToString();
                 string meth = method.ToLower();
                 switch (meth)
                 {
                     case "brand":
-                        return (ProductByBrand(argument, vmodel));
+                        return (ProductByBrand(argument, vmodel, language));
 
                     case "hero":
-                        return (ProductByHero(argument, vmodel));
+                        return (ProductByHero(argument, vmodel, language));
 
                     case "age":
-                        return (ProductByAge(argument, vmodel));
+                        return (ProductByAge(argument, vmodel, language));
 
                     case "cat":
-                        return (ProductByCat(argument, vmodel));
+                        return (ProductByCat(argument, vmodel, language));
 
                     default:
                         ViewBag.ticket = false;
@@ -388,38 +429,30 @@ namespace MyPOS2.Controllers
             }
         }
 
-        private ActionResult ProductByBrand(string argument, TrSearchViewModel vmodel)
+        private ActionResult ProductByBrand(string argument, TrSearchViewModel vmodel, string language)
         {
             //vmodel.Products = SearchBL.FindProductListByIdBrand(argument);
-            //to do --> provisoire language = 1 = French
-            var language = "1";
             vmodel.Products = SearchBL.FindProductListByIdBrand(argument, language);
             return PartialView("_PartialTransactionSearch", vmodel);
         }
 
-        private ActionResult ProductByHero(string argument, TrSearchViewModel vmodel)
+        private ActionResult ProductByHero(string argument, TrSearchViewModel vmodel, string language)
         {
             //vmodel.Products = SearchBL.FindProductListByIdHero(argument);
-            //to do --> provisoire language = 1 = French
-            var language = "1";
             vmodel.Products = SearchBL.FindProductListByIdHero(argument,language);
             return PartialView("_PartialTransactionSearch", vmodel);
         }
 
-        private ActionResult ProductByAge(string argument, TrSearchViewModel vmodel)
+        private ActionResult ProductByAge(string argument, TrSearchViewModel vmodel, string language)
         {
             //vmodel.Products = SearchBL.FindProductListByIdAge(argument);
-            //to do --> provisoire language = 1 = French
-            var language = "1";
             vmodel.Products = SearchBL.FindProductListByIdAge(argument, language);
             return PartialView("_PartialTransactionSearch", vmodel);
         }
 
-        private ActionResult ProductByCat(string argument, TrSearchViewModel vmodel)
+        private ActionResult ProductByCat(string argument, TrSearchViewModel vmodel, string language)
         {
             //search if cat have child cat
-            //to do --> provisoire language = 1 = French
-            var language = "1";
             var children = SearchBL.FindCatsChildList(argument, language);
             if (children.Count() == 0)
             {
@@ -429,7 +462,6 @@ namespace MyPOS2.Controllers
             else
             {
                 vmodel.CatsChild = children;
-                
             }
             return PartialView("_PartialTransactionSearch", vmodel);
         }

@@ -19,7 +19,7 @@ namespace MyPOS2.Data.Entity
         {
             this.PAYMENT = new HashSet<PAYMENT>();
             this.TRANSACTION_DETAILS = new HashSet<TRANSACTION_DETAILS>();
-            this.TICKET_MESSAGE = new HashSet<TICKET_MESSAGE>();
+            this.TRANSACTIONS_MESSAGE = new HashSet<TRANSACTIONS_MESSAGE>();
         }
     
         public int idTransaction { get; set; }
@@ -44,6 +44,6 @@ namespace MyPOS2.Data.Entity
         public virtual ICollection<TRANSACTION_DETAILS> TRANSACTION_DETAILS { get; set; }
         public virtual USERINFO USERINFO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TICKET_MESSAGE> TICKET_MESSAGE { get; set; }
+        public virtual ICollection<TRANSACTIONS_MESSAGE> TRANSACTIONS_MESSAGE { get; set; }
     }
 }

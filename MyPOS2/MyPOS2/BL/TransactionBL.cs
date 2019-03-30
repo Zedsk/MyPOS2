@@ -36,7 +36,7 @@ namespace MyPOS2.BL
 
         }
 
-        internal static void AddNewTransactionDetail(string codeProduct, string terminal, string transaction, bool minus)
+        internal static void AddNewTransactionDetail(string codeProduct, string terminal, string transaction, bool minus, string language)
         {
             using (IDalTransaction dal = new DalTransaction())
             {
@@ -90,13 +90,14 @@ namespace MyPOS2.BL
                     }
                     int terminalId = int.Parse(terminal);
                     int transactionId = int.Parse(transaction);
-                    //to do --> change code product with nameproduct 
-                    //to do --> provisoire language = 1 = French
-                    int language = 1;
+
+                    ////to do --> provisoire language = 1 = French
+                    //int language = 1;
+                    int languageId = LanguageBL.FindIdLanguageByShortForm(language);
                     string name;
                     using (IDalProduct dalP = new DalProduct())
                     {
-                        name = dalP.GetNameProductById(prod.idProduct, language);
+                        name = dalP.GetNameProductById(prod.idProduct, languageId);
                     }
                     dal.CreateDetail(prod, terminalId, transactionId, vatItem, name);
                 }
@@ -235,7 +236,7 @@ namespace MyPOS2.BL
             }
         }
 
-        internal static void AddTicketAndCloseTransac(string numTransaction)
+        internal static void CloseTransac(string numTransaction)
         {
             using (IDalTransaction dal = new DalTransaction())
             {
@@ -244,10 +245,22 @@ namespace MyPOS2.BL
             }
         }
 
+        internal static void CloseTransac(string numTransaction, string dateTicket)
+        {
+            using (IDalTransaction dal = new DalTransaction())
+            {
+                int transac = int.Parse(numTransaction);
+                DateTime date = DateTime.Parse(dateTicket);
+                dal.CloseTransaction(transac, date);
+            }
+        }
+
         internal static string FindTotalByTransacId(string nTransac)
         {
             TRANSACTIONS transac = FindTransactionById(nTransac);
             return transac.total.ToString();
         }
+
+        
     }
 }

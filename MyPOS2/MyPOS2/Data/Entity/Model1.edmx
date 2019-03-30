@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -144,6 +144,7 @@
           </Key>
           <Property Name="idLanguage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nameLanguage" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="shortForm" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <EntityType Name="MESSAGE_TRANSLATION">
           <Key>
@@ -301,6 +302,7 @@
           </Key>
           <Property Name="transactionId" Type="int" Nullable="false" />
           <Property Name="messageId" Type="int" Nullable="false" />
+          <Property Name="languageMessage" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="USERINFO">
           <Key>
@@ -846,11 +848,24 @@
           <Parameter Name="cat" Type="int" Mode="In" />
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
+        <Function Name="SPP_GetAllShop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SPP_GetShopById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="shop" Type="int" Mode="In" />
+        </Function>
         <Function Name="SPP_ParentCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
         <Function Name="SPP_ProductTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPP_TicketTimeSure" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tDate" Type="int" Mode="In" />
+          <Parameter Name="tMonth" Type="int" Mode="In" />
+          <Parameter Name="tDay" Type="int" Mode="In" />
+          <Parameter Name="tHour" Type="int" Mode="In" />
+          <Parameter Name="tMinute" Type="int" Mode="In" />
+          <Parameter Name="tStatus" Type="int" Mode="In" />
+          <Parameter Name="tReturn" Type="bit" Mode="In" />
         </Function>
         <Function Name="SPP_TransactionMessageIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idTransac" Type="int" Mode="In" />
@@ -1060,8 +1075,7 @@
             <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pos1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1212,6 +1226,7 @@
           </Key>
           <Property Name="idLanguage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nameLanguage" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shortForm" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CATEGORY_TRANSLATION" Relationship="Self.FK_CATEGORY_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="CATEGORY_TRANSLATION" />
           <NavigationProperty Name="HERO_TRANSLATION" Relationship="Self.FK_HERO_TRANSLATION_LANGUAGE" FromRole="LANGUAGES" ToRole="HERO_TRANSLATION" />
           <NavigationProperty Name="MESSAGE_TRANSLATION" Relationship="Self.FK_MESSAGE_TRANSLATION_LANGUAGES" FromRole="LANGUAGES" ToRole="MESSAGE_TRANSLATION" />
@@ -1370,7 +1385,7 @@
           </Key>
           <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="MESSAGE_TRANSLATION" Relationship="Self.FK_MESSAGE_TRANSLATION_TICKET_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="MESSAGE_TRANSLATION" />
-          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.TRANSACTIONS_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="TRANSACTIONS" />
+          <NavigationProperty Name="TRANSACTIONS_MESSAGE" Relationship="Self.FK_TRANSACTIONS_MESSAGE_TICKET_MESSAGE" FromRole="TICKET_MESSAGE" ToRole="TRANSACTIONS_MESSAGE" />
         </EntityType>
         <EntityType Name="TRANSACTION_DETAILS">
           <Key>
@@ -1409,7 +1424,18 @@
           <NavigationProperty Name="TERMINAL" Relationship="Self.FK_TRANSACTION_POS" FromRole="TRANSACTIONS" ToRole="TERMINAL" />
           <NavigationProperty Name="TRANSACTION_DETAILS" Relationship="Self.FK_TRANSACTION_DETAILS_TRANSACTION" FromRole="TRANSACTIONS" ToRole="TRANSACTION_DETAILS" />
           <NavigationProperty Name="USERINFO" Relationship="Self.FK_TRANSACTION_VENDOR" FromRole="TRANSACTIONS" ToRole="USERINFO" />
-          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.TRANSACTIONS_MESSAGE" FromRole="TRANSACTIONS" ToRole="TICKET_MESSAGE" />
+          <NavigationProperty Name="TRANSACTIONS_MESSAGE" Relationship="Self.FK_TRANSACTIONS_MESSAGE_TRANSACTIONS" FromRole="TRANSACTIONS" ToRole="TRANSACTIONS_MESSAGE" />
+        </EntityType>
+        <EntityType Name="TRANSACTIONS_MESSAGE">
+          <Key>
+            <PropertyRef Name="transactionId" />
+            <PropertyRef Name="messageId" />
+          </Key>
+          <Property Name="transactionId" Type="Int32" Nullable="false" />
+          <Property Name="messageId" Type="Int32" Nullable="false" />
+          <Property Name="languageMessage" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TICKET_MESSAGE" Relationship="Self.FK_TRANSACTIONS_MESSAGE_TICKET_MESSAGE" FromRole="TRANSACTIONS_MESSAGE" ToRole="TICKET_MESSAGE" />
+          <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTIONS_MESSAGE_TRANSACTIONS" FromRole="TRANSACTIONS_MESSAGE" ToRole="TRANSACTIONS" />
         </EntityType>
         <EntityType Name="USERINFO">
           <Key>
@@ -1823,6 +1849,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TRANSACTIONS_MESSAGE_TICKET_MESSAGE">
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="TRANSACTIONS_MESSAGE" Type="Self.TRANSACTIONS_MESSAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET_MESSAGE">
+              <PropertyRef Name="idMessage" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS_MESSAGE">
+              <PropertyRef Name="messageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TRANSACTION_DETAILS_TRANSACTION">
           <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="1" />
           <End Role="TRANSACTION_DETAILS" Type="Self.TRANSACTION_DETAILS" Multiplicity="*" />
@@ -1847,6 +1885,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TRANSACTIONS_MESSAGE_TRANSACTIONS">
+          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="1" />
+          <End Role="TRANSACTIONS_MESSAGE" Type="Self.TRANSACTIONS_MESSAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACTIONS">
+              <PropertyRef Name="idTransaction" />
+            </Principal>
+            <Dependent Role="TRANSACTIONS_MESSAGE">
+              <PropertyRef Name="transactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
@@ -1854,10 +1904,6 @@
         <Association Name="CONTACT">
           <End Role="BRAND" Type="Self.BRAND" Multiplicity="0..1" />
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
-        </Association>
-        <Association Name="TRANSACTIONS_MESSAGE">
-          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="*" />
-          <End Role="TRANSACTIONS" Type="Self.TRANSACTIONS" Multiplicity="*" />
         </Association>
         <Association Name="VENDOR_SHOP">
           <End Role="SHOP" Type="Self.SHOP" Multiplicity="*" />
@@ -1893,6 +1939,7 @@
           <EntitySet Name="TICKET_MESSAGE" EntityType="Self.TICKET_MESSAGE" />
           <EntitySet Name="TRANSACTION_DETAILS" EntityType="Self.TRANSACTION_DETAILS" />
           <EntitySet Name="TRANSACTIONS" EntityType="Self.TRANSACTIONS" />
+          <EntitySet Name="TRANSACTIONS_MESSAGE" EntityType="Self.TRANSACTIONS_MESSAGE" />
           <EntitySet Name="USERINFO" EntityType="Self.USERINFO" />
           <EntitySet Name="VAT" EntityType="Self.VAT" />
           <AssociationSet Name="FK_PRODUCT_AGE" Association="Self.FK_PRODUCT_AGE">
@@ -2023,6 +2070,10 @@
             <End Role="TERMINAL" EntitySet="TERMINAL" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
           </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTIONS_MESSAGE_TICKET_MESSAGE" Association="Self.FK_TRANSACTIONS_MESSAGE_TICKET_MESSAGE">
+            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
+            <End Role="TRANSACTIONS_MESSAGE" EntitySet="TRANSACTIONS_MESSAGE" />
+          </AssociationSet>
           <AssociationSet Name="FK_TRANSACTION_DETAILS_TRANSACTION" Association="Self.FK_TRANSACTION_DETAILS_TRANSACTION">
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
             <End Role="TRANSACTION_DETAILS" EntitySet="TRANSACTION_DETAILS" />
@@ -2030,6 +2081,10 @@
           <AssociationSet Name="FK_TRANSACTION_VENDOR" Association="Self.FK_TRANSACTION_VENDOR">
             <End Role="USERINFO" EntitySet="USERINFO" />
             <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACTIONS_MESSAGE_TRANSACTIONS" Association="Self.FK_TRANSACTIONS_MESSAGE_TRANSACTIONS">
+            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
+            <End Role="TRANSACTIONS_MESSAGE" EntitySet="TRANSACTIONS_MESSAGE" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -2039,10 +2094,6 @@
             <End Role="BRAND" EntitySet="BRAND" />
             <End Role="PERSON" EntitySet="PERSON" />
           </AssociationSet>
-          <AssociationSet Name="TRANSACTIONS_MESSAGE" Association="Self.TRANSACTIONS_MESSAGE">
-            <End Role="TICKET_MESSAGE" EntitySet="TICKET_MESSAGE" />
-            <End Role="TRANSACTIONS" EntitySet="TRANSACTIONS" />
-          </AssociationSet>
           <AssociationSet Name="VENDOR_SHOP" Association="Self.VENDOR_SHOP">
             <End Role="SHOP" EntitySet="SHOP" />
             <End Role="USERINFO" EntitySet="USERINFO" />
@@ -2051,20 +2102,53 @@
             <Parameter Name="cat" Mode="In" Type="Int32" />
             <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SPP_GetAllShop" ReturnType="Collection(Pos1Model.SPP_GetAllShop_Result)" />
+          <FunctionImport Name="SPP_GetShopById" ReturnType="Collection(Pos1Model.SPP_GetShopById_Result)">
+          <Parameter Name="shop" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="SPP_ParentCategories" ReturnType="Collection(Pos1Model.SPP_ParentCategories_Result)">
-            <Parameter Name="language" Mode="In" Type="Int32" />
+          <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ProductTrans" ReturnType="Collection(Pos1Model.SPP_ProductTrans_Result)">
-            <Parameter Name="language" Mode="In" Type="Int32" />
+          <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_TransactionMessageIds" ReturnType="Collection(Int32)">
-            <Parameter Name="idTransac" Mode="In" Type="Int32" />
+          <Parameter Name="idTransac" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_TicketTimeSure" ReturnType="Collection(Int32)">
+            <Parameter Name="tDate" Mode="In" Type="Int32" />
+            <Parameter Name="tMonth" Mode="In" Type="Int32" />
+            <Parameter Name="tDay" Mode="In" Type="Int32" />
+            <Parameter Name="tHour" Mode="In" Type="Int32" />
+            <Parameter Name="tMinute" Mode="In" Type="Int32" />
+            <Parameter Name="tStatus" Mode="In" Type="Int32" />
+            <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPP_ChildCategories_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
           <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_GetAllShop_Result">
+          <Property Type="Int32" Name="idshop" Nullable="false" />
+          <Property Type="Int32" Name="languageId" Nullable="false" />
+          <Property Type="String" Name="nameShop" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="phone" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="opening" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SPP_GetShopById_Result">
+          <Property Type="Int32" Name="idshop" Nullable="false" />
+          <Property Type="Int32" Name="languageId" Nullable="false" />
+          <Property Type="String" Name="nameShop" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="phone" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="opening" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="SPP_ParentCategories_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
@@ -2221,6 +2305,7 @@
               <MappingFragment StoreEntitySet="LANGUAGES">
                 <ScalarProperty Name="idLanguage" ColumnName="idLanguage" />
                 <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
+                <ScalarProperty Name="shortForm" ColumnName="shortForm" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2385,6 +2470,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TRANSACTIONS_MESSAGE">
+            <EntityTypeMapping TypeName="Pos1Model.TRANSACTIONS_MESSAGE">
+              <MappingFragment StoreEntitySet="TRANSACTIONS_MESSAGE">
+                <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+                <ScalarProperty Name="messageId" ColumnName="messageId" />
+                <ScalarProperty Name="languageMessage" ColumnName="languageMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="USERINFO">
             <EntityTypeMapping TypeName="Pos1Model.USERINFO">
               <MappingFragment StoreEntitySet="USERINFO">
@@ -2423,14 +2517,6 @@
               <ScalarProperty Name="idPerson" ColumnName="contactId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="TRANSACTIONS_MESSAGE" TypeName="Pos1Model.TRANSACTIONS_MESSAGE" StoreEntitySet="TRANSACTIONS_MESSAGE">
-            <EndProperty Name="TICKET_MESSAGE">
-              <ScalarProperty Name="idMessage" ColumnName="messageId" />
-            </EndProperty>
-            <EndProperty Name="TRANSACTIONS">
-              <ScalarProperty Name="idTransaction" ColumnName="transactionId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="VENDOR_SHOP" TypeName="Pos1Model.VENDOR_SHOP" StoreEntitySet="VENDOR_SHOP">
             <EndProperty Name="SHOP">
               <ScalarProperty Name="idShop" ColumnName="shopId" />
@@ -2445,6 +2531,34 @@
                 <ScalarProperty Name="idCategory" ColumnName="idCategory" />
                 <ScalarProperty Name="imageCat" ColumnName="imageCat" />
                 <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_GetAllShop" FunctionName="Pos1Model.Store.SPP_GetAllShop">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_GetAllShop_Result">
+                <ScalarProperty Name="idshop" ColumnName="idshop" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="nameShop" ColumnName="nameShop" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="opening" ColumnName="opening" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_GetShopById" FunctionName="Pos1Model.Store.SPP_GetShopById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_GetShopById_Result">
+                <ScalarProperty Name="idshop" ColumnName="idshop" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="nameShop" ColumnName="nameShop" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="opening" ColumnName="opening" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2476,6 +2590,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPP_TransactionMessageIds" FunctionName="Pos1Model.Store.SPP_TransactionMessageIds" />
+          <FunctionImportMapping FunctionImportName="SPP_TicketTimeSure" FunctionName="Pos1Model.Store.SPP_TicketTimeSure" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

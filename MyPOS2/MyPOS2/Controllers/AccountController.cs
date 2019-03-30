@@ -71,6 +71,16 @@ namespace MyPOS2.Controllers
         {
             if (!ModelState.IsValid)
             {
+                //if terminal exist return idTerminal
+                int terminalOk = TerminalBL.CheckTerminalName();
+                if (terminalOk == 0)
+                {
+                    ViewBag.Error = "le terminal n'est pas enregistré, veuillez l'ajouter via le menu Gestion --> Terminal,  pour pouvoir effectuer des transactions.";
+                }
+                else
+                {
+                    Session["sessTerminalId"] = terminalOk;
+                }
                 return View(model);
             }
 

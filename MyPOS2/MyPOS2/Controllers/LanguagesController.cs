@@ -27,12 +27,12 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LANGUAGES language = db.LANGUAGESs.Find(id);
-            if (language == null)
+            LANGUAGES lANGUAGES = db.LANGUAGESs.Find(id);
+            if (lANGUAGES == null)
             {
                 return HttpNotFound();
             }
-            return View(language);
+            return View(lANGUAGES);
         }
 
         // GET: Languages/Create
@@ -42,20 +42,20 @@ namespace MyPOS2.Controllers
         }
 
         // POST: Languages/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idLanguage,nameLanguage")] LANGUAGES language)
+        public ActionResult Create([Bind(Include = "idLanguage,nameLanguage,shortForm")] LANGUAGES lANGUAGES)
         {
             if (ModelState.IsValid)
             {
-                db.LANGUAGESs.Add(language);
+                db.LANGUAGESs.Add(lANGUAGES);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(language);
+            return View(lANGUAGES);
         }
 
         // GET: Languages/Edit/5
@@ -65,28 +65,28 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LANGUAGES language = db.LANGUAGESs.Find(id);
-            if (language == null)
+            LANGUAGES lANGUAGES = db.LANGUAGESs.Find(id);
+            if (lANGUAGES == null)
             {
                 return HttpNotFound();
             }
-            return View(language);
+            return View(lANGUAGES);
         }
 
         // POST: Languages/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idLanguage,nameLanguage")] LANGUAGES language)
+        public ActionResult Edit([Bind(Include = "idLanguage,nameLanguage,shortForm")] LANGUAGES lANGUAGES)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(language).State = EntityState.Modified;
+                db.Entry(lANGUAGES).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(language);
+            return View(lANGUAGES);
         }
 
         // GET: Languages/Delete/5
@@ -96,12 +96,12 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LANGUAGES language = db.LANGUAGESs.Find(id);
-            if (language == null)
+            LANGUAGES lANGUAGES = db.LANGUAGESs.Find(id);
+            if (lANGUAGES == null)
             {
                 return HttpNotFound();
             }
-            return View(language);
+            return View(lANGUAGES);
         }
 
         // POST: Languages/Delete/5
@@ -109,8 +109,8 @@ namespace MyPOS2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            LANGUAGES language = db.LANGUAGESs.Find(id);
-            db.LANGUAGESs.Remove(language);
+            LANGUAGES lANGUAGES = db.LANGUAGESs.Find(id);
+            db.LANGUAGESs.Remove(lANGUAGES);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

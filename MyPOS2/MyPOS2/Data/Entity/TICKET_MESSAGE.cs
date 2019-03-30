@@ -18,7 +18,7 @@ namespace MyPOS2.Data.Entity
         public TICKET_MESSAGE()
         {
             this.MESSAGE_TRANSLATION = new HashSet<MESSAGE_TRANSLATION>();
-            this.TRANSACTIONS = new HashSet<TRANSACTIONS>();
+            this.TRANSACTIONS_MESSAGE = new HashSet<TRANSACTIONS_MESSAGE>();
         }
     
         public int idMessage { get; set; }
@@ -26,6 +26,6 @@ namespace MyPOS2.Data.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MESSAGE_TRANSLATION> MESSAGE_TRANSLATION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TRANSACTIONS> TRANSACTIONS { get; set; }
+        public virtual ICollection<TRANSACTIONS_MESSAGE> TRANSACTIONS_MESSAGE { get; set; }
     }
 }

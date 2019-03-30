@@ -14,7 +14,12 @@
             window.onunload = function () { null };
         </script>*@
 
+
     @RenderSection("Styles", false)
+
+    @section Styles {
+        <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+    }
 
 </head>
 <body>
@@ -35,6 +40,19 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Gestion", "Management", "Home")</li>
                     <li>@Html.ActionLink("Transaction", "Transaction", "Home")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-globe"></span>
+                            <span class="glyphicon glyphicon-th-list"></span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu disabled">
+                            <li>@Html.ActionLink("Fr", "Transaction", "Home")</li>
+                            <li>@Html.ActionLink("Nl", "Transaction", "Home")</li>
+                            <li>@Html.ActionLink("De", "Transaction", "Home")</li>
+                            <li>@Html.ActionLink("En", "Transaction", "Home")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -12,5 +12,6 @@ namespace MyPOS2.Dal
         List<TERMINAL> GetAllTerminals();
         TERMINAL GetTerminalById(int id);
         int GetTerminalIdByDate();
+        IList<string> GetAllTerminalNames();
     }
 }

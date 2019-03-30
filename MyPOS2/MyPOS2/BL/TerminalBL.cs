@@ -46,5 +46,23 @@ namespace MyPOS2.BL
                 return dal.GetTerminalIdByDate();
             }
         }
+
+        internal static int CheckTerminalName()
+        {
+            using (IDalTerminal dal = new DalTerminal())
+            {
+                string T = System.Net.Dns.GetHostName();
+                //IList<string> listNames = dal.GetAllTerminalNames();
+                List<TERMINAL> terminals = dal.GetAllTerminals();
+                foreach (var item in terminals)
+                {
+                    if (item.nameTerminal == T)
+                    {
+                        return item.idTerminal;
+                    }
+                }
+                return 0;
+            }
+        }
     }
 }

@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyPOS2.BL;
 using MyPOS2.Models.Transactions;
+using MyPOS2.Models.Transactions.Ticket;
 
 namespace MyPOS2.Controllers
 {
     public class PayController : Controller
     {
+        #region Index
         // GET: Pay
         [HandleError]
         [HttpGet]
@@ -22,18 +25,24 @@ namespace MyPOS2.Controllers
                 //if (gTot == null || nTransac == null)
                 if (string.IsNullOrEmpty(nTransac))
                 {
-                    //provisoire
-                    vm.GlobalTotal = "399.97";
-                    vm.NumTransaction = "11";
-                    ViewBag.tot = "399.97";
-                    ViewBag.transac = "11";
-                    ViewBag.ticket = false;
-                    //ViewBag.amount = "0";
-                    //ViewBag.cashBack = "0";
-                    //throw new NullReferenceException();
+                    ////provisoire
+                    //vm.GlobalTotal = "399.97";
+                    //vm.NumTransaction = "11";
+                    //ViewBag.tot = "399.97";
+                    //ViewBag.transac = "11";
+                    //ViewBag.ticket = false;
+                    ////ViewBag.amount = "0";
+                    ////ViewBag.cashBack = "0";
+                    throw new NullReferenceException();
                 }
                 else
                 {
+                    if (Session["Language"] == null)
+                    {
+                        Session["Language"] = ConfigurationManager.AppSettings["Language"];
+                    }
+                    string language = Session["Language"].ToString();
+
                     if (string.IsNullOrEmpty(gTot))
                     {
                         gTot = TransactionBL.FindTotalByTransacId(nTransac);
@@ -56,7 +65,7 @@ namespace MyPOS2.Controllers
                             ViewBag.cashBack = temp.ToString();
                             vm.GlobalTotal = "0";
                             ViewBag.tot = "0";
-                            vm.Ticket = TicketBL.FillTicket(nTransac);
+                            vm.Ticket = TicketBL.FillTicket(nTransac, language);
                             ViewBag.ticket = true;
                         }
                         else if (result == 0)
@@ -64,7 +73,7 @@ namespace MyPOS2.Controllers
                             ViewBag.cashBack = "0";
                             vm.GlobalTotal = "0";
                             ViewBag.tot = "0";
-                            vm.Ticket = TicketBL.FillTicket(nTransac);
+                            vm.Ticket = TicketBL.FillTicket(nTransac, language);
                             ViewBag.ticket = true;
                         }
                         else
@@ -80,6 +89,7 @@ namespace MyPOS2.Controllers
                     //ViewBag.cashBack = "0";
                 }
                 vm.MethodsP = PaymentBL.FindMethodsList();
+                vm.Languages = LanguageBL.FindLanguageList();
                 //vm.PayCardToConfirm = false;
                 ViewBag.messageCard = "";
                 ////provisoire
@@ -154,35 +164,31 @@ namespace MyPOS2.Controllers
             }
 
         }
+        #endregion
 
+        #region Payment
         private ActionResult Payment(TrPaymentMenuViewModel vmodel)
         {
             if (ModelState.IsValid)
             {
-                //if (vmodel.GlobalTot == "0")
-                //{
-                //    ViewBag.nopay = "La transaction est payée!";
-                //    ViewBag.tot = vmodel.GlobalTot;
-                //    //ViewBag.transac = vmodel.NumTransaction;
-                //    ViewBag.amount = vmodel.Amount;
-                //    ViewBag.cashBack = vmodel.CashReturn;
-                //    vmodel.MethodsP = TransactionBL.FindMethodsList();
-                //    ViewBag.ticket = true;
-                //    return View(vmodel);
-                //}
+                if (Session["Language"] == null)
+                {
+                    Session["Language"] = ConfigurationManager.AppSettings["Language"];
+                }
+                string language = Session["Language"].ToString();
                 TrPaymentMenuViewModel vm = new TrPaymentMenuViewModel();
                 switch (vmodel.MethodP)
                 {
                     //method cash
                     case "1":
-                        return (PayCash(vmodel));
+                        return (PayCash(vmodel, language));
 
                     //method debit card
                     case "2":
                         //simulation
                         if (vmodel.PayCardConfirmed)
                         {
-                            return (PayCardDebit(vmodel));
+                            return (PayCardDebit(vmodel, language));
                         }
                         return (PayCardDebitNotConfirmed(vmodel));
 
@@ -192,26 +198,28 @@ namespace MyPOS2.Controllers
                         //return (PayCardCredit(vmodel));
                         if (vmodel.PayCardConfirmed)
                         {
-                            return (PayCardDebit(vmodel));
+                            return (PayCardDebit(vmodel, language));
                         }
                         return (PayCardDebitNotConfirmed(vmodel));
 
                     //method voucher
                     case "4":
                         //same process PayCash
-                        return (PayCash(vmodel));
+                        return (PayCash(vmodel, language));
 
                     default:
                         ViewBag.tot = vmodel.GlobalTotal;
                         ViewBag.amount = vmodel.Amount;
                         ViewBag.cashBack = vmodel.CashReturn;
                         vmodel.MethodsP = PaymentBL.FindMethodsList();
+                        vm.Languages = LanguageBL.FindLanguageList();
                         ViewBag.messageCard = "";
                         ViewBag.ticket = false;
                         return View(vmodel);
                 }
             }
             vmodel.MethodsP = PaymentBL.FindMethodsList();
+            vmodel.Languages = LanguageBL.FindLanguageList();
             ViewBag.tot = vmodel.GlobalTotal;
             ViewBag.amount = vmodel.Amount;
             ViewBag.cashBack = vmodel.CashReturn;
@@ -229,11 +237,14 @@ namespace MyPOS2.Controllers
                 //to do --> print ticket  ???
 
                 //to do --> add n° ticket & close transaction
-                //TransactionBL.AddTicketAndCloseTransac(vmodel.NumTransaction, vmodel.NumTicket);
-                TransactionBL.AddTicketAndCloseTransac(vmodel.NumTransaction);
+                //TransactionBL.CloseTransac(vmodel.NumTransaction, vmodel.NumTicket);
+                //TransactionBL.CloseTransac(vmodel.NumTransaction);
+                TransactionBL.CloseTransac(vmodel.NumTransaction, vmodel.DateT.ToString());
+                
                 return RedirectToAction("Transaction", "Home");
             }
             vmodel.MethodsP = PaymentBL.FindMethodsList();
+            vmodel.Languages = LanguageBL.FindLanguageList();
             ViewBag.nopay = "La transaction n'est pas payée!";
             ViewBag.tot = vmodel.GlobalTotal;
             ViewBag.amount = vmodel.Amount;
@@ -262,7 +273,7 @@ namespace MyPOS2.Controllers
             return RedirectToAction("TransacBack", "Transaction", vmodel);
         }
 
-        private ActionResult PayCash(TrPaymentMenuViewModel vmodel)
+        private ActionResult PayCash(TrPaymentMenuViewModel vmodel, string language)
         {
             //vmodel.AmountsPaid = TransactionBL.MakeAmountsList(vmodel.Amount, vmodel.AmountsPaid);
             var temp = vmodel.Amount.Replace(".", ",");
@@ -284,20 +295,25 @@ namespace MyPOS2.Controllers
             ViewBag.messageCard = "";
             if (ViewBag.tot == "0")
             {
-                vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction);
+                vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language);
+                vmodel.Language = vmodel.Ticket.Language;
+                vmodel.Languages = LanguageBL.FindLanguageList();
                 //vmodel.NumTicket = vmodel.Ticket.Ticket;
-                ViewBag.NumT = vmodel.Ticket.Ticket;
-                vmodel.NumTicket = vmodel.Ticket.Ticket;
+                //ViewBag.NumT = vmodel.Ticket.Ticket;
+                //vmodel.NumTicket = vmodel.Ticket.Ticket;
+                vmodel.DateT = vmodel.Ticket.DateTicket;
+                ViewBag.DateTi = vmodel.Ticket.DateTicket;
                 ViewBag.ticket = true;
             }
             else
             {
                 ViewBag.ticket = false;
             }
+            //vmodel.Language = 1;
             return View(vmodel);
         }
 
-        private ActionResult PayCardDebit(TrPaymentMenuViewModel vmodel)
+        private ActionResult PayCardDebit(TrPaymentMenuViewModel vmodel, string language)
         {
             //vmodel.Resp = TransactionBL.AskValidationCard(vmodel.Amount);
             //if (vmodel.Resp == 1)
@@ -313,10 +329,13 @@ namespace MyPOS2.Controllers
             //vmodel.GlobalTot = "0";
             if (ViewBag.tot == "0")
             {
-                vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction);
+                vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language);
+                vmodel.Language = vmodel.Ticket.Language;
+                vmodel.Languages = LanguageBL.FindLanguageList();
                 //vmodel.NumTicket = vmodel.Ticket.Ticket;
                 //ViewBag.NumT = vmodel.Ticket.Ticket;
                 //vmodel.NumTicket = vmodel.Ticket.Ticket;
+                ViewBag.DateTi = vmodel.Ticket.DateTicket;
                 ViewBag.ticket = true;
             }
             else
@@ -385,5 +404,90 @@ namespace MyPOS2.Controllers
         //    vmodel.MethodsP = TransactionBL.FindMethodsList();
         //    return View(vmodel);
         //}
+        #endregion
+
+        #region OptionsTicket
+        public ActionResult ChangeLanguageTicket(TrPaymentMenuViewModel vmodel)
+        {
+            vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, vmodel.Language);
+            ViewBag.ticket = true;
+            switch(vmodel.Language)
+            {
+                case "1":
+                    return PartialView("_PartialTicket", vmodel.Ticket);
+                case "2":
+                    return PartialView("_PartialTicketNl", vmodel.Ticket);
+                case "3":
+                    return PartialView("_PartialTicketDe", vmodel.Ticket);
+                case "4":
+                    return PartialView("_PartialTicketEn", vmodel.Ticket);
+                default:
+                    return PartialView("_PartialTicket", vmodel.Ticket);
+            }
+        }
+        #endregion
+
+        #region RprintTicket
+        [HttpGet]
+        public ActionResult RprintTicket()
+        {
+            try
+            {
+                TrRprintTicketViewModel vm = new TrRprintTicketViewModel();
+                vm.MethodsP = PaymentBL.FindMethodsList();
+                vm.Languages = LanguageBL.FindLanguageList();
+                ViewBag.ticket = false;
+                return View(vm);
+            }
+            catch (Exception ex)
+            {
+                //to do insert to log file
+                var e1 = ex.GetBaseException(); // --> log
+                var e4 = ex.Message; // --> log
+                var e5 = ex.Source; // --> log
+                var e8 = ex.GetType(); // --> log
+                var e9 = ex.GetType().Name; // --> log
+
+                return View("Error");
+            }
+        }
+
+        [HandleError]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RprintTicket(TrRprintTicketViewModel vmodel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    TrRprintTicketViewModel vm = new TrRprintTicketViewModel();
+                    vm.Tickets = TicketBL.FindTicket(vmodel);
+                    vm.MethodsP = PaymentBL.FindMethodsList();
+                    vm.Languages = LanguageBL.FindLanguageList();
+                    ViewBag.ticket = true;
+                    return View(vm);
+                }
+                vmodel.MethodsP = PaymentBL.FindMethodsList();
+                vmodel.Languages = LanguageBL.FindLanguageList();
+                ViewBag.ticket = false;
+                return View(vmodel);
+            }
+            catch (Exception ex)
+            {
+                //to do insert to log file
+                var e1 = ex.GetBaseException(); // --> log
+                var e4 = ex.Message; // --> log
+                var e5 = ex.Source; // --> log
+                var e8 = ex.GetType(); // --> log
+                var e9 = ex.GetType().Name; // --> log
+
+                return View("Error");
+            }
+        }
+        #endregion
+
+
+
     }
 }

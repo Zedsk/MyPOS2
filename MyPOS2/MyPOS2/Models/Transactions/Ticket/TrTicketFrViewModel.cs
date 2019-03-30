@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using MyPOS2.Data.Entity;
 
-namespace MyPOS2.Models.Transactions
+namespace MyPOS2.Models.Transactions.Ticket
 {
-    public class TrTicketViewModel
+    public class TrTicketFrViewModel
     {
         [DataType(DataType.DateTime)]
         [Display(Name = "Date")]
@@ -16,7 +16,6 @@ namespace MyPOS2.Models.Transactions
         [DataType(DataType.Text)]
         [Display(Name = "Langue")]
         public string Language { get; set; }
-
 
         [DataType(DataType.Text)]
         [Display(Name = "N° du ticket")]
@@ -47,7 +46,7 @@ namespace MyPOS2.Models.Transactions
         [DataType(DataType.Text)]
         [Display(Name = "Méthode de paiment")]
         public string MethodP { get; set; }
-        
+
         public IList<PAYMENT> Payments { get; set; }
 
         [DataType(DataType.Text)]
@@ -59,12 +58,10 @@ namespace MyPOS2.Models.Transactions
         [DataType(DataType.Text)]
         public List<string> Messages { get; set; }
 
-        ////------
-        //public SHOP Shop { get; set; }
+        ////------après intégration
+        public SPP_GetShopById_Result Shop { get; set; }
 
-        //public SHOP_TRANSLATION Shop_Translation { get; set; }
-
-
+        public List<SPP_GetShopById_Result> Shops { get; set; }
 
 
     }

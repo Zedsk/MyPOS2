@@ -9,6 +9,10 @@
  * Transaction views
 * ======================================================================== */
 
+function goBack() {
+    window.history.go(-1);
+}
+
 function ButtonCalc_Click(id) {
     var val = id.getAttribute('Value');
     document.getElementById('addProduct').value += val;
@@ -186,4 +190,64 @@ function ProductBy(id, meth) {
     xhr.open("POST", url);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(param);
+}
+
+function SearchHostName() {
+    try {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('nameId').innerHTML = xhr.responseText;
+                var T = document.getElementById('detail').textContent;
+                document.getElementById('nameTerminal').value = T.trim();
+                
+            }
+        }
+
+        //Get Method
+        var url = "/Terminals/SearchHostName"
+        xhr.open("GET", url);
+        xhr.send();
+    } catch (e) {
+        document.getElementById('errorSearchProduct').textContent = e;
+        document.getElementById('errorSearchProduct').style.visibility = "visible";
+        console.log(e);
+    }
+}
+
+function ChangeLanguageTicket() {
+    try {
+        var val = document.getElementById('Language').value;
+        var transac = document.getElementById('NumTransaction').value;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('myTicket').innerHTML = xhr.responseText;
+                
+
+            }
+        }
+
+        //Post Method
+        var url = "/Pay/ChangeLanguageTicket";
+        var param = "Language=" + val
+            + "&NumTransaction=" + transac;
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(param);
+    } catch (e) {
+        document.getElementById('errorSearchProduct').textContent = e;
+        document.getElementById('errorSearchProduct').style.visibility = "visible";
+        console.log(e);
+    }
+}
+
+function FctPrint(divName) {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
 }

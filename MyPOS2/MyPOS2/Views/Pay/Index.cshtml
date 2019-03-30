@@ -49,9 +49,11 @@
                 @Html.TextBoxFor(m => m.NumTransaction, new { size = "3", @readonly = "readonly" })
                 @Html.ValidationMessageFor(m => m.NumTransaction, "", new { @class = "text-danger" })
                 @*@ViewBag.transac*@
-                <div style="visibility:hidden">
-                    @Html.TextBoxFor(m => m.NumTicket, new { @Value = ViewBag.NumT, size = "3", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(m => m.NumTicket, "", new { @class = "text-danger" })
+                <div style="visibility:visible">
+                    @Html.TextBoxFor(m => m.DateT, new { @Value = ViewBag.DateTi, size = "3", @readonly = "readonly" })
+                    @*@Html.TextBoxFor(m => m.DateT, new { size = "3", @readonly = "readonly" })*@
+                    @Html.ValidationMessageFor(m => m.DateT, "", new { @class = "text-danger" })
+
                 </div>
             </div>
             <div class="containerPay">
@@ -148,7 +150,7 @@
                     @Html.DropDownListFor(m => m.MethodP, new SelectList(Model.MethodsP, "idPaymentMethod", "method"), "Choix de la méthode de paiment")
                     @Html.ValidationMessageFor(m => m.MethodP, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div> <!-- end paymentMethods -->
             <div id="paymentZone">
                 @if (!ViewBag.ticket)
                 {
@@ -163,16 +165,44 @@
                 }
 
                 @*<input type="submit" id="ButtonPayment" class="fct_btn" value="Payment">*@
-            </div>
-        }
+            </div> <!-- end paymentZone -->
+        } <!-- end Form -->
     </div>
     @if (ViewBag.ticket) 
     {
         <div id="myTicket">
-            @Html.Partial("_PartialTicket", Model.Ticket)
+            @switch (Model.Language)
+            {
+                case "1":
+                    @Html.Partial("_PartialTicket", Model.Ticket)
+                    break;
+                case "2":
+                    @Html.Partial("_PartialTicketNl", Model.Ticket)
+                    break;
+                case "3":
+                    @Html.Partial("_PartialTicketDe", Model.Ticket)
+                    break;
+                case "4":
+                    @Html.Partial("_PartialTicketEn", Model.Ticket)
+                    break;
+                default:
+                    @Html.Partial("_PartialTicket", Model.Ticket)
+                    break;
+            }
         </div>
         <div id="optionsTicket">
-
+            <div class="optionT">
+                <div>
+                    <label>Modifier la langue du Ticket</label>
+                </div>
+                <div>
+                    @Html.DropDownListFor(m => m.Language, new SelectList(Model.Languages, "idLanguage", "nameLanguage"), "Choix de la langue")
+                    @Html.ValidationMessageFor(m => m.Language, "", new { @class = "text-danger" })
+                </div>
+                <button type="button" class="btn btn-default" onclick="ChangeLanguageTicket()">
+                    <span class="glyphicon glyphicon-globe"></span> Changer
+                </button>
+            </div>
         </div>
     }
 </div>

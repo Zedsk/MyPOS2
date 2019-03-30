@@ -1,5 +1,10 @@
 @media print{
-	#noprintpart{
-		display: none;
-	}
+    #noprintpart, #titleT, #optionsTicket {
+        display: none;
+    }
+
+    #myTicket {
+        max-width: 302px;
+        font-size: x-small;
+    }
 }

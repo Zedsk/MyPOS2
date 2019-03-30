@@ -1,4 +1,4 @@
-﻿@model MyPOS2.Models.Transactions.TrTicketViewModel
+﻿@model MyPOS2.Models.Transactions.Ticket.TrTicketViewModel
 
 @{
 
@@ -12,13 +12,14 @@
     <img src="~/Content/image/logo_magasin.png" alt="logo du magasin">
 </div>
 
-<div class="container">
+<div class="container-fluid" >
     <!-- Date et heure-->
     <div class="row">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.DateTicket)
+        <div class="col-md-3">
+            @*@Html.LabelFor(m => m.DateTicket)*@
+            <p>Date : </p>
         </div>
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-9 tRight">
             @*@Html.TextBoxFor(m => m.DateTicket, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.DateTicket)
             @Html.ValidationMessageFor(m => m.DateTicket, "", new { @class = "text-danger" })
@@ -36,10 +37,11 @@
     </div>*@
     <!-- N° Transac -->
     <div class="row">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.Transaction)
+        <div class="col-md-8">
+            @*@Html.LabelFor(m => m.Transaction)*@
+            <p>N° de la transaction : </p>
         </div>
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-4 tRight">
             @*@Html.TextBoxFor(m => m.Transaction, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.Transaction)
             @Html.ValidationMessageFor(m => m.Transaction, "", new { @class = "text-danger" })
@@ -48,12 +50,36 @@
 </div>
 <!-- coordonnées magasin -->
 <div style="text-align: center;">
-    <p>Nom du magasin</p>
-    <p>rue du magasin</p>
-    <p>ville</p>
-    <p>Tel</p>
-    <p>email</p>
-    <p>heures d'ouverture</p>
+    @*<p>Nom du magasin</p>*@
+    <p>
+        @Html.DisplayFor(m => m.Shop.nameShop)
+        @Html.ValidationMessageFor(m => m.Shop.nameShop, "", new { @class = "text-danger" })
+    </p>
+    @*<p>rue du magasin</p>*@
+    <p>
+        @Html.DisplayFor(m => m.Shop.street)
+        @Html.ValidationMessageFor(m => m.Shop.street, "", new { @class = "text-danger" })
+        ,
+        @Html.DisplayFor(m => m.Shop.city)
+        @Html.ValidationMessageFor(m => m.Shop.city, "", new { @class = "text-danger" })
+    </p> 
+    @*<p>Tel</p>*@
+    <p>
+        Tel: 
+        @Html.DisplayFor(m => m.Shop.phone)
+        @Html.ValidationMessageFor(m => m.Shop.phone, "", new { @class = "text-danger" })
+    </p>    
+    @*<p>email</p>*@
+    <p>
+        email: 
+        @Html.DisplayFor(m => m.Shop.email)
+        @Html.ValidationMessageFor(m => m.Shop.email, "", new { @class = "text-danger" })
+    </p>
+    @*<p>heures d'ouverture</p>*@
+    <p>
+        @Html.DisplayFor(m => m.Shop.opening)
+        @Html.ValidationMessageFor(m => m.Shop.opening, "", new { @class = "text-danger" })
+    </p>
 </div>
 
 <!-- liste des articles -->
@@ -91,13 +117,14 @@
     </table>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <!-- remise -->
     <div class="row">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.DiscountG)
+        <div class="col-md-4">
+            @*@Html.LabelFor(m => m.DiscountG)*@
+            <p>Remise : </p>
         </div>
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-8 tRight">
             @*@Html.TextBoxFor(m => m.DiscountG, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.DiscountG)
             @Html.ValidationMessageFor(m => m.DiscountG, "", new { @class = "text-danger" })
@@ -105,10 +132,11 @@
     </div>
     <!-- TVA -->
     <div class="row">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.VatG)
+        <div class="col-md-4">
+            @*@Html.LabelFor(m => m.VatG)*@
+            <p>TVA : </p>
         </div>
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-8 tRight">
             @*@Html.TextBoxFor(m => m.VatG, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.VatG)
             @Html.ValidationMessageFor(m => m.VatG, "", new { @class = "text-danger" })
@@ -116,10 +144,11 @@
     </div>
     <!-- total -->
     <div class="row">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.TotalG)
+        <div class="col-md-4">
+            @*@Html.LabelFor(m => m.TotalG)*@
+            <p>Total : </p>
         </div>
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-8 tRight">
             @*@Html.TextBoxFor(m => m.TotalG, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.TotalG)
             @Html.ValidationMessageFor(m => m.TotalG, "", new { @class = "text-danger" })

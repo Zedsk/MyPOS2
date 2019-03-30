@@ -96,12 +96,13 @@ namespace MyPOS2.Dal
         //    }
         //}
 
-        public void CreateTransactionMessageId(int transacId, int messageId)
-        {
-            var transac = db.TRANSACTIONSs.Where(t => t.idTransaction == transacId).Single();
-            db.TICKET_MESSAGEs.Where(t => t.idMessage == messageId).Single().TRANSACTIONS.Add(transac);
-            db.SaveChanges();
-        }
+        //// lorsque TRANSACTIONS_MESSAGE ne contenait pas languageMessage
+        //public void CreateTransactionMessageId(int transacId, int messageId)
+        //{
+        //    var transac = db.TRANSACTIONSs.Where(t => t.idTransaction == transacId).Single();
+        //    db.TICKET_MESSAGEs.Where(t => t.idMessage == messageId).Single().TRANSACTIONS.Add(transac);
+        //    db.SaveChanges();
+        //}
 
         public void CancelTransactionById(int transactionId)
         {
@@ -124,6 +125,19 @@ namespace MyPOS2.Dal
                 //close = 2
                 transac.statusId = 2;
                 transac.transactionDateEnd = DateTime.Now;
+                db.SaveChanges();
+            }
+        }
+
+        public void CloseTransaction(int transacId, DateTime date)
+        {
+            var transac = db.TRANSACTIONSs.First(d => d.idTransaction == transacId);
+            if (transac != null)
+            {
+                //transac.messageId = message;
+                //close = 2
+                transac.statusId = 2;
+                transac.transactionDateEnd = date;
                 db.SaveChanges();
             }
         }

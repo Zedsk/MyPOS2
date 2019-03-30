@@ -38,5 +38,10 @@ namespace MyPOS2.Dal
             CASH_BOTTOM_DAY cashDay = db.CASH_BOTTOM_DAYs.Where(c => c.dateDay == DateTime.Today).Single();
             return cashDay.terminalId;
         }
+
+        public IList<string> GetAllTerminalNames()
+        {
+            return db.TERMINALs.Select(t => t.nameTerminal).ToList();
+        }
     }
 }

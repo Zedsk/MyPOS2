@@ -1,4 +1,8 @@
 /**** Home views *****/
+.disabled {
+    pointer-events: none;
+    opacity:0.6;
+}
 
 .titles {
     /*border: 5px solid orange;
@@ -43,9 +47,9 @@
 	justify-content: space-around;
 }
     
-    #header1 > div {
-	    /*padding: 1%;*/
-    }
+    /*#header1 > div {
+	    padding: 1%;
+    }*/
 
         #header1 > div > label {
 	        color: white;
@@ -189,11 +193,15 @@
     display: flex;
 }
 
+#noprintpart{
+    margin-right: 2%;
+}
+
 #myTicket {
-    margin-left: 2%;
+    margin-right: 2%;
     padding: 3%;
     border: 2px solid silver;
-    max-width: 40%;
+    max-width: 35%;
 }
 
 #navButton > ul > li > button {
@@ -282,6 +290,34 @@
     text-align: center;
     font-weight: bold;
 }
+
+#optionsTicket {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.optionT {
+    border: solid 1px silver;
+    padding: 2px;
+}
+
+#ticketBox {
+    margin-right: 2%;
+    padding: 3%;
+    
+    max-width: 35%;
+}
+
+.ticket {
+    border: 2px solid silver;
+    padding: 3%;
+}
+
+.tRight {
+    text-align: right;
+}
+
 
 @media screen and (max-width:600px) {
     #navBar {

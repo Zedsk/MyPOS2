@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyPOS2.Data.Entity;
+using MyPOS2.Models.Transactions.Ticket;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +11,14 @@ namespace MyPOS2.Dal
     interface IDalTicket : IDisposable
     {
         //int CreateTicket();
-        string GetTicketMessageByIdAndLanguage(int messageId, int languageMessage);
-        List<string> GetListTicketMessageByIdAndLanguage(List<int?> idMessage, int languageMessage);
-        List<int?> GetListMessagesId(int transacId);
-        void UpdateTransactionMessage(int transacId, int idMessage);
+        string GetTicketMessageTransByIdAndLanguage(int messageId, int languageMessage);
+        List<string> GetListTicketMessageTransByIdAndLanguage(List<int?> idMessage, int languageMessage);
+        List<int?> GetListTransactionMessageId(int transacId);
+        void CreateTransactionMessage(int transacId, int idMessage, int languageMessage);
+        IList<int> GetTicket(DateTime date);
+        IList<int> GetTicket(DateTime dateMin, DateTime dateMax);
+        IList<int> GetTicket(DateTime dateMin, DateTime dateMax, decimal total);
+        IList<int> GetTicket(int idLanguage);
+        int GetLanguageTicketByIdTransac(int idTransac);
     }
 }

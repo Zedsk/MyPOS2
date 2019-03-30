@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using MyPOS2.Data.Entity;
+using MyPOS2.Models.Transactions.Ticket;
 
 namespace MyPOS2.Models.Transactions
 {
@@ -41,6 +42,8 @@ namespace MyPOS2.Models.Transactions
 
         public TrTicketViewModel Ticket { get; set; }
 
+        public string DateT { get; set; }
+
         [DataType(DataType.Text)]
         public string NumTicket { get; set; }
 
@@ -52,5 +55,9 @@ namespace MyPOS2.Models.Transactions
 
         [Display(Name = "Montants déjà payés")]
         public List<string> AmountsPaid { get; set; }
+
+        public string Language { get; set; }
+
+        public IList<LANGUAGES> Languages { get; set; }
     }
 }

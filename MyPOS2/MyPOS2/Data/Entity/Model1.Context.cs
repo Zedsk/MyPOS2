@@ -56,6 +56,7 @@ namespace MyPOS2.Data.Entity
         public virtual DbSet<TICKET_MESSAGE> TICKET_MESSAGEs { get; set; }
         public virtual DbSet<TRANSACTION_DETAILS> TRANSACTION_DETAILSs { get; set; }
         public virtual DbSet<TRANSACTIONS> TRANSACTIONSs { get; set; }
+        public virtual DbSet<TRANSACTIONS_MESSAGE> TRANSACTIONS_MESSAGEs { get; set; }
         public virtual DbSet<USERINFO> USERINFOs { get; set; }
         public virtual DbSet<VAT> VATs { get; set; }
     
@@ -70,6 +71,20 @@ namespace MyPOS2.Data.Entity
                 new ObjectParameter("language", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ChildCategories_Result>("SPP_ChildCategories", catParameter, languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_GetAllShop_Result> SPP_GetAllShop()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_GetAllShop_Result>("SPP_GetAllShop");
+        }
+    
+        public virtual ObjectResult<SPP_GetShopById_Result> SPP_GetShopById(Nullable<int> shop)
+        {
+            var shopParameter = shop.HasValue ?
+                new ObjectParameter("shop", shop) :
+                new ObjectParameter("shop", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_GetShopById_Result>("SPP_GetShopById", shopParameter);
         }
     
         public virtual ObjectResult<SPP_ParentCategories_Result> SPP_ParentCategories(Nullable<int> language)
@@ -97,6 +112,39 @@ namespace MyPOS2.Data.Entity
                 new ObjectParameter("idTransac", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TransactionMessageIds", idTransacParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SPP_TicketTimeSure(Nullable<int> tDate, Nullable<int> tMonth, Nullable<int> tDay, Nullable<int> tHour, Nullable<int> tMinute, Nullable<int> tStatus, Nullable<bool> tReturn)
+        {
+            var tDateParameter = tDate.HasValue ?
+                new ObjectParameter("tDate", tDate) :
+                new ObjectParameter("tDate", typeof(int));
+    
+            var tMonthParameter = tMonth.HasValue ?
+                new ObjectParameter("tMonth", tMonth) :
+                new ObjectParameter("tMonth", typeof(int));
+    
+            var tDayParameter = tDay.HasValue ?
+                new ObjectParameter("tDay", tDay) :
+                new ObjectParameter("tDay", typeof(int));
+    
+            var tHourParameter = tHour.HasValue ?
+                new ObjectParameter("tHour", tHour) :
+                new ObjectParameter("tHour", typeof(int));
+    
+            var tMinuteParameter = tMinute.HasValue ?
+                new ObjectParameter("tMinute", tMinute) :
+                new ObjectParameter("tMinute", typeof(int));
+    
+            var tStatusParameter = tStatus.HasValue ?
+                new ObjectParameter("tStatus", tStatus) :
+                new ObjectParameter("tStatus", typeof(int));
+    
+            var tReturnParameter = tReturn.HasValue ?
+                new ObjectParameter("tReturn", tReturn) :
+                new ObjectParameter("tReturn", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TicketTimeSure", tDateParameter, tMonthParameter, tDayParameter, tHourParameter, tMinuteParameter, tStatusParameter, tReturnParameter);
         }
     }
 }

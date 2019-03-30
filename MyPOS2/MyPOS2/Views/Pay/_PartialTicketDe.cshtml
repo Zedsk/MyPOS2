@@ -1,0 +1,201 @@
+﻿@model MyPOS2.Models.Transactions.Ticket.TrTicketViewModel
+
+@{
+
+    Layout = null;
+
+}
+
+<!--  -->
+<!-- Logo Magasin -->
+<div style="text-align: center;">
+    <img src="~/Content/image/logo_magasin.png" alt="logo du magasin">
+</div>
+
+<div class="container">
+    <!-- Date et heure-->
+    <div class="row">
+        <div class="col-md-2">
+            @*@Html.LabelFor(m => m.DateTicket)*@
+            <p>Datum : </p>
+        </div>
+        <div class="col-md-2 offset-md-2">
+            @*@Html.TextBoxFor(m => m.DateTicket, new { @readonly = "readonly" })*@
+            @Html.DisplayFor(m => m.DateTicket)
+            @Html.ValidationMessageFor(m => m.DateTicket, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <!-- N° ticket -->
+    @*<div class="row">
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.Ticket)
+            </div>
+            <div class="col-md-2 offset-md-2">
+                @Html.DisplayFor(m => m.Ticket)
+                @Html.ValidationMessageFor(m => m.Ticket, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <!-- N° Transac -->
+    <div class="row">
+        <div class="col-md-2">
+            @*@Html.LabelFor(m => m.Transaction)*@
+            <p>Transaktions-Nr. : </p>
+        </div>
+        <div class="col-md-2 offset-md-2">
+            @*@Html.TextBoxFor(m => m.Transaction, new { @readonly = "readonly" })*@
+            @Html.DisplayFor(m => m.Transaction)
+            @Html.ValidationMessageFor(m => m.Transaction, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<!-- coordonnées magasin -->
+<div style="text-align: center;">
+    @*<p>Nom du magasin</p>*@
+    <p>
+        @Html.DisplayFor(m => m.Shop.nameShop)
+        @Html.ValidationMessageFor(m => m.Shop.nameShop, "", new { @class = "text-danger" })
+    </p>
+    @*<p>rue du magasin</p>*@
+    <p>
+        @Html.DisplayFor(m => m.Shop.street)
+        @Html.ValidationMessageFor(m => m.Shop.street, "", new { @class = "text-danger" })
+        ,
+        @Html.DisplayFor(m => m.Shop.city)
+        @Html.ValidationMessageFor(m => m.Shop.city, "", new { @class = "text-danger" })
+    </p>
+    @*<p>Tel</p>*@
+    <p>
+        Tel:
+        @Html.DisplayFor(m => m.Shop.phone)
+        @Html.ValidationMessageFor(m => m.Shop.phone, "", new { @class = "text-danger" })
+    </p>
+    @*<p>email</p>*@
+    <p>
+        email:
+        @Html.DisplayFor(m => m.Shop.email)
+        @Html.ValidationMessageFor(m => m.Shop.email, "", new { @class = "text-danger" })
+    </p>
+    @*<p>heures d'ouverture</p>*@
+    <p>
+        @Html.DisplayFor(m => m.Shop.opening)
+        @Html.ValidationMessageFor(m => m.Shop.opening, "", new { @class = "text-danger" })
+    </p>
+</div>
+
+<!-- liste des articles -->
+<div>
+    <table class="table table-condensed" id="tableDetail">
+        <tr>
+            <th>Produkt</th>
+            <th>Preise</th>
+            <th>Menge</th>
+            <th>Total</th>
+        </tr>
+        @{
+            if (Model.DetailsListWithTot == null || Model.DetailsListWithTot.Count == 0)
+            {
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model.DetailsListWithTot)
+                {
+                    <tr>
+                        <td id="nameItem">@item.ProductName</td>
+                        <td id="price">@item.Price</td>
+                        <td id="quantity">@item.Quantity</td>
+                        <td id="itemSubTot">@item.TotalItem</td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+</div>
+
+<div class="container">
+    <!-- remise -->
+    <div class="row">
+        <div class="col-md-2">
+            @*@Html.LabelFor(m => m.DiscountG)*@
+            <p>Rabatt : </p>
+        </div>
+        <div class="col-md-2 offset-md-2">
+            @*@Html.TextBoxFor(m => m.DiscountG, new { @readonly = "readonly" })*@
+            @Html.DisplayFor(m => m.DiscountG)
+            @Html.ValidationMessageFor(m => m.DiscountG, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <!-- TVA -->
+    <div class="row">
+        <div class="col-md-2">
+            @*@Html.LabelFor(m => m.VatG)*@
+            <p>MwSt : </p>
+        </div>
+        <div class="col-md-2 offset-md-2">
+            @*@Html.TextBoxFor(m => m.VatG, new { @readonly = "readonly" })*@
+            @Html.DisplayFor(m => m.VatG)
+            @Html.ValidationMessageFor(m => m.VatG, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <!-- total -->
+    <div class="row">
+        <div class="col-md-2">
+            @*@Html.LabelFor(m => m.TotalG)*@
+            <p>Gesamtzahlung : </p>
+        </div>
+        <div class="col-md-2 offset-md-2">
+            @*@Html.TextBoxFor(m => m.TotalG, new { @readonly = "readonly" })*@
+            @Html.DisplayFor(m => m.TotalG)
+            @Html.ValidationMessageFor(m => m.TotalG, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<!-- methodes de paiment -->
+<!-- montant -->
+<div>
+    <table class="table table-condensed" id="tablePayment">
+        <tr>
+            <th>Zahlungsmethode</th>
+            <th>Betrag</th>
+        </tr>
+        @{
+            if (Model.Payments == null || Model.Payments.Count == 0)
+            {
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model.Payments)
+                {
+                    <tr>
+                        <td id="nameItem">@item.paymentMethodId</td>
+                        <td id="price">@item.amount<span class="glyphicon glyphicon-euro"></span></td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+</div>
+<!-- message -->
+<div>
+    @*<p id="messageT">
+            @Html.DisplayFor(m => m.Message)
+        </p>
+        @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })*@
+
+    @for (int i = 0; i < Model.Messages.Count(); i++)
+    {
+        <p id="messageT">
+            @Model.Messages[i]
+        </p>
+    }
+</div>
+

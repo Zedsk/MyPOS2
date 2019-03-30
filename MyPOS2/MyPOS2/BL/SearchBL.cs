@@ -31,11 +31,13 @@ namespace MyPOS2.BL
             using (IDalSearch dal = new DalSearch())
             {
                 int id = int.Parse(argument);
-                int lang = int.Parse(language);
+                //find idLanguage by shortForm
+                int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllProductByIdBrand(id, lang);
             }
         }
 
+        
         internal static IList<HERO> FindHerosList()
         {
             using (IDalSearch dal = new DalSearch())
@@ -58,7 +60,8 @@ namespace MyPOS2.BL
             using (IDalSearch dal = new DalSearch())
             {
                 int id = int.Parse(argument);
-                int lang = int.Parse(language);
+                //find idLanguage by shortForm
+                int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllProductByIdHero(id, lang);
             }
         }
@@ -85,7 +88,8 @@ namespace MyPOS2.BL
             using (IDalSearch dal = new DalSearch())
             {
                 int id = int.Parse(argument);
-                int lang = int.Parse(language);
+                //find idLanguage by shortForm
+                int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllProductByIdAge(id, lang);
             }
         }
@@ -102,7 +106,8 @@ namespace MyPOS2.BL
         {
             using (IDalSearch dal = new DalSearch())
             {
-                int lang = int.Parse(language);
+                //find idLanguage by shortForm
+                int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllCats(lang);
             }
         }
@@ -112,7 +117,8 @@ namespace MyPOS2.BL
             using (IDalSearch dal = new DalSearch())
             {
                 int id = int.Parse(argument);
-                int lang = int.Parse(language);
+                //find idLanguage by shortForm
+                int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllCats(id, lang);
             }
         }
@@ -131,7 +137,8 @@ namespace MyPOS2.BL
             using (IDalSearch dal = new DalSearch())
             {
                 int id = int.Parse(argument);
-                int lang = int.Parse(language);
+                //find idLanguage by shortForm
+                int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllProductByIdCat(id, lang);
             }
         }

@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Net;
 using System.Linq;
 using System.Web.Mvc;
+using System.Configuration;
+using MyPOS2.BL;
 
 namespace MyPOS2.Controllers
 {
@@ -51,7 +53,22 @@ namespace MyPOS2.Controllers
         // GET: Cash/Create
         public ActionResult Create()
         {
-            ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal");
+            //ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal");
+            if (Session["sessTerminalId"] == null)
+            {
+                //ViewBag.terminalId = ConfigurationManager.AppSettings["Terminal"];
+                int terminalOk = TerminalBL.CheckTerminalName();
+                if (terminalOk == 0)
+                {
+                    TempData["Error"] = "Le terminal n'est pas enregistré, veuillez l'ajouter via le menu Gestion --> Terminal, pour pouvoir effectuer des transactions.";
+                    return RedirectToAction("Transaction", "Home");
+                }
+                else
+                {
+                    Session["sessTerminalId"] = terminalOk;
+                }
+            }
+            ViewBag.terminalId = Session["sessTerminalId"];
             return View();
         }
 
@@ -60,15 +77,17 @@ namespace MyPOS2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dateDay,terminalId,beginningCash")] CASH_BOTTOM_DAY cashDay)
+        //public ActionResult Create([Bind(Include = "dateDay,terminalId,beginningCash")] CASH_BOTTOM_DAY cashDay)
+        public ActionResult Create([Bind(Include = "dateDay,beginningCash")] CASH_BOTTOM_DAY cashDay)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    cashDay.terminalId = Convert.ToInt32(Session["sessTerminalId"]);
                     db.CASH_BOTTOM_DAYs.Add(cashDay);
                     db.SaveChanges();
-                    Session["sessTerminalId"] = cashDay.terminalId;
+                    //Session["sessTerminalId"] = cashDay.terminalId;
                     //var tId = cashDay.terminalId;
                     //return RedirectToAction("Index", "Transaction", new { terminal = tId });
                     return RedirectToAction("Index", "Transaction");
