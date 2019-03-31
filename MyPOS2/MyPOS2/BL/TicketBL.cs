@@ -11,7 +11,7 @@ namespace MyPOS2.BL
 {
     public class TicketBL
     {
-        internal static TrTicketViewModel FillTicket(string numTransaction, string language)
+        internal static TrTicketViewModel FillTicket(string numTransaction, string language, bool? isChange)
             {
             using (IDalTransaction dal = new DalTransaction())
             {
@@ -73,7 +73,7 @@ namespace MyPOS2.BL
                 ////message
                 //var message = FindTicketMessageById(transac.messageId, transac.languageId);
                 
-                var messages = FindTicketMessageById(transac.idTransaction, lang);
+                var messages = FindTicketMessageById(transac.idTransaction, lang, isChange);
                 vm.Messages = messages;
                 return vm;
             }
@@ -87,17 +87,42 @@ namespace MyPOS2.BL
         //    }
         //}
 
-        private static List<string> FindTicketMessageById(int transacId, int languageMessage)
+        //private static List<string> FindTicketMessageById(int transacId, int languageMessage)
+        //{
+        //    using (IDalTicket dal = new DalTicket())
+        //    {
+        //        List<int?> messageIds = dal.GetListIdTransactionMessage(transacId);
+        //        if (messageIds.Count == 0 || messageIds == null)
+        //        {
+        //            message par défaut
+        //            int messageId = 1;
+        //            messageIds.Add(messageId);
+        //            dal.CreateTransactionMessage(transacId, messageId, languageMessage);
+        //        }
+        //        return dal.GetListTicketMessageTransByIdAndLanguage(messageIds, languageMessage);
+        //    }
+        //}
+
+        private static List<string> FindTicketMessageById(int transacId, int languageMessage, bool? isChange)
         {
             using (IDalTicket dal = new DalTicket())
             {
-                List<int?> messageIds = dal.GetListTransactionMessageId(transacId);
+                List<int?> messageIds = dal.GetListIdTransactionMessage(transacId);
+                
                 if (messageIds.Count == 0 || messageIds == null)
                 {
                     //message par défaut
                     int messageId = 1;
                     messageIds.Add(messageId);
                     dal.CreateTransactionMessage(transacId, messageId, languageMessage);
+                }
+                else
+                {
+                    //verify and update if language message is changed
+                    if (isChange != null && isChange == true)
+                    {
+                        dal.UpdateTransactionMessageLanguage(transacId, languageMessage);
+                    }
                 }
                 return dal.GetListTicketMessageTransByIdAndLanguage(messageIds, languageMessage);
             }
@@ -166,7 +191,18 @@ namespace MyPOS2.BL
                     {
                         vmodel.Language = FindLanguageTicketByIdTransac(listTransac[i].ToString());
                     }
-                    result.Add(FillTicket(listTransac[i].ToString(), vmodel.Language));
+                    else
+                    {
+                        //verify if if vmodel.Language = ticket language
+                        string ticketL = FindLanguageTicketByIdTransac(listTransac[i].ToString());
+                        if (vmodel.Language != ticketL)
+                        {
+                            continue;
+                        }
+                    }
+                    //to do --> change init isChange...
+                    bool isChange = false;
+                    result.Add(FillTicket(listTransac[i].ToString(), vmodel.Language, isChange));
                 }
                 return result;
             }

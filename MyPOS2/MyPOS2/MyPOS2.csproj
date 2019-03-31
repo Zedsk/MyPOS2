@@ -417,6 +417,7 @@
     <Content Include="Content\image\hero\Logo_Schtroumpf.jpg" />
     <Content Include="Content\image\hero\Logo_StarWars.jpg" />
     <Content Include="Content\image\logo_magasin.png" />
+    <Content Include="Content\image\NoTicket.JPG" />
     <Content Include="Content\image\product\First_Order_Star_Destroyer.jpg" />
     <Content Include="Content\image\product\GarageHotWheelsMattel.jpg" />
     <Content Include="Content\image\product\harry_potter_logo_2.png" />

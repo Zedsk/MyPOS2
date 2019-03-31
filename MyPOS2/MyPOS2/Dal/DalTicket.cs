@@ -56,22 +56,42 @@ namespace MyPOS2.Dal
             return result;
         }
 
-        public List<int?> GetListTransactionMessageId(int transacId)
+        public List<int?> GetListIdTransactionMessage(int transacId)
         {
             List<int?> messageIds = new List<int?>();
             messageIds = db.SPP_TransactionMessageIds(transacId).ToList();
             return messageIds;
         }
 
-        //// lorsque TRANSACTIONS_MESSAGE ne contenait pas languageMessage
-        //public void CreateTransactionMessage(int transacId, int messageId)
-        //{
-        //    TICKET_MESSAGE tMessage = db.TICKET_MESSAGEs.FirstOrDefault(m => m.idMessage == messageId);
-        //    db.TRANSACTIONSs.FirstOrDefault(t => t.idTransaction == transacId).TICKET_MESSAGE.Add(tMessage);
-        //    db.SaveChanges();
-        //}
+        public List<TRANSACTIONS_MESSAGE> GetListTransactionMessage(int transacId)
+        {
+            return db.TRANSACTIONS_MESSAGEs.Where(m => m.transactionId == transacId).ToList();
+        }
 
-        public void CreateTransactionMessage(int transacId, int messagId, int langMessage)
+        public void UpdateTransactionMessageLanguage(int transacId, int languageMessage)
+        {
+            List<TRANSACTIONS_MESSAGE> messages = GetListTransactionMessage(transacId);
+            foreach (var item in messages)
+            {
+                if (item.languageMessage != languageMessage)
+                {
+                    item.languageMessage = languageMessage;
+                }
+            }
+            db.SaveChanges();
+        }
+
+            
+
+    //// lorsque TRANSACTIONS_MESSAGE ne contenait pas languageMessage
+    //public void CreateTransactionMessage(int transacId, int messageId)
+    //{
+    //    TICKET_MESSAGE tMessage = db.TICKET_MESSAGEs.FirstOrDefault(m => m.idMessage == messageId);
+    //    db.TRANSACTIONSs.FirstOrDefault(t => t.idTransaction == transacId).TICKET_MESSAGE.Add(tMessage);
+    //    db.SaveChanges();
+    //}
+
+    public void CreateTransactionMessage(int transacId, int messagId, int langMessage)
         {
             TRANSACTIONS_MESSAGE tMessage = new TRANSACTIONS_MESSAGE { transactionId = transacId, messageId = messagId, languageMessage = langMessage };
             db.TRANSACTIONS_MESSAGEs.Add(tMessage);

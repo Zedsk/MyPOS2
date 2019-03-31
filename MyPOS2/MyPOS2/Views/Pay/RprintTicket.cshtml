@@ -96,31 +96,38 @@
         @if (ViewBag.ticket)
         {
             <div id="ticketBox">
-                @foreach (var item in Model.Tickets)
+                @if (Model.Tickets.Count == 0)
                 {
-                    <div id="tArea" class="ticket">
-                        @switch (item.Language)
-                        {
-                            case "1":
-                                @Html.Partial("_PartialTicket", item)
-                                break;
-                            case "2":
-                                @Html.Partial("_PartialTicketNl", item)
-                                break;
-                            case "3":
-                                @Html.Partial("_PartialTicketDe", item)
-                                break;
-                            case "4":
-                                @Html.Partial("_PartialTicketEn", item)
-                                break;
-                            default:
-                                @Html.Partial("_PartialTicket", item)
-                                break;
-                        }
-                    </div>
-                    <button type="button" class="btn btn-default" value="" onclick="FctPrint('tArea')">
-                        <span class="glyphicon glyphicon-print"></span> Imprimer le ticket
-                    </button>
+                    <img src="~/Content/image/NoTicket.JPG" alt="logo No ticket" style=" height: 100px; width: 200px;">
+                }
+                else
+                {
+                    foreach (var item in Model.Tickets)
+                    {
+                        <div id="tArea" class="ticket">
+                            @switch (item.Language)
+                            {
+                                case "1":
+                                    @Html.Partial("_PartialTicket", item)
+                                    break;
+                                case "2":
+                                    @Html.Partial("_PartialTicketNl", item)
+                                    break;
+                                case "3":
+                                    @Html.Partial("_PartialTicketDe", item)
+                                    break;
+                                case "4":
+                                    @Html.Partial("_PartialTicketEn", item)
+                                    break;
+                                default:
+                                    @Html.Partial("_PartialTicket", item)
+                                    break;
+                            }
+                        </div>
+                        <button type="button" class="btn btn-default" value="" onclick="FctPrint('tArea')">
+                            <span class="glyphicon glyphicon-print"></span> Imprimer le ticket
+                        </button>
+                    }
                 }
             </div>
         }

@@ -65,7 +65,9 @@ namespace MyPOS2.Controllers
                             ViewBag.cashBack = temp.ToString();
                             vm.GlobalTotal = "0";
                             ViewBag.tot = "0";
-                            vm.Ticket = TicketBL.FillTicket(nTransac, language);
+                            //to do --> change init isChange...
+                            bool isChange = false;
+                            vm.Ticket = TicketBL.FillTicket(nTransac, language, isChange);
                             ViewBag.ticket = true;
                         }
                         else if (result == 0)
@@ -73,7 +75,9 @@ namespace MyPOS2.Controllers
                             ViewBag.cashBack = "0";
                             vm.GlobalTotal = "0";
                             ViewBag.tot = "0";
-                            vm.Ticket = TicketBL.FillTicket(nTransac, language);
+                            //to do --> change init isChange...
+                            bool isChange = false;
+                            vm.Ticket = TicketBL.FillTicket(nTransac, language, isChange);
                             ViewBag.ticket = true;
                         }
                         else
@@ -295,7 +299,9 @@ namespace MyPOS2.Controllers
             ViewBag.messageCard = "";
             if (ViewBag.tot == "0")
             {
-                vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language);
+                //to do --> change init isChange...
+                bool isChange = false;
+                vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language, isChange);
                 vmodel.Language = vmodel.Ticket.Language;
                 vmodel.Languages = LanguageBL.FindLanguageList();
                 //vmodel.NumTicket = vmodel.Ticket.Ticket;
@@ -329,7 +335,9 @@ namespace MyPOS2.Controllers
             //vmodel.GlobalTot = "0";
             if (ViewBag.tot == "0")
             {
-                vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language);
+                //to do --> change init isChange...
+                bool isChange = false;
+                vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language, isChange);
                 vmodel.Language = vmodel.Ticket.Language;
                 vmodel.Languages = LanguageBL.FindLanguageList();
                 //vmodel.NumTicket = vmodel.Ticket.Ticket;
@@ -409,7 +417,8 @@ namespace MyPOS2.Controllers
         #region OptionsTicket
         public ActionResult ChangeLanguageTicket(TrPaymentMenuViewModel vmodel)
         {
-            vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, vmodel.Language);
+            bool? isChange = true;
+            vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, vmodel.Language, isChange);
             ViewBag.ticket = true;
             switch(vmodel.Language)
             {
