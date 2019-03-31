@@ -146,5 +146,22 @@ namespace MyPOS2.Data.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TicketTimeSure", tDateParameter, tMonthParameter, tDayParameter, tHourParameter, tMinuteParameter, tStatusParameter, tReturnParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> SPP_TicketNbItem(Nullable<System.DateTime> dateMin, Nullable<System.DateTime> dateMax, Nullable<int> nbItems)
+        {
+            var dateMinParameter = dateMin.HasValue ?
+                new ObjectParameter("dateMin", dateMin) :
+                new ObjectParameter("dateMin", typeof(System.DateTime));
+    
+            var dateMaxParameter = dateMax.HasValue ?
+                new ObjectParameter("dateMax", dateMax) :
+                new ObjectParameter("dateMax", typeof(System.DateTime));
+    
+            var nbItemsParameter = nbItems.HasValue ?
+                new ObjectParameter("nbItems", nbItems) :
+                new ObjectParameter("nbItems", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TicketNbItem", dateMinParameter, dateMaxParameter, nbItemsParameter);
+        }
     }
 }

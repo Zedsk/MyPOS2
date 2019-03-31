@@ -17,10 +17,13 @@ namespace MyPOS2.Dal
         List<TRANSACTIONS_MESSAGE> GetListTransactionMessage(int transacId);
         void CreateTransactionMessage(int transacId, int idMessage, int languageMessage);
         IList<int> GetTicket(DateTime date);
-        IList<int> GetTicket(DateTime dateMin, DateTime dateMax);
-        IList<int> GetTicket(DateTime dateMin, DateTime dateMax, decimal total);
         IList<int> GetTicket(int idLanguage);
+        IList<int> GetTicket(DateTime dateMin, DateTime dateMax);
+        IList<int> GetTicket(DateTime dateMin, DateTime dateMax, int idclient);
+        IList<int> GetTicket(DateTime dateMin, DateTime dateMax, decimal total);
+        IList<int> GetTicketNbItem(DateTime dateMin, DateTime dateMax, int nbItem);
         int GetLanguageTicketByIdTransac(int idTransac);
         void UpdateTransactionMessageLanguage(int transacId, int languageMessage);
+        
     }
 }

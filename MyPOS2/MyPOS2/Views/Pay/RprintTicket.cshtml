@@ -54,6 +54,7 @@
                         @Html.LabelFor(model => model.Client, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.Client, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            @*@Html.EditorFor(model => model.Client, new { htmlAttributes = new { @class = "form-control"} })*@
                             @Html.ValidationMessageFor(model => model.Client, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -74,7 +75,7 @@
                     <div class="form-group" style="display: flex; align-items: center;">
                         @Html.LabelFor(m => m.MethodP, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(m => m.MethodP, new SelectList(Model.MethodsP, "idPaymentMethod", "method"), "Choix de la méthode de paiment", new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.DropDownListFor(m => m.MethodP, new SelectList(Model.MethodsP, "idPaymentMethod", "method"), "Choix de la méthode de paiment", new { @class = "form-control", @disabled = "disabled" })
                             @Html.ValidationMessageFor(m => m.MethodP, "", new { @class = "text-danger" })
                         </div>
                     </div>

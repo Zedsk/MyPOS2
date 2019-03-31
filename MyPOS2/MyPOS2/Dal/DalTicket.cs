@@ -142,6 +142,18 @@ namespace MyPOS2.Dal
             return result;
         }
 
+        public IList<int> GetTicket(DateTime dateMin, DateTime dateMax, int idclient)
+        {
+            IList<int> result = new List<int>();
+            // statusId = 2  = transaction end   +  isReturn = false  = is not a Transtacion return
+            IList<TRANSACTIONS> transacs = db.TRANSACTIONSs.Where(d => d.transactionDateEnd >= dateMin && d.transactionDateEnd <= dateMax && d.customerId == idclient && d.statusId == 2 && d.isReturn == false).ToList();
+            foreach (var item in transacs)
+            {
+                result.Add(item.idTransaction);
+            }
+            return result;
+        }
+
         public IList<int> GetTicket(DateTime dateMin, DateTime dateMax, decimal total)
         {
             IList<int> result = new List<int>();
@@ -163,6 +175,18 @@ namespace MyPOS2.Dal
         public int GetLanguageTicketByIdTransac(int idTransac)
         {
             return db.TRANSACTIONS_MESSAGEs.Where(m => m.transactionId == idTransac).Select(l => l.languageMessage).Single();
+        }
+
+        public IList<int> GetTicketNbItem(DateTime dateMin, DateTime dateMax, int nbItem)
+        {  
+            IList<int?> res = new List<int?>();
+            IList<int> result = new List<int>();
+            res = db.SPP_TicketNbItem(dateMin, dateMax, nbItem).ToList();
+            for (int i = 0; i < res.Count(); i++)
+            {
+                result.Add(res[i].Value);
+            }
+            return result;
         }
 
         //public IList<int> GetTicket(DateTime dateMin, DateTime dateMax, int nbItem, int idLanguage, int idMethodP)

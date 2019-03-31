@@ -29,7 +29,15 @@ namespace MyPOS2.BL
         {
             using (IDalProduct dal = new DalProduct())
             {
-                int lang = int.Parse(language);
+                int lang;
+                if (int.TryParse(language, out int codeL))
+                {
+                    lang = codeL;
+                }
+                else
+                {
+                    lang = LanguageBL.FindIdLanguageByShortForm(language);
+                }
                 return dal.GetAllProductByCode(codeProduct, lang);
             }
         }
@@ -56,7 +64,15 @@ namespace MyPOS2.BL
         {
             using (IDalProduct dal = new DalProduct())
             {
-                int lang = int.Parse(language);
+                int lang;
+                if (int.TryParse(language, out int codeL))
+                {
+                    lang = codeL;
+                }
+                else
+                {
+                    lang = LanguageBL.FindIdLanguageByShortForm(language);
+                }
                 return dal.GetAllProductByName(product, lang);
             }
         }
@@ -65,7 +81,15 @@ namespace MyPOS2.BL
         {
             using (IDalProduct dal = new DalProduct())
             {
-                int lang = int.Parse(language);
+                int lang;
+                if (int.TryParse(language, out int codeL))
+                {
+                    lang = codeL;
+                }
+                else
+                {
+                    lang = LanguageBL.FindIdLanguageByShortForm(language);
+                }
                 return dal.GetAllProduct(lang);
             }
         }

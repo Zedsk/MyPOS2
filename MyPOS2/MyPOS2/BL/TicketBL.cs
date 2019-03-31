@@ -153,10 +153,18 @@ namespace MyPOS2.BL
                     listTransac = dal.GetTicket(dateMin, dateMax);
                     if (listTransac.Count() > 1)
                     {
-                        if (vmodel.GlobalTotal != null)
+                        if (vmodel.Client != null)
                         {
-                            decimal total = decimal.Parse(vmodel.GlobalTotal);
-                            listTransac = dal.GetTicket(dateMin, dateMax, total);
+                            int client = int.Parse(vmodel.Client);
+                            listTransac = dal.GetTicket(dateMin, dateMax, client);
+                        }
+                        if (listTransac.Count() > 1)
+                        {
+                            if (vmodel.GlobalTotal != null)
+                            {
+                                decimal total = decimal.Parse(vmodel.GlobalTotal);
+                                listTransac = dal.GetTicket(dateMin, dateMax, total);
+                            }
                         }
                         if (listTransac.Count() > 1)
                         {
@@ -164,7 +172,33 @@ namespace MyPOS2.BL
                             {
                                 int idLanguage = int.Parse(vmodel.Language);
                                 listFilter = dal.GetTicket(idLanguage);
-                                listTransac = listTransac.Where(i => i.Equals(listFilter)).ToList();
+                                var listTemp = new List<int>();
+                                for (int i = 0; i < listTransac.Count; i++)
+                                {
+                                    if (listFilter.Contains(listTransac[i]))
+                                    {
+                                        listTemp.Add(listTransac[i]);
+                                    }
+                                }
+                                listTransac = listTemp;
+                            }
+                        }
+                        if (listTransac.Count() > 1)
+                        {
+                            if (vmodel.NbItem != null)
+                            {
+                                //to do
+                                int nbItem = int.Parse(vmodel.NbItem);
+                                listFilter = dal.GetTicketNbItem(dateMin, dateMax, nbItem);
+                                var listTemp = new List<int>();
+                                for (int i = 0; i < listTransac.Count; i++)
+                                {
+                                    if (listFilter.Contains(listTransac[i]))
+                                    {
+                                        listTemp.Add(listTransac[i]);
+                                    }
+                                }
+                                listTransac = listTemp;
                             }
                         }
                         if (listTransac.Count() > 1)
@@ -175,21 +209,14 @@ namespace MyPOS2.BL
                                 int idMethodP = int.Parse(vmodel.MethodP);
                             }
                         }
-                        if (listTransac.Count() > 1)
-                        {
-                            if (vmodel.NbItem != null)
-                            {
-                                //to do
-                                int nbItem = int.Parse(vmodel.NbItem);
-                            }
-                        }
                     }
                 }
                 for (int i = 0; i < listTransac.Count(); i++)
                 {
+                    string lang;
                     if (vmodel.Language == null)
                     {
-                        vmodel.Language = FindLanguageTicketByIdTransac(listTransac[i].ToString());
+                        lang = FindLanguageTicketByIdTransac(listTransac[i].ToString());
                     }
                     else
                     {
@@ -199,10 +226,14 @@ namespace MyPOS2.BL
                         {
                             continue;
                         }
+                        else
+                        {
+                            lang = vmodel.Language;
+                        }
                     }
                     //to do --> change init isChange...
                     bool isChange = false;
-                    result.Add(FillTicket(listTransac[i].ToString(), vmodel.Language, isChange));
+                    result.Add(FillTicket(listTransac[i].ToString(), lang, isChange));
                 }
                 return result;
             }

@@ -858,6 +858,11 @@
         <Function Name="SPP_ProductTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
+        <Function Name="SPP_TicketNbItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dateMin" Type="datetime" Mode="In" />
+          <Parameter Name="dateMax" Type="datetime" Mode="In" />
+          <Parameter Name="nbItems" Type="int" Mode="In" />
+        </Function>
         <Function Name="SPP_TicketTimeSure" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tDate" Type="int" Mode="In" />
           <Parameter Name="tMonth" Type="int" Mode="In" />
@@ -2124,6 +2129,11 @@
             <Parameter Name="tStatus" Mode="In" Type="Int32" />
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="SPP_TicketNbItem" ReturnType="Collection(Int32)">
+            <Parameter Name="dateMin" Mode="In" Type="DateTime" />
+            <Parameter Name="dateMax" Mode="In" Type="DateTime" />
+            <Parameter Name="nbItems" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPP_ChildCategories_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
@@ -2591,6 +2601,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPP_TransactionMessageIds" FunctionName="Pos1Model.Store.SPP_TransactionMessageIds" />
           <FunctionImportMapping FunctionImportName="SPP_TicketTimeSure" FunctionName="Pos1Model.Store.SPP_TicketTimeSure" />
+          <FunctionImportMapping FunctionImportName="SPP_TicketNbItem" FunctionName="Pos1Model.Store.SPP_TicketNbItem" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
