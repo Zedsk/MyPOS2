@@ -4,6 +4,10 @@
     ViewBag.Title = "Index";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Index</h2>
 
 <p>
@@ -14,20 +18,28 @@
         <th>
             @Html.DisplayNameFor(model => model.nameBrand)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imageBrand)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nameBrand)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idBrand }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idBrand }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idBrand })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameBrand)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.imageBrand)*@
+                <img src="@Url.Content(item.imageBrand)" alt="Logo de la marque" class="imgIndex" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idBrand }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idBrand }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idBrand })
+            </td>
+        </tr>
+    }
 
 </table>

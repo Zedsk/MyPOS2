@@ -17,6 +17,14 @@ namespace MyPOS2.BL
             }
         }
 
+        internal static IList<LANGUAGES> FindLanguageListWithoutUniversal()
+        {
+            using (IDalLanguage dal = new DalLanguage())
+            {
+                return dal.GetAllLanguageWithoutUniversal();
+            }
+        }
+
         internal static int FindIdLanguageByShortForm(string language)
         {
             using (IDalLanguage dal = new DalLanguage())

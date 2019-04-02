@@ -852,6 +852,10 @@
         <Function Name="SPP_GetShopById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="shop" Type="int" Mode="In" />
         </Function>
+        <Function Name="SPP_HeroesTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SPP_HeroesTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
         <Function Name="SPP_ParentCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
@@ -2111,14 +2115,17 @@
           <FunctionImport Name="SPP_GetShopById" ReturnType="Collection(Pos1Model.SPP_GetShopById_Result)">
           <Parameter Name="shop" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SPP_HeroesTrans" ReturnType="Collection(Pos1Model.SPP_HeroesTrans_Result)" />
           <FunctionImport Name="SPP_ParentCategories" ReturnType="Collection(Pos1Model.SPP_ParentCategories_Result)">
           <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ProductTrans" ReturnType="Collection(Pos1Model.SPP_ProductTrans_Result)">
           <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SPP_TransactionMessageIds" ReturnType="Collection(Int32)">
-          <Parameter Name="idTransac" Mode="In" Type="Int32" />
+          <FunctionImport Name="SPP_TicketNbItem" ReturnType="Collection(Int32)">
+            <Parameter Name="dateMin" Mode="In" Type="DateTime" />
+            <Parameter Name="dateMax" Mode="In" Type="DateTime" />
+            <Parameter Name="nbItems" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_TicketTimeSure" ReturnType="Collection(Int32)">
             <Parameter Name="tDate" Mode="In" Type="Int32" />
@@ -2129,10 +2136,11 @@
             <Parameter Name="tStatus" Mode="In" Type="Int32" />
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="SPP_TicketNbItem" ReturnType="Collection(Int32)">
-            <Parameter Name="dateMin" Mode="In" Type="DateTime" />
-            <Parameter Name="dateMax" Mode="In" Type="DateTime" />
-            <Parameter Name="nbItems" Mode="In" Type="Int32" />
+          <FunctionImport Name="SPP_TransactionMessageIds" ReturnType="Collection(Int32)">
+          <Parameter Name="idTransac" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_HeroesTransDistinct" ReturnType="Collection(Pos1Model.SPP_HeroesTransDistinct_Result)">
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPP_ChildCategories_Result">
@@ -2160,6 +2168,13 @@
           <Property Type="String" Name="email" Nullable="true" MaxLength="40" />
           <Property Type="String" Name="opening" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="SPP_HeroesTrans_Result">
+          <Property Type="Int32" Name="idHero" Nullable="false" />
+          <Property Type="String" Name="nameHero" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="imageHero" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="languageId" Nullable="false" />
+          <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
+        </ComplexType>
         <ComplexType Name="SPP_ParentCategories_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
           <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
@@ -2178,6 +2193,13 @@
           <Property Type="Int32" Name="vatId" Nullable="true" />
           <Property Type="String" Name="nameProduct" Nullable="false" MaxLength="40" />
           <Property Type="String" Name="description" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="SPP_HeroesTransDistinct_Result">
+          <Property Type="Int32" Name="idHero" Nullable="false" />
+          <Property Type="String" Name="nameHero" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="imageHero" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="languageId" Nullable="false" />
+          <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2572,6 +2594,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_HeroesTrans" FunctionName="Pos1Model.Store.SPP_HeroesTrans">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_HeroesTrans_Result">
+                <ScalarProperty Name="idHero" ColumnName="idHero" />
+                <ScalarProperty Name="nameHero" ColumnName="nameHero" />
+                <ScalarProperty Name="imageHero" ColumnName="imageHero" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPP_ParentCategories" FunctionName="Pos1Model.Store.SPP_ParentCategories">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Pos1Model.SPP_ParentCategories_Result">
@@ -2599,9 +2632,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPP_TransactionMessageIds" FunctionName="Pos1Model.Store.SPP_TransactionMessageIds" />
-          <FunctionImportMapping FunctionImportName="SPP_TicketTimeSure" FunctionName="Pos1Model.Store.SPP_TicketTimeSure" />
           <FunctionImportMapping FunctionImportName="SPP_TicketNbItem" FunctionName="Pos1Model.Store.SPP_TicketNbItem" />
+          <FunctionImportMapping FunctionImportName="SPP_TicketTimeSure" FunctionName="Pos1Model.Store.SPP_TicketTimeSure" />
+          <FunctionImportMapping FunctionImportName="SPP_TransactionMessageIds" FunctionName="Pos1Model.Store.SPP_TransactionMessageIds" />
+          <FunctionImportMapping FunctionImportName="SPP_HeroesTransDistinct" FunctionName="Pos1Model.Store.SPP_HeroesTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_HeroesTransDistinct_Result">
+                <ScalarProperty Name="idHero" ColumnName="idHero" />
+                <ScalarProperty Name="nameHero" ColumnName="nameHero" />
+                <ScalarProperty Name="imageHero" ColumnName="imageHero" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

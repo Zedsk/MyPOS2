@@ -204,11 +204,14 @@
     <Compile Include="BL\TerminalBL.cs" />
     <Compile Include="BL\TicketBL.cs" />
     <Compile Include="BL\TransactionBL.cs" />
+    <Compile Include="BL\TranslationBL.cs" />
     <Compile Include="BL\UserBL.cs" />
     <Compile Include="BL\VatBL.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AgesController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CashController.cs" />
+    <Compile Include="Controllers\HeroesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -219,6 +222,7 @@
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\VatsController.cs" />
     <Compile Include="Dal\DalCashDay.cs" />
+    <Compile Include="Dal\DalHero.cs" />
     <Compile Include="Dal\DalLanguage.cs" />
     <Compile Include="Dal\DalPayment.cs" />
     <Compile Include="Dal\DalProduct.cs" />
@@ -230,6 +234,7 @@
     <Compile Include="Dal\DalUser.cs" />
     <Compile Include="Dal\DalVat.cs" />
     <Compile Include="Dal\IDalCashDay.cs" />
+    <Compile Include="Dal\IDalHero.cs" />
     <Compile Include="Dal\IDalLanguage.cs" />
     <Compile Include="Dal\IDalPayment.cs" />
     <Compile Include="Dal\IDalProduct.cs" />
@@ -333,6 +338,12 @@
     <Compile Include="Data\Entity\SPP_GetShopById_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Entity\SPP_HeroesTransDistinct_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Entity\SPP_HeroesTrans_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Entity\SPP_ParentCategories_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -371,6 +382,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\management\HeroViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Transactions\Ticket\TrRprintTicketViewModel.cs" />
     <Compile Include="Models\Transactions\Ticket\TrTicketDeViewModel.cs" />
@@ -417,6 +429,7 @@
     <Content Include="Content\image\hero\Logo_Schtroumpf.jpg" />
     <Content Include="Content\image\hero\Logo_StarWars.jpg" />
     <Content Include="Content\image\logo_magasin.png" />
+    <Content Include="Content\image\logo_noImage.png" />
     <Content Include="Content\image\NoTicket.JPG" />
     <Content Include="Content\image\product\First_Order_Star_Destroyer.jpg" />
     <Content Include="Content\image\product\GarageHotWheelsMattel.jpg" />
@@ -505,11 +518,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Management.cshtml" />
     <Content Include="Views\Home\Transaction.cshtml" />
-    <Content Include="Views\Brands\Create.cshtml" />
-    <Content Include="Views\Brands\Delete.cshtml" />
-    <Content Include="Views\Brands\Details.cshtml" />
-    <Content Include="Views\Brands\Edit.cshtml" />
-    <Content Include="Views\Brands\Index.cshtml" />
     <Content Include="Views\Payment_Methods\Create.cshtml" />
     <Content Include="Views\Payment_Methods\Delete.cshtml" />
     <Content Include="Views\Payment_Methods\Details.cshtml" />
@@ -551,6 +559,21 @@
     <Content Include="Views\Languages\Details.cshtml" />
     <Content Include="Views\Languages\Edit.cshtml" />
     <Content Include="Views\Languages\Index.cshtml" />
+    <Content Include="Views\Ages\Create.cshtml" />
+    <Content Include="Views\Ages\Delete.cshtml" />
+    <Content Include="Views\Ages\Details.cshtml" />
+    <Content Include="Views\Ages\Edit.cshtml" />
+    <Content Include="Views\Ages\Index.cshtml" />
+    <Content Include="Views\Brands\Create.cshtml" />
+    <Content Include="Views\Brands\Delete.cshtml" />
+    <Content Include="Views\Brands\Details.cshtml" />
+    <Content Include="Views\Brands\Edit.cshtml" />
+    <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\Heroes\Create.cshtml" />
+    <Content Include="Views\Heroes\Delete.cshtml" />
+    <Content Include="Views\Heroes\Details.cshtml" />
+    <Content Include="Views\Heroes\Edit.cshtml" />
+    <Content Include="Views\Heroes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -589,7 +612,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2374</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2374/</IISUrl>
+          <IISUrl>http://localhost:3374/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

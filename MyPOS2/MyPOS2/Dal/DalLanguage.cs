@@ -28,6 +28,11 @@ namespace MyPOS2.Dal
             return db.LANGUAGESs.ToList();
         }
 
+        public IList<LANGUAGES> GetAllLanguageWithoutUniversal()
+        {
+            return db.LANGUAGESs.Where(l => l.shortForm != "all").ToList();
+        }
+
         public int GetIdLanguageByShortForm(string lang)
         {
             return db.LANGUAGESs.Where(l => l.shortForm == lang).Select(t => t.idLanguage).Single();

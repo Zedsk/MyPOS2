@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MyPOS2.Data.Entity.SPP_HeroesTrans_Result>
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HERO</h4>
+    <hr />
+    <div class="dl-horizontal">
+        <div>
+            @Html.DisplayName(Model.First().imageHero)
+        </div>
+        <div>
+            @*@Html.DisplayFor(model => model.imageHero)*@
+            <img src="@Url.Content(Model.First().imageHero)" alt="Image du Héro" class="imgIndex" />
+        </div>
+        @foreach (var item in Model)
+        {
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayName(item.nameHero)
+                </dt>
+                <dd>
+                    @Html.Display(item.nameHero)
+                </dd>
+                <dt>
+                    @Html.DisplayName(item.nameLanguage)
+                </dt>
+                <dd>
+                    @Html.Display(item.nameLanguage)
+                </dd>
+            </dl>
+        }
+    </div> 
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.First().idHero }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

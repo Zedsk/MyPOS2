@@ -87,6 +87,11 @@ namespace MyPOS2.Data.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_GetShopById_Result>("SPP_GetShopById", shopParameter);
         }
     
+        public virtual ObjectResult<SPP_HeroesTrans_Result> SPP_HeroesTrans()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_HeroesTrans_Result>("SPP_HeroesTrans");
+        }
+    
         public virtual ObjectResult<SPP_ParentCategories_Result> SPP_ParentCategories(Nullable<int> language)
         {
             var languageParameter = language.HasValue ?
@@ -105,13 +110,21 @@ namespace MyPOS2.Data.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ProductTrans_Result>("SPP_ProductTrans", languageParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> SPP_TransactionMessageIds(Nullable<int> idTransac)
+        public virtual ObjectResult<Nullable<int>> SPP_TicketNbItem(Nullable<System.DateTime> dateMin, Nullable<System.DateTime> dateMax, Nullable<int> nbItems)
         {
-            var idTransacParameter = idTransac.HasValue ?
-                new ObjectParameter("idTransac", idTransac) :
-                new ObjectParameter("idTransac", typeof(int));
+            var dateMinParameter = dateMin.HasValue ?
+                new ObjectParameter("dateMin", dateMin) :
+                new ObjectParameter("dateMin", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TransactionMessageIds", idTransacParameter);
+            var dateMaxParameter = dateMax.HasValue ?
+                new ObjectParameter("dateMax", dateMax) :
+                new ObjectParameter("dateMax", typeof(System.DateTime));
+    
+            var nbItemsParameter = nbItems.HasValue ?
+                new ObjectParameter("nbItems", nbItems) :
+                new ObjectParameter("nbItems", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TicketNbItem", dateMinParameter, dateMaxParameter, nbItemsParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> SPP_TicketTimeSure(Nullable<int> tDate, Nullable<int> tMonth, Nullable<int> tDay, Nullable<int> tHour, Nullable<int> tMinute, Nullable<int> tStatus, Nullable<bool> tReturn)
@@ -147,21 +160,22 @@ namespace MyPOS2.Data.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TicketTimeSure", tDateParameter, tMonthParameter, tDayParameter, tHourParameter, tMinuteParameter, tStatusParameter, tReturnParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> SPP_TicketNbItem(Nullable<System.DateTime> dateMin, Nullable<System.DateTime> dateMax, Nullable<int> nbItems)
+        public virtual ObjectResult<Nullable<int>> SPP_TransactionMessageIds(Nullable<int> idTransac)
         {
-            var dateMinParameter = dateMin.HasValue ?
-                new ObjectParameter("dateMin", dateMin) :
-                new ObjectParameter("dateMin", typeof(System.DateTime));
+            var idTransacParameter = idTransac.HasValue ?
+                new ObjectParameter("idTransac", idTransac) :
+                new ObjectParameter("idTransac", typeof(int));
     
-            var dateMaxParameter = dateMax.HasValue ?
-                new ObjectParameter("dateMax", dateMax) :
-                new ObjectParameter("dateMax", typeof(System.DateTime));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TransactionMessageIds", idTransacParameter);
+        }
     
-            var nbItemsParameter = nbItems.HasValue ?
-                new ObjectParameter("nbItems", nbItems) :
-                new ObjectParameter("nbItems", typeof(int));
+        public virtual ObjectResult<SPP_HeroesTransDistinct_Result> SPP_HeroesTransDistinct(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TicketNbItem", dateMinParameter, dateMaxParameter, nbItemsParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_HeroesTransDistinct_Result>("SPP_HeroesTransDistinct", languageParameter);
         }
     }
 }

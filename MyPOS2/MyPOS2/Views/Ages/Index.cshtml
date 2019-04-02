@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MyPOS2.Data.Entity.AGE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/pos2.js")" type="text/javascript"></script>
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Back to Menu", "Management", "Home")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.imageAge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rangeAges)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.imageAge)*@
+                <img src="@Url.Content(item.imageAge)" alt="image de l'age autorisé" class="imgIndex" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rangeAges)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idAge }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idAge }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idAge })
+            </td>
+        </tr>
+    }
+
+</table>

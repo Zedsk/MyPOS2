@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MyPOS2.Data.Entity.SPP_HeroesTransDistinct_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Back to Menu", "Management", "Home")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nameHero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imageHero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nameLanguage)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameHero)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.imageHero)*@
+                @if (item.imageHero != null)
+                {
+                    <img src="@Url.Content(item.imageHero)" alt="Image du Héro" class="imgIndex" />
+                }
+                else
+                {
+                    <img src="~/Content/image/logo_noImage.png" alt="Image du Héro" class="imgIndex" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameLanguage)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idHero }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idHero, lang = item.languageId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idHero })
+            </td>
+        </tr>
+    }
+
+</table>

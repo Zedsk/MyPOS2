@@ -10,6 +10,7 @@ namespace MyPOS2.Dal
     interface IDalLanguage : IDisposable
     {
         IList<LANGUAGES> GetAllLanguage();
+        IList<LANGUAGES> GetAllLanguageWithoutUniversal();
         int GetIdLanguageByShortForm(string lang);
     }
 }
