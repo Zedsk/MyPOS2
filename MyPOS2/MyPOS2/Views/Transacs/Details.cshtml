@@ -1,0 +1,126 @@
+﻿@model MyPOS2.Data.Entity.TRANSACTIONS
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Détails</h2>
+
+<div>
+    <h4>TRANSACTIONS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.idTransaction)*@
+            N° de la transaction
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idTransaction)
+        </dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.transactionDateBegin)*@
+            Début de la transaction
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transactionDateBegin)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.transactionDateEnd)*@
+            Fin de la transaction
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transactionDateEnd)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.total)*@
+            Total
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.discountGlobal)*@
+            Remise
+        </dt>
+
+        @if (Model.discountGlobal == null)
+        {
+            <dd>
+                -
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.discountGlobal)
+            </dd>
+        }
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.isReturn)*@
+            Transaction Retour
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isReturn)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.CUSTOMER.PERSON.namePerson)*@
+            Client
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUSTOMER.PERSON.namePerson)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SHOP.idShop)*@
+            Magasin
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.SHOP.SHOP_TRANSLATION.Where(s => s.shopId == model.shopId && s.languageId == int.Parse(Session["Language"].ToString())).Select(s => s.nameShop))*@
+            @Html.DisplayFor(model => model.SHOP.SHOP_TRANSLATION.FirstOrDefault(s => s.shopId == model.shopId).nameShop)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.STATUS.nameStatus)*@
+            Statut de la transaction
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STATUS.nameStatus)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TERMINAL.nameTerminal)*@
+            Nom du terminal
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TERMINAL.nameTerminal)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.USERINFO.nameUser)*@
+            Nom de l'utilisateur
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERINFO.nameUser)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.idTransaction }) |*@
+    @Html.ActionLink("Supprimer", "Delete", new { id = Model.idTransaction }) |
+    @Html.ActionLink("Retour à la Liste", "Index")
+</p>

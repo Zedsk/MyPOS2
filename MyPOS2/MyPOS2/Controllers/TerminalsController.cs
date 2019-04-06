@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MyPOS2.BL;
 using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
@@ -39,7 +41,10 @@ namespace MyPOS2.Controllers
         // GET: Terminals/Create
         public ActionResult Create()
         {
-            ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone");
+            //ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone");
+            int lang = LanguageBL.CheckLanguageSession();
+            int universal = db.LANGUAGESs.Where(l => l.shortForm == "all").Select(s => s.idLanguage).Single();
+            ViewBag.shopId = new SelectList(db.SHOP_TRANSLATIONs.Include(t => t.SHOP).Where(s => s.languageId == lang || s.languageId == universal), "shopId", "nameShop");
             //ViewBag.nameT = "";
             return View();
         }
@@ -57,8 +62,9 @@ namespace MyPOS2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", terminal.shopId);
+            int lang = LanguageBL.CheckLanguageSession();
+            int universal = db.LANGUAGESs.Where(l => l.shortForm == "all").Select(s => s.idLanguage).Single();
+            ViewBag.shopId = new SelectList(db.SHOP_TRANSLATIONs.Include(t => t.SHOP).Where(s => s.languageId == lang || s.languageId == universal), "shopId", "nameShop");
             //ViewBag.nameT = "";
             return View(terminal);
         }
@@ -75,7 +81,10 @@ namespace MyPOS2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", terminal.shopId);
+            //ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", terminal.shopId);
+            int lang = LanguageBL.CheckLanguageSession();
+            int universal = db.LANGUAGESs.Where(l => l.shortForm == "all").Select(s => s.idLanguage).Single();
+            ViewBag.shopId = new SelectList(db.SHOP_TRANSLATIONs.Include(t => t.SHOP).Where(s => s.languageId == lang || s.languageId == universal), "shopId", "nameShop", terminal.shopId);
             return View(terminal);
         }
 
@@ -92,7 +101,9 @@ namespace MyPOS2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", terminal.shopId);
+            int lang = LanguageBL.CheckLanguageSession();
+            int universal = db.LANGUAGESs.Where(l => l.shortForm == "all").Select(s => s.idLanguage).Single();
+            ViewBag.shopId = new SelectList(db.SHOP_TRANSLATIONs.Include(t => t.SHOP).Where(s => s.languageId == lang || s.languageId == universal), "shopId", "nameShop", terminal.shopId);
             return View(terminal);
         }
 

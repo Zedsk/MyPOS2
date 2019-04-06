@@ -10,8 +10,9 @@
 <h2>Transaction</h2>
 
 <p>
-    @Html.ActionLink("Back to Home", "Index", "Home")
+    @Html.ActionLink("Retour à l'accueil", "Index", "Home") | @Html.ActionLink("Aller au Menu Gestion", "Management", "Home")
 </p>
+
 
 <span class="text-danger">@ViewBag.Error</span>
 
@@ -56,7 +57,7 @@
                 <button type="button" class="btn btn-primary menuButton" onclick="location.href='@Url.Action("RprintTicket", "Pay")'" >Ré-imprimer </br> un ticket</button>
             </div>
             <div>
-
+                <button type="button" class="btn btn-primary menuButton" onclick="location.href='@Url.Action("Index", "Transacs")'">Supprimer une </br> transaction</button>
             </div>
             <div>
 

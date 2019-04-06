@@ -142,6 +142,11 @@ namespace MyPOS2.Dal
             }
         }
 
+        public IList<SPP_TransactionsDay_Result> GetAllTransactionDay(DateTime date)
+        {
+            return db.SPP_TransactionsDay(date.Year, date.Month, date.Day, 2, false).ToList();
+        }
+
         #endregion
     }
 }

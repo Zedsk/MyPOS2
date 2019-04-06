@@ -4,14 +4,15 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Détails</h2>
 
 <div>
     <h4>TERMINAL</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.nameTerminal)
+            @*@Html.DisplayNameFor(model => model.nameTerminal)*@
+            Nom du Terminal
         </dt>
 
         <dd>
@@ -19,16 +20,17 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SHOP.phone)
+            @*@Html.DisplayNameFor(model => model.SHOP.idShop)*@
+            Nom du Magasin
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SHOP.phone)
+            @Html.DisplayFor(model => model.SHOP.SHOP_TRANSLATION.FirstOrDefault(s => s.shopId == model.shopId).nameShop)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idTerminal }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editer", "Edit", new { id = Model.idTerminal }) |
+    @Html.ActionLink("Retour à la Liste", "Index")
 </p>

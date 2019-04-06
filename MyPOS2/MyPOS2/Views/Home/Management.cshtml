@@ -6,7 +6,7 @@
 
 <h2>Gestion</h2>
 <p>
-    @Html.ActionLink("Back to Home", "Index", "Home")
+    @Html.ActionLink("Retour à l'accueil", "Index", "Home") | @Html.ActionLink("Aller au Menu Transaction", "Transaction", "Home")
 </p>
 
 <div class="row">
@@ -57,6 +57,10 @@
     <div class="col-md-4">
         <h4>Gérer les clients</h4>
         <a class="btn btn-primary" href="" role="button" disabled>Clients</a>
+    </div>
+    <div class="col-md-4">
+        <h4>Gérer les transactions</h4>
+        <a class="btn btn-primary" href="~/Transacs/Index" role="button">Transactions</a>
     </div>
 </div>
 

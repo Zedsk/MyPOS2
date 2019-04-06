@@ -11,15 +11,17 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Back to Menu", "Management", "Home")
+    @Html.ActionLink("Créer nouveau", "Create") | @Html.ActionLink("Retour au Menu", "Management", "Home")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nameBrand)
+            @*@Html.DisplayNameFor(model => model.nameBrand)*@
+            Nom
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.imageBrand)
+            @*@Html.DisplayNameFor(model => model.imageBrand)*@
+            Logo
         </th>
         <th></th>
     </tr>
@@ -35,9 +37,9 @@
                 <img src="@Url.Content(item.imageBrand)" alt="Logo de la marque" class="imgIndex" />
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idBrand }) |
-                @Html.ActionLink("Details", "Details", new { id = item.idBrand }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.idBrand })
+                @Html.ActionLink("Editer", "Edit", new { id = item.idBrand }) |
+                @Html.ActionLink("Détails", "Details", new { id = item.idBrand }) |
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.idBrand })
             </td>
         </tr>
     }

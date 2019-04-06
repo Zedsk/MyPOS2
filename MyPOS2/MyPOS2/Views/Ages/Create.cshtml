@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Créer</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -15,7 +15,8 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.imageAge, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.imageAge, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2">Image</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.imageAge, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.imageAge, "", new { @class = "text-danger" })
@@ -23,7 +24,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.rangeAges, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.rangeAges, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2">Tranche d'ages</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.rangeAges, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.rangeAges, "", new { @class = "text-danger" })
@@ -32,12 +34,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Créer" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la Liste", "Index")
 </div>

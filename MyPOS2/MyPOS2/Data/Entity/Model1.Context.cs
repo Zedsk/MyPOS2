@@ -92,6 +92,15 @@ namespace MyPOS2.Data.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_HeroesTrans_Result>("SPP_HeroesTrans");
         }
     
+        public virtual ObjectResult<SPP_HeroesTransDistinct_Result> SPP_HeroesTransDistinct(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_HeroesTransDistinct_Result>("SPP_HeroesTransDistinct", languageParameter);
+        }
+    
         public virtual ObjectResult<SPP_ParentCategories_Result> SPP_ParentCategories(Nullable<int> language)
         {
             var languageParameter = language.HasValue ?
@@ -169,13 +178,38 @@ namespace MyPOS2.Data.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SPP_TransactionMessageIds", idTransacParameter);
         }
     
-        public virtual ObjectResult<SPP_HeroesTransDistinct_Result> SPP_HeroesTransDistinct(Nullable<int> language)
+        public virtual ObjectResult<SPP_TransactionsDay_Result> SPP_TransactionsDay(Nullable<int> tDate, Nullable<int> tMonth, Nullable<int> tDay, Nullable<int> tStatus, Nullable<bool> tReturn)
+        {
+            var tDateParameter = tDate.HasValue ?
+                new ObjectParameter("tDate", tDate) :
+                new ObjectParameter("tDate", typeof(int));
+    
+            var tMonthParameter = tMonth.HasValue ?
+                new ObjectParameter("tMonth", tMonth) :
+                new ObjectParameter("tMonth", typeof(int));
+    
+            var tDayParameter = tDay.HasValue ?
+                new ObjectParameter("tDay", tDay) :
+                new ObjectParameter("tDay", typeof(int));
+    
+            var tStatusParameter = tStatus.HasValue ?
+                new ObjectParameter("tStatus", tStatus) :
+                new ObjectParameter("tStatus", typeof(int));
+    
+            var tReturnParameter = tReturn.HasValue ?
+                new ObjectParameter("tReturn", tReturn) :
+                new ObjectParameter("tReturn", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_TransactionsDay_Result>("SPP_TransactionsDay", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ShopTransDistinct_Result> SPP_ShopTransDistinct(Nullable<int> language)
         {
             var languageParameter = language.HasValue ?
                 new ObjectParameter("language", language) :
                 new ObjectParameter("language", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_HeroesTransDistinct_Result>("SPP_HeroesTransDistinct", languageParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ShopTransDistinct_Result>("SPP_ShopTransDistinct", languageParameter);
         }
     }
 }

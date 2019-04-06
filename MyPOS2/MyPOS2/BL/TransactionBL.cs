@@ -261,6 +261,33 @@ namespace MyPOS2.BL
             return transac.total.ToString();
         }
 
-        
+        internal static IList<TRANSACTIONS> FindTransactionsDay()
+        {
+            using (IDalTransaction dal = new DalTransaction())
+            {
+                DateTime date = DateTime.Today;
+                IList<TRANSACTIONS> result = new List<TRANSACTIONS>();
+                IList<SPP_TransactionsDay_Result> tDay = dal.GetAllTransactionDay(date);
+                for (int i = 0; i < tDay.Count(); i++)
+                {
+                    TRANSACTIONS transac = new TRANSACTIONS
+                    {
+                        idTransaction = tDay[i].idTransaction,
+                        transactionDateBegin = tDay[i].transactionDateBegin,
+                        transactionDateEnd = tDay[i].transactionDateEnd,
+                        total = tDay[i].total,
+                        discountGlobal = tDay[i].discountGlobal,
+                        isReturn = tDay[i].isReturn,
+                        terminalId = tDay[i].terminalId,
+                        shopId = tDay[i].shopId,
+                        customerId = tDay[i].customerId,
+                        statusId = tDay[i].statusId,
+                        userId = tDay[i].userId
+                    };
+                    result.Add(transac);
+                }
+                return result;
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using MyPOS2.Dal;
@@ -31,6 +32,25 @@ namespace MyPOS2.BL
             {
                 return dal.GetIdLanguageByShortForm(language.ToLower());
             }
+        }
+
+        internal static int CheckLanguageSession()
+        {
+            if (HttpContext.Current.Session["Language"] == null)
+            {
+                HttpContext.Current.Session["Language"] = ConfigurationManager.AppSettings["Language"];
+            }
+            string language = HttpContext.Current.Session["Language"].ToString();
+            int lang;
+            if (int.TryParse(language, out int codeL))
+            {
+                lang = codeL;
+            }
+            else
+            {
+                lang = FindIdLanguageByShortForm(language);
+            }
+            return lang;
         }
     }
 }

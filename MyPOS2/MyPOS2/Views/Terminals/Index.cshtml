@@ -7,15 +7,17 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Back to Menu", "Management", "Home")
+    @Html.ActionLink("Créer un nouveau Terminal", "Create") | @Html.ActionLink("Retour au Menu", "Management", "Home")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nameTerminal)
+            @*@Html.DisplayNameFor(model => model.nameTerminal)*@
+            Nom du Terminal
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SHOP.phone)
+            @*@Html.DisplayNameFor(model => model.SHOP.phone)*@
+            Nom du Magasin
         </th>
         <th></th>
     </tr>
@@ -26,17 +28,17 @@
             @Html.DisplayFor(modelItem => item.nameTerminal)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SHOP.phone)
+            @Html.DisplayFor(modelItem => item.SHOP.SHOP_TRANSLATION.FirstOrDefault(s => s.shopId == item.shopId).nameShop)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idTerminal }) |
+            @Html.ActionLink("Editer", "Edit", new { id=item.idTerminal }) |
             @Html.ActionLink("Details", "Details", new { id=item.idTerminal }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idTerminal })
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.idTerminal })
         </td>
     </tr>
 }
 
 </table>
 <div>
-    @Html.ActionLink("Back to Menu", "Management", "Home")
+    @Html.ActionLink("Retour au Menu", "Management", "Home")
 </div>

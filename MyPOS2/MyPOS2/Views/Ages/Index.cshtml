@@ -15,15 +15,17 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Back to Menu", "Management", "Home")
+    @Html.ActionLink("Créer nouveau", "Create") | @Html.ActionLink("Retour au Menu", "Management", "Home")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.imageAge)
+            @*@Html.DisplayNameFor(model => model.imageAge)*@
+            Image
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.rangeAges)
+            @*@Html.DisplayNameFor(model => model.rangeAges)*@
+            Tranche d'ages
         </th>
         <th></th>
     </tr>
@@ -39,9 +41,9 @@
                 @Html.DisplayFor(modelItem => item.rangeAges)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idAge }) |
-                @Html.ActionLink("Details", "Details", new { id = item.idAge }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.idAge })
+                @Html.ActionLink("Editer", "Edit", new { id = item.idAge }) |
+                @Html.ActionLink("Détails", "Details", new { id = item.idAge }) |
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.idAge })
             </td>
         </tr>
     }

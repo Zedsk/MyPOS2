@@ -49,7 +49,7 @@
             <div id="containerLeft">
                 <div id="addP">
                     <div>
-                        <input id="addProduct" type="text" placeholder="Add..">
+                        <input id="addProduct" type="text" placeholder="Add.." onchange="ButtonAddProduct_Click()">
                         <button type="button" id="ButtonAddP" class="fct_btn" value="" onclick="ButtonAddProduct_Click()">Ajouter</button>
                     </div>
                     @*@Html.ValidationMessageFor(m => m.AddProduct, "", new { @class = "text-danger" })*@

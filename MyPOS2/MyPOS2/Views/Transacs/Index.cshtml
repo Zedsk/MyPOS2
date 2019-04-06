@@ -1,0 +1,108 @@
+﻿@model IEnumerable<MyPOS2.Data.Entity.TRANSACTIONS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Retour au Menu Gestion", "Management", "Home") | @Html.ActionLink("Retour au Menu Transaction", "Transaction", "Home")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.idTransaction)*@
+            N°
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.transactionDateBegin)*@
+            Début de la transaction
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.transactionDateEnd)*@
+            Fin de la transaction
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.total)*@
+            Total
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.discountGlobal)*@
+            Remise
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.STATUS.nameStatus)*@
+            Statut de la transaction
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.isReturn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CUSTOMER.customerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SHOP.phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TERMINAL.nameTerminal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USERINFO.nameUser)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => item.idTransaction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.transactionDateBegin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.transactionDateEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total)
+        </td>
+        @if (item.discountGlobal == null)
+        {
+            <td >
+                -
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.discountGlobal)
+            </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.STATUS.nameStatus)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.isReturn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUSTOMER.customerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SHOP.phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TERMINAL.nameTerminal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USERINFO.nameUser)
+        </td>*@
+        <td>
+            @*@Html.ActionLink("Editer", "Edit", new { id = item.idTransaction }) |*@
+            @Html.ActionLink("Details", "Details", new { id = item.idTransaction }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id = item.idTransaction })
+        </td>
+    </tr>
+}
+
+</table>

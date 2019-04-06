@@ -40,6 +40,7 @@ namespace MyPOS2.Controllers
                 {
                     Session["Language"] = ConfigurationManager.AppSettings["Language"];
                 }
+
                 //string L = ConfigurationManager.AppSettings["Language"];
                 //ConfigurationManager.AppSettings["Language"] = "Nl";
                 //var L2 = ConfigurationManager.AppSettings["Language"];
@@ -500,6 +501,7 @@ namespace MyPOS2.Controllers
             TransactionBL.CancelTransac(vmodel.NumTransaction);
             return RedirectToAction("Transaction", "Home");
         }
+
         #endregion
     }
 }

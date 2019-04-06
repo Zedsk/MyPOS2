@@ -27,6 +27,7 @@ namespace MyPOS2.Data.Entity
         public System.DateTime transactionDateEnd { get; set; }
         public decimal total { get; set; }
         public Nullable<decimal> discountGlobal { get; set; }
+        public string cancelDescritpion { get; set; }
         public bool isReturn { get; set; }
         public int terminalId { get; set; }
         public int shopId { get; set; }

@@ -7,8 +7,8 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create") |
-    @Html.ActionLink("Back to Menu", "Transaction", "Home")
+    @Html.ActionLink("Créer nouveau", "Create") |
+    @Html.ActionLink("Retour au Menu", "Transaction", "Home")
 </p>
 @using (Html.BeginForm())
 {
@@ -19,24 +19,28 @@
     <label for="SearchString"><strong>Recherche par date: </strong></label>
     <div style="display:flex;">
         @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "DD/MM/YYY", type = "date" })
-        <input type="submit" value="Search" />
-        @Html.ActionLink("All", "Index", "Cash", new { type = "button", @class = "btn btn-primary" })
+        <input type="submit" value="Recherche" />
+        @Html.ActionLink("Tous", "Index", "Cash", new { type = "button", @class = "btn btn-primary" })
     </div>
 }
 <table class="table">
     <tr>
         <th>
             @*@Html.DisplayNameFor(m => m.dateDay)*@
-            @Html.ActionLink(Html.DisplayNameFor(m => m.dateDay).ToString(), "Index", new { sortOrder = ViewBag.DateSortParam })
+            @*@Html.ActionLink(Html.DisplayNameFor(m => m.dateDay).ToString(), "Index", new { sortOrder = ViewBag.DateSortParam })*@
+            @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParam })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.beginningCash)
+            @*@Html.DisplayNameFor(model => model.beginningCash)*@
+            Cash début de journée
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.endCash)
+            @*@Html.DisplayNameFor(model => model.endCash)*@
+            Cash fin de journée
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TERMINAL.nameTerminal)
+            @*@Html.DisplayNameFor(model => model.TERMINAL.nameTerminal)*@
+            Nom du terminal
         </th>
         <th></th>
     </tr>
@@ -59,7 +63,7 @@
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id1=item.dateDay, id2=item.TERMINAL.idTerminal }) |
                     @Html.ActionLink("Details", "Details", new { id1 = item.dateDay, id2 = item.TERMINAL.idTerminal }) |*@
-                @Html.ActionLink("Delete", "Delete", new { id1 = item.dateDay, id2 = item.TERMINAL.idTerminal })
+                @Html.ActionLink("Supprimer", "Delete", new { id1 = item.dateDay, id2 = item.TERMINAL.idTerminal })
             </td>
         </tr>
     }

@@ -4,14 +4,14 @@
     ViewBag.Title = "End";
 }
 
-<h2>End</h2>
+<h2>Fin de journée</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>CASH_BOTTOM_DAY</h4>
+    <h4>FOND DE CAISSE</h4>
     <hr />
     <span class="text-danger">@ViewBag.Error</span>
 
@@ -35,7 +35,8 @@
     @Html.HiddenFor(model => model.beginningCash);
 
     <div class="form-group">
-        @Html.LabelFor(model => model.endCash, htmlAttributes: new { @class = "control-label col-md-2" })
+        @*@Html.LabelFor(model => model.endCash, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Montant</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.endCash, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.endCash, "", new { @class = "text-danger" })
@@ -51,7 +52,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la Liste", "Index")
 </div>
 
 @section Scripts {

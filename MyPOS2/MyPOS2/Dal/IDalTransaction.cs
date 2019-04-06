@@ -22,6 +22,7 @@ namespace MyPOS2.Dal
         //void UpdateTransactionMessageId(int transactionId, int idTicket);
         void CloseTransaction(int transac);
         void CloseTransaction(int transac, DateTime date);
+        IList<SPP_TransactionsDay_Result> GetAllTransactionDay(DateTime date);
         #endregion
     }
 }
