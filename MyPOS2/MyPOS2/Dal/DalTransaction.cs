@@ -35,13 +35,13 @@ namespace MyPOS2.Dal
         public void CreateDetail(PRODUCT prod, int termId, int trId, decimal vat)
         {
             //// name item -> barcode  à changer!
-            db.TRANSACTION_DETAILSs.Add(new TRANSACTION_DETAILS { transactionId = trId, productId = prod.idProduct, nameItem = prod.barcode, price = prod.salesPrice, quantity = 1, Discount = prod.discountRate, vatItem = vat});
+            db.TRANSACTION_DETAILSs.Add(new TRANSACTION_DETAILS { transactionId = trId, productId = prod.idProduct, nameItem = prod.barcode, price = prod.salesPrice, quantity = 1, discount = prod.discountRate, vatItem = vat});
             db.SaveChanges();
         }
 
         public void CreateDetail(PRODUCT prod, int termId, int trId, decimal vat, string nameProd)
         {
-            db.TRANSACTION_DETAILSs.Add(new TRANSACTION_DETAILS { transactionId = trId, productId = prod.idProduct, nameItem = nameProd, price = prod.salesPrice, quantity = 1, Discount = prod.discountRate, vatItem = vat });
+            db.TRANSACTION_DETAILSs.Add(new TRANSACTION_DETAILS { transactionId = trId, productId = prod.idProduct, nameItem = nameProd, price = prod.salesPrice, quantity = 1, discount = prod.discountRate, vatItem = vat });
             db.SaveChanges();
         }
 

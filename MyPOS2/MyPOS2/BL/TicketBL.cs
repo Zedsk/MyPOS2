@@ -69,10 +69,17 @@ namespace MyPOS2.BL
 
                 //payment method & amount
                 vm.Payments = PaymentBL.FindPaymentsByTransacId(numTransaction);
+                //foreach (var item in vm.Payments)
+                //{
+                //    //var test = item.PAYMENT_METHOD.method;
+                //    string test2 = PaymentBL.FindMethodNameById(item.paymentMethodId);
+                //    item.PAYMENT_METHOD.method = test2;
+
+                //}
 
                 ////message
                 //var message = FindTicketMessageById(transac.messageId, transac.languageId);
-                
+
                 var messages = FindTicketMessageById(transac.idTransaction, lang, isChange);
                 vm.Messages = messages;
                 return vm;

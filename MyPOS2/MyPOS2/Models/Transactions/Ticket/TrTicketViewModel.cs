@@ -41,6 +41,8 @@ namespace MyPOS2.Models.Transactions.Ticket
 
         public IList<PAYMENT> Payments { get; set; }
 
+        public IList<string> MethodsTicket { get; set; }
+
         [DataType(DataType.Text)]
         public string Message { get; set; }
 

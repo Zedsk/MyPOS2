@@ -119,6 +119,15 @@ namespace MyPOS2.Data.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ProductTrans_Result>("SPP_ProductTrans", languageParameter);
         }
     
+        public virtual ObjectResult<SPP_ShopTransDistinct_Result> SPP_ShopTransDistinct(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ShopTransDistinct_Result>("SPP_ShopTransDistinct", languageParameter);
+        }
+    
         public virtual ObjectResult<Nullable<int>> SPP_TicketNbItem(Nullable<System.DateTime> dateMin, Nullable<System.DateTime> dateMax, Nullable<int> nbItems)
         {
             var dateMinParameter = dateMin.HasValue ?
@@ -201,15 +210,6 @@ namespace MyPOS2.Data.Entity
                 new ObjectParameter("tReturn", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_TransactionsDay_Result>("SPP_TransactionsDay", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter);
-        }
-    
-        public virtual ObjectResult<SPP_ShopTransDistinct_Result> SPP_ShopTransDistinct(Nullable<int> language)
-        {
-            var languageParameter = language.HasValue ?
-                new ObjectParameter("language", language) :
-                new ObjectParameter("language", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ShopTransDistinct_Result>("SPP_ShopTransDistinct", languageParameter);
         }
     }
 }

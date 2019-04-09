@@ -15,8 +15,10 @@ namespace MyPOS2.Data.Entity
     {
         public int idshop { get; set; }
         public int languageId { get; set; }
+        public string logoShop { get; set; }
         public string nameShop { get; set; }
         public string street { get; set; }
+        public string zipCode { get; set; }
         public string city { get; set; }
         public string phone { get; set; }
         public string email { get; set; }

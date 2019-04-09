@@ -12,5 +12,6 @@ namespace MyPOS2.Dal
         void CreatePayment(decimal tot, int methodP, int numTransaction);
         IList<PAYMENT_METHOD> GetAllMethods();
         IList<PAYMENT> GetAllPaymentsByTransacId(int numTransaction);
+        string GetMethodNameById(int paymentMethodId);
     }
 }

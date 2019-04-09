@@ -25,8 +25,10 @@ namespace MyPOS2.Data.Entity
         }
     
         public int idShop { get; set; }
+        public string logoShop { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
+        public string zipCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHOP_PRODUCT> SHOP_PRODUCT { get; set; }

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using MyPOS2.Data.Entity;
-using MyPOS2.Dal;
+
 
 namespace MyPOS2.Dal
 {
@@ -38,8 +37,14 @@ namespace MyPOS2.Dal
 
         public IList<PAYMENT> GetAllPaymentsByTransacId(int numTransaction)
         {
+            ////ne fonctionne pas ici, dans le controller ça focntionne. Modification dans TicketBL de FillTicket()
+            //var test = db.PAYMENTs.Include(p => p.PAYMENT_METHOD).Where(m => m.transactionId == numTransaction).ToList();
             return db.PAYMENTs.Where(p => p.transactionId == numTransaction).ToList();
         }
 
+        public string GetMethodNameById(int paymentMethodId)
+        {
+            return db.PAYMENT_METHODs.Where(p => p.idPaymentMethod == paymentMethodId).Select(m => m.method).Single();
+        }
     }
 }

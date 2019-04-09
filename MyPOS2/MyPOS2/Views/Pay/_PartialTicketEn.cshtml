@@ -9,7 +9,8 @@
 <!--  -->
 <!-- Logo Magasin -->
 <div style="text-align: center;">
-    <img src="~/Content/image/logo_magasin.png" alt="Store logo">
+    @*<img src="~/Content/image/logo_magasin.png" alt="Store logo">*@
+    <img src="@Url.Content(Model.Shop.logoShop)" alt="store logo" />
 </div>
 
 <div class="container">
@@ -59,6 +60,9 @@
     <p>
         @Html.DisplayFor(m => m.Shop.street)
         @Html.ValidationMessageFor(m => m.Shop.street, "", new { @class = "text-danger" })
+        ,
+        @Html.DisplayFor(m => m.Shop.zipCode)
+        @Html.ValidationMessageFor(m => m.Shop.zipCode, "", new { @class = "text-danger" })
         ,
         @Html.DisplayFor(m => m.Shop.city)
         @Html.ValidationMessageFor(m => m.Shop.city, "", new { @class = "text-danger" })
@@ -176,7 +180,7 @@
                 foreach (var item in Model.Payments)
                 {
                     <tr>
-                        <td id="nameItem">@item.paymentMethodId</td>
+                        <td id="nameItem">@item.PAYMENT_METHOD.method</td>
                         <td id="price">@item.amount<span class="glyphicon glyphicon-euro"></span></td>
                     </tr>
                 }

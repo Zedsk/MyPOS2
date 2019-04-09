@@ -150,7 +150,7 @@ namespace MyPOS2.BL
             {
                 var p = item.price;
                 var q = item.quantity;
-                var d = item.Discount;
+                var d = item.discount;
                 decimal? st;
                 if (p == 0 || q == 0)
                 {
@@ -177,7 +177,7 @@ namespace MyPOS2.BL
                     Price = p,
                     Quantity = q,
                     ProductVat = item.vatItem,
-                    Discount = item.Discount,
+                    Discount = item.discount,
                     TotalItem = st
                 };
                 vmList.Add(vm);

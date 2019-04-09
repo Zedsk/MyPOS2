@@ -46,7 +46,6 @@ namespace MyPOS2.BL
             }
         }
 
-
         //internal static TrPaymentMenuViewModel CalculCash(string total, string cashIn, string method, string numtransac)
         //{
         //    var temp1 = total.Replace(".", ",");
@@ -143,7 +142,24 @@ namespace MyPOS2.BL
             {
 
                 int tr = int.Parse(numTransaction);
+                var test = dal.GetAllPaymentsByTransacId(tr);
+                foreach (var item in test)
+                {
+                    //var test = item.PAYMENT_METHOD.method;
+                    string test2 = PaymentBL.FindMethodNameById(item.paymentMethodId);
+                    item.PAYMENT_METHOD.method = test2;
+
+                }
+
                 return dal.GetAllPaymentsByTransacId(tr);
+            }
+        }
+
+        internal static string FindMethodNameById(int paymentMethodId)
+        {
+            using (IDalPayment dal = new DalPayment())
+            {
+                return dal.GetMethodNameById(paymentMethodId);
             }
         }
     }

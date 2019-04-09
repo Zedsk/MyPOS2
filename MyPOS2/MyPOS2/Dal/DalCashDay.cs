@@ -1,9 +1,7 @@
 ﻿using MyPOS2.Data.Entity;
-using MyPOS2.Dal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace MyPOS2.Dal
 {

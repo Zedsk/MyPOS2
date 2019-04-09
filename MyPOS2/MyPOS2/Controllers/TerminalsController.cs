@@ -20,6 +20,7 @@ namespace MyPOS2.Controllers
         public ActionResult Index()
         {
             var terminal = db.TERMINALs.Include(t => t.SHOP);
+            
             return View(terminal.ToList());
         }
 

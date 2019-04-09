@@ -20,7 +20,7 @@ namespace MyPOS2.Data.Entity
         public string nameItem { get; set; }
         public decimal price { get; set; }
         public int quantity { get; set; }
-        public Nullable<decimal> Discount { get; set; }
+        public Nullable<decimal> discount { get; set; }
         public Nullable<decimal> vatItem { get; set; }
     
         public virtual PRODUCT PRODUCT { get; set; }

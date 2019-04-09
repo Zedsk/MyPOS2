@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -214,8 +214,10 @@
             <PropertyRef Name="idShop" />
           </Key>
           <Property Name="idShop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="logoShop" Type="varchar" MaxLength="200" />
           <Property Name="phone" Type="varchar" MaxLength="40" />
           <Property Name="email" Type="varchar" MaxLength="40" />
+          <Property Name="zipCode" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="SHOP_PRODUCT">
           <Key>
@@ -276,7 +278,7 @@
           <Property Name="nameItem" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
-          <Property Name="Discount" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="discount" Type="decimal" Precision="4" Scale="2" />
           <Property Name="vatItem" Type="decimal" Precision="4" Scale="2" />
         </EntityType>
         <EntityType Name="TRANSACTIONS">
@@ -414,7 +416,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CATEGORY_TRANSLATION_CATEGORY">
-          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CATEGORY_TRANSLATION" Type="Self.CATEGORY_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CATEGORY">
@@ -426,7 +430,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CATEGORY_TRANSLATION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CATEGORY_TRANSLATION" Type="Self.CATEGORY_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
@@ -474,7 +480,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HERO_TRANSLATION_HERO">
-          <End Role="HERO" Type="Self.HERO" Multiplicity="1" />
+          <End Role="HERO" Type="Self.HERO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="HERO_TRANSLATION" Type="Self.HERO_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HERO">
@@ -486,7 +494,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HERO_TRANSLATION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="HERO_TRANSLATION" Type="Self.HERO_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
@@ -498,7 +508,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MESSAGE_TRANSLATION_LANGUAGES">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MESSAGE_TRANSLATION" Type="Self.MESSAGE_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
@@ -510,7 +522,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MESSAGE_TRANSLATION_TICKET_MESSAGE">
-          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MESSAGE_TRANSLATION" Type="Self.MESSAGE_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TICKET_MESSAGE">
@@ -582,7 +596,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PRODUCT_TRANSLATION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PRODUCT_TRANSLATION" Type="Self.PRODUCT_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
@@ -594,7 +610,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PRODUCT_TRANSLATION_PRODUCT">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PRODUCT_TRANSLATION" Type="Self.PRODUCT_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PRODUCT">
@@ -642,7 +660,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SHOP_TRANSLATION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SHOP_TRANSLATION" Type="Self.SHOP_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
@@ -654,7 +674,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SHOP_TRANSLATION_SHOP">
-          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SHOP_TRANSLATION" Type="Self.SHOP_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SHOP">
@@ -1095,7 +1117,8 @@
             <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pos1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1338,8 +1361,10 @@
             <PropertyRef Name="idShop" />
           </Key>
           <Property Name="idShop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="logoShop" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="phone" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="zipCode" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="SHOP_PRODUCT" Relationship="Self.FK_SHOP_PRODUCT_SHOP" FromRole="SHOP" ToRole="SHOP_PRODUCT" />
           <NavigationProperty Name="SHOP_TRANSLATION" Relationship="Self.FK_SHOP_TRANSLATION_SHOP" FromRole="SHOP" ToRole="SHOP_TRANSLATION" />
           <NavigationProperty Name="TERMINAL" Relationship="Self.FK_TERMINAL_SHOP" FromRole="SHOP" ToRole="TERMINAL" />
@@ -1417,7 +1442,7 @@
           <Property Name="nameItem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="quantity" Type="Int32" Nullable="false" />
-          <Property Name="Discount" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="discount" Type="Decimal" Precision="4" Scale="2" />
           <Property Name="vatItem" Type="Decimal" Precision="4" Scale="2" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_TRANSACTION_DETAILS_PRODUCT" FromRole="TRANSACTION_DETAILS" ToRole="PRODUCT" />
           <NavigationProperty Name="TRANSACTIONS" Relationship="Self.FK_TRANSACTION_DETAILS_TRANSACTION" FromRole="TRANSACTION_DETAILS" ToRole="TRANSACTIONS" />
@@ -1559,7 +1584,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CATEGORY_TRANSLATION_CATEGORY">
-          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CATEGORY_TRANSLATION" Type="Self.CATEGORY_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CATEGORY">
@@ -1607,7 +1634,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CATEGORY_TRANSLATION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CATEGORY_TRANSLATION" Type="Self.CATEGORY_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
@@ -1643,7 +1672,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HERO_TRANSLATION_HERO">
-          <End Role="HERO" Type="Self.HERO" Multiplicity="1" />
+          <End Role="HERO" Type="Self.HERO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="HERO_TRANSLATION" Type="Self.HERO_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HERO">
@@ -1667,7 +1698,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HERO_TRANSLATION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="HERO_TRANSLATION" Type="Self.HERO_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
@@ -1679,7 +1712,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MESSAGE_TRANSLATION_LANGUAGES">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MESSAGE_TRANSLATION" Type="Self.MESSAGE_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
@@ -1691,7 +1726,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PRODUCT_TRANSLATION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PRODUCT_TRANSLATION" Type="Self.PRODUCT_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
@@ -1703,7 +1740,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SHOP_TRANSLATION_LANGUAGE">
-          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SHOP_TRANSLATION" Type="Self.SHOP_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGES">
@@ -1715,7 +1754,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MESSAGE_TRANSLATION_TICKET_MESSAGE">
-          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1" />
+          <End Role="TICKET_MESSAGE" Type="Self.TICKET_MESSAGE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MESSAGE_TRANSLATION" Type="Self.MESSAGE_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TICKET_MESSAGE">
@@ -1751,7 +1792,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PRODUCT_TRANSLATION_PRODUCT">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PRODUCT_TRANSLATION" Type="Self.PRODUCT_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PRODUCT">
@@ -1811,7 +1854,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SHOP_TRANSLATION_SHOP">
-          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1" />
+          <End Role="SHOP" Type="Self.SHOP" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SHOP_TRANSLATION" Type="Self.SHOP_TRANSLATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SHOP">
@@ -2125,17 +2170,20 @@
           </FunctionImport>
           <FunctionImport Name="SPP_GetAllShop" ReturnType="Collection(Pos1Model.SPP_GetAllShop_Result)" />
           <FunctionImport Name="SPP_GetShopById" ReturnType="Collection(Pos1Model.SPP_GetShopById_Result)">
-          <Parameter Name="shop" Mode="In" Type="Int32" />
+            <Parameter Name="shop" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_HeroesTrans" ReturnType="Collection(Pos1Model.SPP_HeroesTrans_Result)" />
           <FunctionImport Name="SPP_HeroesTransDistinct" ReturnType="Collection(Pos1Model.SPP_HeroesTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ParentCategories" ReturnType="Collection(Pos1Model.SPP_ParentCategories_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ProductTrans" ReturnType="Collection(Pos1Model.SPP_ProductTrans_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_ShopTransDistinct" ReturnType="Collection(Pos1Model.SPP_ShopTransDistinct_Result)">
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_TicketNbItem" ReturnType="Collection(Int32)">
             <Parameter Name="dateMin" Mode="In" Type="DateTime" />
@@ -2152,7 +2200,7 @@
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SPP_TransactionMessageIds" ReturnType="Collection(Int32)">
-          <Parameter Name="idTransac" Mode="In" Type="Int32" />
+            <Parameter Name="idTransac" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_TransactionsDay" ReturnType="Collection(Pos1Model.SPP_TransactionsDay_Result)">
             <Parameter Name="tDate" Mode="In" Type="Int32" />
@@ -2160,9 +2208,6 @@
             <Parameter Name="tDay" Mode="In" Type="Int32" />
             <Parameter Name="tStatus" Mode="In" Type="Int32" />
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="SPP_ShopTransDistinct" ReturnType="Collection(Pos1Model.SPP_ShopTransDistinct_Result)">
-            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPP_ChildCategories_Result">
@@ -2173,8 +2218,10 @@
         <ComplexType Name="SPP_GetAllShop_Result">
           <Property Type="Int32" Name="idshop" Nullable="false" />
           <Property Type="Int32" Name="languageId" Nullable="false" />
+          <Property Type="String" Name="logoShop" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="nameShop" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="street" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="zipCode" Nullable="false" MaxLength="40" />
           <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="phone" Nullable="true" MaxLength="40" />
           <Property Type="String" Name="email" Nullable="true" MaxLength="40" />
@@ -2183,8 +2230,10 @@
         <ComplexType Name="SPP_GetShopById_Result">
           <Property Type="Int32" Name="idshop" Nullable="false" />
           <Property Type="Int32" Name="languageId" Nullable="false" />
+          <Property Type="String" Name="logoShop" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="nameShop" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="street" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="zipCode" Nullable="false" MaxLength="40" />
           <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="phone" Nullable="true" MaxLength="40" />
           <Property Type="String" Name="email" Nullable="true" MaxLength="40" />
@@ -2223,6 +2272,10 @@
           <Property Type="String" Name="nameProduct" Nullable="false" MaxLength="40" />
           <Property Type="String" Name="description" Nullable="false" MaxLength="Max" />
         </ComplexType>
+        <ComplexType Name="SPP_ShopTransDistinct_Result">
+          <Property Type="Int32" Name="idShop" Nullable="false" />
+          <Property Type="String" Name="nameShop" Nullable="true" MaxLength="100" />
+        </ComplexType>
         <ComplexType Name="SPP_TransactionsDay_Result">
           <Property Type="Int32" Name="idTransaction" Nullable="false" />
           <Property Type="DateTime" Name="transactionDateBegin" Nullable="false" Precision="23" />
@@ -2236,10 +2289,6 @@
           <Property Type="Int32" Name="customerId" Nullable="false" />
           <Property Type="Int32" Name="statusId" Nullable="false" />
           <Property Type="String" Name="userId" Nullable="false" MaxLength="128" />
-        </ComplexType>
-        <ComplexType Name="SPP_ShopTransDistinct_Result">
-          <Property Type="Int32" Name="idShop" Nullable="false" />
-          <Property Type="String" Name="nameShop" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2452,8 +2501,10 @@
             <EntityTypeMapping TypeName="Pos1Model.SHOP">
               <MappingFragment StoreEntitySet="SHOP">
                 <ScalarProperty Name="idShop" ColumnName="idShop" />
+                <ScalarProperty Name="logoShop" ColumnName="logoShop" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2520,7 +2571,7 @@
                 <ScalarProperty Name="nameItem" ColumnName="nameItem" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
                 <ScalarProperty Name="vatItem" ColumnName="vatItem" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2612,8 +2663,10 @@
               <ComplexTypeMapping TypeName="Pos1Model.SPP_GetAllShop_Result">
                 <ScalarProperty Name="idshop" ColumnName="idshop" />
                 <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="logoShop" ColumnName="logoShop" />
                 <ScalarProperty Name="nameShop" ColumnName="nameShop" />
                 <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -2626,8 +2679,10 @@
               <ComplexTypeMapping TypeName="Pos1Model.SPP_GetShopById_Result">
                 <ScalarProperty Name="idshop" ColumnName="idshop" />
                 <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="logoShop" ColumnName="logoShop" />
                 <ScalarProperty Name="nameShop" ColumnName="nameShop" />
                 <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -2684,6 +2739,14 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ShopTransDistinct" FunctionName="Pos1Model.Store.SPP_ShopTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ShopTransDistinct_Result">
+                <ScalarProperty Name="idShop" ColumnName="idShop" />
+                <ScalarProperty Name="nameShop" ColumnName="nameShop" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPP_TicketNbItem" FunctionName="Pos1Model.Store.SPP_TicketNbItem" />
           <FunctionImportMapping FunctionImportName="SPP_TicketTimeSure" FunctionName="Pos1Model.Store.SPP_TicketTimeSure" />
           <FunctionImportMapping FunctionImportName="SPP_TransactionMessageIds" FunctionName="Pos1Model.Store.SPP_TransactionMessageIds" />
@@ -2702,14 +2765,6 @@
                 <ScalarProperty Name="customerId" ColumnName="customerId" />
                 <ScalarProperty Name="statusId" ColumnName="statusId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPP_ShopTransDistinct" FunctionName="Pos1Model.Store.SPP_ShopTransDistinct">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Pos1Model.SPP_ShopTransDistinct_Result">
-                <ScalarProperty Name="idShop" ColumnName="idShop" />
-                <ScalarProperty Name="nameShop" ColumnName="nameShop" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
