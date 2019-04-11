@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyPOS2.Dal
 {
-    interface IDalHero
+    interface IDalHero : IDisposable
     {
         IList<SPP_HeroesTrans_Result> GetAllHeroTrans();
     }

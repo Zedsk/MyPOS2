@@ -90,59 +90,79 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                HERO hero = new HERO
-                {
-                    imageHero = vmodel.ImageHero
-                };
-                db.HEROs.Add(hero);
-                db.SaveChanges();
-                int id = hero.idHero;
+
+                //Check if nameHero have min  1 value
                 IList<HERO_TRANSLATION> heroesT = vmodel.HeroesTrans;
-                int count = heroesT.Count();
-                //IList<HERO_TRANSLATION> tempHeroesT = vmodel.HeroesTrans;
-                bool isUniversal = TranslationBL.CheckIfUniversal(heroesT);
-                if (isUniversal)
+                bool nameHeroIsValid = TranslationBL.CheckIfNameHeroIsValid(heroesT);
+                if (nameHeroIsValid)
                 {
-                    for (int i = 0; i < heroesT.Count(); i++)
+                    //Check if Hero exist by nameHero before create
+                    bool nameExist = TranslationBL.CheckIfNameExist(heroesT);
+                    if (!nameExist)
                     {
-                        if (heroesT[i].nameHero != null)
+                        HERO hero = new HERO
                         {
-                            heroesT[i].heroId = id;
-                            //change language with universal
-                            heroesT[i].languageId = LanguageBL.FindIdLanguageByShortForm("all");
+                            imageHero = vmodel.ImageHero
+                        };
+                        db.HEROs.Add(hero);
+                        db.SaveChanges();
+                        int id = hero.idHero;
+                        int count = heroesT.Count();
+                        //Check if nameHero isUniversal
+                        bool isUniversal = TranslationBL.CheckIfUniversal(heroesT);
+                        if (isUniversal)
+                        {
+                            for (int i = 0; i < heroesT.Count(); i++)
+                            {
+                                if (heroesT[i].nameHero != null)
+                                {
+                                    heroesT[i].heroId = id;
+                                    //change language with universal
+                                    heroesT[i].languageId = LanguageBL.FindIdLanguageByShortForm("all");
+                                }
+                                else
+                                {
+                                    heroesT.Remove(heroesT[i]);
+                                    i--;
+                                }
+                            }
+                            //foreach (var item in tempHeroesT)
+                            //{
+                            //    if (item.nameHero != null)
+                            //    {
+                            //        item.heroId = id;
+                            //        //change language with universal
+                            //        item.languageId = LanguageBL.FindIdLanguageByShortForm("all");
+                            //    }
+                            //    else
+                            //    {
+                            //        heroesT.Remove(item);
+                            //    }
+                            //}
                         }
                         else
                         {
-                            heroesT.Remove(heroesT[i]);
-                            i--;
+                            foreach (var item in heroesT)
+                            {
+                                item.heroId = id;
+                            }
                         }
+                        db.HERO_TRANSLATIONs.AddRange(heroesT);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
                     }
-                    //foreach (var item in tempHeroesT)
-                    //{
-                    //    if (item.nameHero != null)
-                    //    {
-                    //        item.heroId = id;
-                    //        //change language with universal
-                    //        item.languageId = LanguageBL.FindIdLanguageByShortForm("all");
-                    //    }
-                    //    else
-                    //    {
-                    //        heroesT.Remove(item);
-                    //    }
-                    //}
+                    else
+                    {
+                        //to do --> match the error with the name that causes the error
+                        ViewBag.nameIsNotValid = "Le nom existe déjà, veuillez saisir un autre nom!";
+                    }
                 }
                 else
                 {
-                    foreach (var item in heroesT)
-                    {
-                        item.heroId = id;
-                    }
+                    ViewBag.nameIsNotValid = "Veuillez saisir un nom!";
                 }
-                db.HERO_TRANSLATIONs.AddRange(heroesT);
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
+            vmodel.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
             return View(vmodel);
         }
 
@@ -160,16 +180,31 @@ namespace MyPOS2.Controllers
                 return HttpNotFound();
             }
             var translation = db.HERO_TRANSLATIONs.Where(ht => ht.heroId == id).ToList();
+            var lang = db.LANGUAGESs.Count();
             HeroViewModel vm = new HeroViewModel();
+            bool isUniversal = false;
             if (translation.Count() == 1)
             {
-                vm.ListLang = db.LANGUAGESs.Where(l => l.shortForm == "all").ToList();           
+                isUniversal = true;
+                HERO_TRANSLATION empty = new HERO_TRANSLATION
+                {
+                    heroId = 0,
+                    languageId = 0,
+                    nameHero = "",
+                };
+                for (int i = 0; i < (lang-2); i++)
+                {
+                    translation.Add(empty);
+                }
             }
-            else
-            {
-                //ListLang = LanguageBL.FindLanguageListWithoutUniversal(),
-                vm.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
-            }
+            //else
+            //{
+            //    //ListLang = LanguageBL.FindLanguageListWithoutUniversal(),
+            //    vm.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
+            //}
+
+            ViewBag.isUniversal = isUniversal;
+            vm.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
             vm.Hero = hERO;
             vm.HeroesTrans = translation;
             //IList<SPP_HeroesTrans_Result> heroes = db.SPP_HeroesTrans().Where(h => h.idHero == id).ToList();
@@ -202,11 +237,22 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                bool isUniversal = TranslationBL.CheckIfUniversal(vmodel.HeroesTrans);
                 db.Entry(vmodel.Hero).State = EntityState.Modified;
                 foreach (var item in vmodel.HeroesTrans)
                 {
-                    db.Entry(item).State = EntityState.Modified;
+                    if (item.nameHero != null)
+                    {
+                        if (isUniversal)
+                        {
+                            item.languageId = LanguageBL.FindIdLanguageByShortForm("all");
+                            db.Entry(item).State = EntityState.Modified;
+                        }
+                        else
+                        {
+                            db.Entry(item).State = EntityState.Modified;
+                        }
+                    }
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
