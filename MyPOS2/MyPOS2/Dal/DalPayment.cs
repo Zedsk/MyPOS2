@@ -37,7 +37,7 @@ namespace MyPOS2.Dal
 
         public IList<PAYMENT> GetAllPaymentsByTransacId(int numTransaction)
         {
-            ////ne fonctionne pas ici, dans le controller ça focntionne. Modification dans TicketBL de FillTicket()
+            ////ne fonctionne pas ici ==>  Modification dans PaymentBL  FindPaymentsByTransacId(string numTransaction)
             //var test = db.PAYMENTs.Include(p => p.PAYMENT_METHOD).Where(m => m.transactionId == numTransaction).ToList();
             return db.PAYMENTs.Where(p => p.transactionId == numTransaction).ToList();
         }

@@ -52,5 +52,17 @@ namespace MyPOS2.BL
             }
             return lang;
         }
+
+        internal static IList<LANGUAGES> KeepOnlyUniversal(IList<LANGUAGES> lang)
+        {
+            for (int i = 0; i < lang.Count(); i++)
+            {
+                if (lang[i].shortForm != "all")
+                {
+                    lang.Remove(lang[i]);
+                }
+            }
+            return lang;
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace MyPOS2.BL
                 }
                 else
                 {
-                    vm.DiscountG = (transac.discountGlobal).ToString();
+                    vm.DiscountG = (transac.discountGlobal * 100).ToString();
                 }
 
                 ////VAT
@@ -216,6 +216,10 @@ namespace MyPOS2.BL
                                 int idMethodP = int.Parse(vmodel.MethodP);
                             }
                         }
+                    }
+                    else if (listTransac.Count() == 0)
+                    {
+                        listTransac = dal.GetAllTicketDay(dateDay);
                     }
                 }
                 for (int i = 0; i < listTransac.Count(); i++)

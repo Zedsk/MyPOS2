@@ -251,3 +251,101 @@ function FctPrint(divName) {
 
     document.body.innerHTML = originalContents;
 }
+
+//function ImportImage() {
+//    try {
+//        var path = document.getElementById('newImageHero').value;
+//        var filename = path.substring(path.lastIndexOf('\\') + 1);
+//        var source = document.getElementById('sourceName').textContent;
+//        var file = document.getElementById('newImageHero').files[0];
+//        //find controller name
+//        var c = window.location.pathname.split("/");
+//        var controller = c[1];
+
+//        var xhr = new XMLHttpRequest();
+//        xhr.onreadystatechange = function () {
+//            if (this.readyState == 4 && this.status == 200) {
+//                document.getElementById('nameId').innerHTML = xhr.responseText;
+//                var T = document.getElementById('detail').textContent;
+//                document.getElementById('ImageHero').value = T.trim();
+
+//            }
+//        }
+//        switch (source) {
+
+//            default:
+//        }
+
+//        //Post Method
+//        var url = "/" + controller +"/Import";
+//        var param = "file=" + file
+//            + "&filename=" + filename
+//            + "&source=" + source;
+//        xhr.open("POST", url);
+//        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//        xhr.send(param);
+//    } catch (e) {
+//        document.getElementById('errorSearchProduct').textContent = e;
+//        document.getElementById('errorSearchProduct').style.visibility = "visible";
+//        console.log(e);
+//    }
+//}
+
+function ImportImage() {
+    try {
+        //var path = document.getElementById('newImageHero').value;
+        //var filename = path.substring(path.lastIndexOf('\\') + 1);
+        var source = document.getElementById('sourceName').textContent;
+        //var file = document.getElementById('newImageHero');
+        //var dataString = new FormData(form);
+        //var test = form;
+        var formData = new FormData();
+        //formData.append("filename", filename);
+        formData.append("source", source);
+        //formData.append("file", file);
+        formData.append("file", $('#newImageHero')[0].files[0]);
+
+        //find controller name
+        var c = window.location.pathname.split("/");
+        var controller = c[1];
+        var url = "/" + controller + "/Import";
+
+        $.ajax({
+            url: url,
+            type: 'Post',
+            data: formData,
+            success: function (result) {
+                document.getElementById('nameId').innerHTML = result;
+                var T = document.getElementById('detail').textContent;
+
+                switch (source.toLowerCase()) {
+                    case "hero":
+                        if (document.getElementById('ImageHero') != null) {
+                            document.getElementById('ImageHero').value = T.trim();
+                        }
+                        else {
+                            document.getElementById('Hero_imageHero').value = T.trim();
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                document.getElementById('imgLogo').src = (T.trim()).substring(1);        
+            },
+            error: function () { },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        //}).done(function () {
+        //        document.getElementById('nameId').innerHTML = result;
+        //        var T = document.getElementById('detail').textContent;
+        //        document.getElementById('ImageHero').value = T.trim();
+        //    });
+    } catch (e) {
+        document.getElementById('errorSearchProduct').textContent = e;
+        document.getElementById('errorSearchProduct').style.visibility = "visible";
+        console.log(e);
+    }
+}

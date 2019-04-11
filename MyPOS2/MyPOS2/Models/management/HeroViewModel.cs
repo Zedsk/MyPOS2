@@ -18,7 +18,7 @@ namespace MyPOS2.Models.management
         [Display(Name = "Nom du héro")]
         public string NameHero { get; set; }
 
-        //public HERO Hero { get; set; }
+        public HERO Hero { get; set; }
 
         public HERO_TRANSLATION HeroTrans { get; set; }
 

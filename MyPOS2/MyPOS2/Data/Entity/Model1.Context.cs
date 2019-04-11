@@ -47,6 +47,7 @@ namespace MyPOS2.Data.Entity
         public virtual DbSet<PERSON> PERSONs { get; set; }
         public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
         public virtual DbSet<PRODUCT_TRANSLATION> PRODUCT_TRANSLATIONs { get; set; }
+        public virtual DbSet<SETTING> SETTINGs { get; set; }
         public virtual DbSet<SHOP> SHOPs { get; set; }
         public virtual DbSet<SHOP_PRODUCT> SHOP_PRODUCTs { get; set; }
         public virtual DbSet<SHOP_TRANSLATION> SHOP_TRANSLATIONs { get; set; }

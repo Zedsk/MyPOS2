@@ -30,6 +30,7 @@
         @*@Html.LabelFor(model => model.nameTerminal, htmlAttributes: new { @class = "control-label col-md-2" })*@
         <label class="control-label col-md-2">Nom du Terminal</label>
         <div class="col-md-10">
+
             @Html.EditorFor(model => model.nameTerminal, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.nameT } })
             @Html.ValidationMessageFor(model => model.nameTerminal, "", new { @class = "text-danger" })
             <button type="button" class="btn btn-default" value="" onclick="SearchHostName()">

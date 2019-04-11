@@ -116,6 +116,18 @@ namespace MyPOS2.Dal
         //    return result;
         //}
 
+        public IList<int> GetAllTicketDay(DateTime date)
+        {
+            IList<int> result = new List<int>();
+            // statusId = 2  = transaction end   +  isReturn = false  = is not a Transtacion return
+            IList<TRANSACTIONS> transacs = db.TRANSACTIONSs.Where(d => d.transactionDateEnd.Year == date.Year  && d.transactionDateEnd.Month == date.Month && d.transactionDateEnd.Day == date.Day && d.statusId == 2 && d.isReturn == false).ToList();
+            foreach (var item in transacs)
+            {
+                result.Add(item.idTransaction);
+            }
+            return result;
+        }
+
         public IList<int> GetTicket(DateTime date)
         {
             IList<int?> res = new List<int?>();

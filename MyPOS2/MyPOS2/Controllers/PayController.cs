@@ -470,10 +470,13 @@ namespace MyPOS2.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    TrRprintTicketViewModel vm = new TrRprintTicketViewModel();
-                    vm.Tickets = TicketBL.FindTicket(vmodel);
-                    vm.MethodsP = PaymentBL.FindMethodsList();
-                    vm.Languages = LanguageBL.FindLanguageList();
+
+                    TrRprintTicketViewModel vm = new TrRprintTicketViewModel
+                    {
+                        Tickets = TicketBL.FindTicket(vmodel),
+                        MethodsP = PaymentBL.FindMethodsList(),
+                        Languages = LanguageBL.FindLanguageList()
+                    };
                     ViewBag.ticket = true;
                     return View(vm);
                 }

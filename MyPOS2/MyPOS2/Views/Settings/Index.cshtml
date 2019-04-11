@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MyPOS2.Data.Entity.SETTING>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Retour au Menu", "Management", "Home")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nameSetting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valueSetting)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nameSetting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.valueSetting)
+        </td>
+        <td>
+            @Html.ActionLink("Editer", "Edit", new { id=item.idSetting })
+
+
+        </td>
+    </tr>
+}
+
+</table>

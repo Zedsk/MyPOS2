@@ -209,6 +209,14 @@
           <Property Name="nameProduct" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="description" Type="text" Nullable="false" />
         </EntityType>
+        <EntityType Name="SETTING">
+          <Key>
+            <PropertyRef Name="idSetting" />
+          </Key>
+          <Property Name="idSetting" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameSetting" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="valueSetting" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="SHOP">
           <Key>
             <PropertyRef Name="idShop" />
@@ -935,6 +943,7 @@
           <EntitySet Name="PERSON" EntityType="Self.PERSON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCT_TRANSLATION" EntityType="Self.PRODUCT_TRANSLATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SETTING" EntityType="Self.SETTING" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SHOP" EntityType="Self.SHOP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SHOP_PRODUCT" EntityType="Self.SHOP_PRODUCT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SHOP_TRANSLATION" EntityType="Self.SHOP_TRANSLATION" Schema="dbo" store:Type="Tables" />
@@ -1355,6 +1364,14 @@
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="LANGUAGES" Relationship="Self.FK_PRODUCT_TRANSLATION_LANGUAGE" FromRole="PRODUCT_TRANSLATION" ToRole="LANGUAGES" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCT_TRANSLATION_PRODUCT" FromRole="PRODUCT_TRANSLATION" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="SETTING">
+          <Key>
+            <PropertyRef Name="idSetting" />
+          </Key>
+          <Property Name="idSetting" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameSetting" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valueSetting" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="SHOP">
           <Key>
@@ -1996,6 +2013,7 @@
           <EntitySet Name="PERSON" EntityType="Self.PERSON" />
           <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" />
           <EntitySet Name="PRODUCT_TRANSLATION" EntityType="Self.PRODUCT_TRANSLATION" />
+          <EntitySet Name="SETTING" EntityType="Self.SETTING" />
           <EntitySet Name="SHOP" EntityType="Self.SHOP" />
           <EntitySet Name="SHOP_PRODUCT" EntityType="Self.SHOP_PRODUCT" />
           <EntitySet Name="SHOP_TRANSLATION" EntityType="Self.SHOP_TRANSLATION" />
@@ -2494,6 +2512,15 @@
                 <ScalarProperty Name="languageId" ColumnName="languageId" />
                 <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
                 <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SETTING">
+            <EntityTypeMapping TypeName="Pos1Model.SETTING">
+              <MappingFragment StoreEntitySet="SETTING">
+                <ScalarProperty Name="idSetting" ColumnName="idSetting" />
+                <ScalarProperty Name="nameSetting" ColumnName="nameSetting" />
+                <ScalarProperty Name="valueSetting" ColumnName="valueSetting" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

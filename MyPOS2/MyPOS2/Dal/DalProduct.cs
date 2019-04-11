@@ -54,7 +54,7 @@ namespace MyPOS2.Dal
 
         public string GetNameProductById(int idProduct, int language)
         {
-            PRODUCT_TRANSLATION prod = db.PRODUCT_TRANSLATIONs.Where(p => p.productId == idProduct && p.languageId == language).Single();
+            PRODUCT_TRANSLATION prod = db.PRODUCT_TRANSLATIONs.Where(p => p.productId == idProduct && (p.languageId == language || p.LANGUAGES.shortForm == "all")).Single();
             return prod.nameProduct;
         }
 

@@ -90,6 +90,7 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 HERO hero = new HERO
                 {
                     imageHero = vmodel.ImageHero
@@ -152,28 +153,65 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             HERO hERO = db.HEROs.Find(id);
             if (hERO == null)
             {
                 return HttpNotFound();
             }
-            return View(hERO);
+            var translation = db.HERO_TRANSLATIONs.Where(ht => ht.heroId == id).ToList();
+            HeroViewModel vm = new HeroViewModel();
+            if (translation.Count() == 1)
+            {
+                vm.ListLang = db.LANGUAGESs.Where(l => l.shortForm == "all").ToList();           
+            }
+            else
+            {
+                //ListLang = LanguageBL.FindLanguageListWithoutUniversal(),
+                vm.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
+            }
+            vm.Hero = hERO;
+            vm.HeroesTrans = translation;
+            //IList<SPP_HeroesTrans_Result> heroes = db.SPP_HeroesTrans().Where(h => h.idHero == id).ToList();
+
+            return View(vm);
         }
 
-        // POST: Heroes/Edit/5
+        //// POST: Heroes/Edit/5
+        //// Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        //// plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "idHero,imageHero")] HERO hERO)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(hERO).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(hERO);
+        //}
+
+        // POST: 
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idHero,imageHero")] HERO hERO)
+        public ActionResult Edit(HeroViewModel vmodel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(hERO).State = EntityState.Modified;
+
+                db.Entry(vmodel.Hero).State = EntityState.Modified;
+                foreach (var item in vmodel.HeroesTrans)
+                {
+                    db.Entry(item).State = EntityState.Modified;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(hERO);
+            return View(vmodel);
         }
 
         // GET: Heroes/Delete/5
@@ -202,6 +240,25 @@ namespace MyPOS2.Controllers
             db.HEROs.Remove(hERO);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Import(HttpPostedFileBase file, string source)
+        {
+            string path = ImportBL.ImportImage(file, source);
+
+            //string src = source.ToLower();
+            ////string path = Server.MapPath("~/Content/image/" + src + "/" + filename);
+            //string path = "~/Content/image/" + src + "/" + file.FileName;
+            //if (System.IO.File.Exists(path))
+            //{
+            //    System.IO.File.Delete(path);
+            //}
+            ////file.SaveAs(path);
+            file.SaveAs(Server.MapPath(path));
+
+            ViewBag.path = path;
+
+            return PartialView("_PartialImageName");
         }
 
         protected override void Dispose(bool disposing)

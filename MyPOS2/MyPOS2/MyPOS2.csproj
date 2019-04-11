@@ -196,6 +196,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BL\ImportBL.cs" />
     <Compile Include="BL\LanguageBL.cs" />
     <Compile Include="BL\PaymentBL.cs" />
     <Compile Include="BL\ProductBL.cs" />
@@ -213,11 +214,13 @@
     <Compile Include="Controllers\CashController.cs" />
     <Compile Include="Controllers\HeroesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\Payment_MethodsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TerminalsController.cs" />
     <Compile Include="Controllers\TransacsController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
@@ -319,6 +322,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Entity\PRODUCT_TRANSLATION.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Entity\SETTING.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Entity\SHOP.cs">
@@ -584,9 +590,16 @@
     <Content Include="Views\Transacs\Delete.cshtml" />
     <Content Include="Views\Transacs\Details.cshtml" />
     <Content Include="Views\Transacs\Index.cshtml" />
+    <Content Include="Views\Settings\Create.cshtml" />
+    <Content Include="Views\Settings\Delete.cshtml" />
+    <Content Include="Views\Settings\Details.cshtml" />
+    <Content Include="Views\Settings\Edit.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialImageName.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Import\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

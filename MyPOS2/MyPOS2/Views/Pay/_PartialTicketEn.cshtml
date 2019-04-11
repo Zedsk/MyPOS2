@@ -13,14 +13,14 @@
     <img src="@Url.Content(Model.Shop.logoShop)" alt="store logo" />
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <!-- Date et heure-->
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             @*@Html.LabelFor(m => m.DateTicket)*@
             <p>Date : </p>
         </div>
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-9 tRight">
             @*@Html.TextBoxFor(m => m.DateTicket, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.DateTicket)
             @Html.ValidationMessageFor(m => m.DateTicket, "", new { @class = "text-danger" })
@@ -38,11 +38,11 @@
         </div>*@
     <!-- N° Transac -->
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-8">
             @*@Html.LabelFor(m => m.Transaction)*@
             <p>Transaction No. : </p>
         </div>
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-4 tRight">
             @*@Html.TextBoxFor(m => m.Transaction, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.Transaction)
             @Html.ValidationMessageFor(m => m.Transaction, "", new { @class = "text-danger" })
@@ -121,14 +121,14 @@
     </table>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <!-- remise -->
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
             @*@Html.LabelFor(m => m.DiscountG)*@
             <p>Discount : </p>
         </div>
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-8 tRight">
             @*@Html.TextBoxFor(m => m.DiscountG, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.DiscountG)
             @Html.ValidationMessageFor(m => m.DiscountG, "", new { @class = "text-danger" })
@@ -136,11 +136,11 @@
     </div>
     <!-- TVA -->
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
             @*@Html.LabelFor(m => m.VatG)*@
             <p>VAT : </p>
         </div>
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-8 tRight">
             @*@Html.TextBoxFor(m => m.VatG, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.VatG)
             @Html.ValidationMessageFor(m => m.VatG, "", new { @class = "text-danger" })
@@ -148,11 +148,11 @@
     </div>
     <!-- total -->
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
             @*@Html.LabelFor(m => m.TotalG)*@
             <p>Total : </p>
         </div>
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-8 tRight">
             @*@Html.TextBoxFor(m => m.TotalG, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.TotalG)
             @Html.ValidationMessageFor(m => m.TotalG, "", new { @class = "text-danger" })
