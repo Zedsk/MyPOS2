@@ -4,14 +4,22 @@
     ViewBag.Title = "Edit";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/pos2.js")" type="text/javascript"></script>
+}
+
 <h2>Editer</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>AGE</h4>
+        <h4 id="sourceName">AGE</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.idAge)
@@ -20,8 +28,22 @@
             @*@Html.LabelFor(model => model.imageAge, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Image</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.imageAge, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.imageAge, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                @if (ViewBag.path != null)
+                {
+                    <img id="imgLogo" src="@Url.Content(ViewBag.path)" alt="Image de la tranche d'age" class="imgIndex" />
+                }
+                else
+                {
+                    <img id="imgLogo" src="@Url.Content(Model.imageAge)" alt="Image de la tranche d'age" class="imgIndex" />
+                }
+                @Html.HiddenFor(model => model.imageAge)
                 @Html.ValidationMessageFor(model => model.imageAge, "", new { @class = "text-danger" })
+                <input type="file" id="newImage" name="newImage" />
+                <button type="button" class="btn btn-default" value="" onclick="ImportImage()">
+                    <span class="glyphicon glyphicon-download-alt"></span> Modifier
+                </button>
             </div>
         </div>
 
@@ -41,7 +63,9 @@
         </div>
     </div>
 }
-
+<div id="detail">
+    @Html.Partial("_PartialImageName")
+</div>
 <div>
     @Html.ActionLink("Retour à la Liste", "Index")
 </div>

@@ -13,7 +13,7 @@
     <script src="@Url.Content("~/Scripts/pos2.js")" type="text/javascript"></script>
 }
 
-<h2>Edit</h2>
+<h2>Editer</h2>
 
 @using (Html.BeginForm())
 {
@@ -42,7 +42,7 @@
 
                 @Html.HiddenFor(model => model.Hero.imageHero)
                 @Html.ValidationMessageFor(model => model.Hero.imageHero, "", new { @class = "text-danger" })
-                <input type="file" id="newImageHero" name="newImageHero" />
+                <input type="file" id="newImage" name="newImage" />
                 <button type="button" class="btn btn-default" value="" onclick="ImportImage()">
                     <span class="glyphicon glyphicon-download-alt"></span> Modifier
                 </button>
@@ -107,7 +107,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Sauver" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -117,5 +117,5 @@
     @Html.Partial("_PartialImageName")
 </div>
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la Liste", "Index")
 </div>

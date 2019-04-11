@@ -4,25 +4,52 @@
     ViewBag.Title = "Create";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/pos2.js")" type="text/javascript"></script>
+}
+
 <h2>Créer</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>AGE</h4>
+        <h4 id="sourceName">AGE</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @*<div class="form-group">
+                 <!-- @Html.LabelFor(model => model.imageAge, htmlAttributes: new { @class = "control-label col-md-2" }) -->
+                <label class="control-label col-md-2">Image</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.imageAge, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.imageAge, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
         <div class="form-group">
-            @*@Html.LabelFor(model => model.imageAge, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Image</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imageAge, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-2">
+                @if (ViewBag.path != null)
+                {
+                    <img id="imgLogo" src="@Url.Content(ViewBag.path)" alt="Image représentant la tranche d'age" class="imgIndex" />
+                }
+                else
+                {
+                    <img id="imgLogo" src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+                }
+                @Html.HiddenFor(model => model.imageAge, new { htmlAttributes = new { @Value = ViewBag.path } })
                 @Html.ValidationMessageFor(model => model.imageAge, "", new { @class = "text-danger" })
+                <input type="file" id="newImage" name="newImage" />
+                <button type="button" class="btn btn-default" value="" onclick="ImportImage()">
+                    <span class="glyphicon glyphicon-download-alt"></span> Importer
+                </button>
             </div>
         </div>
-
         <div class="form-group">
             @*@Html.LabelFor(model => model.rangeAges, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Tranche d'ages</label>
@@ -38,8 +65,11 @@
             </div>
         </div>
     </div>
-}
+ }
 
+<div id="detail">
+    @Html.Partial("_PartialImageName")
+</div>
 <div>
     @Html.ActionLink("Retour à la Liste", "Index")
 </div>

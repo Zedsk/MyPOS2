@@ -303,7 +303,7 @@ function ImportImage() {
         //formData.append("filename", filename);
         formData.append("source", source);
         //formData.append("file", file);
-        formData.append("file", $('#newImageHero')[0].files[0]);
+        formData.append("file", $('#newImage')[0].files[0]);
 
         //find controller name
         var c = window.location.pathname.split("/");
@@ -325,6 +325,15 @@ function ImportImage() {
                         }
                         else {
                             document.getElementById('Hero_imageHero').value = T.trim();
+                        }
+                        break;
+
+                    case "age":
+                        if (document.getElementById('imageAge') != null) {
+                            document.getElementById('imageAge').value = T.trim();
+                        }
+                        else {
+                            //document.getElementById('Hero_imageHero').value = T.trim();
                         }
                         break;
 

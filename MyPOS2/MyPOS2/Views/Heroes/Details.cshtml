@@ -5,14 +5,15 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Détails</h2>
 
 <div>
     <h4>HERO</h4>
     <hr />
     <div class="dl-horizontal">
         <div>
-            @Html.DisplayName(Model.First().imageHero)
+            @*@Html.DisplayName(Model.First().imageHero)*@
+            <label class="control-label col-md-2">Image</label>
         </div>
         <div>
             @*@Html.DisplayFor(model => model.imageHero)*@
@@ -22,13 +23,15 @@
         {
             <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayName(item.nameHero)
+                    @*@Html.DisplayName(item.nameHero)*@
+                    Nom
                 </dt>
                 <dd>
                     @Html.Display(item.nameHero)
                 </dd>
                 <dt>
-                    @Html.DisplayName(item.nameLanguage)
+                    @*@Html.DisplayName(item.nameLanguage)*@
+                    Langue
                 </dt>
                 <dd>
                     @Html.Display(item.nameLanguage)
@@ -38,6 +41,6 @@
     </div> 
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.First().idHero }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editer", "Edit", new { id = Model.First().idHero }) |
+    @Html.ActionLink("Retour à la Liste", "Index")
 </p>

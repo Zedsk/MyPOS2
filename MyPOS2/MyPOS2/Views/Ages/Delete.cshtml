@@ -17,7 +17,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.imageAge)
+            @*@Html.DisplayFor(model => model.imageAge)*@
+            <img src="@Url.Content(Model.imageAge)" alt="Image représentant la tranche d'age" class="imgIndex" />
         </dd>
 
         <dt>
