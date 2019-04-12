@@ -410,6 +410,7 @@
     <Compile Include="Models\Transactions\TrDetailsViewModel.cs" />
     <Compile Include="Models\Transactions\TrIndexViewModel.cs" />
     <Compile Include="Models\Transactions\TrPaymentMenuViewModel.cs" />
+    <Compile Include="Models\Transactions\TrProductBackViewModel.cs" />
     <Compile Include="Models\Transactions\TrSearchViewModel.cs" />
     <Compile Include="Models\Transactions\Ticket\TrTicketFrViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -606,6 +607,7 @@
     <Content Include="Views\Shops\Details.cshtml" />
     <Content Include="Views\Shops\Edit.cshtml" />
     <Content Include="Views\Shops\Index.cshtml" />
+    <Content Include="Views\Pay\ProductBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

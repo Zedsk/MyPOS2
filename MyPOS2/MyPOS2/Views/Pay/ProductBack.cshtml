@@ -1,0 +1,74 @@
+﻿@using MyPOS2.Models.Transactions
+@model  TrProductBackViewModel
+
+
+@{
+    ViewBag.Title = "ProductBack";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/ticketprint.css")" rel="stylesheet" type="text/css" media="print" />
+}
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/pos2.js")" type="text/javascript"></script>
+}
+
+<h2>ProductBack</h2>
+
+<div id="pagepay">
+    <div id="noprintpart">
+        @using (Html.BeginForm("ProductBack", "Pay", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.NumTransaction)
+            @Html.HiddenFor(m => m.DateT, new { @Value = ViewBag.DateTi })
+            <div id="navButton" class="navbar">
+                <ul class="nav nav-pills nav-justified">
+                    <li class="nav-item"><input type="submit" name="submitButton" class="btn btn-outline" value="End"></li>
+                    <li class="nav-item"><input type="submit" name="submitButton" class="btn btn-danger" value="Cancel" onclick="return confirm('Etes-vous sur de vouloir supprimer la transaction?');"></li>
+                    @*<li class="nav-item"><input type="submit" name="submitButton" class="btn btn-outline" value="Back" onclick="return confirm('Voulez-vous retourner à la transaction?');"></li>*@
+                </ul>
+            </div>
+        }
+
+    </div>
+
+    <div id="myTicket">
+        @switch (Model.Language)
+        {
+            case "1":
+                @Html.Partial("_PartialTicket", Model.Ticket)
+                break;
+            case "2":
+                @Html.Partial("_PartialTicketNl", Model.Ticket)
+                break;
+            case "3":
+                @Html.Partial("_PartialTicketDe", Model.Ticket)
+                break;
+            case "4":
+                @Html.Partial("_PartialTicketEn", Model.Ticket)
+                break;
+            default:
+                @Html.Partial("_PartialTicket", Model.Ticket)
+                break;
+        }
+    </div>
+    <div id="optionsTicket">
+        <div class="optionT">
+            <div>
+                <label>Modifier la langue du Ticket</label>
+            </div>
+            <div>
+                @Html.DropDownListFor(m => m.Language, new SelectList(Model.Languages, "idLanguage", "nameLanguage"), "Choix de la langue")
+                @Html.ValidationMessageFor(m => m.Language, "", new { @class = "text-danger" })
+            </div>
+            <button type="button" class="btn btn-default" onclick="ChangeLanguageTicket()">
+                <span class="glyphicon glyphicon-globe"></span> Changer
+            </button>
+        </div>
+    </div>
+</div>
+
+    

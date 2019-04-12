@@ -180,7 +180,7 @@ namespace MyPOS2.Controllers
                     Session["Language"] = ConfigurationManager.AppSettings["Language"];
                 }
                 string language = Session["Language"].ToString();
-                TrPaymentMenuViewModel vm = new TrPaymentMenuViewModel();
+                //TrPaymentMenuViewModel vm = new TrPaymentMenuViewModel();
                 switch (vmodel.MethodP)
                 {
                     //method cash
@@ -216,7 +216,7 @@ namespace MyPOS2.Controllers
                         ViewBag.amount = vmodel.Amount;
                         ViewBag.cashBack = vmodel.CashReturn;
                         vmodel.MethodsP = PaymentBL.FindMethodsList();
-                        vm.Languages = LanguageBL.FindLanguageList();
+                        vmodel.Languages = LanguageBL.FindLanguageList();
                         ViewBag.messageCard = "";
                         ViewBag.ticket = false;
                         return View(vmodel);
@@ -499,7 +499,69 @@ namespace MyPOS2.Controllers
         }
         #endregion
 
+        #region ProductBack
+        public ActionResult ProductBack(string nTransac)
+        {
+            TrProductBackViewModel vm = new TrProductBackViewModel();
+            if (Session["Language"] == null)
+            {
+                Session["Language"] = ConfigurationManager.AppSettings["Language"];
+            }
+            string language = Session["Language"].ToString();
+            //to do --> change init isChange..
+            bool isChange = false;
+            vm.Ticket = TicketBL.FillTicket(nTransac, language, isChange);
+            vm.Language = language;
+            vm.Languages = LanguageBL.FindLanguageList();
+            vm.NumTransaction = nTransac;
+            vm.DateT = vm.Ticket.DateTicket;
+            ViewBag.DateTi = vm.Ticket.DateTicket;
+            return View(vm);
+        }
 
+        [HandleError]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProductBack(string submitButton, TrProductBackViewModel vmodel)
+        {
+            try
+            {
+                TrPaymentMenuViewModel vm = new TrPaymentMenuViewModel
+                {
+                    NumTransaction = vmodel.NumTransaction,
+                    DateT = vmodel.DateT,
+                    GlobalTotal = "0"
+                };
+                switch (submitButton.ToLower())
+                {
+                    case "end":
+                        return (EndTransac(vm));
+
+                    case "cancel":
+                        return (CancelTransac(vm));
+
+                    //case "Back":
+                    //    return (BackTransac(vmodel));
+
+                    default:
+                        vmodel.Languages = LanguageBL.FindLanguageList();
+                        return View(vmodel);
+                }
+            }
+            catch (Exception ex)
+            {
+                //to do insert to log file
+                var e1 = ex.GetBaseException(); // --> log
+                var e4 = ex.Message; // --> log
+                var e5 = ex.Source; // --> log
+                var e8 = ex.GetType(); // --> log
+                var e9 = ex.GetType().Name; // --> log
+
+                return View("Error");
+            }
+
+        }
+        #endregion
 
     }
 }

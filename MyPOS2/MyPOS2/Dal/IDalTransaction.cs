@@ -17,6 +17,7 @@ namespace MyPOS2.Dal
         void CreateDetail(PRODUCT prod, int transactionId, int terminalId, decimal vat, string nameProd);
         void EditQtyToDetailById(int id, int qty);
         void DeleteDetail(int id);
+        void UpdateTransaction(int transactionId, decimal globalTotal, bool isReturn);
         void UpdateTransaction(int transactionId, decimal globalTotal, decimal? discountG);
         void CancelTransactionById(int transactionId);
         //void UpdateTransactionMessageId(int transactionId, int idTicket);

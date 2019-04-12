@@ -166,13 +166,16 @@ namespace MyPOS2.Controllers
         {
             try
             {
-                switch (submitButton)
+                switch (submitButton.ToLower())
                 {
-                    case "Payment":
+                    case "payment":
                         return (Payment(globalDiscount, vmodel));
 
-                    case "Cancel":
+                    case "cancel":
                         return (CancelTransac(vmodel));
+
+                    case "back":
+                        return (TransactionProductBack(vmodel));
 
                     default:
                         ViewBag.ticket = false;
@@ -478,6 +481,36 @@ namespace MyPOS2.Controllers
                 var gTot = vmodel.GlobalTot;
                 var nTransac = vmodel.NumTransaction;
                 return RedirectToAction("Index", "Pay", new { gTot, nTransac });
+            }
+            var detailsListTot = TransactionBL.ListDetailsWithTot(vmodel.NumTransaction);
+            //Sum subTotItems 
+            ViewBag.subTot1 = TransactionBL.SumItemsSubTot(detailsListTot);
+            vmodel.DetailsListWithTot = detailsListTot;
+            return View(vmodel);
+        }
+        #endregion
+
+        #region ProductBack
+        private ActionResult TransactionProductBack(TrIndexViewModel vmodel)
+        {
+            if (ModelState.IsValid)
+            {
+                //save part of transaction
+                TransactionBL.SaveTransactionProductBack(vmodel.NumTransaction, vmodel.GlobalTot);
+                //TrProductBackViewModel vm = new TrProductBackViewModel();
+                //if (Session["Language"] == null)
+                //{
+                //    Session["Language"] = ConfigurationManager.AppSettings["Language"];
+                //}
+                //string language = Session["Language"].ToString();
+                ////to do --> change init isChange..
+                //bool isChange = false;
+                //vm.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language, isChange);
+                //vm.Language = language;
+                //return View(vm);
+                string gTot = vmodel.GlobalTot;
+                string nTransac = vmodel.NumTransaction;
+                return RedirectToAction("ProductBack", "Pay", new { nTransac });
             }
             var detailsListTot = TransactionBL.ListDetailsWithTot(vmodel.NumTransaction);
             //Sum subTotItems 

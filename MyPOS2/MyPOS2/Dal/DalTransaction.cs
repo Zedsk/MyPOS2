@@ -85,6 +85,17 @@ namespace MyPOS2.Dal
             }
         }
 
+        public void UpdateTransaction(int transactionId, decimal globalTotal, bool isReturn)
+        {
+            var transac = db.TRANSACTIONSs.First(d => d.idTransaction == transactionId);
+            if (transac != null)
+            {
+                transac.total = globalTotal;
+                transac.isReturn = isReturn;
+                db.SaveChanges();
+            }
+        }
+
         //public void UpdateTransactionMessageId(int transactionId, int idMessage)
         //{
 

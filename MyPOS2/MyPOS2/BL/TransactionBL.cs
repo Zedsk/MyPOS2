@@ -289,5 +289,19 @@ namespace MyPOS2.BL
                 return result;
             }
         }
+
+        internal static void SaveTransactionProductBack(string numTransaction, string globalTotal)
+        {
+            using (IDalTransaction dal = new DalTransaction())
+            {
+                var idTr = int.Parse(numTransaction);
+                //var gTot = decimal.Parse(globalTotal);
+                //probleme le string "157.98" devient 15798
+                var temp = globalTotal.Replace(".", ",");
+                var gTot = decimal.Parse(temp);
+                bool isReturn = true;
+                dal.UpdateTransaction(idTr, gTot, isReturn);
+            }
+        }
     }
 }
