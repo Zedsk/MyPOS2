@@ -1,0 +1,75 @@
+﻿@*@model IEnumerable<MyPOS2.Data.Entity.SHOP>*@
+@model IEnumerable<MyPOS2.Data.Entity.SPP_ShopTransDistinct_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Créer nouveau", "Create") | @Html.ActionLink("Retour au Menu", "Management", "Home")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.logoShop)*@
+            Logo
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.nameShop)*@
+            Nom du magasin
+        </th>
+
+
+        @*<th>
+                @Html.DisplayNameFor(model => model.phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.zipCode)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.logoShop)*@
+                @if (item.logoShop != null)
+                {
+                    <img src="@Url.Content(item.logoShop)" alt="Logo du magasin" class="imgIndex" />
+                }
+                else
+                {
+                    <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameShop)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.zipCode)
+                </td>*@
+            <td>
+                @Html.ActionLink("Editer", "Edit", new { id = item.idShop }) |
+                @Html.ActionLink("Détails", "Details", new { id = item.idShop }) |
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.idShop })
+            </td>
+        </tr>
+    }
+
+</table>

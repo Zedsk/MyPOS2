@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -893,6 +893,7 @@
         <Function Name="SPP_ProductTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
+        <Function Name="SPP_ShopTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SPP_ShopTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
@@ -1126,8 +1127,7 @@
             <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pos1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2188,20 +2188,20 @@
           </FunctionImport>
           <FunctionImport Name="SPP_GetAllShop" ReturnType="Collection(Pos1Model.SPP_GetAllShop_Result)" />
           <FunctionImport Name="SPP_GetShopById" ReturnType="Collection(Pos1Model.SPP_GetShopById_Result)">
-            <Parameter Name="shop" Mode="In" Type="Int32" />
+          <Parameter Name="shop" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_HeroesTrans" ReturnType="Collection(Pos1Model.SPP_HeroesTrans_Result)" />
           <FunctionImport Name="SPP_HeroesTransDistinct" ReturnType="Collection(Pos1Model.SPP_HeroesTransDistinct_Result)">
-            <Parameter Name="language" Mode="In" Type="Int32" />
+          <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ParentCategories" ReturnType="Collection(Pos1Model.SPP_ParentCategories_Result)">
-            <Parameter Name="language" Mode="In" Type="Int32" />
+          <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ProductTrans" ReturnType="Collection(Pos1Model.SPP_ProductTrans_Result)">
-            <Parameter Name="language" Mode="In" Type="Int32" />
+          <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ShopTransDistinct" ReturnType="Collection(Pos1Model.SPP_ShopTransDistinct_Result)">
-            <Parameter Name="language" Mode="In" Type="Int32" />
+          <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_TicketNbItem" ReturnType="Collection(Int32)">
             <Parameter Name="dateMin" Mode="In" Type="DateTime" />
@@ -2218,7 +2218,7 @@
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SPP_TransactionMessageIds" ReturnType="Collection(Int32)">
-            <Parameter Name="idTransac" Mode="In" Type="Int32" />
+          <Parameter Name="idTransac" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_TransactionsDay" ReturnType="Collection(Pos1Model.SPP_TransactionsDay_Result)">
             <Parameter Name="tDate" Mode="In" Type="Int32" />
@@ -2227,6 +2227,7 @@
             <Parameter Name="tStatus" Mode="In" Type="Int32" />
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="SPP_ShopTrans" ReturnType="Collection(Pos1Model.SPP_ShopTrans_Result)" />
         </EntityContainer>
         <ComplexType Name="SPP_ChildCategories_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
@@ -2292,7 +2293,16 @@
         </ComplexType>
         <ComplexType Name="SPP_ShopTransDistinct_Result">
           <Property Type="Int32" Name="idShop" Nullable="false" />
+          <Property Type="String" Name="logoShop" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="phone" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="40" />
           <Property Type="String" Name="nameShop" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="zipCode" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="opening" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="languageId" Nullable="false" />
+          <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
         </ComplexType>
         <ComplexType Name="SPP_TransactionsDay_Result">
           <Property Type="Int32" Name="idTransaction" Nullable="false" />
@@ -2307,6 +2317,19 @@
           <Property Type="Int32" Name="customerId" Nullable="false" />
           <Property Type="Int32" Name="statusId" Nullable="false" />
           <Property Type="String" Name="userId" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="SPP_ShopTrans_Result">
+          <Property Type="Int32" Name="idShop" Nullable="false" />
+          <Property Type="String" Name="logoShop" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="phone" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="nameShop" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="zipCode" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="opening" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="languageId" Nullable="false" />
+          <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2770,7 +2793,16 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="Pos1Model.SPP_ShopTransDistinct_Result">
                 <ScalarProperty Name="idShop" ColumnName="idShop" />
+                <ScalarProperty Name="logoShop" ColumnName="logoShop" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="nameShop" ColumnName="nameShop" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="opening" ColumnName="opening" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2792,6 +2824,23 @@
                 <ScalarProperty Name="customerId" ColumnName="customerId" />
                 <ScalarProperty Name="statusId" ColumnName="statusId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ShopTrans" FunctionName="Pos1Model.Store.SPP_ShopTrans">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ShopTrans_Result">
+                <ScalarProperty Name="idShop" ColumnName="idShop" />
+                <ScalarProperty Name="logoShop" ColumnName="logoShop" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nameShop" ColumnName="nameShop" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="opening" ColumnName="opening" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

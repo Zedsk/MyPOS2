@@ -1,0 +1,119 @@
+﻿@*@model MyPOS2.Data.Entity.SHOP*@
+@model IEnumerable<MyPOS2.Data.Entity.SPP_ShopTrans_Result>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Magasin</h4>
+    <hr />
+    <div class="dl-horizontal">
+        <div>
+            @*@Html.DisplayName(Model.First().imageHero)*@
+            <label class="control-label col-md-2">Logo</label>
+        </div>
+        <div>
+            @*@Html.DisplayFor(model => model.imageHero)*@
+
+            @if (Model.First().logoShop != null)
+            {
+                <img src="@Url.Content(Model.First().logoShop)" alt="Image du Héro" class="imgIndex" />
+            }
+            else
+            {
+                <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+            }
+        </div>
+
+        @*<dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.First().phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.First().email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.zipCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.First().zipCode)
+            </dd>
+
+        </dl>*@
+
+        @foreach (var item in Model)
+        {
+            <dl class="dl-horizontal">
+                <dt>
+                    @*@Html.DisplayName(item.nameHero)*@
+                    Nom
+                </dt>
+
+                <dd>
+                    @*@Html.Display(item.nameShop)*@
+                    @Html.DisplayFor(modelitem => item.nameShop)
+                </dd>
+
+                <dt>
+                    Rue
+                </dt>
+
+                <dd>
+                    @*@Html.Display(item.street)*@
+                    @Html.DisplayFor(modelitem => item.street)
+                </dd>
+
+                <dt>
+                    Ville
+                </dt>
+
+                <dd>
+                    @*@Html.Display(item.city)*@
+                    @Html.DisplayFor(modelitem => item.city)
+                </dd>
+
+                <dt>
+                    Heures d'ouverture
+                </dt>
+
+                <dd>
+                    @*@Html.Display(item.opening)*@
+                    @Html.DisplayFor(modelitem => item.opening)
+                </dd>
+
+                <dt>
+                    @*@Html.DisplayName(item.nameLanguage)*@
+                    Langue
+                </dt>
+
+                <dd>
+                    @*@Html.Display(item.nameLanguage)*@
+                    @Html.DisplayFor(modelitem => item.nameLanguage)
+                </dd>
+            </dl>
+        }
+    </div>
+    
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.First().idShop }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

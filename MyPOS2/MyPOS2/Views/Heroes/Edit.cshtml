@@ -24,6 +24,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Hero.idHero)
+
         <div class="form-group">
             @Html.LabelFor(model => model.Hero.imageHero, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -34,11 +35,19 @@
                 }
                 else
                 {
-                    <img id="imgLogo" src="@Url.Content(Model.Hero.imageHero)" alt="Image du Héro" class="imgIndex" />
+                    if (Model.Hero.imageHero != null)
+                    {
+                        <img id="imgLogo" src="@Url.Content(Model.Hero.imageHero)" alt="Image du Héro" class="imgIndex" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+                    }
+
                 }
 
                 @*<img id="imgLogo" src="@Url.Content(ViewBag.path)" alt="Image du Héro" class="imgIndex" />
-                <img src="@Url.Content(Model.Hero.imageHero)" alt="Image du Héro" class="imgIndex" />*@
+        <img src="@Url.Content(Model.Hero.imageHero)" alt="Image du Héro" class="imgIndex" />*@
 
                 @Html.HiddenFor(model => model.Hero.imageHero)
                 @Html.ValidationMessageFor(model => model.Hero.imageHero, "", new { @class = "text-danger" })

@@ -11,8 +11,7 @@ namespace MyPOS2.Data.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class AGE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,8 +22,6 @@ namespace MyPOS2.Data.Entity
     
         public int idAge { get; set; }
         public string imageAge { get; set; }
-
-        [Required]
         public string rangeAges { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

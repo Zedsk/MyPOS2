@@ -1,0 +1,65 @@
+﻿@model MyPOS2.Data.Entity.SHOP
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Supprimer</h2>
+
+<h3>Etes-vous sur de vouloir le supprimer?</h3>
+<div>
+    <h4>Magasin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.logoShop)*@
+            Logo
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.logoShop)*@
+            <img src="@Url.Content(Model.logoShop)" alt="Image du Héro" class="imgIndex" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.phone)*@
+            Tel.
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.email)*@
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.zipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zipCode)
+        </dd>*@
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour à la liste", "Index")
+        </div>
+    }
+</div>

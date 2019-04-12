@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MyPOS2.BL;
 using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
@@ -113,6 +114,14 @@ namespace MyPOS2.Controllers
             db.BRANDs.Remove(bRAND);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Import(HttpPostedFileBase file, string source)
+        {
+            string path = ImportBL.ImportImage(file, source);
+            file.SaveAs(Server.MapPath(path));
+            ViewBag.path = path;
+            return PartialView("_PartialImageName");
         }
 
         protected override void Dispose(bool disposing)

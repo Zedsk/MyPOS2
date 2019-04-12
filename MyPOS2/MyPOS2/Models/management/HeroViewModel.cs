@@ -9,7 +9,7 @@ namespace MyPOS2.Models.management
 {
     public class HeroViewModel
     {
-        //public string IdHero { get; set; }
+        public string IdHero { get; set; }
 
         [Display(Name = "Image du héro")]
         public string ImageHero { get; set; }

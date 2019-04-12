@@ -4,6 +4,10 @@
     ViewBag.Title = "Details";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Détails</h2>
 
 <div>
@@ -28,7 +32,6 @@
         <dd>
             @Html.DisplayFor(model => model.rangeAges)
         </dd>
-
     </dl>
 </div>
 <p>

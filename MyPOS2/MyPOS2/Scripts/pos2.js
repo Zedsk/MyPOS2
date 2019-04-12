@@ -301,8 +301,25 @@ function ImportImage() {
         //var test = form;
         var formData = new FormData();
         //formData.append("filename", filename);
+        //Find source
+        switch (source.toLowerCase()) {
+            case "marque":
+                source = "brand";
+                break;
+            case "catégorie":
+                source = "category";
+                break;
+            case "produit":
+                source = "product";
+                break;
+            case "magasin":
+                source = "shop";
+                break;
+            default:
+                break;
+        }
         formData.append("source", source);
-        //formData.append("file", file);
+        //Find file
         formData.append("file", $('#newImage')[0].files[0]);
 
         //find controller name
@@ -337,9 +354,28 @@ function ImportImage() {
                         }
                         break;
 
+                    case "brand":
+                        if (document.getElementById('imageBrand') != null) {
+                            document.getElementById('imageBrand').value = T.trim();
+                        }
+                        else {
+                            //document.getElementById('Hero_imageHero').value = T.trim();
+                        }
+                        break;
+
+                    case "shop":
+                        if (document.getElementById('LogoShop') != null) {
+                            document.getElementById('LogoShop').value = T.trim();
+                        }
+                        else {
+                            document.getElementById('Shop_logoShop').value = T.trim();
+                        }
+                        break;
+
                     default:
                         break;
                 }
+                var test = (T.trim()).substring(1);  
                 document.getElementById('imgLogo').src = (T.trim()).substring(1);        
             },
             error: function () { },
@@ -347,14 +383,59 @@ function ImportImage() {
             contentType: false,
             processData: false
         });
-        //}).done(function () {
-        //        document.getElementById('nameId').innerHTML = result;
-        //        var T = document.getElementById('detail').textContent;
-        //        document.getElementById('ImageHero').value = T.trim();
-        //    });
+
     } catch (e) {
-        document.getElementById('errorSearchProduct').textContent = e;
-        document.getElementById('errorSearchProduct').style.visibility = "visible";
+        document.getElementById('errorImport').innerHTML = e.message;
+        document.getElementById('errorImport').style.visibility = "visible";
+
         console.log(e);
     }
+}
+
+function validateFormTranslation() {
+    try {
+        //find controller name
+        var c = window.location.pathname.split("/");
+        var controller = c[1];
+        var counter = document.getElementById('counter').textContent;
+        switch (controller.toLowerCase()) {
+            case "shops":
+                var valName = document.getElementById('ShopsTrans_0__nameShop').value;
+                if (valName == null || valName == "") {
+                    throw "Le champ <Universel ou Français> est obligatoire pour le nom";
+                }
+                var valStreet = document.getElementById('ShopsTrans_0__street').value;
+                if (valStreet == null || valStreet == "") {
+                    throw "Le champ <Universel ou Français> est obligatoire pour la rue";
+                }
+                var valCity = document.getElementById('ShopsTrans_0__city').value;
+                if (valCity == null || valCity == "") {
+                    throw "Le champ <Universel ou Français> est obligatoire pour la ville";
+                }
+                var valOpening = document.getElementById('ShopsTrans_0__opening').value;
+                if (valOpening == null || valOpening == "") {
+                    throw "Le champ <Universel ou Français> est obligatoire pour les heures d'ouvertures";
+                }
+                break;
+            case "categories":
+
+                break;
+            case "products":
+
+                break;
+            case "messages":
+
+                break;
+            default:
+                break;
+        }
+        //need JQuery to send the form
+        $("#theForm").submit();
+    } catch (e) {
+        document.getElementById('errorValidation').textContent = e;
+        document.getElementById('errorValidation').style.visibility = "visible";
+        console.log(e);
+    }
+
+    
 }

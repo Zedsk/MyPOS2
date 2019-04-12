@@ -11,7 +11,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Back to Menu", "Management", "Home")
+    @Html.ActionLink("Créer nouveau", "Create") | @Html.ActionLink("Retour au Menu", "Management", "Home")
 </p>
 <table class="table">
     <tr>
@@ -40,16 +40,16 @@
                 }
                 else
                 {
-                    <img src="~/Content/image/logo_noImage.png" alt="Image du Héro" class="imgIndex" />
+                    <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
                 }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.nameLanguage)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idHero }) |
-                @Html.ActionLink("Details", "Details", new { id = item.idHero, lang = item.languageId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.idHero })
+                @Html.ActionLink("Editer", "Edit", new { id = item.idHero }) |
+                @Html.ActionLink("Détails", "Details", new { id = item.idHero, lang = item.languageId }) |
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.idHero })
             </td>
         </tr>
     }

@@ -11,7 +11,7 @@ namespace MyPOS2.Data.Entity
 {
     using System;
     
-    public partial class SPP_ShopTransDistinct_Result
+    public partial class SPP_ShopTrans_Result
     {
         public int idShop { get; set; }
         public string logoShop { get; set; }

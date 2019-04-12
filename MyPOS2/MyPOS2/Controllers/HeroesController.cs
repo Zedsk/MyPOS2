@@ -53,6 +53,7 @@ namespace MyPOS2.Controllers
             //    return HttpNotFound();
             //}
             //return View(hERO);
+
             IList<SPP_HeroesTrans_Result> heroes = db.SPP_HeroesTrans().Where(h => h.idHero == id).ToList();
             return View(heroes);
         }
@@ -190,7 +191,7 @@ namespace MyPOS2.Controllers
                 {
                     heroId = 0,
                     languageId = 0,
-                    nameHero = "",
+                    nameHero = ""
                 };
                 for (int i = 0; i < (lang-2); i++)
                 {

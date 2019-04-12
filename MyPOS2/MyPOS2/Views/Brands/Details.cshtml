@@ -4,6 +4,10 @@
     ViewBag.Title = "Details";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Détails</h2>
 
 <div>
@@ -25,9 +29,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.imageBrand)
+            @*@Html.DisplayFor(model => model.imageBrand)*@
+            <img src="@Url.Content(Model.imageBrand)" alt="Logo de la marque" class="imgIndex" />
         </dd>
-
     </dl>
 </div>
 <p>

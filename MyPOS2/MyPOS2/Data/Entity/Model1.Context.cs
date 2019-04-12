@@ -212,5 +212,10 @@ namespace MyPOS2.Data.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_TransactionsDay_Result>("SPP_TransactionsDay", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter);
         }
+    
+        public virtual ObjectResult<SPP_ShopTrans_Result> SPP_ShopTrans()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ShopTrans_Result>("SPP_ShopTrans");
+        }
     }
 }

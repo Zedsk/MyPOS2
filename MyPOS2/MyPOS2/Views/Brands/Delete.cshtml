@@ -4,9 +4,13 @@
     ViewBag.Title = "Delete";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Supprimer</h2>
 
-<h3>Etes-vous sur de vouloir supprimer cette marque?</h3>
+<h3>Etes-vous sur de vouloir le supprimer?</h3>
 <div>
     <h4>MARQUE</h4>
     <hr />
@@ -26,12 +30,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.imageBrand)
+            @*@Html.DisplayFor(model => model.imageBrand)*@
+            <img src="@Url.Content(Model.imageBrand)" alt="Logo de la marque" class="imgIndex" />
         </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

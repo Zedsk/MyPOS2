@@ -221,6 +221,7 @@
     <Compile Include="Controllers\Payment_MethodsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\ShopsController.cs" />
     <Compile Include="Controllers\TerminalsController.cs" />
     <Compile Include="Controllers\TransacsController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
@@ -360,6 +361,9 @@
     <Compile Include="Data\Entity\SPP_ShopTransDistinct_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Entity\SPP_ShopTrans_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Entity\SPP_TransactionsDay_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -396,6 +400,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\management\HeroViewModel.cs" />
+    <Compile Include="Models\management\ShopViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Transactions\Ticket\TrRprintTicketViewModel.cs" />
     <Compile Include="Models\Transactions\Ticket\TrTicketDeViewModel.cs" />
@@ -596,6 +601,11 @@
     <Content Include="Views\Settings\Edit.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\Shared\_PartialImageName.cshtml" />
+    <Content Include="Views\Shops\Create.cshtml" />
+    <Content Include="Views\Shops\Delete.cshtml" />
+    <Content Include="Views\Shops\Details.cshtml" />
+    <Content Include="Views\Shops\Edit.cshtml" />
+    <Content Include="Views\Shops\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
