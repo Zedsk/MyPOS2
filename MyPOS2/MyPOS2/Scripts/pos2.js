@@ -439,3 +439,68 @@ function validateFormTranslation() {
 
     
 }
+
+function DaylyReports() {
+    var chkBox = document.getElementById('Dayly');
+    if (chkBox.checked == true) {
+        document.getElementById('dateReportBox').style.visibility = "visible";
+        document.getElementById('Monthly').disabled = true;
+    }
+    else {
+        document.getElementById('Date').value = "";
+        document.getElementById('dateReportBox').style.visibility = "hidden";
+        document.getElementById('Monthly').disabled = false;
+    }
+
+    
+}
+
+function MonthlyReports() {
+    var chkBox = document.getElementById('Monthly');
+    if (chkBox.checked == true) {
+        document.getElementById('Dayly').disabled = true;
+    }
+    else {
+        document.getElementById('Dayly').disabled = false;
+    }
+}
+
+function CreateReport() {
+    try {
+        document.getElementById('errorFormReport').style.visibility = "hidden";
+        var typeR = document.getElementById('TypeReportId').value;
+        var chkBoxD = document.getElementById('Dayly');
+        var chkBoxM = document.getElementById('Monthly');
+        var date = document.getElementById('Date').value;
+        if (typeR === null || typeR === "") {
+            throw "Il faut choisir un type de rapport";
+        } else if (chkBoxD.checked == true) {
+            if (date === null || date === "") {
+                throw "Il faut choisir une date pour le rapport journalier";
+            }
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('myReport').innerHTML = xhr.responseText;
+                document.getElementById('myReport').style.visibility = 'visible';
+            }
+        }
+
+        //Post Method
+        var url = "/Reports/Index";
+        var param = "TypeReportId=" + typeR
+            +"&Dayly=" + chkBoxD.checked
+            + "&Monthly=" + chkBoxM.checked
+            + "&Date=" + date;
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(param);
+
+    } catch (e) {
+        document.getElementById('errorFormReport').textContent = e;
+        document.getElementById('errorFormReport').style.visibility = "visible";
+        console.log(e);
+    }
+}

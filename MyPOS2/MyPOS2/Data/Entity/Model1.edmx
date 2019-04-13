@@ -893,6 +893,22 @@
         <Function Name="SPP_ProductTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
+        <Function Name="SPP_ReportTotalSalesByProductsTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tDate" Type="int" Mode="In" />
+          <Parameter Name="tMonth" Type="int" Mode="In" />
+          <Parameter Name="tDay" Type="int" Mode="In" />
+          <Parameter Name="tStatus" Type="int" Mode="In" />
+          <Parameter Name="tReturn" Type="bit" Mode="In" />
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPP_ReportTotalSalesTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tDate" Type="int" Mode="In" />
+          <Parameter Name="tMonth" Type="int" Mode="In" />
+          <Parameter Name="tDay" Type="int" Mode="In" />
+          <Parameter Name="tStatus" Type="int" Mode="In" />
+          <Parameter Name="tReturn" Type="bit" Mode="In" />
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
         <Function Name="SPP_ShopTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SPP_ShopTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
@@ -2228,6 +2244,22 @@
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SPP_ShopTrans" ReturnType="Collection(Pos1Model.SPP_ShopTrans_Result)" />
+          <FunctionImport Name="SPP_ReportTotalSalesByProductsTransDistinct" ReturnType="Collection(Pos1Model.SPP_ReportTotalSalesByProductsTransDistinct_Result)">
+            <Parameter Name="tDate" Mode="In" Type="Int32" />
+            <Parameter Name="tMonth" Mode="In" Type="Int32" />
+            <Parameter Name="tDay" Mode="In" Type="Int32" />
+            <Parameter Name="tStatus" Mode="In" Type="Int32" />
+            <Parameter Name="tReturn" Mode="In" Type="Boolean" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_ReportTotalSalesTransDistinct" ReturnType="Collection(Pos1Model.SPP_ReportTotalSalesTransDistinct_Result)">
+            <Parameter Name="tDate" Mode="In" Type="Int32" />
+            <Parameter Name="tMonth" Mode="In" Type="Int32" />
+            <Parameter Name="tDay" Mode="In" Type="Int32" />
+            <Parameter Name="tStatus" Mode="In" Type="Int32" />
+            <Parameter Name="tReturn" Mode="In" Type="Boolean" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPP_ChildCategories_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
@@ -2330,6 +2362,26 @@
           <Property Type="String" Name="opening" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="languageId" Nullable="false" />
           <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_ReportTotalSalesByProductsTransDistinct_Result">
+          <Property Type="String" Name="nameProduct" Nullable="false" MaxLength="40" />
+          <Property Type="Int32" Name="qtyItem" Nullable="true" />
+          <Property Type="Decimal" Name="totItem" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="productId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SPP_ReportTotalSalesTransDistinct_Result">
+          <Property Type="Int32" Name="idTransaction" Nullable="false" />
+          <Property Type="DateTime" Name="transactionDateBegin" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="transactionDateEnd" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="total" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="Decimal" Name="discountGlobal" Nullable="true" Precision="8" Scale="2" />
+          <Property Type="String" Name="cancelDescritpion" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="isReturn" Nullable="false" />
+          <Property Type="String" Name="nameTerminal" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="namePerson" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="nameStatus" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="nameUser" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="nameShop" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2841,6 +2893,34 @@
                 <ScalarProperty Name="opening" ColumnName="opening" />
                 <ScalarProperty Name="languageId" ColumnName="languageId" />
                 <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ReportTotalSalesByProductsTransDistinct" FunctionName="Pos1Model.Store.SPP_ReportTotalSalesByProductsTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ReportTotalSalesByProductsTransDistinct_Result">
+                <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
+                <ScalarProperty Name="qtyItem" ColumnName="qtyItem" />
+                <ScalarProperty Name="totItem" ColumnName="totItem" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ReportTotalSalesTransDistinct" FunctionName="Pos1Model.Store.SPP_ReportTotalSalesTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ReportTotalSalesTransDistinct_Result">
+                <ScalarProperty Name="idTransaction" ColumnName="idTransaction" />
+                <ScalarProperty Name="transactionDateBegin" ColumnName="transactionDateBegin" />
+                <ScalarProperty Name="transactionDateEnd" ColumnName="transactionDateEnd" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="discountGlobal" ColumnName="discountGlobal" />
+                <ScalarProperty Name="cancelDescritpion" ColumnName="cancelDescritpion" />
+                <ScalarProperty Name="isReturn" ColumnName="isReturn" />
+                <ScalarProperty Name="nameTerminal" ColumnName="nameTerminal" />
+                <ScalarProperty Name="namePerson" ColumnName="namePerson" />
+                <ScalarProperty Name="nameStatus" ColumnName="nameStatus" />
+                <ScalarProperty Name="nameUser" ColumnName="nameUser" />
+                <ScalarProperty Name="nameShop" ColumnName="nameShop" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

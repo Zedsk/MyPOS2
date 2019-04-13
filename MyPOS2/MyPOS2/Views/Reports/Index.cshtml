@@ -1,0 +1,98 @@
+﻿@model MyPOS2.Models.report.ReportMenuViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/ticketprint.css")" rel="stylesheet" type="text/css" media="print" />
+}
+
+
+<h2>Index</h2>
+
+<div class="jumbotron">
+    <div id="noprintpart">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>RAPPORTS</h4>
+                <hr />
+                <span class="text-danger">@ViewBag.Error</span>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <span id="errorFormReport" class="text-danger"></span>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Type de rapport</label>
+                    <div>
+                        @Html.DropDownListFor(m => m.TypeReportId, new SelectList(Model.TypesReport, "idTypeReport", "nameTypeReport"), "Choix du type de rapport")
+                        @Html.ValidationMessageFor(m => m.TypeReportId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <!-- end typeReport -->
+                <div class="form-group">
+                    <label class="control-label col-md-2">Période</label>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Dayly, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.CheckBoxFor(model => model.Dayly, new { @class = "custom-control-input ChkBox", @onclick = "DaylyReports()" })
+                                @Html.ValidationMessageFor(model => model.Dayly, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Monthly, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.CheckBoxFor(model => model.Monthly, new { @class = "custom-control-input ChkBox", @onclick = "MonthlyReports()" })
+                                @Html.ValidationMessageFor(model => model.Monthly, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end period -->
+                <div id="dateReportBox" class="form-group" style="visibility: hidden">
+                    @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/YYY", type = "date" } })
+                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <!-- end date -->
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @*<input type="submit" value="Créer" class="btn btn-default" />*@
+                        <button type="button" class="btn btn-default" value="" onclick="CreateReport()">Créer</button>
+                    </div>
+                </div>
+            </div>
+        }<!-- end Form -->
+    </div> <!-- end noprintpart -->
+    <div id="myReport" style="visibility:hidden">
+        @switch (Model.TypeReportId)
+        {
+            case "1":
+                @Html.Partial("_PartialReportTotalSales", Model.ReportTotalSales)
+
+                break;
+            case "2":
+                @Html.Partial("_PartialReportTotalSalesByProduct", Model.ReportTotalSalesByProduct)
+                break;
+
+            default:
+                <p>Ce modèle de rapport n'existe pas!</p>
+                break;
+        }
+    </div>
+
+    <div>
+        @Html.ActionLink("Retour au Menu", "Transaction", "Home")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="@Url.Content("~/Scripts/pos2.js")" type="text/javascript"></script>
+    }
+
+
+</div>

@@ -41,7 +41,7 @@
                         <li class="nav-item"><input type="submit" name="submitButton" class="btn btn-outline" value="Back" onclick="return confirm('Voulez-vous retourner à la transaction?');"></li>
                     }
                     @*<li class="nav-item"><button type="button" id="ButtonCancelTransac" class="btn btn-danger" value="" onclick="CancelTransac()">Annuler la transaction</button></li>
-                    <li class="nav-item"><button type="button" id="ButtonBackTransac" class="btn btn-outline" value="" onclick="BackTransac()">Retour à la transaction</button></li>*@
+                        <li class="nav-item"><button type="button" id="ButtonBackTransac" class="btn btn-outline" value="" onclick="BackTransac()">Retour à la transaction</button></li>*@
                 </ul>
             </div>
             <div style="visibility:visible">
@@ -100,16 +100,16 @@
                 </div>
             </div> <!-- end containerPay -->
             @*<div id="respBank">
-                @if (Model.Resp == 1)
-                {
-                    <p style="color:green">@ViewBag.messageCard</p>
-                }
-                else
-                {
-                    <p style="color:red">@ViewBag.messageCard</p>
-                }
+                    @if (Model.Resp == 1)
+                    {
+                        <p style="color:green">@ViewBag.messageCard</p>
+                    }
+                    else
+                    {
+                        <p style="color:red">@ViewBag.messageCard</p>
+                    }
 
-            </div>*@
+                </div>*@
             <div class="containerPay">
                 <div class="cellPay">
                     <h2>@Html.LabelFor(m => m.Amount)</h2>
@@ -126,11 +126,11 @@
                         @if (Model.AmountsPaid != null)
                         {
                             @*<ol class="totToPayList">
-                                @for (int i = 0; i < Model.AmountsPaid.Count; i++)
-                                {
-                                    <li>@Html.TextBoxFor(m => m.AmountsPaid, new { @Value = Model.AmountsPaid[i] })</li>
-                                }
-                            </ol>*@
+                                    @for (int i = 0; i < Model.AmountsPaid.Count; i++)
+                                    {
+                                        <li>@Html.TextBoxFor(m => m.AmountsPaid, new { @Value = Model.AmountsPaid[i] })</li>
+                                    }
+                                </ol>*@
 
                             <ol class="totToPayList">
                                 @for (int i = 0; i < Model.AmountsPaid.Count; i++)
@@ -167,8 +167,8 @@
                 @*<input type="submit" id="ButtonPayment" class="fct_btn" value="Payment">*@
             </div> <!-- end paymentZone -->
         } <!-- end Form -->
-    </div>
-    @if (ViewBag.ticket) 
+    </div> <!-- end noprintpart -->
+    @if (ViewBag.ticket)
     {
         <div id="myTicket">
             @switch (Model.Language)

@@ -1,0 +1,69 @@
+﻿@model MyPOS2.Models.report.RTotalSalesViewModel
+
+
+<table class="table">
+    <dl class="dl-horizontal">
+        <dt>@Html.LabelFor(m => m.TotReport)</dt>
+        <dd>
+            @Html.DisplayFor(m => m.TotReport)
+        </dd>
+    </dl>
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">
+                @Html.LabelFor(m => m.Report.idTransaction)
+
+            </th>
+            <th scope="col">
+                @Html.LabelFor(m => m.Report.transactionDateBegin)
+
+            </th>
+            <th scope="col">
+                @Html.LabelFor(m => m.Report.transactionDateEnd)
+
+            </th>
+            <th scope="col">
+                @Html.LabelFor(m => m.Report.total)
+
+            </th>
+            <th scope="col">
+                @Html.LabelFor(m => m.Report.discountGlobal)
+
+            </th>
+            <th scope="col">
+                @Html.LabelFor(m => m.Report.nameTerminal)
+
+            </th>
+            <th scope="col">
+                @Html.LabelFor(m => m.Report.namePerson)
+
+            </th>
+            <th scope="col">
+                @Html.LabelFor(m => m.Report.nameUser)
+
+            </th>
+            <th scope="col">
+                @Html.LabelFor(m => m.Report.nameShop)
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Reports)
+        {
+            <tr>
+                <th scope="row">1</th>
+                <td>@item.idTransaction</td>
+                <td>@item.transactionDateBegin</td>
+                <td>@item.transactionDateEnd</td>
+                <td>@item.total</td>
+                <td>@item.discountGlobal</td>
+                <td>@item.nameTerminal</td>
+                <td>@item.namePerson</td>
+                <td>@item.nameUser</td>
+                <td>@item.nameShop</td>
+            </tr>
+        }
+    </tbody>
+</table>

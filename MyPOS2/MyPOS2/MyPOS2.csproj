@@ -200,6 +200,7 @@
     <Compile Include="BL\LanguageBL.cs" />
     <Compile Include="BL\PaymentBL.cs" />
     <Compile Include="BL\ProductBL.cs" />
+    <Compile Include="BL\ReportBL.cs" />
     <Compile Include="BL\SearchBL.cs" />
     <Compile Include="BL\ShopBL.cs" />
     <Compile Include="BL\TerminalBL.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\Payment_MethodsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\ShopsController.cs" />
@@ -231,6 +233,7 @@
     <Compile Include="Dal\DalLanguage.cs" />
     <Compile Include="Dal\DalPayment.cs" />
     <Compile Include="Dal\DalProduct.cs" />
+    <Compile Include="Dal\DalReport.cs" />
     <Compile Include="Dal\DalSearch.cs" />
     <Compile Include="Dal\DalShop.cs" />
     <Compile Include="Dal\DalTerminal.cs" />
@@ -243,6 +246,7 @@
     <Compile Include="Dal\IDalLanguage.cs" />
     <Compile Include="Dal\IDalPayment.cs" />
     <Compile Include="Dal\IDalProduct.cs" />
+    <Compile Include="Dal\IDalReport.cs" />
     <Compile Include="Dal\IDalSearch.cs" />
     <Compile Include="Dal\IDalShop.cs" />
     <Compile Include="Dal\IDalTerminal.cs" />
@@ -358,6 +362,12 @@
     <Compile Include="Data\Entity\SPP_ProductTrans_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Entity\SPP_ReportTotalSalesByProductsTransDistinct_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Entity\SPP_ReportTotalSalesTransDistinct_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Entity\SPP_ShopTransDistinct_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -402,6 +412,10 @@
     <Compile Include="Models\management\HeroViewModel.cs" />
     <Compile Include="Models\management\ShopViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\report\ReportMenuViewModel.cs" />
+    <Compile Include="Models\report\ReportViewModel.cs" />
+    <Compile Include="Models\report\RTotalSalesByProductViewModel.cs" />
+    <Compile Include="Models\report\RTotalSalesViewModel.cs" />
     <Compile Include="Models\Transactions\Ticket\TrRprintTicketViewModel.cs" />
     <Compile Include="Models\Transactions\Ticket\TrTicketDeViewModel.cs" />
     <Compile Include="Models\Transactions\Ticket\TrTicketEnViewModel.cs" />
@@ -460,6 +474,7 @@
     <Content Include="Content\image\product\VoitureHotWheelsNikko.jpg" />
     <Content Include="Content\image\product\ZeldaSwitch.jpg" />
     <Content Include="Content\pos2.css" />
+    <Content Include="Content\reportprint.css" />
     <Content Include="Content\ticketprint.css" />
     <Content Include="Data\Entity\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -608,6 +623,10 @@
     <Content Include="Views\Shops\Edit.cshtml" />
     <Content Include="Views\Shops\Index.cshtml" />
     <Content Include="Views\Pay\ProductBack.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Home\Report.cshtml" />
+    <Content Include="Views\Reports\_PartialReportTotalSales.cshtml" />
+    <Content Include="Views\Reports\_PartialReportTotalSalesByProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
