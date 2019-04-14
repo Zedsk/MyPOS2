@@ -13,14 +13,50 @@ function goBack() {
     window.history.go(-1);
 }
 
+function SetSessionFocus(el) {
+    var val = el.getAttribute('id');
+    localStorage.setItem("inuputFocus", val);
+}
+
 function ButtonCalc_Click(id) {
     var val = id.getAttribute('Value');
-    document.getElementById('addProduct').value += val;
+    //document.getElementById('addProduct').value += val;
+    switch (localStorage.getItem("inuputFocus")) {
+        case "addProduct":
+            document.getElementById('addProduct').value += val;
+            break;
+        case "globalDiscount":
+            document.getElementById('globalDiscount').value += val;
+            break;
+        case "searchProduct":
+            document.getElementById('searchProduct').value += val;
+            break;
+        default:
+            alert("Selectionner un champ!");
+            break;
+    }
 }
 
 function ButtonDelete_Click() {
-    var val = document.getElementById('addProduct').value;
-    document.getElementById('addProduct').value = val.substring(0, val.length - 1);
+    //var val = document.getElementById('addProduct').value;
+    //document.getElementById('addProduct').value = val.substring(0, val.length - 1);
+    switch (localStorage.getItem("inuputFocus")) {
+        case "addProduct":
+            var val = document.getElementById('addProduct').value;
+            document.getElementById('addProduct').value = val.substring(0, val.length - 1);
+            break;
+        case "globalDiscount":
+            var val = document.getElementById('globalDiscount').value;
+            document.getElementById('globalDiscount').value = val.substring(0, val.length - 1);
+            break;
+        case "searchProduct":
+            var val = document.getElementById('searchProduct').value;
+            document.getElementById('searchProduct').value = val.substring(0, val.length - 1);
+            break;
+        default:
+            alert("Selectionner un champ!");
+            break;
+    }
 }
 
 function ButtonAddProduct_Click() {
