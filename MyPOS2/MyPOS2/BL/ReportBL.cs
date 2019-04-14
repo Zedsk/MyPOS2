@@ -86,6 +86,16 @@ namespace MyPOS2.BL
             return result.ToString();
         }
 
+        private static string CalculateTotalReport(IList<SPP_ReportTotalSalesByProductsTransDistinct_Result> list)
+        {
+            decimal? result = 0;
+            for (int i = 0; i < list.Count(); i++)
+            {
+                result += list[i].totItem;
+            }
+            return result.ToString();
+        }
+
         internal static RTotalSalesByProductViewModel FindReportTotalSalesByProduct(ReportMenuViewModel vmodel, int language)
         {
             using (IDalReport dal = new DalReport())
@@ -114,7 +124,8 @@ namespace MyPOS2.BL
                 IList < SPP_ReportTotalSalesByProductsTransDistinct_Result > list = dal.CreateReportTotalSalesByProduct(yearD, monthD, dayD, status, isReturn, language);
                 RTotalSalesByProductViewModel vm = new RTotalSalesByProductViewModel
                 {
-                    Reports = list
+                    Reports = list,
+                    TotReport = CalculateTotalReport(list)
                 };
                 return vm;
                 //return dal.CreateReportTotalSalesByProduct(yearD, monthD, dayD, status, isReturn, language);

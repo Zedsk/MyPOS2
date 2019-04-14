@@ -1,7 +1,13 @@
 @media print{
-    #noprintpart {
+    .noprintpart, footer, h2 {
         display: none;
     }
+
+    /*footer, h2 {
+        display: none;
+        color: orangered;
+    }*/
+
 
     #myTicket {
         max-width: 302px;

@@ -624,7 +624,6 @@
     <Content Include="Views\Shops\Index.cshtml" />
     <Content Include="Views\Pay\ProductBack.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
-    <Content Include="Views\Home\Report.cshtml" />
     <Content Include="Views\Reports\_PartialReportTotalSales.cshtml" />
     <Content Include="Views\Reports\_PartialReportTotalSalesByProduct.cshtml" />
   </ItemGroup>

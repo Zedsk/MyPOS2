@@ -332,6 +332,35 @@
     outline: 1px solid orange;
 }
 
+.delimiterTopBotBold {
+    border-top: 2px solid orange;
+    border-bottom: 2px solid orange;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.delimiterTopBot {
+    border-top: 1px solid orange;
+    border-bottom: 1px solid orange;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.delimiterTop {
+    border-top: 1px solid orange;
+    padding-top: 10px;
+}
+
+.delimiterBot {
+    border-bottom: 1px solid orange;
+    padding-bottom: 10px;
+}
+
+#totReport{
+    display: flex;
+    font-weight: bold;
+}
+
 
 @media screen and (max-width:600px) {
     #navBar {

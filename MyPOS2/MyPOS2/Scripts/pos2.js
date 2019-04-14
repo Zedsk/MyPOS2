@@ -485,6 +485,30 @@ function CreateReport() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById('myReport').innerHTML = xhr.responseText;
                 document.getElementById('myReport').style.visibility = 'visible';
+                switch (typeR) {
+                    case "1":
+                        if (chkBoxD.checked == true) {
+                            document.getElementById("reportTitle").innerHTML = "Rapport journalier des ventes totales";
+                        } else if (chkBoxM.checked == true) {
+                            document.getElementById("reportTitle").innerHTML = "Rapport mensuel des ventes totales";
+                        } else {
+                            document.getElementById("reportTitle").innerHTML = "Rapport des ventes totales";
+                        }
+                        break;
+                    case "2":
+                        if (chkBoxD.checked == true) {
+                            document.getElementById('reportTitle').innerHTML = "Rapport journalier des ventes totales par article";
+                        } else if (chkBoxM.checked == true) {
+                            document.getElementById('reportTitle').innerHTML = "Rapport mensuel des ventes totales par article";
+                        } else {
+                            document.getElementById('reportTitle').innerHTML = "Rapport des ventes totales par article";
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                
             }
         }
 

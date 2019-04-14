@@ -1,39 +1,53 @@
 ﻿@model MyPOS2.Models.report.RTotalSalesByProductViewModel
 
+<h3 id="reportTitle" class="delimiterTopBotBold"></h3>
+<h4></h4>
 
-
-<table class="table">
+<div id="totReport">
+    <span class="col-md-2" style="font-size: 16px">
+        @Html.LabelFor(m => m.TotReport) :
+    </span>
+    <span class="col-md-3" style="font-size: 16px">
+        @Html.DisplayFor(m => m.TotReport)<span class="glyphicon glyphicon-euro"></span>
+    </span>
+</div>
+<table class="table delimiterTopBot">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.nameProduct)
-
+                @*@Html.LabelFor(m => m.Report.nameProduct)*@
+                Article
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.qtyItem)
-
+                @*@Html.LabelFor(m => m.Report.qtyItem)*@
+                Quantité
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.totItem)
-
+                @*@Html.LabelFor(m => m.Report.totItem)*@
+                Total
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.productId)
-
+                @*@Html.LabelFor(m => m.Report.productId)*@
+                N° article
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Reports)
-        {
-            <tr>
-                <th scope="row">1</th>
-                <td>@item.nameProduct</td>
-                <td>@item.qtyItem</td>
-                <td>@item.totItem</td>
-                <td>@item.productId</td>
-            </tr>
+        @{
+            var i = 1;
+            foreach (var item in Model.Reports)
+            {
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@item.nameProduct</td>
+                    <td>@item.qtyItem</td>
+                    <td>@item.totItem</td>
+                    <td>@item.productId</td>
+                </tr>
+                i++;
+            }
         }
     </tbody>
 </table>
+<p style="font-size: 11px">Rapport généré le : @DateTime.Now.ToShortDateString()  à @DateTime.Now.ToLongTimeString()</p>

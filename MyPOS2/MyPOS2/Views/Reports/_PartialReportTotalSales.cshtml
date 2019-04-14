@@ -1,69 +1,85 @@
 ﻿@model MyPOS2.Models.report.RTotalSalesViewModel
 
+@*<p class="delimiter"></p>*@
 
-<table class="table">
-    <dl class="dl-horizontal">
+<h3 id="reportTitle" class="delimiterTopBotBold"></h3>
+<h4></h4>
+
+<div id="totReport">
+    <span class="col-md-2" style="font-size: 16px">
+        @Html.LabelFor(m => m.TotReport) :
+    </span>
+    <span class="col-md-3" style="font-size: 16px">
+        @Html.DisplayFor(m => m.TotReport)<span class="glyphicon glyphicon-euro"></span>
+    </span>
+</div>
+<table class="table delimiterTopBot">
+    @*<dl class="dl-horizontal">
         <dt>@Html.LabelFor(m => m.TotReport)</dt>
         <dd>
             @Html.DisplayFor(m => m.TotReport)
         </dd>
-    </dl>
+    </dl>*@
     <thead class="thead-dark">
-        <tr>
+        <tr >
             <th scope="col">#</th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.idTransaction)
-
+                @*@Html.LabelFor(m => m.Report.idTransaction)*@
+                N° Transaction
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.transactionDateBegin)
-
+                @*@Html.LabelFor(m => m.Report.transactionDateBegin)*@
+                Début
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.transactionDateEnd)
-
+                @*@Html.LabelFor(m => m.Report.transactionDateEnd)*@
+                Fin
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.total)
-
+                @*@Html.LabelFor(m => m.Report.total)*@
+                Total
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.discountGlobal)
-
+                @*@Html.LabelFor(m => m.Report.discountGlobal)*@
+                Remise 
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.nameTerminal)
-
+                @*@Html.LabelFor(m => m.Report.nameTerminal)*@
+                Terminal
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.namePerson)
-
+                @*@Html.LabelFor(m => m.Report.namePerson)*@
+                Client
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.nameUser)
-
+                @*@Html.LabelFor(m => m.Report.nameUser)*@
+                Vendeur
             </th>
             <th scope="col">
-                @Html.LabelFor(m => m.Report.nameShop)
-
+                @*@Html.LabelFor(m => m.Report.nameShop)*@
+                Magasin
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Reports)
-        {
-            <tr>
-                <th scope="row">1</th>
-                <td>@item.idTransaction</td>
-                <td>@item.transactionDateBegin</td>
-                <td>@item.transactionDateEnd</td>
-                <td>@item.total</td>
-                <td>@item.discountGlobal</td>
-                <td>@item.nameTerminal</td>
-                <td>@item.namePerson</td>
-                <td>@item.nameUser</td>
-                <td>@item.nameShop</td>
-            </tr>
+        @{
+            var i = 1;
+            foreach (var item in Model.Reports){
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@item.idTransaction</td>
+                    <td>@item.transactionDateBegin</td>
+                    <td>@item.transactionDateEnd</td>
+                    <td>@item.total</td>
+                    <td>@item.discountGlobal</td>
+                    <td>@item.nameTerminal</td>
+                    <td>@item.namePerson</td>
+                    <td>@item.nameUser</td>
+                    <td>@item.nameShop</td>
+                </tr>
+                i++;
+            }
         }
     </tbody>
 </table>
+<p style="font-size: 11px">Rapport généré le : @DateTime.Now.ToShortDateString()  à @DateTime.Now.ToLongTimeString()</p>
