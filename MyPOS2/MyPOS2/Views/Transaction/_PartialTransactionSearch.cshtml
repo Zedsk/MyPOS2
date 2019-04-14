@@ -89,7 +89,7 @@
     @if (Model.CatsChild != null)
     {
         @*<button onclick="goBack()">Go Back</button>*@
-        <button class="btn" data-target="">Suivant</button>
+        <button id="goBack" class="btn" data-target=""><span class="glyphicon glyphicon-menu-left"></span>Précédent</button>
         foreach (var cat in Model.CatsChild)
         {
             <button type="button" class="close-image buttonProd" value="@cat.idCategory" onclick="ProductBy(this, 'cat')">
@@ -103,7 +103,7 @@
     @if (Model.Products != null)
     {
         @*<button onclick="goBack()">Go Back</button>*@
-        <button class="btn" data-target="page1">Suivant</button>
+        <button id="goBack" class="btn" onclick="FindCat()"><span class="glyphicon glyphicon-menu-left"></span>Précédent</button>
         foreach (var item in Model.Products)
         {
             <button type="button" class="close-image buttonProd" onclick="AddItem(@item.barcode)">
@@ -121,29 +121,29 @@
 <p>Vue partielle : @DateTime.Now.ToLongTimeString()</p>
 
 @*@section Scripts{
-    <script>
-        $(function () {
-            function ini() {
-                var hash = $(location).attr('hash');
-                if (hash && hash != '#') {
-                    charge(hash.substr(1));
-                } else {
-                    charge("page0");
+        <script>
+            $(function () {
+                function ini() {
+                    var hash = $(location).attr('hash');
+                    if (hash && hash != '#') {
+                        charge(hash.substr(1));
+                    } else {
+                        charge("page0");
+                    }
                 }
-            }
 
-            function charge(page) {
-                $("#app").load(page + ".html", function () {
-                    $(".btn").click(function () {
-                        $(location).attr('hash', $(this).data("target"));
-                        $("body").scrollTop(0);
+                function charge(page) {
+                    $("#app").load(page + ".html", function () {
+                        $(".btn").click(function () {
+                            $(location).attr('hash', $(this).data("target"));
+                            $("body").scrollTop(0);
+                        });
                     });
-                });
-            }
+                }
 
-            $(window).on('hashchange', function () { ini(); });
+                $(window).on('hashchange', function () { ini(); });
 
-            ini();
-        });
-    </script>
-}*@
+                ini();
+            });
+        </script>
+    }*@

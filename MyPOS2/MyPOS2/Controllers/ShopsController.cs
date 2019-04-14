@@ -236,26 +236,30 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool isUniversal = TranslationBL.CheckIfUniversal(vmodel.ShopsTrans);
+                //bool isUniversal = TranslationBL.CheckIfUniversal(vmodel.ShopsTrans);
                 db.Entry(vmodel.Shop).State = EntityState.Modified;
                 foreach (var item in vmodel.ShopsTrans)
                 {
-                    if (item.nameShop != null)
-                    {
-                        if (isUniversal)
-                        {
-                            item.languageId = LanguageBL.FindIdLanguageByShortForm("all");
-                            db.Entry(item).State = EntityState.Modified;
-                        }
-                        else
-                        {
-                            db.Entry(item).State = EntityState.Modified;
-                        }
-                    }
+                    //// to do --> manage if universal translation 
+                    //if (item.nameShop != null)
+                    //{
+                    //    if (isUniversal)
+                    //    {
+                    //        item.languageId = LanguageBL.FindIdLanguageByShortForm("all");
+                    //        db.Entry(item).State = EntityState.Modified;
+                    //    }
+                    //    else
+                    //    {
+                    //        db.Entry(item).State = EntityState.Modified;
+                    //    }
+                    //}
+
+                    db.Entry(item).State = EntityState.Modified;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            vmodel.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
             return View(vmodel);
         }
 

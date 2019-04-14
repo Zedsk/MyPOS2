@@ -140,6 +140,7 @@ function AddDiscount() {
 function SearchByCodeOrName() {
     document.getElementById('errorSearchProduct').textContent = "";
     document.getElementById('errorSearchProduct').style.visibility = "hidden";
+
     try {
         var val = document.getElementById('searchProduct').value;
         if (val === null || val === "") {
@@ -194,10 +195,12 @@ function AddItem(item) {
 
 function SearchBy(method) {
     var val = method.getAttribute('Value');
+
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById('containerRight').innerHTML = xhr.responseText;
+
         }
     }
 
@@ -215,7 +218,7 @@ function ProductBy(id, meth) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('containerRight').innerHTML = xhr.responseText;
+            document.getElementById('containerRight').innerHTML = xhr.responseText + '<a href="javascript:window.history.back();">Retour</a>';
         }
     }
 

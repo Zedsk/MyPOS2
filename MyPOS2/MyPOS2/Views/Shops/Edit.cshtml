@@ -46,9 +46,6 @@
 
             }
 
-            @*<img id="imgLogo" src="@Url.Content(ViewBag.path)" alt="Image du Héro" class="imgIndex" />
-        <img src="@Url.Content(Model.Hero.imageHero)" alt="Image du Héro" class="imgIndex" />*@
-
             @Html.HiddenFor(model => model.Shop.logoShop)
             @Html.ValidationMessageFor(model => model.Shop.logoShop, "", new { @class = "text-danger" })
             <input type="file" id="newImage" name="newImage" />
@@ -83,200 +80,200 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.NameShop, htmlAttributes: new { @class = "control-label col-md-2" })
-        @if (!ViewBag.isUniversal)
-        {
-            for (int i = 0; i < Model.ListLang.Count(); i++)
+            @Html.LabelFor(model => model.NameShop, htmlAttributes: new { @class = "control-label col-md-2" })
+            @if (!ViewBag.isUniversal)
+            {
+                for (int i = 0; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
+                        @Html.EditorFor(model => model.ShopsTrans[i].nameShop, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
+
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+
+                    </div>
+                    <br />
+                }
+            }
+            else
             {
                 <div class="col-md-2">
-                    @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
-                    @Html.EditorFor(model => model.ShopsTrans[i].nameShop, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ShopsTrans[0].shopId)
+                    @Html.EditorFor(model => model.ShopsTrans[0].nameShop, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
 
-                    @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+                    <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
 
-                    @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                    @Html.HiddenFor(m => m.ShopsTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
 
                 </div>
                 <br />
+                for (int i = 1; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
+                        @Html.EditorFor(model => model.ShopsTrans[i].nameShop, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
+
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                    </div>
+                    <br />
+                }
             }
-        }
-        else
-        {
-            <div class="col-md-2">
-                @Html.HiddenFor(model => model.ShopsTrans[0].shopId)
-                @Html.EditorFor(model => model.ShopsTrans[0].nameShop, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
 
-                <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
+        </div>
 
-                @Html.HiddenFor(m => m.ShopsTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
+            @if (!ViewBag.isUniversal)
+            {
+                for (int i = 0; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
+                        @Html.EditorFor(model => model.ShopsTrans[i].street, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
 
-            </div>
-            <br />
-            for (int i = 1; i < Model.ListLang.Count(); i++)
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+
+                    </div>
+                    <br />
+                }
+            }
+            else
             {
                 <div class="col-md-2">
-                    @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
-                    @Html.EditorFor(model => model.ShopsTrans[i].nameShop, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ShopsTrans[0].shopId)
+                    @Html.EditorFor(model => model.ShopsTrans[0].street, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
 
-                    @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+                    <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
 
-                    @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
-                </div>
-                <br />
-            }
-        }
-
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
-        @if (!ViewBag.isUniversal)
-        {
-            for (int i = 0; i < Model.ListLang.Count(); i++)
-            {
-                <div class="col-md-2">
-                    @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
-                    @Html.EditorFor(model => model.ShopsTrans[i].street, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
-
-                    @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
-
-                    @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
-
-                </div>
-                <br />
-            }
-        }
-        else
-        {
-            <div class="col-md-2">
-                @Html.HiddenFor(model => model.ShopsTrans[0].shopId)
-                @Html.EditorFor(model => model.ShopsTrans[0].street, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
-
-                <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
-
-                @Html.HiddenFor(m => m.ShopsTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
-
-            </div>
-            <br />
-            for (int i = 1; i < Model.ListLang.Count(); i++)
-            {
-                <div class="col-md-2">
-                    @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
-                    @Html.EditorFor(model => model.ShopsTrans[i].street, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
-
-                    @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
-
-                    @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
-                </div>
-                <br />
-            }
-        }
-
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-        @if (!ViewBag.isUniversal)
-        {
-            for (int i = 0; i < Model.ListLang.Count(); i++)
-            {
-                <div class="col-md-2">
-                    @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
-                    @Html.EditorFor(model => model.ShopsTrans[i].city, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
-
-                    @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
-
-                    @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                    @Html.HiddenFor(m => m.ShopsTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
 
                 </div>
                 <br />
+                for (int i = 1; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
+                        @Html.EditorFor(model => model.ShopsTrans[i].street, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
+
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                    </div>
+                    <br />
+                }
             }
-        }
-        else
-        {
-            <div class="col-md-2">
-                @Html.HiddenFor(model => model.ShopsTrans[0].shopId)
-                @Html.EditorFor(model => model.ShopsTrans[0].city, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
 
-                <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
+        </div>
 
-                @Html.HiddenFor(m => m.ShopsTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            @if (!ViewBag.isUniversal)
+            {
+                for (int i = 0; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
+                        @Html.EditorFor(model => model.ShopsTrans[i].city, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
 
-            </div>
-            <br />
-            for (int i = 1; i < Model.ListLang.Count(); i++)
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+
+                    </div>
+                    <br />
+                }
+            }
+            else
             {
                 <div class="col-md-2">
-                    @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
-                    @Html.EditorFor(model => model.ShopsTrans[i].city, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ShopsTrans[0].shopId)
+                    @Html.EditorFor(model => model.ShopsTrans[0].city, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
 
-                    @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+                    <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
 
-                    @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                    @Html.HiddenFor(m => m.ShopsTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
+
                 </div>
                 <br />
+                for (int i = 1; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
+                        @Html.EditorFor(model => model.ShopsTrans[i].city, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
+
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                    </div>
+                    <br />
+                }
             }
-        }
 
-    </div>
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Opening, htmlAttributes: new { @class = "control-label col-md-2" })
-        @if (!ViewBag.isUniversal)
-        {
-            for (int i = 0; i < Model.ListLang.Count(); i++)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Opening, htmlAttributes: new { @class = "control-label col-md-2" })
+            @if (!ViewBag.isUniversal)
+            {
+                for (int i = 0; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
+                        @Html.EditorFor(model => model.ShopsTrans[i].opening, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
+
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+
+                    </div>
+                    <br />
+                }
+            }
+            else
             {
                 <div class="col-md-2">
-                    @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
-                    @Html.EditorFor(model => model.ShopsTrans[i].opening, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ShopsTrans[0].shopId)
+                    @Html.EditorFor(model => model.ShopsTrans[0].opening, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
 
-                    @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+                    <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
 
-                    @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                    @Html.HiddenFor(m => m.ShopsTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
 
                 </div>
                 <br />
+                for (int i = 1; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
+                        @Html.EditorFor(model => model.ShopsTrans[i].opening, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
+
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                    </div>
+                    <br />
+                }
             }
-        }
-        else
-        {
-            <div class="col-md-2">
-                @Html.HiddenFor(model => model.ShopsTrans[0].shopId)
-                @Html.EditorFor(model => model.ShopsTrans[0].opening, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
 
-                <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
-
-                @Html.HiddenFor(m => m.ShopsTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
-
-            </div>
-            <br />
-            for (int i = 1; i < Model.ListLang.Count(); i++)
-            {
-                <div class="col-md-2">
-                    @Html.HiddenFor(model => model.ShopsTrans[i].shopId, new { @Value = Model.Shop.idShop })
-                    @Html.EditorFor(model => model.ShopsTrans[i].opening, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ShopsTrans, "", new { @class = "text-danger" })
-
-                    @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
-
-                    @Html.HiddenFor(m => m.ShopsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
-                </div>
-                <br />
-            }
-        }
-
-    </div>
+        </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

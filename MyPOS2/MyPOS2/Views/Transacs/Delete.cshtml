@@ -124,7 +124,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            <input type="submit" value="Supprimer" class="btn btn-default" onclick="return confirm('Etes-vous sur de vouloir supprimer?');"/> |
             @Html.ActionLink("Retour à la Liste", "Index")
         </div>
     }

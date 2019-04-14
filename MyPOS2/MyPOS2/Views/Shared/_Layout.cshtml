@@ -14,13 +14,39 @@
             window.onunload = function () { null };
         </script>*@
 
+    @*<script>
+        $(function () {
+            function ini() {
+                var hash = $(location).attr('hash');
+                if (hash && hash != '#') {
+                    charge(hash.substr(1));
+                } else {
+                    charge("page0");
+                }
+            }
+
+            function charge(page) {
+                $("#app").load(page + ".html", function () {
+                    $(".btn").click(function () {
+                        $(location).attr('hash', $(this).data("target"));
+                        $("body").scrollTop(0);
+                    });
+                });
+            }
+
+            $(window).on('hashchange', function () { ini(); });
+
+            ini();
+        });
+    </script>*@
+
 
     @RenderSection("Styles", false)
 
     @*@section Styles {
-        <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
-    }*@
-
+            <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+        }*@
+        
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -71,3 +97,4 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+

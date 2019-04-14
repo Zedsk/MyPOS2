@@ -22,7 +22,15 @@
 
         <dd>
             @*@Html.DisplayFor(model => model.logoShop)*@
-            <img src="@Url.Content(Model.logoShop)" alt="Image du Héro" class="imgIndex" />
+            @if (Model.logoShop != null)
+            {
+                <img src="@Url.Content(Model.logoShop)" alt="Logo du magasin" class="imgIndex" />
+            }
+            else
+            {
+                <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+            }
+            
         </dd>
 
         <dt>
@@ -58,7 +66,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            <input type="submit" value="Supprimer" class="btn btn-default" onclick="return confirm('Etes-vous sur de vouloir supprimer?');"/> |
             @Html.ActionLink("Retour à la liste", "Index")
         </div>
     }
