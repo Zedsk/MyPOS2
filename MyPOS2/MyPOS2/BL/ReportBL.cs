@@ -30,7 +30,7 @@ namespace MyPOS2.BL
             return typesReport;
         }
 
-        //provisoire type report
+        //provisoire type report à modifier
         public class TYPE_REPORT
         {
             public TYPE_REPORT() { }
@@ -67,13 +67,28 @@ namespace MyPOS2.BL
                 IList<SPP_ReportTotalSalesTransDistinct_Result> list = dal.CreateReportTotalSales(yearD, monthD, dayD, status, isReturn, language);
                 RTotalSalesViewModel vm = new RTotalSalesViewModel
                 {
-                    Reports = list,
+                    //to do--> change format display for discount 0.21 to 21%
+                    Reports = ModifyFormatDisplayDiscount(list),
                     TotReport = CalculateTotalReport(list)
                 };
-
                 return vm;
                 //return dal.CreateReportTotalSales(yearD, monthD, dayD, status, isReturn, language);
             }
+        }
+
+        private static IList<SPP_ReportTotalSalesTransDistinct_Result> ModifyFormatDisplayDiscount(IList<SPP_ReportTotalSalesTransDistinct_Result> list)
+        {
+            for (int i = 0; i < list.Count(); i++)
+            {
+                if (list[i].discountGlobal != null)
+                {
+                    var temp = (list[i].discountGlobal * 100).ToString();
+                    var tempsplit = temp.Split(',');
+                    int discount = int.Parse(tempsplit[0]);
+                    list[i].discountGlobal = discount;
+                }
+            }
+            return list;
         }
 
         private static string CalculateTotalReport(IList<SPP_ReportTotalSalesTransDistinct_Result> list)

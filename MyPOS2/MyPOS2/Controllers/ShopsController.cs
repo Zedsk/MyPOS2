@@ -22,20 +22,21 @@ namespace MyPOS2.Controllers
         public ActionResult Index()
         {
             //return View(db.SHOPs.ToList());
-            if (Session["Language"] == null)
-            {
-                Session["Language"] = ConfigurationManager.AppSettings["Language"];
-            }
-            string language = Session["Language"].ToString();
-            int lang;
-            if (int.TryParse(language, out int codeL))
-            {
-                lang = codeL;
-            }
-            else
-            {
-                lang = LanguageBL.FindIdLanguageByShortForm(language);
-            }
+            //if (Session["Language"] == null)
+            //{
+            //    Session["Language"] = ConfigurationManager.AppSettings["Language"];
+            //}
+            //string language = Session["Language"].ToString();
+            //int lang;
+            //if (int.TryParse(language, out int codeL))
+            //{
+            //    lang = codeL;
+            //}
+            //else
+            //{
+            //    lang = LanguageBL.FindIdLanguageByShortForm(language);
+            //}
+            int lang = LanguageBL.CheckLanguageSession();
             var shopsT = db.SPP_ShopTransDistinct(lang).ToList();
             return View(shopsT);
         }

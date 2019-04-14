@@ -10,7 +10,7 @@
         @Html.LabelFor(m => m.TotReport) :
     </span>
     <span class="col-md-3" style="font-size: 16px">
-        @Html.DisplayFor(m => m.TotReport)<span class="glyphicon glyphicon-euro"></span>
+        @Html.DisplayFor(m => m.TotReport) € @*<span class="glyphicon glyphicon-euro"></span>*@
     </span>
 </div>
 <table class="table delimiterTopBot">
@@ -65,18 +65,24 @@
         @{
             var i = 1;
             foreach (var item in Model.Reports){
-                <tr>
-                    <th scope="row">@i</th>
-                    <td>@item.idTransaction</td>
-                    <td>@item.transactionDateBegin</td>
-                    <td>@item.transactionDateEnd</td>
-                    <td>@item.total</td>
-                    <td>@item.discountGlobal</td>
-                    <td>@item.nameTerminal</td>
-                    <td>@item.namePerson</td>
-                    <td>@item.nameUser</td>
-                    <td>@item.nameShop</td>
-                </tr>
+        <tr>
+            <th scope="row">@i</th>
+            <td>@item.idTransaction</td>
+            <td>@item.transactionDateBegin</td>
+            <td>@item.transactionDateEnd</td>
+            <td>@item.total €</td>
+            @if (@item.discountGlobal != null)
+            {
+                <td>@item.discountGlobal %</td>
+            }else
+            {
+                <td> - </td>
+            }
+            <td>@item.nameTerminal</td>
+            <td>@item.namePerson</td>
+            <td>@item.nameUser</td>
+            <td>@item.nameShop</td>
+        </tr>
                 i++;
             }
         }

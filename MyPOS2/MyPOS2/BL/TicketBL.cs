@@ -57,12 +57,19 @@ namespace MyPOS2.BL
                 }
                 else
                 {
-                    vm.DiscountG = (transac.discountGlobal * 100).ToString();
+                    var temp = (transac.discountGlobal * 100).ToString();
+                    var tempsplit = temp.Split(',');
+                    var discount = tempsplit[0] + "%";
+                    vm.DiscountG = discount;
                 }
 
                 ////VAT
                 //vm.VatG = (FindVatValById(transac.vatId)).ToString();
                 //vm.VatG = dal.GetAppliedVatById(transac.vatId).appliedVat;
+                //to do --> provisoire vatId = 2 --> 21%
+                int tva = 2;
+                vm.VatG = VatBL.FindVatValById(tva);
+
 
                 //Total
                 vm.TotalG = (transac.total).ToString();

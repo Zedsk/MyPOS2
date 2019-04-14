@@ -220,6 +220,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\Payment_MethodsController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -410,6 +411,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\management\HeroViewModel.cs" />
+    <Compile Include="Models\management\ProductViewModel.cs" />
     <Compile Include="Models\management\ShopViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\report\ReportMenuViewModel.cs" />
@@ -626,6 +628,11 @@
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\_PartialReportTotalSales.cshtml" />
     <Content Include="Views\Reports\_PartialReportTotalSalesByProduct.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

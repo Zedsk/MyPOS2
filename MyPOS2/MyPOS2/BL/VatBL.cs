@@ -42,14 +42,16 @@ namespace MyPOS2.BL
             }
         }
 
-        private static string FindVatValById(int? vatId)
+        public static string FindVatValById(int? vatId)
         {
             if (vatId != null)
             {
                 using (IDalVat dal = new DalVat())
                 {
-
-                    return (dal.GetVatValById(vatId)).ToString();
+                    var temp = (dal.GetVatValById(vatId)*100).ToString();
+                    var tempsplit = temp.Split(',');
+                    var tva = tempsplit[0] + "%";
+                    return tva;
                 }
             }
             return "no VAT";

@@ -1,0 +1,90 @@
+﻿@model MyPOS2.Data.Entity.PRODUCT
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PRODUCT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.barcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.barcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salesPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salesPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discountRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discountRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imageProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imageProduct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AGE.imageAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AGE.imageAge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BRAND.nameBrand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BRAND.nameBrand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CATEGORY.imageCat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORY.imageCat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HERO.imageHero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HERO.imageHero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VAT.idVat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VAT.idVat)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idProduct }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
