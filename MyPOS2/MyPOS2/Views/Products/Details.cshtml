@@ -4,14 +4,36 @@
     ViewBag.Title = "Details";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Details</h2>
 
 <div>
-    <h4>PRODUCT</h4>
+    <h4>Article</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.barcode)
+            @*@Html.DisplayNameFor(model => model.imageProduct)*@
+            Image
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.imageProduct)*@
+            @if (Model.imageProduct != null)
+            {
+                <img src="@Url.Content(Model.imageProduct)" alt="Image du produit" class="imgIndex" />
+            }
+            else
+            {
+                <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+            }
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.barcode)*@
+            Code barre
         </dt>
 
         <dd>
@@ -19,7 +41,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.salesPrice)
+            @*@Html.DisplayNameFor(model => model.salesPrice)*@
+            Prix
         </dt>
 
         <dd>
@@ -27,7 +50,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.discountRate)
+            @*@Html.DisplayNameFor(model => model.discountRate)*@
+            Remise
         </dt>
 
         <dd>
@@ -35,23 +59,25 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.imageProduct)
+            @*@Html.DisplayNameFor(model => model.AGE.imageAge)*@
+            Age
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.imageProduct)
+            @*@Html.DisplayFor(model => model.AGE.imageAge)*@
+            @if (Model.AGE.imageAge != null)
+            {
+                <img src="@Url.Content(Model.AGE.imageAge)" alt="Image de la tranche d'age" class="imgIndex" />
+            }
+            else
+            {
+                <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+            }
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AGE.imageAge)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AGE.imageAge)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BRAND.nameBrand)
+            @*@Html.DisplayNameFor(model => model.BRAND.nameBrand)*@
+            Marque
         </dt>
 
         <dd>
@@ -59,32 +85,77 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CATEGORY.imageCat)
+            @*@Html.DisplayNameFor(model => model.CATEGORY.imageCat)*@
+            Catégorie
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CATEGORY.imageCat)
+            @*@Html.DisplayFor(model => model.CATEGORY.imageCat)*@
+            @if (Model.CATEGORY.imageCat != null)
+            {
+                <img src="@Url.Content(Model.CATEGORY.imageCat)" alt="Image de la catégorie" class="imgIndex" />
+            }
+            else
+            {
+                <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+            }
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HERO.imageHero)
+            @*@Html.DisplayNameFor(model => model.HERO.imageHero)*@
+            Héro
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HERO.imageHero)
+            @*@Html.DisplayFor(model => model.HERO.imageHero)*@
+            @if (Model.HERO != null)
+            {
+                <img src="@Url.Content(Model.HERO.imageHero)" alt="Logo Héro" class="imgIndex" />
+            }
+            else
+            {
+                <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+            }
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.VAT.idVat)
+            @*@Html.DisplayNameFor(model => model.VAT.idVat)*@
+            TVA
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.VAT.idVat)
+            @{
+                var temp = ((Model.VAT.appliedVat) * 100).ToString();
+                var tempsplit = temp.Split(',');
+                var tva = tempsplit[0] + "%";
+                <span>@tva</span>
+            }
+
+            @*@Html.DisplayFor(model => model.VAT.idVat)*@
         </dd>
+
+        @foreach (var item in ViewBag.ProductTrans)
+        {
+            <dl class="dl-horizontal">
+                <dt>
+                    Nom
+                </dt>
+                <dd>
+                    @item.nameProduct
+                </dd>
+
+                <dt>
+                    Description
+                </dt>
+                <dd>
+                    @item.description
+                </dd>
+            </dl>
+        }
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idProduct }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editer", "Edit", new { id = Model.idProduct }) |
+    @Html.ActionLink("Retour à la liste", "Index")
 </p>

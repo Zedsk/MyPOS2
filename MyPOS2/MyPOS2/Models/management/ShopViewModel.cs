@@ -18,7 +18,6 @@ namespace MyPOS2.Models.management
 
         [Display(Name = "Rue")]
         public string Street { get; set; }
-
         
         [Display(Name = "Code postal")]
         public string ZipCode { get; set; }

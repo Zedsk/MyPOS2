@@ -11,7 +11,8 @@ namespace MyPOS2.Data.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BRAND
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +23,8 @@ namespace MyPOS2.Data.Entity
         }
     
         public int idBrand { get; set; }
+
+        [Required(ErrorMessage = "Le champ Nom est requis")]
         public string nameBrand { get; set; }
         public string imageBrand { get; set; }
     

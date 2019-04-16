@@ -1,101 +1,274 @@
-﻿@model MyPOS2.Data.Entity.PRODUCT
+﻿@*@model MyPOS2.Data.Entity.PRODUCT*@
+@model MyPOS2.Models.management.ProductViewModel
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/pos2.js")" type="text/javascript"></script>
+}
+
+<h2>Editer</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PRODUCT</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.idProduct)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.barcode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.barcode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.barcode, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<div class="form-horizontal">
+    <h4 id="sourceName">Article</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.IdProduct)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.salesPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.salesPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.salesPrice, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.HiddenFor(model => model.Product.idProduct)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.discountRate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.discountRate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.discountRate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImageProduct, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @if (ViewBag.path != null)
+            {
+                <img id="imgLogo" src="@Url.Content(ViewBag.path)" alt="Image du produit" class="imgIndex" />
+            }
+            else
+            {
+                if (Model.ImageProduct != null)
+                {
+                    @*<img id="imgLogo" src="@Url.Content(Model.ImageProduct)" alt="Image du produit" class="imgIndex" />*@
+                    <img id="imgLogo" src="@Url.Content(Model.Product.imageProduct)" alt="Image du produit" class="imgIndex" />
+                }
+                else
+                {
+                    <img id="imgLogo" src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+                }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.imageProduct, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imageProduct, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.imageProduct, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.categoryId, "categoryId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("categoryId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            @*@Html.HiddenFor(model => model.Product.imageProduct, new { @Value = Model.ImageProduct })*@
+            @Html.HiddenFor(model => model.Product.imageProduct)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ageId, "ageId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ageId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ageId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.brandId, "brandId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("brandId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.brandId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.heroId, "heroId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("heroId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.heroId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.vatId, "vatId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("vatId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.vatId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            @*@Html.HiddenFor(model => model.ImageProduct)*@
+            @Html.ValidationMessageFor(model => model.ImageProduct, "", new { @class = "text-danger" })
+            <input type="file" id="newImage" name="newImage" />
+            <button type="button" class="btn btn-default" value="" onclick="ImportImage()">
+                <span class="glyphicon glyphicon-download-alt"></span> Modifier
+            </button>
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.barcode, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.EditorFor(model => model.Product.barcode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Product.barcode, "", new { @class = "text-danger" })
+
+            @*@Html.HiddenFor(model => model.Product.barcode, new { @Value = Model.Barcode })*@
+            @Html.HiddenFor(model => model.Barcode, new { @Value = Model.Product.barcode })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @oninput = " ChangeHiddenVal(this)" } })*@
+            @Html.EditorFor(model => model.Product.salesPrice, new { htmlAttributes = new { @class = "form-control" } })
+
+            @Html.ValidationMessageFor(model => model.Product.salesPrice, "", new { @class = "text-danger" })
+
+            @*@Html.HiddenFor(model => model.Product.salesPrice, new { @Value = (Model.Price).ToString() })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.EditorFor(model => model.Product.discountRate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Product.discountRate, "", new { @class = "text-danger" })
+
+            @*@Html.HiddenFor(model => model.Product.discountRate, new { @Value = (Model.Discount).ToString() })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.categoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DropDownListFor(l => l.Category, new SelectList(Model.CategoriesTrans, "categoryId", "nameCategory"), "Choix de la Catégorie", htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownListFor(l => l.Product.categoryId, new SelectList(Model.CategoriesTrans, "categoryId", "nameCategory"), "Choix de la Catégorie", htmlAttributes: new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.Product.categoryId, "", new { @class = "text-danger" })
+
+            @*@Html.HiddenFor(model => model.Product.categoryId, new { @Value = Model.Category })*@
+            @Html.HiddenFor(model => model.Category, new { @Value = Model.Product.categoryId })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.ageId, "ageId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DropDownListFor(l => l.Age, new SelectList(Model.Ages, "idAge", "rangeAges"), "Choix de la tranche d'age", htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownListFor(l => l.Product.ageId, new SelectList(Model.Ages, "idAge", "rangeAges"), "Choix de la tranche d'age", htmlAttributes: new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.Product.ageId, "", new { @class = "text-danger" })
+
+            @*@Html.HiddenFor(model => model.Product.ageId, new { @Value = Model.Age })*@
+            @Html.HiddenFor(model => model.Age, new { @Value = Model.Product.ageId })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.brandId, "brandId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DropDownListFor(l => l.Brand, new SelectList(Model.Brands, "idBrand", "nameBrand"), "Choix de la marque", htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownListFor(l => l.Product.brandId, new SelectList(Model.Brands, "idBrand", "nameBrand"), "Choix de la marque", htmlAttributes: new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.Product.brandId, "", new { @class = "text-danger" })
+
+            @*@Html.HiddenFor(model => model.Product.brandId, new { @Value = Model.Brand })*@
+            @Html.HiddenFor(model => model.Brand, new { @Value = Model.Product.brandId })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Hero, "heroId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DropDownListFor(l => l.Hero, new SelectList(Model.HeroesTrans, "heroId", "nameHero"), "Choix du héro", htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownListFor(l => l.Product.heroId, new SelectList(Model.HeroesTrans, "heroId", "nameHero"), "Choix du héro", htmlAttributes: new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.Hero, "", new { @class = "text-danger" })
+
+            @*@Html.HiddenFor(model => model.Product.heroId, new { @Value = Model.Hero })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vat, "vatId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DropDownListFor(l => l.Vat, new SelectList(Model.Vats, "idVat", "appliedVat"), "Choix de la TVA", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })*@
+            @Html.DropDownListFor(l => l.Product.vatId, new SelectList(Model.Vats, "idVat", "appliedVat"), "Choix de la TVA", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+
+            @Html.ValidationMessageFor(model => model.Vat, "", new { @class = "text-danger" })
+
+            @*@Html.HiddenFor(model => model.Product.vatId, new { @Value = Model.Vat })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.ProductTrans.nameProduct, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Nom</label>
+        <span style="color: red; font-weight: bold">@ViewBag.nameIsNotValid</span>
+        @if (!ViewBag.isUniversal)
+        {
+            for (int i = 0; i < Model.ListLang.Count(); i++)
+            {
+                <div class="col-md-2">
+                    @Html.HiddenFor(model => model.ProductsTrans[i].productId, new { @Value = Model.IdProduct })
+                    @Html.EditorFor(model => model.ProductsTrans[i].nameProduct, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductsTrans, "", new { @class = "text-danger" })
+
+                    @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                    @Html.HiddenFor(m => m.ProductsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+
+                </div>
+                <br />
+            }
+        }
+        else
+        {
+            <div class="col-md-2">
+                @Html.HiddenFor(model => model.ProductsTrans[0].productId, new { @Value = Model.IdProduct })
+                @Html.EditorFor(model => model.ProductsTrans[0].nameProduct, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductsTrans, "", new { @class = "text-danger" })
+
+                <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
+
+                @Html.HiddenFor(m => m.ProductsTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
+
+            </div>
+            @*<br />
+                for (int i = 1; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.ProductsTrans[i].productId)
+                        @Html.EditorFor(model => model.ProductsTrans[i].nameProduct, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.ProductsTrans, "", new { @class = "text-danger" })
+
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.ProductsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                    </div>
+                    <br />
+                }*@
+        }
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.ProductTrans.description, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Description</label>
+        <span style="color: red; font-weight: bold">@ViewBag.nameIsNotValid</span>
+        @if (!ViewBag.isUniversal)
+        {
+            for (int i = 0; i < Model.ListLang.Count(); i++)
+            {
+                <div class="col-md-2">
+                    @Html.HiddenFor(model => model.ProductsTrans[i].productId, new { @Value = Model.IdProduct })
+                    @Html.TextAreaFor(model => model.ProductsTrans[i].description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductsTrans, "", new { @class = "text-danger" })
+
+                    @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                    @Html.HiddenFor(m => m.ProductsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+
+                </div>
+                <br />
+            }
+        }
+        else
+        {
+            <div class="col-md-2">
+                @Html.HiddenFor(model => model.ProductsTrans[0].productId, new { @Value = Model.IdProduct })
+                @Html.TextAreaFor(model => model.ProductsTrans[0].description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductsTrans, "", new { @class = "text-danger" })
+
+                <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
+
+                @Html.HiddenFor(m => m.ProductsTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
+
+            </div>
+            <br />
+            @*for (int i = 1; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.ProductsTrans[i].productId)
+                        @Html.TextAreaFor(model => model.ProductsTrans[i].description, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.ProductsTrans, "", new { @class = "text-danger" })
+
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.ProductsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                    </div>
+                    <br />
+                }*@
+        }
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Sauver" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
+<div id="detail">
+    @Html.Partial("_PartialImageName")
+</div>
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la liste", "Index")
 </div>

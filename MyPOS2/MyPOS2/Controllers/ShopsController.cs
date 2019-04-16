@@ -22,20 +22,7 @@ namespace MyPOS2.Controllers
         public ActionResult Index()
         {
             //return View(db.SHOPs.ToList());
-            //if (Session["Language"] == null)
-            //{
-            //    Session["Language"] = ConfigurationManager.AppSettings["Language"];
-            //}
-            //string language = Session["Language"].ToString();
-            //int lang;
-            //if (int.TryParse(language, out int codeL))
-            //{
-            //    lang = codeL;
-            //}
-            //else
-            //{
-            //    lang = LanguageBL.FindIdLanguageByShortForm(language);
-            //}
+ 
             int lang = LanguageBL.CheckLanguageSession();
             var shopsT = db.SPP_ShopTransDistinct(lang).ToList();
             return View(shopsT);
@@ -94,7 +81,6 @@ namespace MyPOS2.Controllers
             {
                 try
                 {
-                    IList<SHOP_TRANSLATION> shopsT = vmodel.ShopsTrans;
                     //if no image, assign default image
                     string logo = vmodel.LogoShop;
                     if (logo == null)
@@ -110,7 +96,12 @@ namespace MyPOS2.Controllers
                     };
                     db.SHOPs.Add(shop);
                     db.SaveChanges();
+
+                    //Add Translation
                     int id = shop.idShop;
+                    //IList<SHOP_TRANSLATION> shopsT = vmodel.ShopsTrans;
+                    IList<SHOP_TRANSLATION> shopsT = TranslationBL.VerifyIsUniversal(vmodel.ShopsTrans, id);
+
                     //int id = 3;
 
                     //int count = shopsT.Count();
@@ -139,10 +130,11 @@ namespace MyPOS2.Controllers
                     //{
 
                     //}
-                    foreach (var item in shopsT)
-                    {
-                        item.shopId = id;
-                    }
+
+                    //foreach (var item in shopsT)
+                    //{
+                    //    item.shopId = id;
+                    //}
                     db.SHOP_TRANSLATIONs.AddRange(shopsT);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -237,9 +229,10 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-                //bool isUniversal = TranslationBL.CheckIfUniversal(vmodel.ShopsTrans);
+                
                 db.Entry(vmodel.Shop).State = EntityState.Modified;
-                foreach (var item in vmodel.ShopsTrans)
+                IList<SHOP_TRANSLATION> shopsT = TranslationBL.VerifyIsUniversal(vmodel.ShopsTrans, vmodel.Shop.idShop);
+                foreach (var item in shopsT)
                 {
                     //// to do --> manage if universal translation 
                     //if (item.nameShop != null)
@@ -254,7 +247,7 @@ namespace MyPOS2.Controllers
                     //        db.Entry(item).State = EntityState.Modified;
                     //    }
                     //}
-
+                    
                     db.Entry(item).State = EntityState.Modified;
                 }
                 db.SaveChanges();

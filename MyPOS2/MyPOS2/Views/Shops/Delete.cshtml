@@ -30,8 +30,16 @@
             {
                 <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
             }
-            
+
         </dd>
+
+        @*<dt>
+            Nom
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(m => m.SHOP)
+        </dd>*@
 
         <dt>
             @*@Html.DisplayNameFor(model => model.phone)*@
@@ -51,13 +59,14 @@
             @Html.DisplayFor(model => model.email)
         </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.zipCode)
+        <dt>
+            @*@Html.DisplayNameFor(model => model.zipCode)*@
+            Code postal
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.zipCode)
-        </dd>*@
+        </dd>
 
     </dl>
 

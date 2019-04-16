@@ -30,18 +30,58 @@ namespace MyPOS2.BL
 
         internal static bool CheckIfUniversal(IList<SHOP_TRANSLATION> shopsT)
         {
-            bool result = true;
+            bool result = false;
             List<string> nameList = new List<string>();
+            List<string> streetList = new List<string>();
+            List<string> cityList = new List<string>();
+            List<string> opList = new List<string>();
             foreach (var item in shopsT)
             {
                 if (item.nameShop != null)
                 {
                     nameList.Add(item.nameShop);
                 }
+                if (item.street != null)
+                {
+                    streetList.Add(item.nameShop);
+                }
+                if (item.city != null)
+                {
+                    cityList.Add(item.nameShop);
+                }
+                if (item.opening != null)
+                {
+                    opList.Add(item.nameShop);
+                }
+
             }
-            if (nameList.Count() > 1)
+            if (nameList.Count() == 1 && streetList.Count() == 1 && cityList.Count() == 1 && opList.Count() == 1)
             {
-                result = false;
+                result = true;
+            }
+            return result;
+        }
+
+        internal static bool CheckIfUniversal(IList<PRODUCT_TRANSLATION> productsT)
+        {
+            bool result = false;
+            List<string> nameList = new List<string>();
+            List<string> descList = new List<string>();
+            foreach (var item in productsT)
+            {
+                if (item.nameProduct != null)
+                {
+                    nameList.Add(item.nameProduct);
+                }
+                //if (item.description != null)
+                //{
+                //    descList.Add(item.description);
+                //}
+            }
+            //if (nameList.Count() > 1 && descList.Count() > 1)
+            if (nameList.Count() == 1)
+            {
+                result = true;
             }
             return result;
         }
@@ -82,7 +122,7 @@ namespace MyPOS2.BL
                 return result;
             }
         }
-
+                
         internal static bool CheckIfNameHeroIsValid(IList<HERO_TRANSLATION> heroesT)
         {
             bool result = true;
@@ -99,6 +139,59 @@ namespace MyPOS2.BL
                 result = false;
             }
             return result;
+        }
+
+        internal static IList<PRODUCT_TRANSLATION> VerifyIsUniversal(IList<PRODUCT_TRANSLATION> productsTrans, int id)
+        {
+            bool isUniversal = TranslationBL.CheckIfUniversal(productsTrans);
+            int count = productsTrans.Count();
+            if (isUniversal)
+            {
+                List<PRODUCT_TRANSLATION> result = new List<PRODUCT_TRANSLATION>();
+                productsTrans[0].productId = id;
+                //change language with universal
+                productsTrans[0].languageId = LanguageBL.FindUniversalId();
+                if (productsTrans[0].description == null)
+                {
+                    productsTrans[0].description = " - ";
+                }
+                result.Add(productsTrans[0]);
+
+                return result;
+            }
+            else
+            {
+                foreach (var item in productsTrans)
+                {
+                    item.productId = id;
+                }
+                return productsTrans;
+            }
+        }
+
+        internal static IList<SHOP_TRANSLATION> VerifyIsUniversal(IList<SHOP_TRANSLATION> shopsTrans, int id)
+        {
+            bool isUniversal = TranslationBL.CheckIfUniversal(shopsTrans);
+            int count = shopsTrans.Count();
+            if (isUniversal)
+            {
+                List<SHOP_TRANSLATION> result = new List<SHOP_TRANSLATION>();
+                shopsTrans[0].shopId = id;
+                //change language with universal
+                shopsTrans[0].languageId = LanguageBL.FindUniversalId();
+                
+                result.Add(shopsTrans[0]);
+
+                return result;
+            }
+            else
+            {
+                foreach (var item in shopsTrans)
+                {
+                    item.shopId = id;
+                }
+                return shopsTrans;
+            }
         }
     }
 }

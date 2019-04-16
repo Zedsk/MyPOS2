@@ -348,7 +348,7 @@ function ImportImage() {
             case "catégorie":
                 source = "category";
                 break;
-            case "produit":
+            case "article":
                 source = "product";
                 break;
             case "magasin":
@@ -389,7 +389,7 @@ function ImportImage() {
                             document.getElementById('imageAge').value = T.trim();
                         }
                         else {
-                            //document.getElementById('Hero_imageHero').value = T.trim();
+                            //document.getElementById('Age_imageAge').value = T.trim();
                         }
                         break;
 
@@ -398,7 +398,7 @@ function ImportImage() {
                             document.getElementById('imageBrand').value = T.trim();
                         }
                         else {
-                            //document.getElementById('Hero_imageHero').value = T.trim();
+                            //document.getElementById('Brand_imageBrand').value = T.trim();
                         }
                         break;
 
@@ -408,6 +408,15 @@ function ImportImage() {
                         }
                         else {
                             document.getElementById('Shop_logoShop').value = T.trim();
+                        }
+                        break;
+
+                    case "product":
+                        if (document.getElementById('ImageProduct') != null) {
+                            document.getElementById('ImageProduct').value = T.trim();
+                        }
+                        else {
+                            document.getElementById('Product_imageProduct').value = T.trim();
                         }
                         break;
 
@@ -566,4 +575,17 @@ function CreateReport() {
         document.getElementById('errorFormReport').style.visibility = "visible";
         console.log(e);
     }
+}
+
+function ChangeHiddenVal(source) {
+    var t = source.id;
+    var v = source.value;
+    t.oninput = function () {
+        document.getElementById('Product_salesPrice').value = v;
+    }
+
+    
+
+
+
 }

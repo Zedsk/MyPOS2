@@ -11,7 +11,8 @@ namespace MyPOS2.Data.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PRODUCT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +25,11 @@ namespace MyPOS2.Data.Entity
     
         public int idProduct { get; set; }
         public string barcode { get; set; }
+
+        [Range(0, 99999, ErrorMessage = "valeur devant être comprise entre 0 et 99999")]
         public decimal salesPrice { get; set; }
+        
+        [Range(0, 1, ErrorMessage = "valeur devant être comprise entre 0 et 1")]
         public Nullable<decimal> discountRate { get; set; }
         public string imageProduct { get; set; }
         public int categoryId { get; set; }

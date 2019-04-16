@@ -64,5 +64,15 @@ namespace MyPOS2.BL
             }
             return lang;
         }
+
+        internal static int FindUniversalId()
+        {
+            using (IDalLanguage dal = new DalLanguage())
+            {
+                // to do  -> améliorer 
+                string shortForm = "all";
+                return dal.GetIdLanguageByShortForm(shortForm.ToLower());
+            }
+        }
     }
 }
