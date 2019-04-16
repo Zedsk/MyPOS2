@@ -202,6 +202,7 @@
     <Compile Include="BL\ProductBL.cs" />
     <Compile Include="BL\ReportBL.cs" />
     <Compile Include="BL\SearchBL.cs" />
+    <Compile Include="BL\SettingBL.cs" />
     <Compile Include="BL\ShopBL.cs" />
     <Compile Include="BL\TerminalBL.cs" />
     <Compile Include="BL\TicketBL.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\Payment_MethodsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -229,26 +231,34 @@
     <Compile Include="Controllers\TransacsController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\VatsController.cs" />
+    <Compile Include="Dal\DalBrand.cs" />
     <Compile Include="Dal\DalCashDay.cs" />
+    <Compile Include="Dal\DalCategory.cs" />
     <Compile Include="Dal\DalHero.cs" />
     <Compile Include="Dal\DalLanguage.cs" />
+    <Compile Include="Dal\DalMessage.cs" />
     <Compile Include="Dal\DalPayment.cs" />
     <Compile Include="Dal\DalProduct.cs" />
     <Compile Include="Dal\DalReport.cs" />
     <Compile Include="Dal\DalSearch.cs" />
+    <Compile Include="Dal\DalSetting.cs" />
     <Compile Include="Dal\DalShop.cs" />
     <Compile Include="Dal\DalTerminal.cs" />
     <Compile Include="Dal\DalTicket.cs" />
     <Compile Include="Dal\DalTransaction.cs" />
     <Compile Include="Dal\DalUser.cs" />
     <Compile Include="Dal\DalVat.cs" />
+    <Compile Include="Dal\IDalBrand.cs" />
     <Compile Include="Dal\IDalCashDay.cs" />
+    <Compile Include="Dal\IDalCategory.cs" />
     <Compile Include="Dal\IDalHero.cs" />
     <Compile Include="Dal\IDalLanguage.cs" />
+    <Compile Include="Dal\IDalMessage.cs" />
     <Compile Include="Dal\IDalPayment.cs" />
     <Compile Include="Dal\IDalProduct.cs" />
     <Compile Include="Dal\IDalReport.cs" />
     <Compile Include="Dal\IDalSearch.cs" />
+    <Compile Include="Dal\IDalSetting.cs" />
     <Compile Include="Dal\IDalShop.cs" />
     <Compile Include="Dal\IDalTerminal.cs" />
     <Compile Include="Dal\IDalTicket.cs" />
@@ -345,6 +355,9 @@
     <Compile Include="Data\Entity\SHOP_TRANSLATION.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Entity\SPP_CategoryTrans_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Entity\SPP_ChildCategories_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -358,6 +371,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Entity\SPP_HeroesTrans_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Entity\SPP_MessageTransDistinct_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Entity\SPP_MessageTrans_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Entity\SPP_ParentCategories_Result.cs">
@@ -411,6 +430,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\management\HeroViewModel.cs" />
+    <Compile Include="Models\management\MessageViewModel.cs" />
     <Compile Include="Models\management\ProductViewModel.cs" />
     <Compile Include="Models\management\ShopViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -633,6 +653,12 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Messages\Create.cshtml" />
+    <Content Include="Views\Messages\Delete.cshtml" />
+    <Content Include="Views\Messages\Details.cshtml" />
+    <Content Include="Views\Messages\Edit.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Messages\Default.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

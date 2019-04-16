@@ -1,0 +1,47 @@
+﻿@*@model IEnumerable<MyPOS2.Data.Entity.MESSAGE>*@
+@model IEnumerable<MyPOS2.Data.Entity.SPP_MessageTransDistinct_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Messages</h2>
+
+<p>
+    @Html.ActionLink("Créer nouveau", "Create") | @Html.ActionLink("Retour au Menu", "Management", "Home")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Titre
+        </th>
+        <th>
+            Message
+        </th>
+        <th>
+            Langage
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameLanguage)
+            </td>
+            <td>
+                @Html.ActionLink("Editer", "Edit", new { id = item.idMessage }) |
+                @Html.ActionLink("Détails", "Details", new { id = item.idMessage }) |
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.idMessage }) |
+                @Html.ActionLink("Par défaut", "Default", new { id = item.idMessage })
+            </td>
+        </tr>
+    }
+
+</table>

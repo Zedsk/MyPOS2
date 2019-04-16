@@ -1,0 +1,44 @@
+﻿@*@model MyPOS2.Data.Entity.MESSAGE*@
+@model IEnumerable<MyPOS2.Data.Entity.SPP_MessageTrans_Result>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MESSAGE</h4>
+    <hr />
+
+    @foreach (var item in Model)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                Titre
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelitem => item.title)
+            </dd>
+
+            <dt>
+                Message
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelitem => item.message)
+            </dd>
+
+            <dt>
+                Langue
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelitem => item.nameLanguage)
+            </dd>
+        </dl>
+    }
+
+</div>
+<p>
+    @Html.ActionLink("Editer", "Edit", new { id = Model.First().idMessage }) |
+    @Html.ActionLink("Retour à la liste", "Index")
+</p>

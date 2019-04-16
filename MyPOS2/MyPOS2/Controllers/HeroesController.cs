@@ -20,21 +20,22 @@ namespace MyPOS2.Controllers
         // GET: Heroes
         public ActionResult Index()
         {
-            //return View(db.HEROs.ToList());
-            if (Session["Language"] == null)
-            {
-                Session["Language"] = ConfigurationManager.AppSettings["Language"];
-            }
-            string language = Session["Language"].ToString();
-            int lang;
-            if (int.TryParse(language, out int codeL))
-            {
-                lang = codeL;
-            }
-            else
-            {
-                lang = LanguageBL.FindIdLanguageByShortForm(language);
-            }
+            ////return View(db.HEROs.ToList());
+            //if (Session["Language"] == null)
+            //{
+            //    Session["Language"] = ConfigurationManager.AppSettings["Language"];
+            //}
+            //string language = Session["Language"].ToString();
+            //int lang;
+            //if (int.TryParse(language, out int codeL))
+            //{
+            //    lang = codeL;
+            //}
+            //else
+            //{
+            //    lang = LanguageBL.FindIdLanguageByShortForm(language);
+            //}
+            int lang = LanguageBL.CheckLanguageSession();
             //var heroesT = db.SPP_HeroesTrans().Where(h => h.languageId == lang).ToList();
             var heroesT = db.SPP_HeroesTransDistinct(lang).ToList();
             return View(heroesT);
@@ -91,10 +92,9 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 //Check if nameHero have min  1 value
                 IList<HERO_TRANSLATION> heroesT = vmodel.HeroesTrans;
-                bool nameHeroIsValid = TranslationBL.CheckIfNameHeroIsValid(heroesT);
+                bool nameHeroIsValid = TranslationBL.CheckIfMinOneValued(heroesT);
                 if (nameHeroIsValid)
                 {
                     //Check if Hero exist by nameHero before create

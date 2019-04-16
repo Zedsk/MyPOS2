@@ -1,0 +1,48 @@
+﻿@*@model MyPOS2.Data.Entity.MESSAGE*@
+@model MyPOS2.Data.Entity.SPP_MessageTransDistinct_Result
+
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Supprimer</h2>
+
+<h3>Etes-vous sur de vouloir le supprimer?</h3>
+<div>
+    <h4>MESSAGE</h4>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            Titre
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.title)
+        </dd>
+
+        <dt>
+            Message
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.message)
+        </dd>
+
+        <dt>
+            Langue
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.nameLanguage)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" onclick="return confirm('Etes-vous sur de vouloir supprimer?');"/> |
+            @Html.ActionLink("Retour à la liste", "Index")
+        </div>
+    }
+</div>

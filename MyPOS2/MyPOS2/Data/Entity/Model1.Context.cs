@@ -275,5 +275,24 @@ namespace MyPOS2.Data.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_TransactionsDay_Result>("SPP_TransactionsDay", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter);
         }
+    
+        public virtual ObjectResult<SPP_MessageTransDistinct_Result> SPP_MessageTransDistinct(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_MessageTransDistinct_Result>("SPP_MessageTransDistinct", languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_CategoryTrans_Result> SPP_CategoryTrans()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_CategoryTrans_Result>("SPP_CategoryTrans");
+        }
+    
+        public virtual ObjectResult<SPP_MessageTrans_Result> SPP_MessageTrans()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_MessageTrans_Result>("SPP_MessageTrans");
+        }
     }
 }
