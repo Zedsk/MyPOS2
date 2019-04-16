@@ -18,7 +18,7 @@ namespace MyPOS2.Data.Entity
         public int messageId { get; set; }
         public int languageMessage { get; set; }
     
-        public virtual TICKET_MESSAGE TICKET_MESSAGE { get; set; }
+        public virtual MESSAGE MESSAGE { get; set; }
         public virtual TRANSACTIONS TRANSACTIONS { get; set; }
     }
 }

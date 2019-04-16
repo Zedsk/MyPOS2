@@ -28,7 +28,7 @@ namespace MyPOS2.Data.Entity
 
         [Range(0, 99999, ErrorMessage = "valeur devant être comprise entre 0 et 99999")]
         public decimal salesPrice { get; set; }
-        
+
         [Range(0, 1, ErrorMessage = "valeur devant être comprise entre 0 et 1")]
         public Nullable<decimal> discountRate { get; set; }
         public string imageProduct { get; set; }

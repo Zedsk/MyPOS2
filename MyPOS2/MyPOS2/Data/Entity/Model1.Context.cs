@@ -41,6 +41,7 @@ namespace MyPOS2.Data.Entity
         public virtual DbSet<HERO> HEROs { get; set; }
         public virtual DbSet<HERO_TRANSLATION> HERO_TRANSLATIONs { get; set; }
         public virtual DbSet<LANGUAGES> LANGUAGESs { get; set; }
+        public virtual DbSet<MESSAGE> MESSAGEs { get; set; }
         public virtual DbSet<MESSAGE_TRANSLATION> MESSAGE_TRANSLATIONs { get; set; }
         public virtual DbSet<PAYMENT> PAYMENTs { get; set; }
         public virtual DbSet<PAYMENT_METHOD> PAYMENT_METHODs { get; set; }
@@ -54,7 +55,6 @@ namespace MyPOS2.Data.Entity
         public virtual DbSet<STATUS> STATUSs { get; set; }
         public virtual DbSet<SUBCATEGORY> SUBCATEGORYs { get; set; }
         public virtual DbSet<TERMINAL> TERMINALs { get; set; }
-        public virtual DbSet<TICKET_MESSAGE> TICKET_MESSAGEs { get; set; }
         public virtual DbSet<TRANSACTION_DETAILS> TRANSACTION_DETAILSs { get; set; }
         public virtual DbSet<TRANSACTIONS> TRANSACTIONSs { get; set; }
         public virtual DbSet<TRANSACTIONS_MESSAGE> TRANSACTIONS_MESSAGEs { get; set; }
@@ -118,6 +118,69 @@ namespace MyPOS2.Data.Entity
                 new ObjectParameter("language", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ProductTrans_Result>("SPP_ProductTrans", languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ReportTotalSalesByProductsTransDistinct_Result> SPP_ReportTotalSalesByProductsTransDistinct(Nullable<int> tDate, Nullable<int> tMonth, Nullable<int> tDay, Nullable<int> tStatus, Nullable<bool> tReturn, Nullable<int> language)
+        {
+            var tDateParameter = tDate.HasValue ?
+                new ObjectParameter("tDate", tDate) :
+                new ObjectParameter("tDate", typeof(int));
+    
+            var tMonthParameter = tMonth.HasValue ?
+                new ObjectParameter("tMonth", tMonth) :
+                new ObjectParameter("tMonth", typeof(int));
+    
+            var tDayParameter = tDay.HasValue ?
+                new ObjectParameter("tDay", tDay) :
+                new ObjectParameter("tDay", typeof(int));
+    
+            var tStatusParameter = tStatus.HasValue ?
+                new ObjectParameter("tStatus", tStatus) :
+                new ObjectParameter("tStatus", typeof(int));
+    
+            var tReturnParameter = tReturn.HasValue ?
+                new ObjectParameter("tReturn", tReturn) :
+                new ObjectParameter("tReturn", typeof(bool));
+    
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ReportTotalSalesByProductsTransDistinct_Result>("SPP_ReportTotalSalesByProductsTransDistinct", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter, languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ReportTotalSalesTransDistinct_Result> SPP_ReportTotalSalesTransDistinct(Nullable<int> tDate, Nullable<int> tMonth, Nullable<int> tDay, Nullable<int> tStatus, Nullable<bool> tReturn, Nullable<int> language)
+        {
+            var tDateParameter = tDate.HasValue ?
+                new ObjectParameter("tDate", tDate) :
+                new ObjectParameter("tDate", typeof(int));
+    
+            var tMonthParameter = tMonth.HasValue ?
+                new ObjectParameter("tMonth", tMonth) :
+                new ObjectParameter("tMonth", typeof(int));
+    
+            var tDayParameter = tDay.HasValue ?
+                new ObjectParameter("tDay", tDay) :
+                new ObjectParameter("tDay", typeof(int));
+    
+            var tStatusParameter = tStatus.HasValue ?
+                new ObjectParameter("tStatus", tStatus) :
+                new ObjectParameter("tStatus", typeof(int));
+    
+            var tReturnParameter = tReturn.HasValue ?
+                new ObjectParameter("tReturn", tReturn) :
+                new ObjectParameter("tReturn", typeof(bool));
+    
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ReportTotalSalesTransDistinct_Result>("SPP_ReportTotalSalesTransDistinct", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter, languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ShopTrans_Result> SPP_ShopTrans()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ShopTrans_Result>("SPP_ShopTrans");
         }
     
         public virtual ObjectResult<SPP_ShopTransDistinct_Result> SPP_ShopTransDistinct(Nullable<int> language)
@@ -211,69 +274,6 @@ namespace MyPOS2.Data.Entity
                 new ObjectParameter("tReturn", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_TransactionsDay_Result>("SPP_TransactionsDay", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter);
-        }
-    
-        public virtual ObjectResult<SPP_ShopTrans_Result> SPP_ShopTrans()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ShopTrans_Result>("SPP_ShopTrans");
-        }
-    
-        public virtual ObjectResult<SPP_ReportTotalSalesByProductsTransDistinct_Result> SPP_ReportTotalSalesByProductsTransDistinct(Nullable<int> tDate, Nullable<int> tMonth, Nullable<int> tDay, Nullable<int> tStatus, Nullable<bool> tReturn, Nullable<int> language)
-        {
-            var tDateParameter = tDate.HasValue ?
-                new ObjectParameter("tDate", tDate) :
-                new ObjectParameter("tDate", typeof(int));
-    
-            var tMonthParameter = tMonth.HasValue ?
-                new ObjectParameter("tMonth", tMonth) :
-                new ObjectParameter("tMonth", typeof(int));
-    
-            var tDayParameter = tDay.HasValue ?
-                new ObjectParameter("tDay", tDay) :
-                new ObjectParameter("tDay", typeof(int));
-    
-            var tStatusParameter = tStatus.HasValue ?
-                new ObjectParameter("tStatus", tStatus) :
-                new ObjectParameter("tStatus", typeof(int));
-    
-            var tReturnParameter = tReturn.HasValue ?
-                new ObjectParameter("tReturn", tReturn) :
-                new ObjectParameter("tReturn", typeof(bool));
-    
-            var languageParameter = language.HasValue ?
-                new ObjectParameter("language", language) :
-                new ObjectParameter("language", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ReportTotalSalesByProductsTransDistinct_Result>("SPP_ReportTotalSalesByProductsTransDistinct", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter, languageParameter);
-        }
-    
-        public virtual ObjectResult<SPP_ReportTotalSalesTransDistinct_Result> SPP_ReportTotalSalesTransDistinct(Nullable<int> tDate, Nullable<int> tMonth, Nullable<int> tDay, Nullable<int> tStatus, Nullable<bool> tReturn, Nullable<int> language)
-        {
-            var tDateParameter = tDate.HasValue ?
-                new ObjectParameter("tDate", tDate) :
-                new ObjectParameter("tDate", typeof(int));
-    
-            var tMonthParameter = tMonth.HasValue ?
-                new ObjectParameter("tMonth", tMonth) :
-                new ObjectParameter("tMonth", typeof(int));
-    
-            var tDayParameter = tDay.HasValue ?
-                new ObjectParameter("tDay", tDay) :
-                new ObjectParameter("tDay", typeof(int));
-    
-            var tStatusParameter = tStatus.HasValue ?
-                new ObjectParameter("tStatus", tStatus) :
-                new ObjectParameter("tStatus", typeof(int));
-    
-            var tReturnParameter = tReturn.HasValue ?
-                new ObjectParameter("tReturn", tReturn) :
-                new ObjectParameter("tReturn", typeof(bool));
-    
-            var languageParameter = language.HasValue ?
-                new ObjectParameter("language", language) :
-                new ObjectParameter("language", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ReportTotalSalesTransDistinct_Result>("SPP_ReportTotalSalesTransDistinct", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter, languageParameter);
         }
     }
 }

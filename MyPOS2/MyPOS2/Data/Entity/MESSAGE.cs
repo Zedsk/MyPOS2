@@ -12,10 +12,10 @@ namespace MyPOS2.Data.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class TICKET_MESSAGE
+    public partial class MESSAGE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TICKET_MESSAGE()
+        public MESSAGE()
         {
             this.MESSAGE_TRANSLATION = new HashSet<MESSAGE_TRANSLATION>();
             this.TRANSACTIONS_MESSAGE = new HashSet<TRANSACTIONS_MESSAGE>();

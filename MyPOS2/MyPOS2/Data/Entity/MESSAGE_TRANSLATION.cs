@@ -20,6 +20,6 @@ namespace MyPOS2.Data.Entity
         public string message { get; set; }
     
         public virtual LANGUAGES LANGUAGES { get; set; }
-        public virtual TICKET_MESSAGE TICKET_MESSAGE { get; set; }
+        public virtual MESSAGE MESSAGE1 { get; set; }
     }
 }

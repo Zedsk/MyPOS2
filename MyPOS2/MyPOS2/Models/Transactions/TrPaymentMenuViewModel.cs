@@ -30,6 +30,7 @@ namespace MyPOS2.Models.Transactions
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Montant à traiter")]
+        [Range(0, 99999, ErrorMessage = "valeur devant être comprise entre 0 et 99999")]
         public string Amount { get; set; }
 
         [DataType(DataType.Text)]

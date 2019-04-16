@@ -297,6 +297,9 @@
     <Compile Include="Data\Entity\LANGUAGES.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Entity\MESSAGE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Entity\MESSAGE_TRANSLATION.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -385,9 +388,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Entity\TERMINAL.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Entity\TICKET_MESSAGE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Entity\TRANSACTIONS.cs">
