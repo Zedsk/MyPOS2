@@ -4,30 +4,52 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>TVA</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Back to Menu", "Management", "Home")
+    @Html.ActionLink("Créer nouveau", "Create") | @Html.ActionLink("Retour au Menu", "Management", "Home")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.appliedVat)
+            @*@Html.DisplayNameFor(model => model.appliedVat)*@
+            Taux
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.appliedVat)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idVat }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idVat }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idVat })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        if (ViewBag.vatSetting == item.appliedVat)
+        {
+            <tr>
+                <td>
+                    <span class="defSetting">@Html.DisplayFor(modelItem => item.appliedVat)</span>
+                </td>
+                <td>
+                    @Html.ActionLink("Editer", "Edit", new { id = item.idVat }) |
+                    @Html.ActionLink("Détails", "Details", new { id = item.idVat }) |
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.idVat })
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.appliedVat)
+                </td>
+                <td>
+                    @Html.ActionLink("Editer", "Edit", new { id = item.idVat }) |
+                    @Html.ActionLink("Détails", "Details", new { id = item.idVat }) |
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.idVat })
+                </td>
+            </tr>
+        }
+    }
 
 </table>

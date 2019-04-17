@@ -74,5 +74,13 @@ namespace MyPOS2.BL
                 return dal.GetIdLanguageByShortForm(shortForm.ToLower());
             }
         }
+
+        internal static string FindShortFormById(int? id)
+        {
+            using (IDalLanguage dal = new DalLanguage())
+            {
+                return dal.GetShortFormById(id);
+            }
+        }
     }
 }

@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Détails</h2>
 
 <div>
-    <h4>LANGUAGES</h4>
+    <h4>LANGAGES</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -26,7 +26,16 @@
         </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idLanguage }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@if (Model.shortForm == "all")
+{
+    <p>
+        @Html.ActionLink("Retour à la Liste", "Index")
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Editer", "Edit", new { id = Model.idLanguage }) |
+        @Html.ActionLink("Retour à la Liste", "Index")
+    </p>
+}

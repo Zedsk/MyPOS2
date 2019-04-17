@@ -325,6 +325,11 @@
     width: 60px;
 }
 
+.defSetting {
+    outline: 1px solid orange;
+    font-weight: bold;
+}
+
 /**** Report views *****/
 .ChkBox {
     width: 37px;

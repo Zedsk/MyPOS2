@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MyPOS2.BL;
 using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
@@ -17,6 +19,12 @@ namespace MyPOS2.Controllers
         // GET: Vats
         public ActionResult Index()
         {
+            //to do --> find setting message
+            string nameSetting = "Vat";
+            string vatSetting = SettingBL.FindSettingValueByName(nameSetting);
+            var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
+            var value = Decimal.Parse(vatSetting, numberFormatInfo);
+            ViewBag.vatSetting = value;
             return View(db.VATs.ToList());
         }
 

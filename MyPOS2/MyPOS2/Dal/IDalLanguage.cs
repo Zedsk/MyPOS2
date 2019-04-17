@@ -12,5 +12,6 @@ namespace MyPOS2.Dal
         IList<LANGUAGES> GetAllLanguage();
         IList<LANGUAGES> GetAllLanguageWithoutUniversal();
         int GetIdLanguageByShortForm(string lang);
+        string GetShortFormById(int? id);
     }
 }

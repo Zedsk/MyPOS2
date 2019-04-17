@@ -37,5 +37,10 @@ namespace MyPOS2.Dal
         {
             return db.LANGUAGESs.Where(l => l.shortForm == lang).Select(t => t.idLanguage).Single();
         }
+
+        public string GetShortFormById(int? id)
+        {
+            return db.LANGUAGESs.Where(l => l.idLanguage == id).Select(s => s.shortForm).Single();
+        }
     }
 }

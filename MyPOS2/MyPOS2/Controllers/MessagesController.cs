@@ -20,7 +20,10 @@ namespace MyPOS2.Controllers
         public ActionResult Index()
         {
             //return View(db.MESSAGEs.ToList());
-            //to do --> find setting messesage
+            //to do --> find setting message
+            string nameSetting = "MessageGen";
+            string messageG = SettingBL.FindSettingValueByName(nameSetting);
+            ViewBag.messageG = int.Parse(messageG);
             int lang = LanguageBL.CheckLanguageSession();
             var messagesT = db.SPP_MessageTransDistinct(lang).ToList();
             return View(messagesT);
@@ -188,7 +191,19 @@ namespace MyPOS2.Controllers
 
         public ActionResult Default(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //to do --> modify  nameSet
+            string nameSet = "MessageGen";
+            var result = db.SETTINGs.SingleOrDefault(s => s.nameSetting == nameSet);
+            if (result != null)
+            {
+                result.valueSetting = id.ToString();
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

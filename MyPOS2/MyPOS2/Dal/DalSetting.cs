@@ -29,9 +29,9 @@ namespace MyPOS2.Dal
             return db.SETTINGs.ToList();
         }
 
-        public string GetSettingValueByName(string name)
+        public SETTING GetSettingValueByName(string name)
         {
-            return db.SETTINGs.Where(s => s.nameSetting == name).ToString();
+            return db.SETTINGs.Where(s => s.nameSetting == name).Single();
         }
     }
 }

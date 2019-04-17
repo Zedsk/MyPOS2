@@ -4,30 +4,74 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Langages</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Back to Menu", "Management", "Home")
+    @Html.ActionLink("Créer nouveau", "Create") | @Html.ActionLink("Retour au Menu", "Management", "Home")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nameLanguage)
+            @*@Html.DisplayNameFor(model => model.nameLanguage)*@
+            Langage
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nameLanguage)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idLanguage }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idLanguage }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idLanguage })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        if (ViewBag.langSetting == item.shortForm)
+        {
+            <tr>
+                <td>
+                    <span class="defSetting">@Html.DisplayFor(modelItem => item.nameLanguage)</span>
+                </td>
+                @if (item.shortForm == "all")
+                {
+                    <td>
+                        @Html.ActionLink("Détails", "Details", new { id = item.idLanguage })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Editer", "Edit", new { id = item.idLanguage }) |
+                        @Html.ActionLink("Détails", "Details", new { id = item.idLanguage }) |
+                        @Html.ActionLink("Supprimer", "Delete", new { id = item.idLanguage }) |
+                        @Html.ActionLink("Par défaut", "Default", new { id = item.idLanguage })
+                    </td>
+                }
+                
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nameLanguage)
+                </td>
+                @if (item.shortForm == "all")
+                {
+                    <td>
+                        @Html.ActionLink("Détails", "Details", new { id = item.idLanguage })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Editer", "Edit", new { id = item.idLanguage }) |
+                        @Html.ActionLink("Détails", "Details", new { id = item.idLanguage }) |
+                        @Html.ActionLink("Supprimer", "Delete", new { id = item.idLanguage }) |
+                        @Html.ActionLink("Par défaut", "Default", new { id = item.idLanguage })
+                    </td>
+                }
+
+            </tr>
+        }
+    }
 
 </table>

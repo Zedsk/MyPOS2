@@ -10,6 +10,6 @@ namespace MyPOS2.Dal
     interface IDalSetting : IDisposable
     {
         IList<SETTING> GetAllSetting();
-        string GetSettingValueByName(string name);
+        SETTING GetSettingValueByName(string name);
     }
 }

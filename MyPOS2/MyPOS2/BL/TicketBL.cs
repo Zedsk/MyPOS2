@@ -125,10 +125,12 @@ namespace MyPOS2.BL
                 
                 if (messageIds.Count == 0 || messageIds == null)
                 {
-                    //message par défaut
-                    int messageId = 1;
-                    messageIds.Add(messageId);
-                    dal.CreateTransactionMessage(transacId, messageId, languageMessage);
+                    ////message par défaut
+                    //int messageId = 1;
+                    string langSetting = "MessageGen";
+                    int defMessage = int.Parse(SettingBL.FindSettingValueByName(langSetting));
+                    messageIds.Add(defMessage);
+                    dal.CreateTransactionMessage(transacId, defMessage, languageMessage);
                 }
                 else
                 {

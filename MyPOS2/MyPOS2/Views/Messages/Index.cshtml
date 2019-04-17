@@ -5,6 +5,10 @@
     ViewBag.Title = "Index";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Messages</h2>
 
 <p>
@@ -25,23 +29,46 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.message)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nameLanguage)
-            </td>
-            <td>
-                @Html.ActionLink("Editer", "Edit", new { id = item.idMessage }) |
-                @Html.ActionLink("Détails", "Details", new { id = item.idMessage }) |
-                @Html.ActionLink("Supprimer", "Delete", new { id = item.idMessage }) |
-                @Html.ActionLink("Par défaut", "Default", new { id = item.idMessage })
-            </td>
-        </tr>
+        if (ViewBag.messageG == item.idMessage)
+        {
+            <tr>
+                <td>
+                    <span class="defSetting">@Html.DisplayFor(modelItem => item.title)</span>
+                </td>
+                <td>
+                    <span class="defSetting"> @Html.DisplayFor(modelItem => item.message)</span>
+                </td>
+                <td>
+                    <span class="defSetting">@Html.DisplayFor(modelItem => item.nameLanguage)</span>
+                </td>
+                <td>
+                    @Html.ActionLink("Editer", "Edit", new { id = item.idMessage }) |
+                    @Html.ActionLink("Détails", "Details", new { id = item.idMessage }) |
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.idMessage }) |
+                    @Html.ActionLink("Par défaut", "Default", new { id = item.idMessage })
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.message)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nameLanguage)
+                </td>
+                <td>
+                    @Html.ActionLink("Editer", "Edit", new { id = item.idMessage }) |
+                    @Html.ActionLink("Détails", "Details", new { id = item.idMessage }) |
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.idMessage }) |
+                    @Html.ActionLink("Par défaut", "Default", new { id = item.idMessage })
+                </td>
+            </tr>
+        }
     }
 
 </table>

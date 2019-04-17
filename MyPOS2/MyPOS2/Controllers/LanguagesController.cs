@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MyPOS2.BL;
 using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
@@ -17,6 +18,10 @@ namespace MyPOS2.Controllers
         // GET: Languages
         public ActionResult Index()
         {
+            //to do --> find setting message
+            string nameSetting = "Language";
+            string langSetting = SettingBL.FindSettingValueByName(nameSetting);
+            ViewBag.langSetting = langSetting;
             return View(db.LANGUAGESs.ToList());
         }
 
@@ -112,6 +117,24 @@ namespace MyPOS2.Controllers
             LANGUAGES lANGUAGES = db.LANGUAGESs.Find(id);
             db.LANGUAGESs.Remove(lANGUAGES);
             db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Default(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //to do --> modify  nameSet
+            string nameSet = "Language";
+            string val = LanguageBL.FindShortFormById(id);
+            var result = db.SETTINGs.SingleOrDefault(s => s.nameSetting == nameSet);
+            if (result != null)
+            {
+                result.valueSetting = val;
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 

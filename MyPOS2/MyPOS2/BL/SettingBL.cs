@@ -1,4 +1,5 @@
 ﻿using MyPOS2.Dal;
+using MyPOS2.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,29 @@ namespace MyPOS2.BL
 {
     public class SettingBL
     {
-        public string FindSettingValueByName(string name)
+        internal static IList<SETTING> FindAllSetting()
         {
             using (IDalSetting dal = new DalSetting())
             {
-                return dal.GetSettingValueByName(name);
+                return dal.GetAllSetting();
             }
         }
+
+        internal static string FindSettingValueByName(string name)
+        {
+            using (IDalSetting dal = new DalSetting())
+            {
+                SETTING val = dal.GetSettingValueByName(name);
+                return val.valueSetting;
+            }
+        }
+
+        //internal static string FindMessageGen()
+        //{
+        //    using (IDalSetting dal = new DalSetting())
+        //    {
+        //        return dal.;
+        //    }
+        //}
     }
 }
