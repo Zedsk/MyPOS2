@@ -205,7 +205,7 @@ namespace MyPOS2.Controllers
                 isUniversal = true;
             }
             ViewBag.isUniversal = isUniversal;
-            vm.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
+            //vm.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
 
             vm.Product = pRODUCT;
 

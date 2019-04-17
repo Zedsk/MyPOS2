@@ -11,7 +11,7 @@ namespace MyPOS2.Data.Entity
 {
     using System;
     
-    public partial class SPP_ChildCategories_Result
+    public partial class SPP_ChildCategoriesOfParent_Result
     {
         public int idCategory { get; set; }
         public string imageCat { get; set; }

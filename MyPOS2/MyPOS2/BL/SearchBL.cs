@@ -102,7 +102,7 @@ namespace MyPOS2.BL
             }
         }
 
-        internal static IList<SPP_ParentCategories_Result> FindCatsParentList(string language)
+        internal static IList<SPP_ParentCategoriesTransDistinct_Result> FindCatsParentList(string language)
         {
             using (IDalSearch dal = new DalSearch())
             {
@@ -112,7 +112,7 @@ namespace MyPOS2.BL
             }
         }
 
-        internal static IList<SPP_ChildCategories_Result> FindCatsChildList(string argument, string language)
+        internal static IList<SPP_ChildCategoriesOfParent_Result> FindCatsChildList(string argument, string language)
         {
             using (IDalSearch dal = new DalSearch())
             {

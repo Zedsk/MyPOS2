@@ -1,0 +1,45 @@
+﻿@model MyPOS2.Data.Entity.CATEGORY
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Supprimer</h2>
+
+<h3>Etes-vous sur de vouloir le supprimer?</h3>
+<div>
+    <h4>Catégorie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.imageCat)*@
+            Image
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.imageCat)*@
+            @if (Model.imageCat != null)
+            {
+                <img src="@Url.Content(Model.imageCat)" alt="Image de la catégorie" class="imgIndex" />
+            }
+            else
+            {
+                <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+            }
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" onclick="return confirm('Etes-vous sur de vouloir supprimer?');"/> |
+            @Html.ActionLink("Retour à la liste", "Index")
+        </div>
+    }
+</div>

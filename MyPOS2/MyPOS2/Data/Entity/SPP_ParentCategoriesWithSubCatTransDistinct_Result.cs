@@ -10,16 +10,11 @@
 namespace MyPOS2.Data.Entity
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class MESSAGE_TRANSLATION
+    public partial class SPP_ParentCategoriesWithSubCatTransDistinct_Result
     {
-        public int messageId { get; set; }
-        public int languageId { get; set; }
-        public string title { get; set; }
-        public string message { get; set; }
-    
-        public virtual LANGUAGES LANGUAGES { get; set; }
-        public virtual MESSAGE MESSAGE1 { get; set; }
+        public int idCategory { get; set; }
+        public string imageCat { get; set; }
+        public string nameCategory { get; set; }
     }
 }

@@ -420,6 +420,15 @@ function ImportImage() {
                         }
                         break;
 
+                    case "category":
+                        if (document.getElementById('Image') != null) {
+                            document.getElementById('Image').value = T.trim();
+                        }
+                        else {
+                            document.getElementById('Cat_imageCat').value = T.trim();
+                        }
+                        break;
+
                     default:
                         break;
                 }

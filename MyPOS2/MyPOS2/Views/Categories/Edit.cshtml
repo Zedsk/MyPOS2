@@ -1,0 +1,120 @@
+﻿@*@model MyPOS2.Data.Entity.CATEGORY*@
+@model MyPOS2.Models.management.CategoryViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/pos2.js")" type="text/javascript"></script>
+}
+
+<h2>Editer</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 id="sourceName">Catégorie</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Cat.idCategory)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Cat.imageCat, new { htmlAttributes = new { @class = "form-control" } })*@
+                @if (ViewBag.path != null)
+                {
+                    <img id="imgLogo" src="@Url.Content(ViewBag.path)" alt="Image de la catégorie" class="imgIndex" />
+                }
+                else
+                {
+                    if (Model.Cat.imageCat != null)
+                    {
+                        <img id="imgLogo" src="@Url.Content(Model.Cat.imageCat)" alt="Image de la catégorie" class="imgIndex" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
+                    }
+
+                }
+                @Html.HiddenFor(model => model.Cat.imageCat)
+                @Html.ValidationMessageFor(model => model.Cat.imageCat, "", new { @class = "text-danger" })
+                <input type="file" id="newImage" name="newImage" />
+                <button type="button" class="btn btn-default" value="" onclick="ImportImage()">
+                    <span class="glyphicon glyphicon-download-alt"></span> Modifier
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Nom</label>
+            <span style="color: red; font-weight: bold">@ViewBag.nameIsNotValid</span>
+            @if (!ViewBag.isUniversal)
+            {
+                for (int i = 0; i < Model.ListLang.Count(); i++)
+                {
+                    <div class="col-md-2">
+                        @Html.HiddenFor(model => model.CategoriesTrans[i].categoryId, new { @Value = Model.Cat.idCategory })
+                        @Html.EditorFor(model => model.CategoriesTrans[i].nameCategory, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CategoriesTrans, "", new { @class = "text-danger" })
+
+                        @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                        @Html.HiddenFor(m => m.CategoriesTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+
+                    </div>
+                    <br />
+                }
+            }
+            else
+            {
+                <div class="col-md-2">
+                    @Html.HiddenFor(model => model.CategoriesTrans[0].categoryId, new { @Value = Model.Cat.idCategory })
+                    @Html.EditorFor(model => model.CategoriesTrans[0].nameCategory, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CategoriesTrans, "", new { @class = "text-danger" })
+
+                    <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
+
+                    @Html.HiddenFor(m => m.CategoriesTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
+
+                </div>
+                @*<br />
+                    for (int i = 1; i < Model.ListLang.Count(); i++)
+                    {
+                        <div class="col-md-2">
+                            @Html.HiddenFor(model => model.ProductsTrans[i].productId)
+                            @Html.EditorFor(model => model.ProductsTrans[i].nameProduct, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.ProductsTrans, "", new { @class = "text-danger" })
+
+                            @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
+
+                            @Html.HiddenFor(m => m.ProductsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
+                        </div>
+                        <br />
+                    }*@
+            }
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Sauver" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div id="detail">
+    @Html.Partial("_PartialImageName")
+</div>
+<div>
+    @Html.ActionLink("Retour à la Liste", "Index")
+</div>

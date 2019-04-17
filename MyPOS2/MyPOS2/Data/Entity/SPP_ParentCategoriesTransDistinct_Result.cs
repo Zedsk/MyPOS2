@@ -11,7 +11,7 @@ namespace MyPOS2.Data.Entity
 {
     using System;
     
-    public partial class SPP_ParentCategories_Result
+    public partial class SPP_ParentCategoriesTransDistinct_Result
     {
         public int idCategory { get; set; }
         public string imageCat { get; set; }

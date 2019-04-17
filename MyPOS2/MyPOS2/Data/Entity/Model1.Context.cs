@@ -61,7 +61,21 @@ namespace MyPOS2.Data.Entity
         public virtual DbSet<USERINFO> USERINFOs { get; set; }
         public virtual DbSet<VAT> VATs { get; set; }
     
-        public virtual ObjectResult<SPP_ChildCategories_Result> SPP_ChildCategories(Nullable<int> cat, Nullable<int> language)
+        public virtual ObjectResult<SPP_CategoryTrans_Result> SPP_CategoryTrans()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_CategoryTrans_Result>("SPP_CategoryTrans");
+        }
+    
+        public virtual ObjectResult<SPP_CategoryTransDistinct_Result> SPP_CategoryTransDistinct(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_CategoryTransDistinct_Result>("SPP_CategoryTransDistinct", languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ChildCategoriesOfParent_Result> SPP_ChildCategoriesOfParent(Nullable<int> cat, Nullable<int> language)
         {
             var catParameter = cat.HasValue ?
                 new ObjectParameter("cat", cat) :
@@ -71,7 +85,25 @@ namespace MyPOS2.Data.Entity
                 new ObjectParameter("language", language) :
                 new ObjectParameter("language", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ChildCategories_Result>("SPP_ChildCategories", catParameter, languageParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ChildCategoriesOfParent_Result>("SPP_ChildCategoriesOfParent", catParameter, languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ChildCategoriesOnlyTransDistinct_Result> SPP_ChildCategoriesOnlyTransDistinct(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ChildCategoriesOnlyTransDistinct_Result>("SPP_ChildCategoriesOnlyTransDistinct", languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ChildCategoriesTransDistinct_Result> SPP_ChildCategoriesTransDistinct(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ChildCategoriesTransDistinct_Result>("SPP_ChildCategoriesTransDistinct", languageParameter);
         }
     
         public virtual ObjectResult<SPP_GetAllShop_Result> SPP_GetAllShop()
@@ -102,13 +134,45 @@ namespace MyPOS2.Data.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_HeroesTransDistinct_Result>("SPP_HeroesTransDistinct", languageParameter);
         }
     
-        public virtual ObjectResult<SPP_ParentCategories_Result> SPP_ParentCategories(Nullable<int> language)
+        public virtual ObjectResult<SPP_MessageTrans_Result> SPP_MessageTrans()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_MessageTrans_Result>("SPP_MessageTrans");
+        }
+    
+        public virtual ObjectResult<SPP_MessageTransDistinct_Result> SPP_MessageTransDistinct(Nullable<int> language)
         {
             var languageParameter = language.HasValue ?
                 new ObjectParameter("language", language) :
                 new ObjectParameter("language", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ParentCategories_Result>("SPP_ParentCategories", languageParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_MessageTransDistinct_Result>("SPP_MessageTransDistinct", languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ParentCategoriesSubTransDistinct_Result> SPP_ParentCategoriesSubTransDistinct(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ParentCategoriesSubTransDistinct_Result>("SPP_ParentCategoriesSubTransDistinct", languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ParentCategoriesTransDistinct_Result> SPP_ParentCategoriesTransDistinct(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ParentCategoriesTransDistinct_Result>("SPP_ParentCategoriesTransDistinct", languageParameter);
+        }
+    
+        public virtual ObjectResult<SPP_ParentCategoriesWithSubCatTransDistinct_Result> SPP_ParentCategoriesWithSubCatTransDistinct(Nullable<int> language)
+        {
+            var languageParameter = language.HasValue ?
+                new ObjectParameter("language", language) :
+                new ObjectParameter("language", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_ParentCategoriesWithSubCatTransDistinct_Result>("SPP_ParentCategoriesWithSubCatTransDistinct", languageParameter);
         }
     
         public virtual ObjectResult<SPP_ProductTrans_Result> SPP_ProductTrans(Nullable<int> language)
@@ -274,25 +338,6 @@ namespace MyPOS2.Data.Entity
                 new ObjectParameter("tReturn", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_TransactionsDay_Result>("SPP_TransactionsDay", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter);
-        }
-    
-        public virtual ObjectResult<SPP_MessageTransDistinct_Result> SPP_MessageTransDistinct(Nullable<int> language)
-        {
-            var languageParameter = language.HasValue ?
-                new ObjectParameter("language", language) :
-                new ObjectParameter("language", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_MessageTransDistinct_Result>("SPP_MessageTransDistinct", languageParameter);
-        }
-    
-        public virtual ObjectResult<SPP_CategoryTrans_Result> SPP_CategoryTrans()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_CategoryTrans_Result>("SPP_CategoryTrans");
-        }
-    
-        public virtual ObjectResult<SPP_MessageTrans_Result> SPP_MessageTrans()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_MessageTrans_Result>("SPP_MessageTrans");
         }
     }
 }

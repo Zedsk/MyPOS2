@@ -19,8 +19,8 @@ namespace MyPOS2.Dal
         IList<PRODUCT> GetAllProductByIdAge(int id);
         IList<SPP_ProductTrans_Result> GetAllProductByIdAge(int id, int language);
         IList<CATEGORY> GetAllCats();
-        IList<SPP_ParentCategories_Result> GetAllCats(int language);
-        IList<SPP_ChildCategories_Result> GetAllCats(int id, int language);
+        IList<SPP_ParentCategoriesTransDistinct_Result> GetAllCats(int language);
+        IList<SPP_ChildCategoriesOfParent_Result> GetAllCats(int id, int language);
         IList<PRODUCT> GetAllProductByIdCat(int id);
         IList<SPP_ProductTrans_Result> GetAllProductByIdCat(int id, int language);
     }

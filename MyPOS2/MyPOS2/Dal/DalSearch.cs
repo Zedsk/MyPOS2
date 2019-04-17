@@ -85,19 +85,19 @@ namespace MyPOS2.Dal
             return db.CATEGORYs.ToList();
         }
 
-        public IList<SPP_ParentCategories_Result> GetAllCats(int language)
+        public IList<SPP_ParentCategoriesTransDistinct_Result> GetAllCats(int language)
         {
             //return all parents category            
-            List<SPP_ParentCategories_Result> parents = null;
-            parents = db.SPP_ParentCategories(language).ToList();
+            List<SPP_ParentCategoriesTransDistinct_Result> parents = null;
+            parents = db.SPP_ParentCategoriesTransDistinct(language).ToList();
             return parents;
         }
 
-        public IList<SPP_ChildCategories_Result> GetAllCats(int id, int language)
+        public IList<SPP_ChildCategoriesOfParent_Result> GetAllCats(int id, int language)
         {
-            //return all parents category            
-            List<SPP_ChildCategories_Result> children = null;
-            children = db.SPP_ChildCategories(id, language).ToList();
+            //return all children category            
+            List<SPP_ChildCategoriesOfParent_Result> children = null;
+            children = db.SPP_ChildCategoriesOfParent(id, language).ToList();
             return children;
         }
 

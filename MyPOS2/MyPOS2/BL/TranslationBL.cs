@@ -10,6 +10,7 @@ namespace MyPOS2.BL
 {
     public class TranslationBL
     {
+        #region CheckIfUniversal
         internal static bool CheckIfUniversal(IList<HERO_TRANSLATION> heroesT)
         {
             bool result = true;
@@ -86,7 +87,7 @@ namespace MyPOS2.BL
             return result;
         }
 
-        
+
 
         private static bool CheckIfUniversal(IList<MESSAGE_TRANSLATION> messagesT)
         {
@@ -105,6 +106,26 @@ namespace MyPOS2.BL
             }
             return result;
         }
+
+        private static bool CheckIfUniversal(IList<CATEGORY_TRANSLATION> catsT)
+        {
+            bool result = false;
+            List<string> nameList = new List<string>();
+            foreach (var item in catsT)
+            {
+                if (item.nameCategory != null)
+                {
+                    nameList.Add(item.nameCategory);
+                }
+            }
+            if (nameList.Count() == 1)
+            {
+                result = true;
+            }
+            return result;
+        }
+        #endregion
+
 
 
 
@@ -127,6 +148,7 @@ namespace MyPOS2.BL
         //    return result;
         //}
 
+        #region CheckIfNameExist
         internal static bool CheckIfNameExist(IList<HERO_TRANSLATION> heroesT)
         {
             using (IDalHero dal = new DalHero())
@@ -135,10 +157,13 @@ namespace MyPOS2.BL
                 List<string> nameList = dal.GetAllHeroTrans().Select(n => n.nameHero.ToLower()).ToList();
                 foreach (var item in heroesT)
                 {
-                    if (nameList.Contains(item.nameHero.ToLower()))
+                    if (item.nameHero != null)
                     {
-                        result = true;
-                        break;
+                        if (nameList.Contains(item.nameHero.ToLower()))
+                        {
+                            result = true;
+                            break;
+                        }
                     }
                 }
                 return result;
@@ -174,10 +199,13 @@ namespace MyPOS2.BL
                 List<string> nameList = dal.GetAllCategoryTrans().Select(n => n.nameCategory.ToLower()).ToList();
                 foreach (var item in catsT)
                 {
-                    if (nameList.Contains(item.nameCategory.ToLower()))
+                    if (item.nameCategory != null)
                     {
-                        result = true;
-                        break;
+                        if (nameList.Contains(item.nameCategory.ToLower()))
+                        {
+                            result = true;
+                            break;
+                        }
                     }
                 }
                 return result;
@@ -211,7 +239,9 @@ namespace MyPOS2.BL
                 return result;
             }
         }
+        #endregion
 
+        #region CheckIfMinOneValued
         internal static bool CheckIfMinOneValued(IList<HERO_TRANSLATION> heroesT)
         {
             //to do --> ameliorer !
@@ -255,6 +285,27 @@ namespace MyPOS2.BL
             return result;
         }
 
+        internal static bool CheckIfMinOneValued(IList<CATEGORY_TRANSLATION> catsT)
+        {
+            //to do --> ameliorer !
+            bool result = true;
+            List<string> nameList = new List<string>();
+            foreach (var item in catsT)
+            {
+                if (item.nameCategory != null)
+                {
+                    nameList.Add(item.nameCategory);
+                }
+            }
+            if (nameList.Count() == 0)
+            {
+                result = false;
+            }
+            return result;
+        }
+        #endregion
+
+        #region VerifyIsUniversal
         internal static IList<PRODUCT_TRANSLATION> VerifyIsUniversal(IList<PRODUCT_TRANSLATION> productsTrans, int id)
         {
             bool isUniversal = TranslationBL.CheckIfUniversal(productsTrans);
@@ -293,7 +344,7 @@ namespace MyPOS2.BL
                 shopsTrans[0].shopId = id;
                 //change language with universal
                 shopsTrans[0].languageId = LanguageBL.FindUniversalId();
-                
+
                 result.Add(shopsTrans[0]);
 
                 return result;
@@ -333,6 +384,32 @@ namespace MyPOS2.BL
             }
         }
 
-        
+        internal static IList<CATEGORY_TRANSLATION> VerifyIsUniversal(IList<CATEGORY_TRANSLATION> catsT, int id)
+        {
+            bool isUniversal = TranslationBL.CheckIfUniversal(catsT);
+            int count = catsT.Count();
+            if (isUniversal)
+            {
+                List<CATEGORY_TRANSLATION> result = new List<CATEGORY_TRANSLATION>();
+                catsT[0].categoryId = id;
+                //change language with universal
+                catsT[0].languageId = LanguageBL.FindUniversalId();
+
+                result.Add(catsT[0]);
+
+                return result;
+            }
+            else
+            {
+                foreach (var item in catsT)
+                {
+                    item.categoryId = id;
+                }
+                return catsT;
+            }
+        }
+        #endregion
+
+
     }
 }

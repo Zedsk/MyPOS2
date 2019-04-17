@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -708,7 +708,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SUBCATEGORY_Parent">
-          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SUBCATEGORY" Type="Self.SUBCATEGORY" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CATEGORY">
@@ -876,8 +878,17 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="SPP_CategoryTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="SPP_ChildCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="SPP_CategoryTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPP_ChildCategoriesOfParent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cat" Type="int" Mode="In" />
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPP_ChildCategoriesOnlyTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPP_ChildCategoriesTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
         <Function Name="SPP_GetAllShop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -892,7 +903,13 @@
         <Function Name="SPP_MessageTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
-        <Function Name="SPP_ParentCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="SPP_ParentCategoriesSubTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPP_ParentCategoriesTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="language" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPP_ParentCategoriesWithSubCatTransDistinct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="language" Type="int" Mode="In" />
         </Function>
         <Function Name="SPP_ProductTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1148,7 +1165,8 @@
             <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pos1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1660,7 +1678,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SUBCATEGORY_Parent">
-          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SUBCATEGORY" Type="Self.SUBCATEGORY" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CATEGORY">
@@ -2203,23 +2223,43 @@
             <End Role="SHOP" EntitySet="SHOP" />
             <End Role="USERINFO" EntitySet="USERINFO" />
           </AssociationSet>
-          <FunctionImport Name="SPP_ChildCategories" ReturnType="Collection(Pos1Model.SPP_ChildCategories_Result)">
+          <FunctionImport Name="SPP_CategoryTrans" ReturnType="Collection(Pos1Model.SPP_CategoryTrans_Result)" />
+          <FunctionImport Name="SPP_CategoryTransDistinct" ReturnType="Collection(Pos1Model.SPP_CategoryTransDistinct_Result)">
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_ChildCategoriesOfParent" ReturnType="Collection(Pos1Model.SPP_ChildCategoriesOfParent_Result)">
             <Parameter Name="cat" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_ChildCategoriesOnlyTransDistinct" ReturnType="Collection(Pos1Model.SPP_ChildCategoriesOnlyTransDistinct_Result)">
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_ChildCategoriesTransDistinct" ReturnType="Collection(Pos1Model.SPP_ChildCategoriesTransDistinct_Result)">
             <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_GetAllShop" ReturnType="Collection(Pos1Model.SPP_GetAllShop_Result)" />
           <FunctionImport Name="SPP_GetShopById" ReturnType="Collection(Pos1Model.SPP_GetShopById_Result)">
-          <Parameter Name="shop" Mode="In" Type="Int32" />
+            <Parameter Name="shop" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_HeroesTrans" ReturnType="Collection(Pos1Model.SPP_HeroesTrans_Result)" />
           <FunctionImport Name="SPP_HeroesTransDistinct" ReturnType="Collection(Pos1Model.SPP_HeroesTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SPP_ParentCategories" ReturnType="Collection(Pos1Model.SPP_ParentCategories_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+          <FunctionImport Name="SPP_MessageTrans" ReturnType="Collection(Pos1Model.SPP_MessageTrans_Result)" />
+          <FunctionImport Name="SPP_MessageTransDistinct" ReturnType="Collection(Pos1Model.SPP_MessageTransDistinct_Result)">
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_ParentCategoriesSubTransDistinct" ReturnType="Collection(Pos1Model.SPP_ParentCategoriesSubTransDistinct_Result)">
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_ParentCategoriesTransDistinct" ReturnType="Collection(Pos1Model.SPP_ParentCategoriesTransDistinct_Result)">
+            <Parameter Name="language" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPP_ParentCategoriesWithSubCatTransDistinct" ReturnType="Collection(Pos1Model.SPP_ParentCategoriesWithSubCatTransDistinct_Result)">
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ProductTrans" ReturnType="Collection(Pos1Model.SPP_ProductTrans_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ReportTotalSalesByProductsTransDistinct" ReturnType="Collection(Pos1Model.SPP_ReportTotalSalesByProductsTransDistinct_Result)">
             <Parameter Name="tDate" Mode="In" Type="Int32" />
@@ -2239,7 +2279,7 @@
           </FunctionImport>
           <FunctionImport Name="SPP_ShopTrans" ReturnType="Collection(Pos1Model.SPP_ShopTrans_Result)" />
           <FunctionImport Name="SPP_ShopTransDistinct" ReturnType="Collection(Pos1Model.SPP_ShopTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_TicketNbItem" ReturnType="Collection(Int32)">
             <Parameter Name="dateMin" Mode="In" Type="DateTime" />
@@ -2256,7 +2296,7 @@
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SPP_TransactionMessageIds" ReturnType="Collection(Int32)">
-          <Parameter Name="idTransac" Mode="In" Type="Int32" />
+            <Parameter Name="idTransac" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_TransactionsDay" ReturnType="Collection(Pos1Model.SPP_TransactionsDay_Result)">
             <Parameter Name="tDate" Mode="In" Type="Int32" />
@@ -2265,13 +2305,28 @@
             <Parameter Name="tStatus" Mode="In" Type="Int32" />
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="SPP_MessageTransDistinct" ReturnType="Collection(Pos1Model.SPP_MessageTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SPP_CategoryTrans" ReturnType="Collection(Pos1Model.SPP_CategoryTrans_Result)" />
-          <FunctionImport Name="SPP_MessageTrans" ReturnType="Collection(Pos1Model.SPP_MessageTrans_Result)" />
         </EntityContainer>
-        <ComplexType Name="SPP_ChildCategories_Result">
+        <ComplexType Name="SPP_CategoryTrans_Result">
+          <Property Type="Int32" Name="idCategory" Nullable="false" />
+          <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_CategoryTransDistinct_Result">
+          <Property Type="Int32" Name="idCategory" Nullable="false" />
+          <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_ChildCategoriesOfParent_Result">
+          <Property Type="Int32" Name="idCategory" Nullable="false" />
+          <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_ChildCategoriesOnlyTransDistinct_Result">
+          <Property Type="Int32" Name="idCategory" Nullable="false" />
+          <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_ChildCategoriesTransDistinct_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
           <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
@@ -2314,7 +2369,29 @@
           <Property Type="Int32" Name="languageId" Nullable="false" />
           <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
         </ComplexType>
-        <ComplexType Name="SPP_ParentCategories_Result">
+        <ComplexType Name="SPP_MessageTrans_Result">
+          <Property Type="Int32" Name="idMessage" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="message" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_MessageTransDistinct_Result">
+          <Property Type="Int32" Name="idMessage" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="message" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_ParentCategoriesSubTransDistinct_Result">
+          <Property Type="Int32" Name="idCategory" Nullable="false" />
+          <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_ParentCategoriesTransDistinct_Result">
+          <Property Type="Int32" Name="idCategory" Nullable="false" />
+          <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SPP_ParentCategoriesWithSubCatTransDistinct_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
           <Property Type="String" Name="imageCat" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
@@ -2392,23 +2469,6 @@
           <Property Type="Int32" Name="customerId" Nullable="false" />
           <Property Type="Int32" Name="statusId" Nullable="false" />
           <Property Type="String" Name="userId" Nullable="false" MaxLength="128" />
-        </ComplexType>
-        <ComplexType Name="SPP_MessageTransDistinct_Result">
-          <Property Type="Int32" Name="idMessage" Nullable="false" />
-          <Property Type="String" Name="title" Nullable="false" MaxLength="40" />
-          <Property Type="String" Name="message" Nullable="false" MaxLength="Max" />
-          <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
-        </ComplexType>
-        <ComplexType Name="SPP_CategoryTrans_Result">
-          <Property Type="Int32" Name="idCategory" Nullable="false" />
-          <Property Type="String" Name="nameCategory" Nullable="false" MaxLength="40" />
-          <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
-        </ComplexType>
-        <ComplexType Name="SPP_MessageTrans_Result">
-          <Property Type="Int32" Name="idMessage" Nullable="false" />
-          <Property Type="String" Name="title" Nullable="false" MaxLength="40" />
-          <Property Type="String" Name="message" Nullable="false" MaxLength="Max" />
-          <Property Type="String" Name="nameLanguage" Nullable="false" MaxLength="40" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2778,9 +2838,45 @@
               <ScalarProperty Name="userId" ColumnName="userId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="SPP_ChildCategories" FunctionName="Pos1Model.Store.SPP_ChildCategories">
+          <FunctionImportMapping FunctionImportName="SPP_CategoryTrans" FunctionName="Pos1Model.Store.SPP_CategoryTrans">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Pos1Model.SPP_ChildCategories_Result">
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_CategoryTrans_Result">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_CategoryTransDistinct" FunctionName="Pos1Model.Store.SPP_CategoryTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_CategoryTransDistinct_Result">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="imageCat" ColumnName="imageCat" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ChildCategoriesOfParent" FunctionName="Pos1Model.Store.SPP_ChildCategoriesOfParent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ChildCategoriesOfParent_Result">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="imageCat" ColumnName="imageCat" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ChildCategoriesOnlyTransDistinct" FunctionName="Pos1Model.Store.SPP_ChildCategoriesOnlyTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ChildCategoriesOnlyTransDistinct_Result">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="imageCat" ColumnName="imageCat" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ChildCategoriesTransDistinct" FunctionName="Pos1Model.Store.SPP_ChildCategoriesTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ChildCategoriesTransDistinct_Result">
                 <ScalarProperty Name="idCategory" ColumnName="idCategory" />
                 <ScalarProperty Name="imageCat" ColumnName="imageCat" />
                 <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
@@ -2841,9 +2937,47 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPP_ParentCategories" FunctionName="Pos1Model.Store.SPP_ParentCategories">
+          <FunctionImportMapping FunctionImportName="SPP_MessageTrans" FunctionName="Pos1Model.Store.SPP_MessageTrans">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Pos1Model.SPP_ParentCategories_Result">
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_MessageTrans_Result">
+                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_MessageTransDistinct" FunctionName="Pos1Model.Store.SPP_MessageTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_MessageTransDistinct_Result">
+                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ParentCategoriesSubTransDistinct" FunctionName="Pos1Model.Store.SPP_ParentCategoriesSubTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ParentCategoriesSubTransDistinct_Result">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="imageCat" ColumnName="imageCat" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ParentCategoriesTransDistinct" FunctionName="Pos1Model.Store.SPP_ParentCategoriesTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ParentCategoriesTransDistinct_Result">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="imageCat" ColumnName="imageCat" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPP_ParentCategoriesWithSubCatTransDistinct" FunctionName="Pos1Model.Store.SPP_ParentCategoriesWithSubCatTransDistinct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pos1Model.SPP_ParentCategoriesWithSubCatTransDistinct_Result">
                 <ScalarProperty Name="idCategory" ColumnName="idCategory" />
                 <ScalarProperty Name="imageCat" ColumnName="imageCat" />
                 <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
@@ -2948,35 +3082,6 @@
                 <ScalarProperty Name="customerId" ColumnName="customerId" />
                 <ScalarProperty Name="statusId" ColumnName="statusId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPP_MessageTransDistinct" FunctionName="Pos1Model.Store.SPP_MessageTransDistinct">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Pos1Model.SPP_MessageTransDistinct_Result">
-                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="message" ColumnName="message" />
-                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPP_CategoryTrans" FunctionName="Pos1Model.Store.SPP_CategoryTrans">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Pos1Model.SPP_CategoryTrans_Result">
-                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
-                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
-                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPP_MessageTrans" FunctionName="Pos1Model.Store.SPP_MessageTrans">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Pos1Model.SPP_MessageTrans_Result">
-                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="message" ColumnName="message" />
-                <ScalarProperty Name="nameLanguage" ColumnName="nameLanguage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

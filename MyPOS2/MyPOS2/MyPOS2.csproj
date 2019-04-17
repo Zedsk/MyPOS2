@@ -196,6 +196,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BL\CategoryBL.cs" />
     <Compile Include="BL\ImportBL.cs" />
     <Compile Include="BL\LanguageBL.cs" />
     <Compile Include="BL\PaymentBL.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Controllers\AgesController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CashController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HeroesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
@@ -230,6 +232,7 @@
     <Compile Include="Controllers\TerminalsController.cs" />
     <Compile Include="Controllers\TransacsController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
+    <Compile Include="Controllers\UserInfosController.cs" />
     <Compile Include="Controllers\VatsController.cs" />
     <Compile Include="Dal\DalBrand.cs" />
     <Compile Include="Dal\DalCashDay.cs" />
@@ -355,10 +358,19 @@
     <Compile Include="Data\Entity\SHOP_TRANSLATION.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Entity\SPP_CategoryTransDistinct_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Entity\SPP_CategoryTrans_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Entity\SPP_ChildCategories_Result.cs">
+    <Compile Include="Data\Entity\SPP_ChildCategoriesOfParent_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Entity\SPP_ChildCategoriesOnlyTransDistinct_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Entity\SPP_ChildCategoriesTransDistinct_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Entity\SPP_GetAllShop_Result.cs">
@@ -379,7 +391,13 @@
     <Compile Include="Data\Entity\SPP_MessageTrans_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Entity\SPP_ParentCategories_Result.cs">
+    <Compile Include="Data\Entity\SPP_ParentCategoriesSubTransDistinct_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Entity\SPP_ParentCategoriesTransDistinct_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Entity\SPP_ParentCategoriesWithSubCatTransDistinct_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Entity\SPP_ProductTrans_Result.cs">
@@ -429,6 +447,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\management\CategoryViewModel.cs" />
     <Compile Include="Models\management\HeroViewModel.cs" />
     <Compile Include="Models\management\MessageViewModel.cs" />
     <Compile Include="Models\management\ProductViewModel.cs" />
@@ -659,10 +678,17 @@
     <Content Include="Views\Messages\Edit.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Messages\Default.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Import\" />
+    <Folder Include="Views\UserInfos\" />
+    <Folder Include="Views\UserInfo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
