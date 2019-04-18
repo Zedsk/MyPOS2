@@ -20,6 +20,15 @@ namespace MyPOS2.Models
         public string City { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+
+        //[Required]
+        //[DataType(DataType.Text)]
+        //[Display(Name = "Rôles")]
+        //public string Role { get; set; }
+
+        //public IList<string> ListRole { get; set; }
+
+        //public string UserASPID { get; set; }
     }
 
     public class ManageLoginsViewModel

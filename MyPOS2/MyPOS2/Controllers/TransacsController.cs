@@ -12,11 +12,15 @@ using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class TransacsController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
         // GET: Transacs
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
         public ActionResult Index()
         {
             DateTime date = DateTime.Today;
@@ -27,6 +31,9 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Transacs/Details/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -131,6 +138,8 @@ namespace MyPOS2.Controllers
         //}
 
         // GET: Transacs/Delete/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

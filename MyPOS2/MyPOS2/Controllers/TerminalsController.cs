@@ -12,11 +12,14 @@ using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class TerminalsController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
         // GET: Terminals
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Index()
         {
             var terminal = db.TERMINALs.Include(t => t.SHOP);
@@ -25,6 +28,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Terminals/Details/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,6 +45,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Terminals/Create
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Create()
         {
             //ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone");
@@ -71,6 +78,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Terminals/Edit/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -109,6 +118,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Terminals/Delete/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

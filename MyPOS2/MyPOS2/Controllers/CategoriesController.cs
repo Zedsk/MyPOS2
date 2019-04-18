@@ -12,11 +12,14 @@ using MyPOS2.Models.management;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
         // GET: Categories
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Index()
         {
             //return View(db.CATEGORYs.ToList());
@@ -61,6 +64,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Categories/Details/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -82,6 +87,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Categories/Create
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Create()
         {
             int lang = LanguageBL.CheckLanguageSession();
@@ -152,6 +159,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Categories/Edit/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -202,6 +211,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Categories/Delete/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

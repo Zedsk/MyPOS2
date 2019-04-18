@@ -8,11 +8,53 @@ using Microsoft.AspNet.Identity;
 using MyPOS2.BL;
 using MyPOS2.Models.Transactions;
 using System.Configuration;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace MyPOS2.Controllers
 {
+    //[Authorize(Roles = "admin")]
+    //[Authorize(Roles = "manager")]
+    //[Authorize(Roles = "vendor")]
+    [Authorize]
     public class TransactionController : Controller
     {
+        //private ApplicationSignInManager _signInManager;
+        //private ApplicationUserManager _userManager;
+
+        //public TransactionController()
+        //{
+        //}
+
+        //public TransactionController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        //{
+        //    UserManager = userManager;
+        //    SignInManager = signInManager;
+        //}
+
+        //public ApplicationSignInManager SignInManager
+        //{
+        //    get
+        //    {
+        //        return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+        //    }
+        //    private set
+        //    {
+        //        _signInManager = value;
+        //    }
+        //}
+
+        //public ApplicationUserManager UserManager
+        //{
+        //    get
+        //    {
+        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        //    }
+        //    private set
+        //    {
+        //        _userManager = value;
+        //    }
+        //}
+
         #region Index
         [HttpGet]
         public ActionResult Index()

@@ -10,12 +10,16 @@ using MyPOS2.Models.Transactions.Ticket;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class PayController : Controller
     {
         #region Index
         // GET: Pay
         [HandleError]
         [HttpGet]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
         //public ActionResult Index(TrPaymentMenuViewModel vm)
         public ActionResult Index(string gTot, string nTransac)
         {
@@ -438,6 +442,9 @@ namespace MyPOS2.Controllers
 
         #region RprintTicket
         [HttpGet]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
         public ActionResult RprintTicket()
         {
             try
@@ -500,6 +507,9 @@ namespace MyPOS2.Controllers
         #endregion
 
         #region ProductBack
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
         public ActionResult ProductBack(string nTransac)
         {
             TrProductBackViewModel vm = new TrProductBackViewModel();

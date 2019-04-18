@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MyPOS2.BL;
 using MyPOS2.Models;
 
 namespace MyPOS2.Controllers
@@ -62,7 +63,7 @@ namespace MyPOS2.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "Votre numéro de téléphone a été ajouté."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Votre numéro de téléphone a été supprimé."
                 : "";
-
+            
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
@@ -71,13 +72,13 @@ namespace MyPOS2.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                Name = BL.UserBL.FindNameByAspId(userId),
-                Firstname = BL.UserBL.FindFirstnameByAspId(userId),
-                Street = BL.UserBL.FindStreetByAspId(userId),
-                Zipcode = BL.UserBL.FindZipcodeByAspId(userId),
-                City = BL.UserBL.FindCityByAspId(userId),
-                Phone = BL.UserBL.FindPhoneByAspId(userId),
-                Email = BL.UserBL.FindEmailByAspId(userId)
+                Name = UserBL.FindNameByAspId(userId),
+                Firstname = UserBL.FindFirstnameByAspId(userId),
+                Street = UserBL.FindStreetByAspId(userId),
+                Zipcode = UserBL.FindZipcodeByAspId(userId),
+                City = UserBL.FindCityByAspId(userId),
+                Phone = UserBL.FindPhoneByAspId(userId),
+                Email = UserBL.FindEmailByAspId(userId)
             };
             return View(model);
         }

@@ -10,11 +10,15 @@ using MyPOS2.BL;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class CashController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
         // GET: Cash
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
         public ActionResult Index(string sortOrder, DateTime? searchString)
         {
             ViewBag.DateSortParam = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
@@ -36,6 +40,9 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Cash/Details/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
         public ActionResult Details(DateTime id1, int? id2)
         {
             if (id1 == null || id2 == null)
@@ -51,6 +58,9 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Cash/Create
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
         public ActionResult Create()
         {
             //ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal");
@@ -112,6 +122,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Cash/Edit/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         //id1 = dateday   id2 = terminalId
         public ActionResult Edit(DateTime id1, int? id2)
         {
@@ -145,7 +157,10 @@ namespace MyPOS2.Controllers
             return View(cashD);
         }
 
+
         // GET: Cash/Delete/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Delete(DateTime id1, int? id2)
         {
             if (id1 == null || id2 == null)
@@ -172,6 +187,9 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Cash/End
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
         public ActionResult End()
         {
             var id1 = DateTime.Today;

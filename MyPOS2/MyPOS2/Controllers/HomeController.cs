@@ -27,12 +27,19 @@ namespace MyPOS2.Controllers
             return View();
         }
 
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        [Authorize]
         public ActionResult Management()
         {
             ViewBag.Message = "Votre page de gestion.";
             return View();
         }
 
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
+        [Authorize]
         public ActionResult Transaction()
         {
             if (TempData["Error"] == null)

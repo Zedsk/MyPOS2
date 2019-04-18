@@ -339,5 +339,23 @@ namespace MyPOS2.Data.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_TransactionsDay_Result>("SPP_TransactionsDay", tDateParameter, tMonthParameter, tDayParameter, tStatusParameter, tReturnParameter);
         }
+    
+        public virtual ObjectResult<SPP_UserInfo_Role_Result> SPP_UserInfo_Role()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_UserInfo_Role_Result>("SPP_UserInfo_Role");
+        }
+    
+        public virtual int SPP_AspNetUserRoles_Update(string aspId, string newRole)
+        {
+            var aspIdParameter = aspId != null ?
+                new ObjectParameter("aspId", aspId) :
+                new ObjectParameter("aspId", typeof(string));
+    
+            var newRoleParameter = newRole != null ?
+                new ObjectParameter("newRole", newRole) :
+                new ObjectParameter("newRole", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPP_AspNetUserRoles_Update", aspIdParameter, newRoleParameter);
+        }
     }
 }

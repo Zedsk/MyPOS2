@@ -7,7 +7,7 @@
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Changer les paramètres de votre compte</h4>
+    <h4>Changer les paramètres du compte</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>Mot de passe :</dt>
@@ -23,65 +23,135 @@
             }
             ]
         </dd>
-        <dt>Connexions externes :</dt>
+
+        <dt>Nom :</dt>
+        <dd>
+            @(Model.Name ?? "Néant")
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddNom") </text> ]
+        </dd>
+        <dt>Prénom :</dt>
+        <dd>
+            @(Model.Firstname ?? "Néant")
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddPrenom") </text> ]
+        </dd>
+        <dt>Rue :</dt>
+        <dd>
+            @(Model.Street ?? "Néant")
+            @*@if (Model.Street != null)
+            {
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddNomSociete")&nbsp;&nbsp;]</text>
+
+            }
+            else
+            {
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Ajouter", "AddNomSociete") </text>
+            }*@
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddNomSociete")&nbsp;&nbsp;]</text>
+
+        </dd>
+        <dt>Code postal :</dt>
+        <dd>
+            @(Model.Zipcode ?? "Néant")
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddNumEntreprise") </text> ]
+        </dd>
+        <dt>Ville :</dt>
+        <dd>
+            @(Model.City ?? "Néant")
+            @*@if (Model.City != null)
+            {
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddAdresse")&nbsp;&nbsp;]</text>
+            }
+            else
+            {
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Ajouter", "AddAdresse") ]</text>
+            }*@
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddAdresse")&nbsp;&nbsp;]</text>
+        </dd>
+
+        <dt>N° de téléphone :</dt>
+        <dd>
+            @(Model.Phone ?? "Néant")
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddNumTel") </text> ]
+        </dd>
+
+        @*<dt>N° de Gsm :</dt>
+        <dd>
+            @(Model.NumGsm ?? "Néant")
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddNumGsm") </text> ]
+        </dd>*@
+
+        <dt>Email :</dt>
+        <dd>
+            @(Model.Email ?? "Néant")
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddNumTel") </text> ]
+        </dd>
+
+        @*<dt>Role :</dt>
+        <dd>
+            @(Model.Role ?? "Néant")
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Modifier", "AddRole", new { id = Model.UserASPID }) </text> ]
+        </dd>*@
+
+        @*<dt>Connexions externes :</dt>
         <dd>
             @Model.Logins.Count [
             @Html.ActionLink("Gérer", "ManageLogins") ]
-        </dd>
+        </dd>*@
+
         @*
-            Les numéros de téléphone peuvent être utilisés comme second facteur de vérification dans un système d'authentification à 2 facteurs.
-             
-             Consultez <a href="https://go.microsoft.com/fwlink/?LinkId=403804">cet article</a>
-                pour plus de détails sur la configuration de cette application ASP.NET afin qu'elle prenne en charge l'utilisation de l'authentification à 2 facteurs à l'aide de SMS.
-             
-             Décommentez le bloc suivant après avoir configuré l'authentification à 2 facteurs
+        Les numéros de téléphone peuvent être utilisés comme second facteur de vérification dans un système d'authentification à 2 facteurs.
+
+         Consultez <a href="https://go.microsoft.com/fwlink/?LinkId=403804">cet article</a>
+            pour plus de détails sur la configuration de cette application ASP.NET afin qu'elle prenne en charge l'utilisation de l'authentification à 2 facteurs à l'aide de SMS.
+
+         Décommentez le bloc suivant après avoir configuré l'authentification à 2 facteurs
         *@
-        @*  
-            <dt>Numéro de téléphone :</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
+        @*
+        <dt>Numéro de téléphone :</dt>
+        <dd>
+            @(Model.PhoneNumber ?? "None")
+            @if (Model.PhoneNumber != null)
+            {
+                <br />
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Supprimer" class="btn-link" />]</text>
-                    }
+                    @Html.AntiForgeryToken()
+                    <text>[<input type="submit" value="Supprimer" class="btn-link" />]</text>
                 }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
-            </dd>
+            }
+            else
+            {
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+            }
+        </dd>
         *@
-        <dt>Authentification à 2 facteurs :</dt>
+        @*<dt>Authentification à 2 facteurs :</dt>
         <dd>
             <p>
                 Aucun fournisseur d'authentification à deux facteurs n'est configuré. Consultez <a href="https://go.microsoft.com/fwlink/?LinkId=403804">cet article</a>
                 pour plus de détails sur la configuration de cette application ASP.NET afin qu'elle prenne en charge l'authentification à deux facteurs.
-            </p>
-            @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Activé
-                        <input type="submit" value="Désactiver" class="btn btn-link" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Désactivé
-                        <input type="submit" value="Activer" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
-        </dd>
+            </p>*@
+        @*@if (Model.TwoFactor)
+        {
+            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <text>Activé
+                <input type="submit" value="Désactiver" class="btn btn-link" />
+                </text>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <text>Désactivé
+                <input type="submit" value="Activer" class="btn btn-link" />
+                </text>
+            }
+        }*@
+        @*</dd>*@
     </dl>
 </div>

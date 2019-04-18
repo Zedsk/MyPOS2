@@ -13,11 +13,14 @@ using MyPOS2.Models.management;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class HeroesController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
         // GET: Heroes
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Index()
         {
             ////return View(db.HEROs.ToList());
@@ -42,6 +45,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Heroes/Details/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -60,6 +65,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Heroes/Create
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Create()
         {
             HeroViewModel vm = new HeroViewModel
@@ -168,6 +175,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Heroes/Edit/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -262,6 +271,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Heroes/Delete/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

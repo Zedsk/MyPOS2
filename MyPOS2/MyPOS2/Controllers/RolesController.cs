@@ -10,17 +10,20 @@ using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class RolesController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
         // GET: Roles
+        //[Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return View(db.AspNetRoles.ToList());
         }
 
         // GET: Roles/Details/5
+        //[Authorize(Roles = "admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Roles/Create
+        //[Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +63,7 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Roles/Edit/5
+        //[Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +95,7 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Roles/Delete/5
+        //[Authorize(Roles = "admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

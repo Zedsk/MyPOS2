@@ -148,6 +148,8 @@ namespace MyPOS2.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Register()
         {
             return View();
@@ -187,6 +189,8 @@ namespace MyPOS2.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -200,6 +204,8 @@ namespace MyPOS2.Controllers
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult ForgotPassword()
         {
             return View();
@@ -236,6 +242,8 @@ namespace MyPOS2.Controllers
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
@@ -244,6 +252,8 @@ namespace MyPOS2.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
@@ -278,6 +288,8 @@ namespace MyPOS2.Controllers
         //
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
@@ -287,6 +299,8 @@ namespace MyPOS2.Controllers
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
@@ -297,6 +311,8 @@ namespace MyPOS2.Controllers
         //
         // GET: /Account/SendCode
         [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
@@ -313,6 +329,8 @@ namespace MyPOS2.Controllers
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
@@ -332,6 +350,8 @@ namespace MyPOS2.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();

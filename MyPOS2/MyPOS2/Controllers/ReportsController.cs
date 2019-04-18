@@ -9,9 +9,13 @@ using System.Web.Mvc;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class ReportsController : Controller
     {
         // GET: Reports
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
+        //[Authorize(Roles = "vendor")]
         public ActionResult Index()
         {
             ReportMenuViewModel vm = new ReportMenuViewModel();

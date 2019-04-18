@@ -12,11 +12,14 @@ using MyPOS2.Models.management;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class MessagesController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
         // GET: Messages
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Index()
         {
             //return View(db.MESSAGEs.ToList());
@@ -30,6 +33,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Messages/Details/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -46,6 +51,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Messages/Create
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Create()
         {
             MessageViewModel vm = new MessageViewModel
@@ -112,6 +119,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Messages/Edit/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -161,6 +170,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Messages/Delete/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

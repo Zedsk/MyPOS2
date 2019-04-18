@@ -11,11 +11,14 @@ using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class LanguagesController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
         // GET: Languages
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Index()
         {
             //to do --> find setting message
@@ -26,6 +29,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Languages/Details/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,6 +46,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Languages/Create
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Create()
         {
             return View();
@@ -64,6 +71,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Languages/Edit/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +104,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Languages/Delete/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

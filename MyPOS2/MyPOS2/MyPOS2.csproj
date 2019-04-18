@@ -218,7 +218,6 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HeroesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
@@ -418,6 +417,9 @@
     <Compile Include="Data\Entity\SPP_TransactionsDay_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Entity\SPP_UserInfo_Role_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Entity\STATUS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -452,6 +454,7 @@
     <Compile Include="Models\management\MessageViewModel.cs" />
     <Compile Include="Models\management\ProductViewModel.cs" />
     <Compile Include="Models\management\ShopViewModel.cs" />
+    <Compile Include="Models\management\UserInfoViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\report\ReportMenuViewModel.cs" />
     <Compile Include="Models\report\ReportViewModel.cs" />
@@ -683,11 +686,12 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\UserInfos\Index.cshtml" />
+    <Content Include="Views\UserInfos\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Import\" />
-    <Folder Include="Views\UserInfos\" />
     <Folder Include="Views\UserInfo\" />
   </ItemGroup>
   <ItemGroup>

@@ -10,17 +10,22 @@ using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class Payment_MethodsController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
         // GET: Payment_Methods
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Index()
         {
             return View(db.PAYMENT_METHODs.ToList());
         }
 
         // GET: Payment_Methods/Details/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +41,7 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Payment_Methods/Create
+        //[Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +65,7 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Payment_Methods/Edit/5
+        //[Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +97,7 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Payment_Methods/Delete/5
+        //[Authorize(Roles = "admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

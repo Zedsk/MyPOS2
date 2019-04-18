@@ -12,11 +12,14 @@ using MyPOS2.Data.Entity;
 
 namespace MyPOS2.Controllers
 {
+    [Authorize]
     public class VatsController : Controller
     {
         private Pos1Entities db = new Pos1Entities();
 
         // GET: Vats
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Index()
         {
             //to do --> find setting message
@@ -29,6 +32,8 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Vats/Details/5
+        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,6 +49,7 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Vats/Create
+        //[Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -67,6 +73,7 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Vats/Edit/5
+        //[Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -98,6 +105,7 @@ namespace MyPOS2.Controllers
         }
 
         // GET: Vats/Delete/5
+        //[Authorize(Roles = "admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
