@@ -21,7 +21,7 @@ namespace MyPOS2.Controllers
         // GET: Heroes
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ////return View(db.HEROs.ToList());
             //if (Session["Language"] == null)
@@ -38,9 +38,27 @@ namespace MyPOS2.Controllers
             //{
             //    lang = LanguageBL.FindIdLanguageByShortForm(language);
             //}
+            
             int lang = LanguageBL.CheckLanguageSession();
             //var heroesT = db.SPP_HeroesTrans().Where(h => h.languageId == lang).ToList();
             var heroesT = db.SPP_HeroesTransDistinct(lang).ToList();
+
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (!String.IsNullOrEmpty((searchString)))
+            {
+                //heroesT = heroesT.Where(s => s.nameHero == searchString).ToList();
+                heroesT = heroesT.Where(s => s.nameHero.ToLower().StartsWith(searchString.ToLower())).ToList();
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    heroesT = heroesT.OrderByDescending(d => d.nameHero).ToList();
+                    break;
+                default:
+                    heroesT = heroesT.OrderBy(d => d.nameHero).ToList();
+                    break;
+            }
+
             return View(heroesT);
         }
 

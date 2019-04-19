@@ -20,7 +20,7 @@ namespace MyPOS2.Controllers
         // GET: Messages
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
             //return View(db.MESSAGEs.ToList());
             //to do --> find setting message
@@ -29,6 +29,23 @@ namespace MyPOS2.Controllers
             ViewBag.messageG = int.Parse(messageG);
             int lang = LanguageBL.CheckLanguageSession();
             var messagesT = db.SPP_MessageTransDistinct(lang).ToList();
+
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (!String.IsNullOrEmpty((searchString)))
+            {
+                //heroesT = heroesT.Where(s => s.nameHero == searchString).ToList();
+                messagesT = messagesT.Where(s => s.title.ToLower().StartsWith(searchString.ToLower())).ToList();
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    messagesT = messagesT.OrderByDescending(d => d.title).ToList();
+                    break;
+                default:
+                    messagesT = messagesT.OrderBy(d => d.title).ToList();
+                    break;
+            }
+
             return View(messagesT);
         }
 

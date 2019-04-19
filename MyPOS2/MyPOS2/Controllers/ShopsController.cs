@@ -22,12 +22,29 @@ namespace MyPOS2.Controllers
         // GET: Shops
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
             //return View(db.SHOPs.ToList());
  
             int lang = LanguageBL.CheckLanguageSession();
             var shopsT = db.SPP_ShopTransDistinct(lang).ToList();
+
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (!String.IsNullOrEmpty((searchString)))
+            {
+                //heroesT = heroesT.Where(s => s.nameHero == searchString).ToList();
+                shopsT = shopsT.Where(s => s.nameShop.ToLower().StartsWith(searchString.ToLower())).ToList();
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    shopsT = shopsT.OrderByDescending(d => d.nameShop).ToList();
+                    break;
+                default:
+                    shopsT = shopsT.OrderBy(d => d.nameShop).ToList();
+                    break;
+            }
+
             return View(shopsT);
         }
 

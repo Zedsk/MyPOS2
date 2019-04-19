@@ -20,11 +20,27 @@ namespace MyPOS2.Controllers
         // GET: Terminals
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            var terminal = db.TERMINALs.Include(t => t.SHOP);
-            
-            return View(terminal.ToList());
+            var terminals = db.TERMINALs.Include(t => t.SHOP).ToList();
+
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (!String.IsNullOrEmpty((searchString)))
+            {
+                //heroesT = heroesT.Where(s => s.nameHero == searchString).ToList();
+                terminals = terminals.Where(s => s.nameTerminal.ToLower().StartsWith(searchString.ToLower())).ToList();
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    terminals = terminals.OrderByDescending(d => d.nameTerminal).ToList();
+                    break;
+                default:
+                    terminals = terminals.OrderBy(d => d.nameTerminal).ToList();
+                    break;
+            }
+
+            return View(terminals);
         }
 
         // GET: Terminals/Details/5

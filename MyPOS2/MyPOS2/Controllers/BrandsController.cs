@@ -19,9 +19,25 @@ namespace MyPOS2.Controllers
         // GET: Brands
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(db.BRANDs.ToList());
+            var brands = db.BRANDs.ToList();
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (!String.IsNullOrEmpty((searchString)))
+            {
+                brands = brands.Where(s => s.nameBrand.ToLower().StartsWith(searchString.ToLower())).ToList();
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    brands = brands.OrderByDescending(d => d.nameBrand).ToList();
+                    break;
+                default:
+                    brands = brands.OrderBy(d => d.nameBrand).ToList();
+                    break;
+            }
+
+            return View(brands);
         }
 
         // GET: Brands/Details/5

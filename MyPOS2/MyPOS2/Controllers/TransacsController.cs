@@ -17,7 +17,7 @@ namespace MyPOS2.Controllers
     {
         private Pos1Entities db = new Pos1Entities();
 
-        // GET: Transacs
+        //// GET: Transacs
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         //[Authorize(Roles = "vendor")]
@@ -30,7 +30,7 @@ namespace MyPOS2.Controllers
             return View(transactions.ToList());
         }
 
-        // GET: Transacs/Details/5
+        //// GET: Transacs/Details/5
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         //[Authorize(Roles = "vendor")]

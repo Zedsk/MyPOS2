@@ -13,11 +13,28 @@
 <p>
     @Html.ActionLink("Créer nouveau", "Create") | @Html.ActionLink("Retour au Menu", "Management", "Home")
 </p>
+@using (Html.BeginForm())
+{
+    @*<p>
+            Recherche par date: @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "DD/MM/YYY", type = "date" })
+            <input type="submit" value="Search" />
+        </p>*@
+    <label for="SearchString"><strong>Recherche par nom: </strong></label>
+    <div style="display:flex;">
+        @Html.TextBox("SearchString", "", new { @class = "form-control" })
+        <input type="submit" value="Recherche" />
+        @Html.ActionLink("Tous", "Index", "Products", new { type = "button", @class = "btn btn-primary" })
+    </div>
+}
 <table class="table">
     <tr>
         <th>
             @*@Html.DisplayNameFor(model => model.imageProduct)*@
-            Image Article
+            Image 
+        </th>
+        <th>
+            Nom
+            @*@Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NameSortParam })*@
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.barcode)*@
@@ -37,7 +54,7 @@
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.BRAND.nameBrand)*@
-            Marque
+            @Html.ActionLink("Marque", "Index", new { sortOrder = ViewBag.BrandSortParam })
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.CATEGORY.imageCat)*@
@@ -67,6 +84,9 @@
                 {
                     <img src="~/Content/image/logo_noImage.png" alt="Pas d'image" class="imgIndex" />
                 }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRODUCT_TRANSLATION.FirstOrDefault(s => s.productId == item.idProduct).nameProduct)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.barcode)

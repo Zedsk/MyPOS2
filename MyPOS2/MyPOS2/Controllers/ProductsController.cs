@@ -20,10 +20,36 @@ namespace MyPOS2.Controllers
         // GET: Products
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            var product = db.PRODUCTs.Include(p => p.AGE).Include(p => p.BRAND).Include(p => p.CATEGORY).Include(p => p.HERO).Include(p => p.VAT);
-            return View(product.ToList());
+            //int lang = LanguageBL.CheckLanguageSession();
+            var products = db.PRODUCTs.Include(p => p.AGE).Include(p => p.BRAND).Include(p => p.CATEGORY).Include(p => p.HERO).Include(p => p.VAT).ToList();
+
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "Name";
+            ViewBag.BrandSortParam = String.IsNullOrEmpty(sortOrder) ? "brand_desc" : "";
+            if (!String.IsNullOrEmpty((searchString)))
+            {
+                //products = products.Where(s => s.BRAND.nameBrand.ToLower().StartsWith(searchString.ToLower())
+                //                            || s.PRODUCT_TRANSLATION.FirstOrDefault(t => t.languageId == lang).nameProduct.ToLower().StartsWith(searchString.ToLower())).ToList();
+                products = products.Where(s => s.BRAND.nameBrand.ToLower().StartsWith(searchString.ToLower())).ToList();
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    //products = products.OrderByDescending(d => d.PRODUCT_TRANSLATION.Select(s => s.nameProduct)).ToList();
+                    break;
+                case "Name":
+                    //products = products.OrderBy(d => d.PRODUCT_TRANSLATION.Select(s => s.nameProduct)).ToList();
+                    break;
+                case "brand_desc":
+                    products = products.OrderByDescending(d => d.BRAND.nameBrand).ToList();
+                    break;
+                default:
+                    products = products.OrderBy(d => d.BRAND.nameBrand).ToList();
+                    break;
+            }
+
+            return View(products);
             //int lang = LanguageBL.CheckLanguageSession();
             //var productsT;
             //return View(productsT);

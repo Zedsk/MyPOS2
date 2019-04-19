@@ -4,16 +4,29 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Terminaux</h2>
 
 <p>
     @Html.ActionLink("Créer un nouveau Terminal", "Create") | @Html.ActionLink("Retour au Menu", "Management", "Home")
 </p>
+@using (Html.BeginForm())
+{
+    @*<p>
+            Recherche par date: @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "DD/MM/YYY", type = "date" })
+            <input type="submit" value="Search" />
+        </p>*@
+    <label for="SearchString"><strong>Recherche par nom: </strong></label>
+    <div style="display:flex;">
+        @Html.TextBox("SearchString", "", new { @class = "form-control" })
+        <input type="submit" value="Recherche" />
+        @Html.ActionLink("Tous", "Index", "Terminals", new { type = "button", @class = "btn btn-primary" })
+    </div>
+}
 <table class="table">
     <tr>
         <th>
             @*@Html.DisplayNameFor(model => model.nameTerminal)*@
-            Nom du Terminal
+            @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NameSortParam })
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.SHOP.phone)*@
@@ -22,21 +35,22 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nameTerminal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SHOP.SHOP_TRANSLATION.FirstOrDefault(s => s.shopId == item.shopId).nameShop)
-        </td>
-        <td>
-            @Html.ActionLink("Editer", "Edit", new { id=item.idTerminal }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idTerminal }) |
-            @Html.ActionLink("Supprimer", "Delete", new { id=item.idTerminal })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameTerminal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SHOP.SHOP_TRANSLATION.FirstOrDefault(s => s.shopId == item.shopId).nameShop)
+            </td>
+            <td>
+                @Html.ActionLink("Editer", "Edit", new { id = item.idTerminal }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idTerminal }) |
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.idTerminal })
+            </td>
+        </tr>
+    }
 
 </table>
 <div>

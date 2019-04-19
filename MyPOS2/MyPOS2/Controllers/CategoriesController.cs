@@ -20,7 +20,7 @@ namespace MyPOS2.Controllers
         // GET: Categories
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
             //return View(db.CATEGORYs.ToList());
             CategoryViewModel vm = new CategoryViewModel();
@@ -54,10 +54,24 @@ namespace MyPOS2.Controllers
                     Image = item.imageCat, 
                     Relation = rel
                 };
-
                 list.Add(cat);
             }
-            
+
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (!String.IsNullOrEmpty((searchString)))
+            {
+                //heroesT = heroesT.Where(s => s.nameHero == searchString).ToList();
+                list = list.Where(s => s.NameCat.ToLower().StartsWith(searchString.ToLower())).ToList();
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    list = list.OrderByDescending(d => d.NameCat).ToList();
+                    break;
+                default:
+                    list = list.OrderBy(d => d.NameCat).ToList();
+                    break;
+            }
 
             return View(list);           
 
