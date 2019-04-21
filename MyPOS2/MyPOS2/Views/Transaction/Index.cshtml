@@ -69,7 +69,7 @@
                 <div id="detail">
                     @Html.Partial("_PartialTransactionDetail", new TrDetailsViewModel { DetailsListWithTot = Model.DetailsListWithTot })
                 </div>
-                <p>Vue Mère : @DateTime.Now.ToLongTimeString()</p>
+                
                 <div class="Totals">
                     <div id="reductions">
                         <div>
@@ -101,7 +101,6 @@
                                     <input type="button" id="ButtonAdd" class="calc_btn" value="+" onclick="ButtonAddProduct_Click()">
                                 </td>
                                 <td>
-                                    @*<input type="button" id="ButtonCustomer" class="btn btn-default fct_btn" value="Customer" onclick="ButtonCustomer_Click()" disabled>*@
                                     <button type="button" name="ButtonCustomer" class="btn btn-default fct_btn" value="Customer" onclick="ButtonCustomer_Click()" disabled>Client</button>
                                 </td>
                             </tr>
@@ -140,7 +139,6 @@
                                     <input type="button" id="ButtonReturn" class="calc_btn" value="&larr;" onclick="ButtonDelete_Click()">
                                 </td>
                                 <td>
-                                    @*<input type="submit" name="submitButton" class="fct_btn" value="Cancel" onclick="return confirm('Etes-vous sur de vouloir supprimer la transaction?');">*@
                                     <button type="submit" name="submitButton" class="btn btn-default fct_btn" value="Cancel" onclick="return confirm('Etes-vous sur de vouloir supprimer la transaction?');">Annuler</button>
                                 </td>
                             </tr>
@@ -152,7 +150,6 @@
                                     <input type="button" id="ButtonComa" class="calc_btn" value="," onclick="ButtonCalc_Click(this)">
                                 </td>
                                 <td>
-                                    @*<input type="button" id="ButtonBackProduct" class="fct_btn" value="T.Retour" onclick="ButtonBackProduct_Click()">*@
                                     <button type="submit" name="submitButton" class="btn btn-default fct_btn" value="Back">T.Retour</button>
                                 </td>
                             </tr>

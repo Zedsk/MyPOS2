@@ -86,7 +86,5 @@ namespace MyPOS2.Tests.BL
             Assert.AreEqual(5, result[1].discountGlobal);
             Assert.AreEqual(25, result[2].discountGlobal);
         }
-
-
     }
 }
