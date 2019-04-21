@@ -70,5 +70,7 @@ namespace MyPOS2.Dal
             PRODUCT prod = db.PRODUCTs.Where(p => p.idProduct == id).Single();
             return prod.barcode;
         }
+
+       
     }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyPOS2.Dal;
 using MyPOS2.Data.Entity;
+using MyPOS2.Models.Transactions;
 
 namespace MyPOS2.BL
 {
@@ -86,8 +87,6 @@ namespace MyPOS2.BL
             }
             return result;
         }
-
-
 
         internal static bool CheckIfUniversal(IList<MESSAGE_TRANSLATION> messagesT)
         {
@@ -410,6 +409,17 @@ namespace MyPOS2.BL
         }
         #endregion
 
-
+        internal static IList<TrDetailsViewModel> TranslateDetailList(IList<TrDetailsViewModel> listDetails, int lang)
+        {
+            using(IDalProduct dal = new DalProduct())
+            {
+                foreach (var item in listDetails)
+                {
+                    var prod = dal.GetProductByCode(item.ProductCode);
+                    item.ProductName = dal.GetNameProductById(prod.idProduct, lang);
+                }
+                return listDetails;
+            }
+        }
     }
 }

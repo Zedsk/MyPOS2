@@ -47,8 +47,9 @@ namespace MyPOS2.BL
                 //to do --> magasin
                 vm.Shop = ShopBL.FindShopById(transac.shopId, lang);
                 //detail
-                vm.DetailsListWithTot = TransactionBL.ListDetailsWithTot(numTransaction);
-
+                //vm.DetailsListWithTot = TransactionBL.ListDetailsWithTot(numTransaction);
+                var listDetails = TransactionBL.ListDetailsWithTot(numTransaction);
+                vm.DetailsListWithTot = TranslationBL.TranslateDetailList(listDetails, lang);
                 //discount
 
                 if (transac.discountGlobal == null)

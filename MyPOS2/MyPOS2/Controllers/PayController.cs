@@ -97,7 +97,8 @@ namespace MyPOS2.Controllers
                     //ViewBag.cashBack = "0";
                 }
                 vm.MethodsP = PaymentBL.FindMethodsList();
-                vm.Languages = LanguageBL.FindLanguageList();
+                //vm.Languages = LanguageBL.FindLanguageList();
+                vm.Languages = LanguageBL.FindLanguageListWithoutUniversal();
                 //vm.PayCardToConfirm = false;
                 ViewBag.messageCard = "";
                 ////provisoire
@@ -220,14 +221,16 @@ namespace MyPOS2.Controllers
                         ViewBag.amount = vmodel.Amount;
                         ViewBag.cashBack = vmodel.CashReturn;
                         vmodel.MethodsP = PaymentBL.FindMethodsList();
-                        vmodel.Languages = LanguageBL.FindLanguageList();
+                        //vmodel.Languages = LanguageBL.FindLanguageList();
+                        vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
                         ViewBag.messageCard = "";
                         ViewBag.ticket = false;
                         return View(vmodel);
                 }
             }
             vmodel.MethodsP = PaymentBL.FindMethodsList();
-            vmodel.Languages = LanguageBL.FindLanguageList();
+            //vmodel.Languages = LanguageBL.FindLanguageList();
+            vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
             ViewBag.tot = vmodel.GlobalTotal;
             ViewBag.amount = vmodel.Amount;
             ViewBag.cashBack = vmodel.CashReturn;
@@ -252,7 +255,8 @@ namespace MyPOS2.Controllers
                 return RedirectToAction("Transaction", "Home");
             }
             vmodel.MethodsP = PaymentBL.FindMethodsList();
-            vmodel.Languages = LanguageBL.FindLanguageList();
+            //vmodel.Languages = LanguageBL.FindLanguageList();
+            vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
             ViewBag.nopay = "La transaction n'est pas payée!";
             ViewBag.tot = vmodel.GlobalTotal;
             ViewBag.amount = vmodel.Amount;
@@ -307,7 +311,8 @@ namespace MyPOS2.Controllers
                 bool isChange = false;
                 vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language, isChange);
                 vmodel.Language = vmodel.Ticket.Language;
-                vmodel.Languages = LanguageBL.FindLanguageList();
+                //vmodel.Languages = LanguageBL.FindLanguageList();
+                vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
                 //vmodel.NumTicket = vmodel.Ticket.Ticket;
                 //ViewBag.NumT = vmodel.Ticket.Ticket;
                 //vmodel.NumTicket = vmodel.Ticket.Ticket;
@@ -343,7 +348,8 @@ namespace MyPOS2.Controllers
                 bool isChange = false;
                 vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language, isChange);
                 vmodel.Language = vmodel.Ticket.Language;
-                vmodel.Languages = LanguageBL.FindLanguageList();
+                //vmodel.Languages = LanguageBL.FindLanguageList();
+                vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
                 //vmodel.NumTicket = vmodel.Ticket.Ticket;
                 //ViewBag.NumT = vmodel.Ticket.Ticket;
                 //vmodel.NumTicket = vmodel.Ticket.Ticket;
