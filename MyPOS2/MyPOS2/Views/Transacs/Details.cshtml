@@ -117,6 +117,17 @@
             @Html.DisplayFor(model => model.USERINFO.nameUser)
         </dd>
 
+        @if (Model.cancelDescritpion != null)
+        {
+            <dt>
+                @*@Html.DisplayNameFor(model => model.USERINFO.nameUser)*@
+                Motif de suppression
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cancelDescritpion)
+            </dd>
+        }
     </dl>
 </div>
 <p>

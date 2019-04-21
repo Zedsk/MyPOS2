@@ -586,14 +586,21 @@ function CreateReport() {
     }
 }
 
-function ChangeHiddenVal(source) {
-    var t = source.id;
-    var v = source.value;
-    t.oninput = function () {
-        document.getElementById('Product_salesPrice').value = v;
+function CheckReasonDeleteTransac() {
+    try {
+        document.getElementById('noReason').textContent = "";
+        var reason = document.getElementById('cancelDescritpion').value;
+        if (reason == null || reason == "") {
+            throw "Un motif est obligatoire";
+        } else {
+            return confirm('Etes-vous sur de vouloir supprimer?');
+        }
+    } catch (e) {
+        document.getElementById('noReason').textContent = e;
+        console.log(e);
+        
+        return document.Forms[0].submit.false;
     }
-
-    
 
 
 

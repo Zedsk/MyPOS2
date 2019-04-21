@@ -79,21 +79,21 @@ namespace MyPOS2.Controllers
         //// plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "idTransaction,transactionDateBegin,transactionDateEnd,total,discountGlobal,isReturn,terminalId,shopId,customerId,statusId,userId")] TRANSACTIONS tRANSACTIONS)
+        //public ActionResult Create([Bind(Include = "idTransaction,transactionDateBegin,transactionDateEnd,total,discountGlobal,isReturn,terminalId,shopId,customerId,statusId,userId")] TRANSACTIONS transaction)
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        db.TRANSACTIONSs.Add(tRANSACTIONS);
+        //        db.TRANSACTIONSs.Add(transaction);
         //        db.SaveChanges();
         //        return RedirectToAction("Index");
         //    }
 
-        //    ViewBag.customerId = new SelectList(db.CUSTOMERs, "customerId", "customerId", tRANSACTIONS.customerId);
-        //    ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", tRANSACTIONS.shopId);
-        //    ViewBag.statusId = new SelectList(db.STATUSs, "idStatus", "nameStatus", tRANSACTIONS.statusId);
-        //    ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal", tRANSACTIONS.terminalId);
-        //    ViewBag.userId = new SelectList(db.USERINFOs, "userId", "nameUser", tRANSACTIONS.userId);
-        //    return View(tRANSACTIONS);
+        //    ViewBag.customerId = new SelectList(db.CUSTOMERs, "customerId", "customerId", transaction.customerId);
+        //    ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", transaction.shopId);
+        //    ViewBag.statusId = new SelectList(db.STATUSs, "idStatus", "nameStatus", transaction.statusId);
+        //    ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal", transaction.terminalId);
+        //    ViewBag.userId = new SelectList(db.USERINFOs, "userId", "nameUser", transaction.userId);
+        //    return View(transaction);
         //}
 
         //// GET: Transacs/Edit/5
@@ -103,17 +103,17 @@ namespace MyPOS2.Controllers
         //    {
         //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //    }
-        //    TRANSACTIONS tRANSACTIONS = db.TRANSACTIONSs.Find(id);
-        //    if (tRANSACTIONS == null)
+        //    TRANSACTIONS transaction = db.TRANSACTIONSs.Find(id);
+        //    if (transaction == null)
         //    {
         //        return HttpNotFound();
         //    }
-        //    ViewBag.customerId = new SelectList(db.CUSTOMERs, "customerId", "customerId", tRANSACTIONS.customerId);
-        //    ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", tRANSACTIONS.shopId);
-        //    ViewBag.statusId = new SelectList(db.STATUSs, "idStatus", "nameStatus", tRANSACTIONS.statusId);
-        //    ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal", tRANSACTIONS.terminalId);
-        //    ViewBag.userId = new SelectList(db.USERINFOs, "userId", "nameUser", tRANSACTIONS.userId);
-        //    return View(tRANSACTIONS);
+        //    ViewBag.customerId = new SelectList(db.CUSTOMERs, "customerId", "customerId", transaction.customerId);
+        //    ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", transaction.shopId);
+        //    ViewBag.statusId = new SelectList(db.STATUSs, "idStatus", "nameStatus", transaction.statusId);
+        //    ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal", transaction.terminalId);
+        //    ViewBag.userId = new SelectList(db.USERINFOs, "userId", "nameUser", transaction.userId);
+        //    return View(transaction);
         //}
 
         //// POST: Transacs/Edit/5
@@ -121,20 +121,20 @@ namespace MyPOS2.Controllers
         //// plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "idTransaction,transactionDateBegin,transactionDateEnd,total,discountGlobal,isReturn,terminalId,shopId,customerId,statusId,userId")] TRANSACTIONS tRANSACTIONS)
+        //public ActionResult Edit([Bind(Include = "idTransaction,transactionDateBegin,transactionDateEnd,total,discountGlobal,isReturn,terminalId,shopId,customerId,statusId,userId")] TRANSACTIONS transaction)
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        db.Entry(tRANSACTIONS).State = EntityState.Modified;
+        //        db.Entry(transaction).State = EntityState.Modified;
         //        db.SaveChanges();
         //        return RedirectToAction("Index");
         //    }
-        //    ViewBag.customerId = new SelectList(db.CUSTOMERs, "customerId", "customerId", tRANSACTIONS.customerId);
-        //    ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", tRANSACTIONS.shopId);
-        //    ViewBag.statusId = new SelectList(db.STATUSs, "idStatus", "nameStatus", tRANSACTIONS.statusId);
-        //    ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal", tRANSACTIONS.terminalId);
-        //    ViewBag.userId = new SelectList(db.USERINFOs, "userId", "nameUser", tRANSACTIONS.userId);
-        //    return View(tRANSACTIONS);
+        //    ViewBag.customerId = new SelectList(db.CUSTOMERs, "customerId", "customerId", transaction.customerId);
+        //    ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", transaction.shopId);
+        //    ViewBag.statusId = new SelectList(db.STATUSs, "idStatus", "nameStatus", transaction.statusId);
+        //    ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal", transaction.terminalId);
+        //    ViewBag.userId = new SelectList(db.USERINFOs, "userId", "nameUser", transaction.userId);
+        //    return View(transaction);
         //}
 
         // GET: Transacs/Delete/5
@@ -157,12 +157,20 @@ namespace MyPOS2.Controllers
         // POST: Transacs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(TRANSACTIONS tr, int id)
         {
-            TRANSACTIONS tRANSACTIONS = db.TRANSACTIONSs.Find(id);
-            db.TRANSACTIONSs.Remove(tRANSACTIONS);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            TRANSACTIONS transaction = db.TRANSACTIONSs.Find(id);
+            if (tr.cancelDescritpion != null)
+            {
+                transaction.cancelDescritpion = tr.cancelDescritpion;
+                transaction.statusId = db.STATUSs.Where(s => s.nameStatus == "deleted").Select(st => st.idStatus).Single();
+                db.Entry(transaction).State = EntityState.Modified;
+                //db.TRANSACTIONSs.Remove(transaction);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.noReason = "Un motif est obligatoire";
+            return View(transaction);
         }
 
         protected override void Dispose(bool disposing)

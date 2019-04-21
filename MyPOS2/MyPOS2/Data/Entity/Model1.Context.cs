@@ -61,6 +61,19 @@ namespace MyPOS2.Data.Entity
         public virtual DbSet<USERINFO> USERINFOs { get; set; }
         public virtual DbSet<VAT> VATs { get; set; }
     
+        public virtual int SPP_AspNetUserRoles_Update(string aspId, string newRole)
+        {
+            var aspIdParameter = aspId != null ?
+                new ObjectParameter("aspId", aspId) :
+                new ObjectParameter("aspId", typeof(string));
+    
+            var newRoleParameter = newRole != null ?
+                new ObjectParameter("newRole", newRole) :
+                new ObjectParameter("newRole", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPP_AspNetUserRoles_Update", aspIdParameter, newRoleParameter);
+        }
+    
         public virtual ObjectResult<SPP_CategoryTrans_Result> SPP_CategoryTrans()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_CategoryTrans_Result>("SPP_CategoryTrans");
@@ -343,19 +356,6 @@ namespace MyPOS2.Data.Entity
         public virtual ObjectResult<SPP_UserInfo_Role_Result> SPP_UserInfo_Role()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPP_UserInfo_Role_Result>("SPP_UserInfo_Role");
-        }
-    
-        public virtual int SPP_AspNetUserRoles_Update(string aspId, string newRole)
-        {
-            var aspIdParameter = aspId != null ?
-                new ObjectParameter("aspId", aspId) :
-                new ObjectParameter("aspId", typeof(string));
-    
-            var newRoleParameter = newRole != null ?
-                new ObjectParameter("newRole", newRole) :
-                new ObjectParameter("newRole", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPP_AspNetUserRoles_Update", aspIdParameter, newRoleParameter);
         }
     }
 }

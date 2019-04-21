@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Pos1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -1170,7 +1170,8 @@
             <End Role="VENDOR_SHOP" EntitySet="VENDOR_SHOP" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pos1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2227,43 +2228,47 @@
             <End Role="SHOP" EntitySet="SHOP" />
             <End Role="USERINFO" EntitySet="USERINFO" />
           </AssociationSet>
+          <FunctionImport Name="SPP_AspNetUserRoles_Update">
+            <Parameter Name="aspId" Mode="In" Type="String" />
+            <Parameter Name="newRole" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="SPP_CategoryTrans" ReturnType="Collection(Pos1Model.SPP_CategoryTrans_Result)" />
           <FunctionImport Name="SPP_CategoryTransDistinct" ReturnType="Collection(Pos1Model.SPP_CategoryTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ChildCategoriesOfParent" ReturnType="Collection(Pos1Model.SPP_ChildCategoriesOfParent_Result)">
             <Parameter Name="cat" Mode="In" Type="Int32" />
             <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ChildCategoriesOnlyTransDistinct" ReturnType="Collection(Pos1Model.SPP_ChildCategoriesOnlyTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ChildCategoriesTransDistinct" ReturnType="Collection(Pos1Model.SPP_ChildCategoriesTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_GetAllShop" ReturnType="Collection(Pos1Model.SPP_GetAllShop_Result)" />
           <FunctionImport Name="SPP_GetShopById" ReturnType="Collection(Pos1Model.SPP_GetShopById_Result)">
-          <Parameter Name="shop" Mode="In" Type="Int32" />
+            <Parameter Name="shop" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_HeroesTrans" ReturnType="Collection(Pos1Model.SPP_HeroesTrans_Result)" />
           <FunctionImport Name="SPP_HeroesTransDistinct" ReturnType="Collection(Pos1Model.SPP_HeroesTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_MessageTrans" ReturnType="Collection(Pos1Model.SPP_MessageTrans_Result)" />
           <FunctionImport Name="SPP_MessageTransDistinct" ReturnType="Collection(Pos1Model.SPP_MessageTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ParentCategoriesSubTransDistinct" ReturnType="Collection(Pos1Model.SPP_ParentCategoriesSubTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ParentCategoriesTransDistinct" ReturnType="Collection(Pos1Model.SPP_ParentCategoriesTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ParentCategoriesWithSubCatTransDistinct" ReturnType="Collection(Pos1Model.SPP_ParentCategoriesWithSubCatTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ProductTrans" ReturnType="Collection(Pos1Model.SPP_ProductTrans_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_ReportTotalSalesByProductsTransDistinct" ReturnType="Collection(Pos1Model.SPP_ReportTotalSalesByProductsTransDistinct_Result)">
             <Parameter Name="tDate" Mode="In" Type="Int32" />
@@ -2283,7 +2288,7 @@
           </FunctionImport>
           <FunctionImport Name="SPP_ShopTrans" ReturnType="Collection(Pos1Model.SPP_ShopTrans_Result)" />
           <FunctionImport Name="SPP_ShopTransDistinct" ReturnType="Collection(Pos1Model.SPP_ShopTransDistinct_Result)">
-          <Parameter Name="language" Mode="In" Type="Int32" />
+            <Parameter Name="language" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_TicketNbItem" ReturnType="Collection(Int32)">
             <Parameter Name="dateMin" Mode="In" Type="DateTime" />
@@ -2300,7 +2305,7 @@
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SPP_TransactionMessageIds" ReturnType="Collection(Int32)">
-          <Parameter Name="idTransac" Mode="In" Type="Int32" />
+            <Parameter Name="idTransac" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPP_TransactionsDay" ReturnType="Collection(Pos1Model.SPP_TransactionsDay_Result)">
             <Parameter Name="tDate" Mode="In" Type="Int32" />
@@ -2310,10 +2315,6 @@
             <Parameter Name="tReturn" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SPP_UserInfo_Role" ReturnType="Collection(Pos1Model.SPP_UserInfo_Role_Result)" />
-          <FunctionImport Name="SPP_AspNetUserRoles_Update">
-            <Parameter Name="aspId" Mode="In" Type="String" />
-            <Parameter Name="newRole" Mode="In" Type="String" />
-          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPP_CategoryTrans_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
@@ -2858,6 +2859,7 @@
               <ScalarProperty Name="userId" ColumnName="userId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="SPP_AspNetUserRoles_Update" FunctionName="Pos1Model.Store.SPP_AspNetUserRoles_Update" />
           <FunctionImportMapping FunctionImportName="SPP_CategoryTrans" FunctionName="Pos1Model.Store.SPP_CategoryTrans">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Pos1Model.SPP_CategoryTrans_Result">
@@ -3120,7 +3122,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPP_AspNetUserRoles_Update" FunctionName="Pos1Model.Store.SPP_AspNetUserRoles_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
