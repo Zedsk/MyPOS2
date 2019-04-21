@@ -76,7 +76,7 @@ namespace MyPOS2.BL
             }
         }
 
-        private static IList<SPP_ReportTotalSalesTransDistinct_Result> ModifyFormatDisplayDiscount(IList<SPP_ReportTotalSalesTransDistinct_Result> list)
+        public static IList<SPP_ReportTotalSalesTransDistinct_Result> ModifyFormatDisplayDiscount(IList<SPP_ReportTotalSalesTransDistinct_Result> list)
         {
             for (int i = 0; i < list.Count(); i++)
             {
@@ -91,7 +91,7 @@ namespace MyPOS2.BL
             return list;
         }
 
-        private static string CalculateTotalReport(IList<SPP_ReportTotalSalesTransDistinct_Result> list)
+        public static string CalculateTotalReport(IList<SPP_ReportTotalSalesTransDistinct_Result> list)
         {
             decimal result = 0;
             for (int i = 0; i < list.Count(); i++)
@@ -101,7 +101,7 @@ namespace MyPOS2.BL
             return result.ToString();
         }
 
-        private static string CalculateTotalReport(IList<SPP_ReportTotalSalesByProductsTransDistinct_Result> list)
+        public static string CalculateTotalReport(IList<SPP_ReportTotalSalesByProductsTransDistinct_Result> list)
         {
             decimal? result = 0;
             for (int i = 0; i < list.Count(); i++)

@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\ReportBLTest.cs" />
     <Compile Include="BL\TransactionBLTest.cs" />
     <Compile Include="Controllers\AgesControllerTest.cs" />
     <Compile Include="Dal\UnitTest1.cs" />

@@ -104,7 +104,7 @@ namespace MyPOS2.BL
             }
         }
 
-        private static bool VerifyProductInDetail(int idProd, IList<TRANSACTION_DETAILS> detailList)
+        public static bool VerifyProductInDetail(int idProd, IList<TRANSACTION_DETAILS> detailList)
         {
             var result = false;
             if (detailList.Count != 0)

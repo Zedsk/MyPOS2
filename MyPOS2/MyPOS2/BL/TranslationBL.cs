@@ -89,7 +89,7 @@ namespace MyPOS2.BL
 
 
 
-        private static bool CheckIfUniversal(IList<MESSAGE_TRANSLATION> messagesT)
+        internal static bool CheckIfUniversal(IList<MESSAGE_TRANSLATION> messagesT)
         {
             bool result = false;
             List<string> nameList = new List<string>();
@@ -107,7 +107,7 @@ namespace MyPOS2.BL
             return result;
         }
 
-        private static bool CheckIfUniversal(IList<CATEGORY_TRANSLATION> catsT)
+        internal static bool CheckIfUniversal(IList<CATEGORY_TRANSLATION> catsT)
         {
             bool result = false;
             List<string> nameList = new List<string>();

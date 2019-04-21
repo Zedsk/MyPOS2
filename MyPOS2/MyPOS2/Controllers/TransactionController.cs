@@ -100,7 +100,7 @@ namespace MyPOS2.Controllers
 
                     // to do --> quid date et heure?
                     DateDay = DateTime.Now.Date.ToString("d"),
-                    HourDay = DateTime.Now.ToString("T"),
+                    HourDay = DateTime.Now.ToString("T")
                 };
                 return View(vm);
             }

@@ -42,7 +42,7 @@ namespace MyPOS2.BL
             }
         }
 
-        public static string FindVatValById(int? vatId)
+        internal static string FindVatValById(int? vatId)
         {
             if (vatId != null)
             {
