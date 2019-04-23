@@ -12,14 +12,13 @@ namespace MyPOS2.BL
     public class TicketBL
     {
         internal static TrTicketViewModel FillTicket(string numTransaction, string language, bool? isChange)
-            {
+        {
             using (IDalTransaction dal = new DalTransaction())
             {
                 //find transac
                 var transac = TransactionBL.FindTransactionById(numTransaction);
                 //create ticket
                 TrTicketViewModel vm = new TrTicketViewModel();
-                //to do --> provisoire language = 1 = French
                 int lang;
                 if (int.TryParse(language, out int codeL))
                 {
@@ -44,14 +43,12 @@ namespace MyPOS2.BL
                 }
                 //n° transac
                 vm.Transaction = numTransaction;
-                //to do --> magasin
+                //shop informations
                 vm.Shop = ShopBL.FindShopById(transac.shopId, lang);
-                //detail
-                //vm.DetailsListWithTot = TransactionBL.ListDetailsWithTot(numTransaction);
+                //detail transaction
                 var listDetails = TransactionBL.ListDetailsWithTot(numTransaction);
                 vm.DetailsListWithTot = TranslationBL.TranslateDetailList(listDetails, lang);
-                //discount
-
+                //discount or not
                 if (transac.discountGlobal == null)
                 {
                     vm.DiscountG = " - ";
@@ -65,58 +62,23 @@ namespace MyPOS2.BL
                 }
 
                 ////VAT
-                //vm.VatG = (FindVatValById(transac.vatId)).ToString();
-                //vm.VatG = dal.GetAppliedVatById(transac.vatId).appliedVat;
                 //to do --> provisoire vatId = 2 --> 21%
                 int tva = 2;
                 vm.VatG = VatBL.FindVatValById(tva);
-
-
-                //Total
+                
+                //Total transaction
                 vm.TotalG = (transac.total).ToString();
 
                 //payment method & amount
                 vm.Payments = PaymentBL.FindPaymentsByTransacId(numTransaction);
-                //foreach (var item in vm.Payments)
-                //{
-                //    //var test = item.PAYMENT_METHOD.method;
-                //    string test2 = PaymentBL.FindMethodNameById(item.paymentMethodId);
-                //    item.PAYMENT_METHOD.method = test2;
-
-                //}
 
                 ////message
-                //var message = FindTicketMessageById(transac.messageId, transac.languageId);
-
                 var messages = FindTicketMessageById(transac.idTransaction, lang, isChange);
                 vm.Messages = messages;
+
                 return vm;
             }
         }
-
-        //private static string FindTicketMessageById(int messageId, int languageMessage)
-        //{
-        //    using (IDalTicket dal = new DalTicket())
-        //    {
-        //        return dal.GetTicketMessagesByIdsAndLanguage(messageId, languageMessage);
-        //    }
-        //}
-
-        //private static List<string> FindTicketMessageById(int transacId, int languageMessage)
-        //{
-        //    using (IDalTicket dal = new DalTicket())
-        //    {
-        //        List<int?> messageIds = dal.GetListIdTransactionMessage(transacId);
-        //        if (messageIds.Count == 0 || messageIds == null)
-        //        {
-        //            message par défaut
-        //            int messageId = 1;
-        //            messageIds.Add(messageId);
-        //            dal.CreateTransactionMessage(transacId, messageId, languageMessage);
-        //        }
-        //        return dal.GetListTicketMessageTransByIdAndLanguage(messageIds, languageMessage);
-        //    }
-        //}
 
         private static List<string> FindTicketMessageById(int transacId, int languageMessage, bool? isChange)
         {
@@ -126,8 +88,6 @@ namespace MyPOS2.BL
                 
                 if (messageIds.Count == 0 || messageIds == null)
                 {
-                    ////message par défaut
-                    //int messageId = 1;
                     string langSetting = "MessageGen";
                     int defMessage = int.Parse(SettingBL.FindSettingValueByName(langSetting));
                     messageIds.Add(defMessage);
@@ -161,7 +121,7 @@ namespace MyPOS2.BL
                 {
                     listTransac = dal.GetTicket(dateDay);
                 }
-                // si listTransac.Count() = 0 --> erreur estimation du client
+                // if listTransac.Count() = 0 --> erreur estimation du client
                 if (listTransac.Count() == 0 || listTransac == null)
                 {
                     //to do -> rendre les param (-+ 30) dynamiques
@@ -204,7 +164,6 @@ namespace MyPOS2.BL
                         {
                             if (vmodel.NbItem != null)
                             {
-                                //to do
                                 int nbItem = int.Parse(vmodel.NbItem);
                                 listFilter = dal.GetTicketNbItem(dateMin, dateMax, nbItem);
                                 var listTemp = new List<int>();
@@ -222,7 +181,6 @@ namespace MyPOS2.BL
                         {
                             if (vmodel.MethodP != null)
                             {
-                                //to do
                                 int idMethodP = int.Parse(vmodel.MethodP);
                             }
                         }
@@ -241,7 +199,7 @@ namespace MyPOS2.BL
                     }
                     else
                     {
-                        //verify if if vmodel.Language = ticket language
+                        //verify if vmodel.Language = ticket language
                         string ticketL = FindLanguageTicketByIdTransac(listTransac[i].ToString());
                         if (vmodel.Language != ticketL)
                         {

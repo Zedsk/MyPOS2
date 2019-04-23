@@ -25,13 +25,5 @@ namespace MyPOS2.BL
                 return val.valueSetting;
             }
         }
-
-        //internal static string FindMessageGen()
-        //{
-        //    using (IDalSetting dal = new DalSetting())
-        //    {
-        //        return dal.;
-        //    }
-        //}
     }
 }

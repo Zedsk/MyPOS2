@@ -1,4 +1,4 @@
-﻿@*@model MyPOS2.Data.Entity.CATEGORY*@
+﻿
 @model MyPOS2.Models.management.CategoryViewModel
 
 @{
@@ -28,7 +28,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Cat.imageCat, new { htmlAttributes = new { @class = "form-control" } })*@
                 @if (ViewBag.path != null)
                 {
                     <img id="imgLogo" src="@Url.Content(ViewBag.path)" alt="Image de la catégorie" class="imgIndex" />
@@ -86,20 +85,6 @@
                     @Html.HiddenFor(m => m.CategoriesTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
 
                 </div>
-                @*<br />
-                    for (int i = 1; i < Model.ListLang.Count(); i++)
-                    {
-                        <div class="col-md-2">
-                            @Html.HiddenFor(model => model.ProductsTrans[i].productId)
-                            @Html.EditorFor(model => model.ProductsTrans[i].nameProduct, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                            @Html.ValidationMessageFor(model => model.ProductsTrans, "", new { @class = "text-danger" })
-
-                            @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
-
-                            @Html.HiddenFor(m => m.ProductsTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
-                        </div>
-                        <br />
-                    }*@
             }
         </div>
 

@@ -37,10 +37,6 @@ namespace MyPOS2.Models.Transactions
         [Display(Name = "Montant à rendre")]
         public string CashReturn { get; set; }
 
-        //[DataType(DataType.Text)]
-        //[Display(Name = "Réponse du système")]
-        //public int Resp { get; set; }
-
         public TrTicketViewModel Ticket { get; set; }
 
         public string DateT { get; set; }

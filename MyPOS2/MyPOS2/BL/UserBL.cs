@@ -90,7 +90,6 @@ namespace MyPOS2.BL
                     phone = userInfo.phone,
                     creationDate = userInfo.creationDate
                 };
-                //string idRole = UserBL.FindIdRoleByName(userInfo.role);
                 dal.UpdateUserInfo(uInfo, userInfo.role);
             }
         }

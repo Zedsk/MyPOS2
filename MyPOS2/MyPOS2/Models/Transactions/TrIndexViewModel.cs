@@ -40,51 +40,6 @@ namespace MyPOS2.Models.Transactions
         [Display(Name = "TOTAL")]
         public string GlobalTot { get; set; }
 
-        //[Required(ErrorMessage = "TVA obligatoire")]
-        //[DataType(DataType.Text)]
-        //[Display(Name = "TVA")]
-        //public decimal GlobalVAT { get; set; }
-
-        //public IList<VAT> VatsList { get; set; }
         public IList<TrDetailsViewModel> DetailsListWithTot { get; set; }
-
-        //[DataType(DataType.Text)]
-        //[Display(Name = "Nom de caisse")]
-        //public string TerminalName { get; set; }
-
-        //public IList<string> TerminalsNames { get; set; }
-        //public IList<TERMINAL> TerminalsList { get; set; }
-
-        //[Required]
-        //[DataType(DataType.Text)]
-        //[Display(Name = "Produit")]
-        //public string ProductName { get; set; }
-
-        //[Required]
-        //[DataType(DataType.Text)]
-        //[Display(Name = "Prix")]
-        //public string Price { get; set; }
-
-        //[Required]
-        //[DataType(DataType.Text)]
-        //[Display(Name = "Qtité")]
-        //public string Quantity { get; set; }
-
-        //[Required]
-        //[DataType(DataType.Text)]
-        //[Display(Name = "Remise")]
-        //public string Discount { get; set; }
-
-        //[Required]
-        //[DataType(DataType.Text)]
-        //[Display(Name = "TVA")]
-        //public string ProductVat { get; set; }
-
-        //[Required]
-        //[DataType(DataType.Text)]
-        //[Display(Name = "TotalItem")]
-        //public string TotalItem { get; set; }
-
-        //public IList<TRANSACTION_DETAILS> TransactionDetailsListById { get; set; }
     }
 }

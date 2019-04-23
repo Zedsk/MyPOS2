@@ -17,10 +17,6 @@
 </p>
 @using (Html.BeginForm())
 {
-    @*<p>
-            Recherche par date: @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "DD/MM/YYY", type = "date" })
-            <input type="submit" value="Search" />
-        </p>*@
     <label for="SearchString"><strong>Recherche par nom: </strong></label>
     <div style="display:flex;">
         @Html.TextBox("SearchString", "", new { @class = "form-control" })
@@ -31,11 +27,9 @@
 <table class="table">
     <tr>
         <th>
-            @*@Html.DisplayNameFor(model => model.nameBrand)*@
             @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NameSortParam })
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.imageBrand)*@
             Logo
         </th>
         <th></th>
@@ -48,7 +42,6 @@
                 @Html.DisplayFor(modelItem => item.nameBrand)
             </td>
             <td>
-                @*@Html.DisplayFor(modelItem => item.imageBrand)*@
                 <img src="@Url.Content(item.imageBrand)" alt="Logo de la marque" class="imgIndex" />
             </td>
             <td>

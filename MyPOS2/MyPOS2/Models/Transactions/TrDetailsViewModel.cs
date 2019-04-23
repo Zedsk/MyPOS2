@@ -36,23 +36,12 @@ namespace MyPOS2.Models.Transactions
         [Display(Name = "total")]
         public decimal? TotalItem { get; set; }
 
-        //[DataType(DataType.Text)]
-        //[Display(Name = "Remise globale (%)")]
-        //[Range(0, 100, ErrorMessage = "valeur devant être comprise entre 0 et 100")]
-        //public decimal? GlobalDiscount { get; set; }
-
-        //[DataType(DataType.Text)]
-        //[Display(Name = "TVA")]
-        //public decimal GlobalVAT { get; set; }
-
         [Required(ErrorMessage = "Il faut saisir un produit")]
         [DataType(DataType.Text)]
         public string AddProduct { get; set; }
 
         public bool Minus { get; set; }
 
-        //public IList<TRANSACTION_DETAILS> TransactionDetailsListById { get; set; }
-        //public IList<TRANSACTION_DETAILS> DetailsListById { get; set; }
         public IList<TrDetailsViewModel> DetailsListWithTot { get; set; }
     }
 }

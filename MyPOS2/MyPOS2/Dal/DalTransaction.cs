@@ -34,7 +34,6 @@ namespace MyPOS2.Dal
 
         public void CreateDetail(PRODUCT prod, int termId, int trId, decimal vat)
         {
-            //// name item -> barcode  à changer!
             db.TRANSACTION_DETAILSs.Add(new TRANSACTION_DETAILS { transactionId = trId, productId = prod.idProduct, nameItem = prod.barcode, price = prod.salesPrice, quantity = 1, discount = prod.discountRate, vatItem = vat});
             db.SaveChanges();
         }
@@ -79,8 +78,6 @@ namespace MyPOS2.Dal
             {
                 transac.total = globalTotal;
                 transac.discountGlobal = discountG;
-                //transac.vatId = globalVAT;
-
                 db.SaveChanges();
             }
         }
@@ -132,7 +129,6 @@ namespace MyPOS2.Dal
             var transac = db.TRANSACTIONSs.First(d => d.idTransaction == transacId);
             if (transac != null)
             {
-                //transac.messageId = message;
                 //close = 2
                 transac.statusId = 2;
                 transac.transactionDateEnd = DateTime.Now;
@@ -145,7 +141,6 @@ namespace MyPOS2.Dal
             var transac = db.TRANSACTIONSs.First(d => d.idTransaction == transacId);
             if (transac != null)
             {
-                //transac.messageId = message;
                 //close = 2
                 transac.statusId = 2;
                 transac.transactionDateEnd = date;

@@ -22,7 +22,6 @@ namespace MyPOS2.Controllers
         //[Authorize(Roles = "manager")]
         public ActionResult Index(string sortOrder, string searchString)
         {
-            //return View(db.CATEGORYs.ToList());
             CategoryViewModel vm = new CategoryViewModel();
             //Find all cat by language
             int lang = LanguageBL.CheckLanguageSession();
@@ -60,7 +59,6 @@ namespace MyPOS2.Controllers
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             if (!String.IsNullOrEmpty((searchString)))
             {
-                //heroesT = heroesT.Where(s => s.nameHero == searchString).ToList();
                 list = list.Where(s => s.NameCat.ToLower().StartsWith(searchString.ToLower())).ToList();
             }
             switch (sortOrder)
@@ -94,8 +92,6 @@ namespace MyPOS2.Controllers
             CategoryViewModel vm = new CategoryViewModel();
             vm.Cat = cATEGORY;
             vm.CatsTr = db.SPP_CategoryTrans().Where(ct => ct.idCategory == id).ToList();
-
-            //IList<SPP_CategoryTrans_Result> category = db.SPP_CategoryTrans().Where(ct => ct.idCategory == id).ToList();
 
             return View(vm);
         }

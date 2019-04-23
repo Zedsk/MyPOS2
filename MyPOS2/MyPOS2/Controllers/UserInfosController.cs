@@ -37,7 +37,6 @@ namespace MyPOS2.Controllers
             vm.UserInfo = UserBL.FindUserInfoById(id);
             vm.Roles = UserBL.FindAllRole();
             return View(vm);
-            //return View("Index", "Manage", id);
         }
 
         [HttpPost]

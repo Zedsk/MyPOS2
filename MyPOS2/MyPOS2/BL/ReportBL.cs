@@ -67,12 +67,10 @@ namespace MyPOS2.BL
                 IList<SPP_ReportTotalSalesTransDistinct_Result> list = dal.CreateReportTotalSales(yearD, monthD, dayD, status, isReturn, language);
                 RTotalSalesViewModel vm = new RTotalSalesViewModel
                 {
-                    //to do--> change format display for discount 0.21 to 21%
                     Reports = ModifyFormatDisplayDiscount(list),
                     TotReport = CalculateTotalReport(list)
                 };
                 return vm;
-                //return dal.CreateReportTotalSales(yearD, monthD, dayD, status, isReturn, language);
             }
         }
 
@@ -143,7 +141,6 @@ namespace MyPOS2.BL
                     TotReport = CalculateTotalReport(list)
                 };
                 return vm;
-                //return dal.CreateReportTotalSalesByProduct(yearD, monthD, dayD, status, isReturn, language);
             }
         }
     }

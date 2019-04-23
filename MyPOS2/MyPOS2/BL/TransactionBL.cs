@@ -14,11 +14,12 @@ namespace MyPOS2.BL
         {
             using (IDalTransaction dal = new DalTransaction())
             {
-                // to do --> provisoire vendorId = 1, shopId = 1, customerId = 1
+                // to do --> provisoire currentId value for test.
                 if (string.IsNullOrEmpty(currentId))
                 {
                     currentId = "8a4759b1-391e-48d6-baa3-ff95c7640915";
                 }
+                // to do --> provisoire shopId = 1, customerId = 1
                 int shop = 1;
                 int customer = 1;
 
@@ -82,7 +83,6 @@ namespace MyPOS2.BL
                 else
                 {
                     ////Add new detail --> param product, terminalId, transactionId, vatItem 
-                    //var vatItem = dal.GetAppliedVatById(prod.vatId).appliedVat;
                     decimal vatItem;
                     using (IDalVat dalV = new DalVat())
                     {
@@ -90,9 +90,6 @@ namespace MyPOS2.BL
                     }
                     int terminalId = int.Parse(terminal);
                     int transactionId = int.Parse(transaction);
-
-                    ////to do --> provisoire language = 1 = French
-                    //int language = 1;
                     int languageId = LanguageBL.FindIdLanguageByShortForm(language);
                     string name;
                     using (IDalProduct dalP = new DalProduct())
@@ -213,11 +210,8 @@ namespace MyPOS2.BL
                 //probleme le string "157.98" devient 15798
                 var temp = globalTotal.Replace(".", ",");
                 var gTot = decimal.Parse(temp);
-                ////find idVAT by name
-                //var gVat = FindVatIdByVal(globalVAT);
 
                 decimal? gDisc = null;
-                //rem si premiere condition true --> ne regarde pas la seconde??? non
                 if (discountG != "")
                 {
                     gDisc = decimal.Parse(discountG);

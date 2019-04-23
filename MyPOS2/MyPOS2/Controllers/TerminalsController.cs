@@ -27,7 +27,6 @@ namespace MyPOS2.Controllers
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             if (!String.IsNullOrEmpty((searchString)))
             {
-                //heroesT = heroesT.Where(s => s.nameHero == searchString).ToList();
                 terminals = terminals.Where(s => s.nameTerminal.ToLower().StartsWith(searchString.ToLower())).ToList();
             }
             switch (sortOrder)
@@ -65,11 +64,9 @@ namespace MyPOS2.Controllers
         //[Authorize(Roles = "manager")]
         public ActionResult Create()
         {
-            //ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone");
             int lang = LanguageBL.CheckLanguageSession();
             int universal = db.LANGUAGESs.Where(l => l.shortForm == "all").Select(s => s.idLanguage).Single();
             ViewBag.shopId = new SelectList(db.SHOP_TRANSLATIONs.Include(t => t.SHOP).Where(s => s.languageId == lang || s.languageId == universal), "shopId", "nameShop");
-            //ViewBag.nameT = "";
             return View();
         }
 
@@ -89,7 +86,6 @@ namespace MyPOS2.Controllers
             int lang = LanguageBL.CheckLanguageSession();
             int universal = db.LANGUAGESs.Where(l => l.shortForm == "all").Select(s => s.idLanguage).Single();
             ViewBag.shopId = new SelectList(db.SHOP_TRANSLATIONs.Include(t => t.SHOP).Where(s => s.languageId == lang || s.languageId == universal), "shopId", "nameShop");
-            //ViewBag.nameT = "";
             return View(terminal);
         }
 
@@ -107,7 +103,6 @@ namespace MyPOS2.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.shopId = new SelectList(db.SHOPs, "idShop", "phone", terminal.shopId);
             int lang = LanguageBL.CheckLanguageSession();
             int universal = db.LANGUAGESs.Where(l => l.shortForm == "all").Select(s => s.idLanguage).Single();
             ViewBag.shopId = new SelectList(db.SHOP_TRANSLATIONs.Include(t => t.SHOP).Where(s => s.languageId == lang || s.languageId == universal), "shopId", "nameShop", terminal.shopId);
@@ -164,7 +159,6 @@ namespace MyPOS2.Controllers
         [HttpGet]
         public ActionResult SearchHostName()
         {
-            //string T = System.Net.Dns.GetHostName();
             string T = Dns.GetHostName();
             ViewBag.nameT = T;
             return PartialView("_PartialTerminalName");

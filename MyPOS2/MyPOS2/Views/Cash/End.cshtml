@@ -21,21 +21,9 @@
 
     @Html.HiddenFor(model => model.terminalId)
 
-    @*<div class="form-group">
-        @Html.LabelFor(model => model.beginningCash, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">*@
-
-            @*@Html.EditorFor(model => model.beginningCash, new { htmlAttributes = new { @class = "form-control" } })*@
-
-            @*@Html.DisplayFor(model => model.beginningCash, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.beginningCash, "", new { @class = "text-danger" })
-        </div>
-    </div>*@
-
     @Html.HiddenFor(model => model.beginningCash);
 
     <div class="form-group">
-        @*@Html.LabelFor(model => model.endCash, htmlAttributes: new { @class = "control-label col-md-2" })*@
         <label class="control-label col-md-2">Montant</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.endCash, new { htmlAttributes = new { @class = "form-control" } })

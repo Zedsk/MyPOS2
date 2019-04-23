@@ -23,15 +23,6 @@ namespace MyPOS2.Models.management
         [Display(Name = "Catégorie parent")]
         public int? Parent { get; set; }
 
-        //public IList<CATEGORY> Parents { get; set; }
-
-        //[Display(Name = "Catégorie enfant")]
-        //public CATEGORY Child { get; set; }
-
-        //public IList<CATEGORY> Children { get; set; }
-
-        //public IList<CategoryViewModel> ListCatVM { get; set; }
-
         public IList<SPP_CategoryTransDistinct_Result> Categories { get; set; }
 
         public IList<SPP_CategoryTrans_Result> CatsTr { get; set; }

@@ -28,7 +28,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Hero.imageHero, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Hero.imageHero, new { htmlAttributes = new { @class = "form-control" } })*@
                 @if (ViewBag.path != null)
                 {
                     <img id="imgLogo" src="@Url.Content(ViewBag.path)" alt="Image du Héro" class="imgIndex" />
@@ -45,9 +44,6 @@
                     }
 
                 }
-
-                @*<img id="imgLogo" src="@Url.Content(ViewBag.path)" alt="Image du Héro" class="imgIndex" />
-        <img src="@Url.Content(Model.Hero.imageHero)" alt="Image du Héro" class="imgIndex" />*@
 
                 @Html.HiddenFor(model => model.Hero.imageHero)
                 @Html.ValidationMessageFor(model => model.Hero.imageHero, "", new { @class = "text-danger" })
@@ -68,13 +64,8 @@
                         @Html.HiddenFor(model => model.HeroesTrans[i].heroId, new { @Value = Model.Hero.idHero })
                         @Html.EditorFor(model => model.HeroesTrans[i].nameHero, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.HeroesTrans, "", new { @class = "text-danger" })
-                        @*@Html.DropDownListFor(m => m.LanguageId, new SelectList(Model.ListLang, "idLanguage", "nameLanguage"), Model.ListLang[0].nameLanguage, new { @disabled = "disabled" })*@
                         @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
-                        @*@Html.EditorFor(m => m.LanguageId, new { @Value = Model.ListLang[0].idLanguage, @Visibility = "hidden" })*@
-                        @*@Html.HiddenFor(m => m.ListLang[i].idLanguage)*@
                         @Html.HiddenFor(m => m.HeroesTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
-                        @*@Html.ActionLink("+ traduction", "#")*@
-                        @*<a onclick="AddTranslation()">+ traduction</a>*@
                     </div>
                     <br />
                 }
@@ -85,13 +76,8 @@
                     @Html.HiddenFor(model => model.HeroesTrans[0].heroId)
                     @Html.EditorFor(model => model.HeroesTrans[0].nameHero, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.HeroesTrans, "", new { @class = "text-danger" })
-                    @*@Html.DropDownListFor(m => m.LanguageId, new SelectList(Model.ListLang, "idLanguage", "nameLanguage"), Model.ListLang[0].nameLanguage, new { @disabled = "disabled" })*@
                     <label>Universel ou @Html.DisplayFor(m => m.ListLang[0].nameLanguage)</label>
-                    @*@Html.EditorFor(m => m.LanguageId, new { @Value = Model.ListLang[0].idLanguage, @Visibility = "hidden" })*@
-                    @*@Html.HiddenFor(m => m.ListLang[i].idLanguage)*@
                     @Html.HiddenFor(m => m.HeroesTrans[0].languageId, new { @Value = Model.ListLang[0].idLanguage })
-                    @*@Html.ActionLink("+ traduction", "#")*@
-                    @*<a onclick="AddTranslation()">+ traduction</a>*@
                 </div>
                 <br />
                 for (int i = 1; i < Model.ListLang.Count(); i++)
@@ -100,13 +86,8 @@
                         @Html.HiddenFor(model => model.HeroesTrans[i].heroId, new { @Value = Model.Hero.idHero })
                         @Html.EditorFor(model => model.HeroesTrans[i].nameHero, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.HeroesTrans, "", new { @class = "text-danger" })
-                        @*@Html.DropDownListFor(m => m.LanguageId, new SelectList(Model.ListLang, "idLanguage", "nameLanguage"), Model.ListLang[0].nameLanguage, new { @disabled = "disabled" })*@
                         @Html.DisplayFor(m => m.ListLang[i].nameLanguage)
-                        @*@Html.EditorFor(m => m.LanguageId, new { @Value = Model.ListLang[0].idLanguage, @Visibility = "hidden" })*@
-                        @*@Html.HiddenFor(m => m.ListLang[i].idLanguage)*@
                         @Html.HiddenFor(m => m.HeroesTrans[i].languageId, new { @Value = Model.ListLang[i].idLanguage })
-                        @*@Html.ActionLink("+ traduction", "#")*@
-                        @*<a onclick="AddTranslation()">+ traduction</a>*@
                     </div>
                     <br />
                 }

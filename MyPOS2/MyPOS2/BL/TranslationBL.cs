@@ -75,12 +75,7 @@ namespace MyPOS2.BL
                 {
                     nameList.Add(item.nameProduct);
                 }
-                //if (item.description != null)
-                //{
-                //    descList.Add(item.description);
-                //}
             }
-            //if (titleList.Count() > 1 && descList.Count() > 1)
             if (nameList.Count() == 1)
             {
                 result = true;
@@ -124,9 +119,6 @@ namespace MyPOS2.BL
             return result;
         }
         #endregion
-
-
-
 
         //// version générique à revoir à cause de item.name 
         //internal static bool CheckIfUniversal<T>(IList<T> lisT)

@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<MyPOS2.Data.Entity.MESSAGE>*@
+﻿
 @model IEnumerable<MyPOS2.Data.Entity.SPP_MessageTransDistinct_Result>
 
 @{
@@ -16,10 +16,7 @@
 </p>
 @using (Html.BeginForm())
 {
-    @*<p>
-            Recherche par date: @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "DD/MM/YYY", type = "date" })
-            <input type="submit" value="Search" />
-        </p>*@
+
     <label for="SearchString"><strong>Recherche par titre: </strong></label>
     <div style="display:flex;">
         @Html.TextBox("SearchString", "", new { @class = "form-control" })

@@ -24,15 +24,12 @@ namespace MyPOS2.Controllers
         //[Authorize(Roles = "manager")]
         public ActionResult Index(string sortOrder, string searchString)
         {
-            //return View(db.SHOPs.ToList());
- 
             int lang = LanguageBL.CheckLanguageSession();
             var shopsT = db.SPP_ShopTransDistinct(lang).ToList();
 
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             if (!String.IsNullOrEmpty((searchString)))
             {
-                //heroesT = heroesT.Where(s => s.nameHero == searchString).ToList();
                 shopsT = shopsT.Where(s => s.nameShop.ToLower().StartsWith(searchString.ToLower())).ToList();
             }
             switch (sortOrder)
@@ -57,12 +54,6 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //SHOP sHOP = db.SHOPs.Find(id);
-            //if (sHOP == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(sHOP);
             IList<SPP_ShopTrans_Result> shops = db.SPP_ShopTrans().Where(s => s.idShop == id).ToList();
             return View(shops);
         }
@@ -78,24 +69,6 @@ namespace MyPOS2.Controllers
             };
             return View(vm);
         }
-
-        //// POST: Shops/Create
-        //// Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        //// plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "idShop,logoShop,phone,email,zipCode")] SHOP sHOP)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.SHOPs.Add(sHOP);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(sHOP);
-        //}
-
         
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -123,42 +96,8 @@ namespace MyPOS2.Controllers
 
                     //Add Translation
                     int id = shop.idShop;
-                    //IList<SHOP_TRANSLATION> shopsT = vmodel.ShopsTrans;
                     IList<SHOP_TRANSLATION> shopsT = TranslationBL.VerifyIsUniversal(vmodel.ShopsTrans, id);
 
-                    //int id = 3;
-
-                    //int count = shopsT.Count();
-                    //bool isUniversal = TranslationBL.CheckIfUniversal(shopsT);
-                    //if (isUniversal)
-                    //{
-                    //    for (int i = 0; i < shopsT.Count(); i++)
-                    //    {
-                    //        if (shopsT[i].nameShop != null)
-                    //        {
-                    //            shopsT[i].shopId = id;
-                    //            //change language with universal
-                    //            shopsT[i].languageId = LanguageBL.FindIdLanguageByShortForm("all");
-                    //            //shopsT[i].street =
-                    //            //shopsT[i].city =
-                    //            //shopsT[i].opening =
-                    //        }
-                    //        else
-                    //        {
-                    //            shopsT.Remove(shopsT[i]);
-                    //            i--;
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    //{
-
-                    //}
-
-                    //foreach (var item in shopsT)
-                    //{
-                    //    item.shopId = id;
-                    //}
                     db.SHOP_TRANSLATIONs.AddRange(shopsT);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -171,7 +110,6 @@ namespace MyPOS2.Controllers
                     var e5 = ex.Source; // --> log
                     var e8 = ex.GetType(); // --> log
                     var e9 = ex.GetType().Name; // --> log
-                    //TempData["Error"] = "L'initialisation de la transaction ne s'est pas déroulé correctement, veuillez contacter l'administrateur";
                     return View("Error");
                 }
                 catch (Exception ex)
@@ -182,7 +120,6 @@ namespace MyPOS2.Controllers
                     var e5 = ex.Source; // --> log
                     var e8 = ex.GetType(); // --> log
                     var e9 = ex.GetType().Name; // --> log
-                    //TempData["Error"] = "L'initialisation de la transaction ne s'est pas déroulé correctement, veuillez contacter l'administrateur";
                     return View("Error");
                 }
                 
@@ -233,47 +170,16 @@ namespace MyPOS2.Controllers
             return View(vm);
         }
 
-        //// POST: Shops/Edit/5
-        //// Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        //// plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "idShop,logoShop,phone,email,zipCode")] SHOP sHOP)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(sHOP).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(sHOP);
-        //}
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ShopViewModel vmodel)
         {
             if (ModelState.IsValid)
-            {
-                
+            {          
                 db.Entry(vmodel.Shop).State = EntityState.Modified;
                 IList<SHOP_TRANSLATION> shopsT = TranslationBL.VerifyIsUniversal(vmodel.ShopsTrans, vmodel.Shop.idShop);
                 foreach (var item in shopsT)
-                {
-                    //// to do --> manage if universal translation 
-                    //if (item.nameShop != null)
-                    //{
-                    //    if (isUniversal)
-                    //    {
-                    //        item.languageId = LanguageBL.FindIdLanguageByShortForm("all");
-                    //        db.Entry(item).State = EntityState.Modified;
-                    //    }
-                    //    else
-                    //    {
-                    //        db.Entry(item).State = EntityState.Modified;
-                    //    }
-                    //}
-                    
+                {                    
                     db.Entry(item).State = EntityState.Modified;
                 }
                 db.SaveChanges();

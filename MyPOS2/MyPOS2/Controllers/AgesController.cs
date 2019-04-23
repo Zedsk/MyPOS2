@@ -16,7 +16,7 @@ namespace MyPOS2.Controllers
     {
         private Pos1Entities db = new Pos1Entities();
 
-        // GET: Ages
+        //// GET: Ages
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Index()
@@ -24,7 +24,7 @@ namespace MyPOS2.Controllers
             return View(db.AGEs.ToList());
         }
 
-        // GET: Ages/Details/5
+        //// GET: Ages/Details/5
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Details(int? id)
@@ -41,7 +41,7 @@ namespace MyPOS2.Controllers
             return View(aGE);
         }
 
-        // GET: Ages/Create
+        //// GET: Ages/Create
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Create()
@@ -49,7 +49,7 @@ namespace MyPOS2.Controllers
             return View();
         }
 
-        // POST: Ages/Create
+        //// POST: Ages/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -66,7 +66,7 @@ namespace MyPOS2.Controllers
             return View(aGE);
         }
 
-        // GET: Ages/Edit/5
+        //// GET: Ages/Edit/5
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Edit(int? id)
@@ -83,7 +83,7 @@ namespace MyPOS2.Controllers
             return View(aGE);
         }
 
-        // POST: Ages/Edit/5
+        //// POST: Ages/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -99,7 +99,7 @@ namespace MyPOS2.Controllers
             return View(aGE);
         }
 
-        // GET: Ages/Delete/5
+        //// GET: Ages/Delete/5
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Delete(int? id)

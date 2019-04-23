@@ -21,7 +21,6 @@ namespace MyPOS2.Controllers
         //[Authorize(Roles = "manager")]
         public ActionResult Index()
         {
-            //to do --> find setting message
             string nameSetting = "Language";
             string langSetting = SettingBL.FindSettingValueByName(nameSetting);
             ViewBag.langSetting = langSetting;

@@ -22,8 +22,6 @@ namespace MyPOS2.Controllers
         //[Authorize(Roles = "manager")]
         public ActionResult Index(string sortOrder, string searchString)
         {
-            //return View(db.MESSAGEs.ToList());
-            //to do --> find setting message
             string nameSetting = "MessageGen";
             string messageG = SettingBL.FindSettingValueByName(nameSetting);
             ViewBag.messageG = int.Parse(messageG);
@@ -33,7 +31,6 @@ namespace MyPOS2.Controllers
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             if (!String.IsNullOrEmpty((searchString)))
             {
-                //heroesT = heroesT.Where(s => s.nameHero == searchString).ToList();
                 messagesT = messagesT.Where(s => s.title.ToLower().StartsWith(searchString.ToLower())).ToList();
             }
             switch (sortOrder)
@@ -58,11 +55,6 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //MESSAGE mESSAGE = db.MESSAGEs.Find(id);
-            //if (mESSAGE == null)
-            //{
-            //    return HttpNotFound();
-            //}
             IList<SPP_MessageTrans_Result> messages = db.SPP_MessageTrans().Where(m => m.idMessage == id).ToList();
             return View(messages);
         }
@@ -78,24 +70,7 @@ namespace MyPOS2.Controllers
             };
             return View(vm);
         }
-
-        //// POST: Messages/Create
-        //// Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        //// plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "idMessage")] MESSAGE message)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.MESSAGEs.Add(message);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(message);
-        //}
-
+         
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(MessageViewModel vmodel)
@@ -149,8 +124,6 @@ namespace MyPOS2.Controllers
             {
                 return HttpNotFound();
             }
-            //var translation = db.MESSAGE_TRANSLATIONs.Where(mt => mt.messageId == id).ToList();
-            //var lang = db.LANGUAGESs.Count();
 
             MessageViewModel vm = new MessageViewModel();
             bool isUniversal = false;
@@ -195,11 +168,6 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //MESSAGE mESSAGE = db.MESSAGEs.Find(id);
-            //if (mESSAGE == null)
-            //{
-            //    return HttpNotFound();
-            //}
             int lang = LanguageBL.CheckLanguageSession();
 
             SPP_MessageTransDistinct_Result messages = db.SPP_MessageTransDistinct(lang).Where(m => m.idMessage == id).Single();

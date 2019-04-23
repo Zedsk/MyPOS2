@@ -13,7 +13,6 @@ namespace MyPOS2.BL
         {
             using (IDalVat dal = new DalVat())
             {
-                //decimal vat = dal.GetAppliedVatById(id).appliedVat;
                 decimal vat = dal.GetVatValById(id);
 
                 if (vat != 0)

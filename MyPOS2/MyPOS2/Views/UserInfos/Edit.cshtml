@@ -20,87 +20,58 @@
         <div class="form-group">
             @Html.LabelFor(model => model.UserInfo.nameUser, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.EditorFor(model => model.UserInfo.nameUser, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UserInfo.nameUser, "", new { @class = "text-danger" })
-
-                @*@Html.HiddenFor(model => model.Product.barcode, new { @Value = Model.Barcode })*@
-                @*@Html.HiddenFor(model => model.Barcode, new { @Value = Model.Product.barcode })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserInfo.firstname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.EditorFor(model => model.UserInfo.firstname, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UserInfo.firstname, "", new { @class = "text-danger" })
-
-                @*@Html.HiddenFor(model => model.Product.barcode, new { @Value = Model.Barcode })*@
-                @*@Html.HiddenFor(model => model.Barcode, new { @Value = Model.Product.barcode })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserInfo.street, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.EditorFor(model => model.UserInfo.street, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UserInfo.street, "", new { @class = "text-danger" })
-
-                @*@Html.HiddenFor(model => model.Product.barcode, new { @Value = Model.Barcode })*@
-                @*@Html.HiddenFor(model => model.Barcode, new { @Value = Model.Product.barcode })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserInfo.zipCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.EditorFor(model => model.UserInfo.zipCode, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UserInfo.zipCode, "", new { @class = "text-danger" })
-
-                @*@Html.HiddenFor(model => model.Product.barcode, new { @Value = Model.Barcode })*@
-                @*@Html.HiddenFor(model => model.Barcode, new { @Value = Model.Product.barcode })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserInfo.city, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.EditorFor(model => model.UserInfo.city, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UserInfo.city, "", new { @class = "text-danger" })
-
-                @*@Html.HiddenFor(model => model.Product.barcode, new { @Value = Model.Barcode })*@
-                @*@Html.HiddenFor(model => model.Barcode, new { @Value = Model.Product.barcode })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserInfo.phone, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.EditorFor(model => model.UserInfo.phone, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UserInfo.phone, "", new { @class = "text-danger" })
-
-                @*@Html.HiddenFor(model => model.Product.barcode, new { @Value = Model.Barcode })*@
-                @*@Html.HiddenFor(model => model.Barcode, new { @Value = Model.Product.barcode })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserInfo.role, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.DropDownListFor(l => l.UserInfo.role, new SelectList(Model.Roles, "Name", "Name"), "Choix du role", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.UserInfo.role, "", new { @class = "text-danger" })
-
-                @*@Html.HiddenFor(model => model.Product.barcode, new { @Value = Model.Barcode })*@
-                @*@Html.HiddenFor(model => model.Barcode, new { @Value = Model.Product.barcode })*@
             </div>
         </div>
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

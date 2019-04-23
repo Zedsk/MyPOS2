@@ -24,22 +24,6 @@
         </div>
     </div>
 
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.terminalId, "terminalId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("terminalId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.terminalId, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    @*<div class="form-group">
-        @Html.LabelFor(model => model.terminalId, "terminalId", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.terminalId, htmlAttributes: new { @class = "form-control" , @Value = ViewBag.terminalId})
-            @Html.ValidationMessageFor(model => model.terminalId, "", new { @class = "text-danger" })
-        </div>
-    </div>*@
-
     <div class="form-group">
         @Html.LabelFor(model => model.beginningCash, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -47,15 +31,6 @@
             @Html.ValidationMessageFor(model => model.beginningCash, "", new { @class = "text-danger" })
         </div>
     </div>
-
-    <!-- inutile en debut de journée -->
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.endCash, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.endCash, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.endCash, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

@@ -20,23 +20,13 @@ namespace MyPOS2.Controllers
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         //[Authorize(Roles = "vendor")]
-        //public ActionResult Index(TrPaymentMenuViewModel vm)
         public ActionResult Index(string gTot, string nTransac)
         {
             try
             {
                 TrPaymentMenuViewModel vm = new TrPaymentMenuViewModel();
-                //if (gTot == null || nTransac == null)
                 if (string.IsNullOrEmpty(nTransac))
                 {
-                    ////provisoire
-                    //vm.GlobalTotal = "399.97";
-                    //vm.NumTransaction = "11";
-                    //ViewBag.tot = "399.97";
-                    //ViewBag.transac = "11";
-                    //ViewBag.ticket = false;
-                    ////ViewBag.amount = "0";
-                    ////ViewBag.cashBack = "0";
                     throw new NullReferenceException();
                 }
                 else
@@ -93,23 +83,14 @@ namespace MyPOS2.Controllers
                     }
                     vm.NumTransaction = nTransac;
                     ViewBag.transac = nTransac;
-                    //ViewBag.amount = "0";
-                    //ViewBag.cashBack = "0";
                 }
                 vm.MethodsP = PaymentBL.FindMethodsList();
-                //vm.Languages = LanguageBL.FindLanguageList();
                 vm.Languages = LanguageBL.FindLanguageListWithoutUniversal();
-                //vm.PayCardToConfirm = false;
                 ViewBag.messageCard = "";
-                ////provisoire
-                //vm.GlobalTot = "123.99";
-                //vm.NumTransaction = "999";
-                ////ViewBag.Amount = vm.GlobalTot;
                 return View(vm);
             }
             catch (NullReferenceException ex)
             {
-                //TempData["Error"] = "Il n'y a pas de transaction en cours !";
                 //to do insert to log file
                 var e1 = ex.GetBaseException(); // --> log
                 var e4 = ex.Message; // --> log
@@ -185,7 +166,6 @@ namespace MyPOS2.Controllers
                     Session["Language"] = ConfigurationManager.AppSettings["Language"];
                 }
                 string language = Session["Language"].ToString();
-                //TrPaymentMenuViewModel vm = new TrPaymentMenuViewModel();
                 switch (vmodel.MethodP)
                 {
                     //method cash
@@ -204,7 +184,6 @@ namespace MyPOS2.Controllers
                     //method credit card
                     case "3":
                         ////simulation same process CardDebit
-                        //return (PayCardCredit(vmodel));
                         if (vmodel.PayCardConfirmed)
                         {
                             return (PayCardDebit(vmodel, language));
@@ -221,7 +200,6 @@ namespace MyPOS2.Controllers
                         ViewBag.amount = vmodel.Amount;
                         ViewBag.cashBack = vmodel.CashReturn;
                         vmodel.MethodsP = PaymentBL.FindMethodsList();
-                        //vmodel.Languages = LanguageBL.FindLanguageList();
                         vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
                         ViewBag.messageCard = "";
                         ViewBag.ticket = false;
@@ -229,12 +207,10 @@ namespace MyPOS2.Controllers
                 }
             }
             vmodel.MethodsP = PaymentBL.FindMethodsList();
-            //vmodel.Languages = LanguageBL.FindLanguageList();
             vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
             ViewBag.tot = vmodel.GlobalTotal;
             ViewBag.amount = vmodel.Amount;
             ViewBag.cashBack = vmodel.CashReturn;
-            //vmodel.MethodsP = TransactionBL.FindMethodsList();
             ViewBag.messageCard = "";
             ViewBag.ticket = false;
             return View(vmodel);
@@ -246,16 +222,12 @@ namespace MyPOS2.Controllers
             if (vmodel.GlobalTotal == "0")
             {
                 //to do --> print ticket  ???
-
-                //to do --> add n° ticket & close transaction
-                //TransactionBL.CloseTransac(vmodel.NumTransaction, vmodel.NumTicket);
-                //TransactionBL.CloseTransac(vmodel.NumTransaction);
+                //add n° ticket & close transaction
                 TransactionBL.CloseTransac(vmodel.NumTransaction, vmodel.DateT.ToString());
                 
                 return RedirectToAction("Transaction", "Home");
             }
             vmodel.MethodsP = PaymentBL.FindMethodsList();
-            //vmodel.Languages = LanguageBL.FindLanguageList();
             vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
             ViewBag.nopay = "La transaction n'est pas payée!";
             ViewBag.tot = vmodel.GlobalTotal;
@@ -267,7 +239,6 @@ namespace MyPOS2.Controllers
 
         private ActionResult CancelTransac(TrPaymentMenuViewModel vmodel)
         {
-            //if (vmodel.NumTransaction == "" || vmodel.NumTransaction == null)
             if (string.IsNullOrEmpty(vmodel.NumTransaction))
             {
                 //to do --> ???
@@ -287,7 +258,6 @@ namespace MyPOS2.Controllers
 
         private ActionResult PayCash(TrPaymentMenuViewModel vmodel, string language)
         {
-            //vmodel.AmountsPaid = TransactionBL.MakeAmountsList(vmodel.Amount, vmodel.AmountsPaid);
             var temp = vmodel.Amount.Replace(".", ",");
             decimal cash = decimal.Parse(temp);
             // legal limit for cash
@@ -311,11 +281,7 @@ namespace MyPOS2.Controllers
                 bool isChange = false;
                 vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language, isChange);
                 vmodel.Language = vmodel.Ticket.Language;
-                //vmodel.Languages = LanguageBL.FindLanguageList();
                 vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
-                //vmodel.NumTicket = vmodel.Ticket.Ticket;
-                //ViewBag.NumT = vmodel.Ticket.Ticket;
-                //vmodel.NumTicket = vmodel.Ticket.Ticket;
                 vmodel.DateT = vmodel.Ticket.DateTicket;
                 ViewBag.DateTi = vmodel.Ticket.DateTicket;
                 ViewBag.ticket = true;
@@ -324,35 +290,22 @@ namespace MyPOS2.Controllers
             {
                 ViewBag.ticket = false;
             }
-            //vmodel.Language = 1;
             return View(vmodel);
         }
 
         private ActionResult PayCardDebit(TrPaymentMenuViewModel vmodel, string language)
         {
-            //vmodel.Resp = TransactionBL.AskValidationCard(vmodel.Amount);
-            //if (vmodel.Resp == 1)
-            //{
-            //vmodel.AmountsPaid = PaymentBL.MakeAmountsList(vmodel.Amount, vmodel.AmountsPaid);
-
             PaymentBL.CalculCash(vmodel);
-            //ViewBag.messageCard = "Demande acceptée !";
             ViewBag.tot = vmodel.GlobalTotal;
             ViewBag.amount = vmodel.Amount;
             ViewBag.cashBack = vmodel.CashReturn;
-            //vmodel.Amount = "0";
-            //vmodel.GlobalTot = "0";
             if (ViewBag.tot == "0")
             {
                 //to do --> change init isChange...
                 bool isChange = false;
                 vmodel.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language, isChange);
                 vmodel.Language = vmodel.Ticket.Language;
-                //vmodel.Languages = LanguageBL.FindLanguageList();
                 vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
-                //vmodel.NumTicket = vmodel.Ticket.Ticket;
-                //ViewBag.NumT = vmodel.Ticket.Ticket;
-                //vmodel.NumTicket = vmodel.Ticket.Ticket;
                 ViewBag.DateTi = vmodel.Ticket.DateTicket;
                 ViewBag.ticket = true;
             }
@@ -360,16 +313,6 @@ namespace MyPOS2.Controllers
             {
                 ViewBag.ticket = false;
             }
-            //}
-            //else
-            //{
-            //    ViewBag.messageCard = "Demande refusée !";
-            //    ViewBag.tot = vmodel.GlobalTot;
-            //    ViewBag.amount = "";
-            //    ViewBag.cashBack = "0";
-            //    //vmodel.Amount = "0";
-            //    ViewBag.ticket = false;
-            //}
             vmodel.AmountsPaid = PaymentBL.MakeAmountsList(vmodel.NumTransaction);
             vmodel.MethodsP = PaymentBL.FindMethodsList();
             return View(vmodel);
@@ -379,7 +322,6 @@ namespace MyPOS2.Controllers
         {
             vmodel.PayCardToConfirm = true;
             vmodel.MethodsP = PaymentBL.FindMethodsList();
-            //vmodel.AmountsPaid = PaymentBL.MakeAmountsList(vmodel.NumTransaction);
             ViewBag.tot = vmodel.GlobalTotal;
             ViewBag.amount = vmodel.Amount;
             ViewBag.ticket = false;
@@ -483,7 +425,6 @@ namespace MyPOS2.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
                     TrRprintTicketViewModel vm = new TrRprintTicketViewModel
                     {
                         Tickets = TicketBL.FindTicket(vmodel),
@@ -555,9 +496,6 @@ namespace MyPOS2.Controllers
 
                     case "cancel":
                         return (CancelTransac(vm));
-
-                    //case "Back":
-                    //    return (BackTransac(vmodel));
 
                     default:
                         vmodel.Languages = LanguageBL.FindLanguageList();

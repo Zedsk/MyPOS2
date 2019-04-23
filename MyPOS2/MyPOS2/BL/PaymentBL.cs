@@ -10,6 +10,11 @@ namespace MyPOS2.BL
 {
     public class PaymentBL
     {
+        /// <summary>
+        /// method to calculate a cash transaction, if you still have to pay, give change or do nothing 
+        /// </summary>
+        /// <param name="vmodel"></param>
+        /// <returns></returns>
         internal static TrPaymentMenuViewModel CalculCash(TrPaymentMenuViewModel vmodel)
         {
             var temp1 = vmodel.GlobalTotal.Replace(".", ",");
@@ -46,48 +51,18 @@ namespace MyPOS2.BL
             }
         }
 
-        //internal static TrPaymentMenuViewModel CalculCash(string total, string cashIn, string method, string numtransac)
-        //{
-        //    var temp1 = total.Replace(".", ",");
-        //    var temp2 = cashIn.Replace(".", ",");
-        //    decimal cash = decimal.Parse(temp2);
-        //    decimal tot = decimal.Parse(temp1);
-        //    int meth = int.Parse(method);
-        //    int transac = int.Parse(numtransac);
-        //    TrPaymentMenuViewModel vm = new TrPaymentMenuViewModel();
-        //    using (IDalTransaction dal = new DalTransaction())
-        //    {
-        //        if (cash > tot)
-        //        {
-        //            //dal.CreatePayment(tot, meth, transac);
-        //            vm.CashReturn = (cash - tot).ToString();
-        //            vm.Amount = "0";
-        //            vm.GlobalTot = "0";
-        //        }
-        //        else if (cash == tot)
-        //        {
-        //            //dal.CreatePayment(tot, meth, transac);
-        //            vm.CashReturn = "0";
-        //            vm.Amount = "0";
-        //            vm.GlobalTot = "0";
-        //        }
-        //        else if (cash < tot)
-        //        {
-        //            //dal.CreatePayment(cash, meth, transac);
-        //            vm.CashReturn = "0";
-        //            vm.Amount = "0";
-        //            vm.GlobalTot = (tot - cash).ToString();
-        //        }
-        //        return vm;
-        //    }
-        //}
-
+        /// <summary>
+        /// simulation of the authorisation for payment by card
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns>0 or 1</returns>
         internal static int AskValidationCard(string amount)
         {
             Random random = new Random();
             int val = random.Next(2);
             return val;
         }
+
 
         internal static IList<PAYMENT_METHOD> FindMethodsList()
         {
@@ -96,6 +71,7 @@ namespace MyPOS2.BL
                 return dal.GetAllMethods();
             }
         }
+
 
         internal static List<string> MakeAmountsList(string amount, List<string> amountsList)
         {
@@ -140,12 +116,10 @@ namespace MyPOS2.BL
         {
             using (IDalPayment dal = new DalPayment())
             {
-
                 int tr = int.Parse(numTransaction);
                 var test = dal.GetAllPaymentsByTransacId(tr);
                 foreach (var item in test)
                 {
-                    //var test = item.PAYMENT_METHOD.method;
                     string test2 = PaymentBL.FindMethodNameById(item.paymentMethodId);
                     item.PAYMENT_METHOD.method = test2;
 

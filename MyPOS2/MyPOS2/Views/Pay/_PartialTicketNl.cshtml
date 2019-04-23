@@ -9,7 +9,6 @@
 <!--  -->
 <!-- Logo Magasin -->
 <div style="text-align: center;">
-    @*<img src="~/Content/image/logo_magasin.png" alt="logo du magasin">*@
     <img src="@Url.Content(Model.Shop.logoShop)" alt="winkellogo" />
 </div>
 
@@ -17,33 +16,19 @@
     <!-- Date et heure-->
     <div class="row">
         <div class="col-md-3">
-            @*@Html.LabelFor(m => m.DateTicket)*@
             <p>Datum : </p>
         </div>
         <div class="col-md-9 tRight">
-            @*@Html.TextBoxFor(m => m.DateTicket, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.DateTicket)
             @Html.ValidationMessageFor(m => m.DateTicket, "", new { @class = "text-danger" })
         </div>
     </div>
-    <!-- N° ticket -->
-    @*<div class="row">
-            <div class="col-md-2">
-                @Html.LabelFor(m => m.Ticket)
-            </div>
-            <div class="col-md-2 offset-md-2">
-                @Html.DisplayFor(m => m.Ticket)
-                @Html.ValidationMessageFor(m => m.Ticket, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
     <!-- N° Transac -->
     <div class="row">
         <div class="col-md-8">
-            @*@Html.LabelFor(m => m.Transaction)*@
             <p>Transactienr. : </p>
         </div>
         <div class="col-md-4 tRight">
-            @*@Html.TextBoxFor(m => m.Transaction, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.Transaction)
             @Html.ValidationMessageFor(m => m.Transaction, "", new { @class = "text-danger" })
         </div>
@@ -125,11 +110,9 @@
     <!-- remise -->
     <div class="row">
         <div class="col-md-4">
-            @*@Html.LabelFor(m => m.DiscountG)*@
             <p>Korting : </p>
         </div>
         <div class="col-md-8 tRight">
-            @*@Html.TextBoxFor(m => m.DiscountG, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.DiscountG)
             @Html.ValidationMessageFor(m => m.DiscountG, "", new { @class = "text-danger" })
         </div>
@@ -137,11 +120,9 @@
     <!-- TVA -->
     <div class="row">
         <div class="col-md-4">
-            @*@Html.LabelFor(m => m.VatG)*@
             <p>BTW : </p>
         </div>
         <div class="col-md-8 tRight">
-            @*@Html.TextBoxFor(m => m.VatG, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.VatG)
             @Html.ValidationMessageFor(m => m.VatG, "", new { @class = "text-danger" })
         </div>
@@ -149,11 +130,9 @@
     <!-- total -->
     <div class="row">
         <div class="col-md-4">
-            @*@Html.LabelFor(m => m.TotalG)*@
             <p>Totaal : </p>
         </div>
         <div class="col-md-8 tRight">
-            @*@Html.TextBoxFor(m => m.TotalG, new { @readonly = "readonly" })*@
             @Html.DisplayFor(m => m.TotalG)
             @Html.ValidationMessageFor(m => m.TotalG, "", new { @class = "text-danger" })
         </div>
@@ -190,10 +169,6 @@
 </div>
 <!-- message -->
 <div>
-    @*<p id="messageT">
-            @Html.DisplayFor(m => m.Message)
-        </p>
-        @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })*@
 
     @for (int i = 0; i < Model.Messages.Count(); i++)
     {

@@ -50,9 +50,6 @@ namespace MyPOS2.Controllers
             }
 
             return View(products);
-            //int lang = LanguageBL.CheckLanguageSession();
-            //var productsT;
-            //return View(productsT);
         }
 
         // GET: Products/Details/5
@@ -74,18 +71,7 @@ namespace MyPOS2.Controllers
             return View(pRODUCT);
         }
 
-        //// GET: Products/Create
-        //public ActionResult Create()
-        //{
-        //    int lang = LanguageBL.CheckLanguageSession();
-        //    ViewBag.ageId = new SelectList(db.AGEs, "idAge", "rangeAges");
-        //    ViewBag.brandId = new SelectList(db.BRANDs, "idBrand", "nameBrand");
-        //    ViewBag.categoryId = new SelectList(db.CATEGORY_TRANSLATIONs.Where(c => c.languageId == lang), "categoryId", "nameCategory");
-        //    ViewBag.heroId = new SelectList(db.HERO_TRANSLATIONs.Where(c => c.languageId == lang), "heroId", "nameHero");
-        //    ViewBag.vatId = new SelectList(db.VATs, "idVat", "appliedVat");
-        //    return View();
-        //}
-
+        
         // GET: Products/Create
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
@@ -105,30 +91,6 @@ namespace MyPOS2.Controllers
             };
             return View(vm);
         }
-
-
-
-        //// POST: Products/Create
-        //// Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        //// plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "idProduct,barcode,salesPrice,discountRate,imageProduct,categoryId,ageId,brandId,heroId,vatId")] PRODUCT pRODUCT)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.PRODUCTs.Add(pRODUCT);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ViewBag.ageId = new SelectList(db.AGEs, "idAge", "rangeAges");
-        //    ViewBag.brandId = new SelectList(db.BRANDs, "idBrand", "nameBrand");
-        //    ViewBag.categoryId = new SelectList(db.CATEGORY_TRANSLATIONs.Where(c => c.languageId == lang), "categoryId", "nameCategory");
-        //    ViewBag.heroId = new SelectList(db.HERO_TRANSLATIONs.Where(c => c.languageId == lang), "heroId", "nameHero");
-        //    ViewBag.vatId = new SelectList(db.VATs, "idVat", "appliedVat");
-        //    return View(pRODUCT);
-        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -182,7 +144,6 @@ namespace MyPOS2.Controllers
                     var e5 = ex.Source; // --> log
                     var e8 = ex.GetType(); // --> log
                     var e9 = ex.GetType().Name; // --> log
-                    //TempData["Error"] = "L'initialisation de la transaction ne s'est pas déroulé correctement, veuillez contacter l'administrateur";
                     return View("Error");
                 }
             }
@@ -196,26 +157,6 @@ namespace MyPOS2.Controllers
             vmodel.Vats = db.VATs.ToList();
             return View(vmodel);
         }
-
-        //// GET: Products/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    PRODUCT pRODUCT = db.PRODUCTs.Find(id);
-        //    if (pRODUCT == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.ageId = new SelectList(db.AGEs, "idAge", "imageAge", pRODUCT.ageId);
-        //    ViewBag.brandId = new SelectList(db.BRANDs, "idBrand", "nameBrand", pRODUCT.brandId);
-        //    ViewBag.categoryId = new SelectList(db.CATEGORYs, "idCategory", "imageCat", pRODUCT.categoryId);
-        //    ViewBag.heroId = new SelectList(db.HEROs, "idHero", "imageHero", pRODUCT.heroId);
-        //    ViewBag.vatId = new SelectList(db.VATs, "idVat", "idVat", pRODUCT.vatId);
-        //    return View(pRODUCT);
-        //}
 
         // GET: Products/Edit/5
         //[Authorize(Roles = "admin")]
@@ -240,7 +181,6 @@ namespace MyPOS2.Controllers
                 isUniversal = true;
             }
             ViewBag.isUniversal = isUniversal;
-            //vm.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
 
             vm.Product = pRODUCT;
 
@@ -253,7 +193,6 @@ namespace MyPOS2.Controllers
             vm.Age = pRODUCT.ageId.ToString();
             vm.Brand = pRODUCT.brandId.ToString();
             vm.Hero = pRODUCT.heroId.ToString();
-            //vm.Vat = pRODUCT.vatId;
 
             vm.ProductsTrans = translation;
 
@@ -268,27 +207,6 @@ namespace MyPOS2.Controllers
             return View(vm);
         }
 
-        //// POST: Products/Edit/5
-        //// Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        //// plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "idProduct,barcode,salesPrice,discountRate,imageProduct,categoryId,ageId,brandId,heroId,vatId")] PRODUCT pRODUCT)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(pRODUCT).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.ageId = new SelectList(db.AGEs, "idAge", "imageAge", pRODUCT.ageId);
-        //    ViewBag.brandId = new SelectList(db.BRANDs, "idBrand", "nameBrand", pRODUCT.brandId);
-        //    ViewBag.categoryId = new SelectList(db.CATEGORYs, "idCategory", "imageCat", pRODUCT.categoryId);
-        //    ViewBag.heroId = new SelectList(db.HEROs, "idHero", "imageHero", pRODUCT.heroId);
-        //    ViewBag.vatId = new SelectList(db.VATs, "idVat", "idVat", pRODUCT.vatId);
-        //    return View(pRODUCT);
-        //}
-
         // POST: Products/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -298,32 +216,6 @@ namespace MyPOS2.Controllers
         {
             if (ModelState.IsValid)
             {
-                ////if no image, assign default image
-                //string img = vmodel.ImageProduct;
-                //if (img == null)
-                //{
-                //    img = "~/Content/image/logo_noImage.png";
-                //}
-                //// check if hero is null
-                //int? hero = null;
-                //if (vmodel.Hero != null)
-                //{
-                //    hero = int.Parse(vmodel.Hero);
-                //}
-                //PRODUCT product = new PRODUCT
-                //{
-                //    barcode = vmodel.Barcode,
-                //    salesPrice = vmodel.Price,
-                //    discountRate = vmodel.Discount,
-                //    imageProduct = img,
-                //    categoryId = int.Parse(vmodel.Category),
-                //    ageId = int.Parse(vmodel.Age),
-                //    brandId = int.Parse(vmodel.Brand),
-                //    heroId = hero,
-                //    vatId = int.Parse(vmodel.Vat)
-                //};
-                //db.Entry(product).State = EntityState.Modified;
-
                 db.Entry(vmodel.Product).State = EntityState.Modified;
                 //db.SaveChanges();
                 IList<PRODUCT_TRANSLATION> productsT = TranslationBL.VerifyIsUniversal(vmodel.ProductsTrans, vmodel.IdProduct);

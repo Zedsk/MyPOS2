@@ -17,30 +17,24 @@
         
         <dl class="dl-horizontal">
             <dt>
-                @*@Html.DisplayName(Model.First().imageHero)*@
                 Image
             </dt>
             <dd>
-                @*@Html.DisplayFor(model => model.imageHero)*@
                 <img src="@Url.Content(Model.First().imageHero)" alt="Image du Héro" class="imgIndex" />
             </dd>
             @foreach (var item in Model)
             {
                 <dl class="dl-horizontal">
                     <dt>
-                        @*@Html.DisplayName(item.nameHero)*@
                         Nom
                     </dt>
                     <dd>
-                        @*@Html.Display(item.nameHero)*@
                         @Html.DisplayFor(modelitem => item.nameHero)
                     </dd>
                     <dt>
-                        @*@Html.DisplayName(item.nameLanguage)*@
                         Langue
                     </dt>
                     <dd>
-                        @*@Html.Display(item.nameLanguage)*@
                         @Html.DisplayFor(modelitem => item.nameLanguage)
                     </dd>
                 </dl>

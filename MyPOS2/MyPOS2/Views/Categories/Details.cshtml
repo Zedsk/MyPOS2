@@ -1,5 +1,4 @@
-﻿@*@model MyPOS2.Data.Entity.CATEGORY*@
-@*@model IEnumerable<MyPOS2.Data.Entity.SPP_CategoryTrans_Result>*@
+﻿
 @model MyPOS2.Models.management.CategoryViewModel
 
 @{
@@ -18,12 +17,10 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @*@Html.DisplayNameFor(model => model.imageCat)*@
             <label class="control-label col-md-2">Image</label>
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.imageCat)*@
             @if (Model.Cat.imageCat!= null)
             {
                 <img src="@Url.Content(Model.Cat.imageCat)" alt="Image de la catégorie" class="imgIndex" />
@@ -38,22 +35,18 @@
         {
             <dl class="dl-horizontal">
                 <dt>
-                    @*@Html.DisplayName(item.nameHero)*@
                     Nom
                 </dt>
 
                 <dd>
-                    @*@Html.Display(item.nameShop)*@
                     @Html.DisplayFor(modelitem => item.nameCategory)
                 </dd>
 
                 <dt>
-                    @*@Html.DisplayName(item.nameLanguage)*@
                     Langue
                 </dt>
 
                 <dd>
-                    @*@Html.Display(item.nameLanguage)*@
                     @Html.DisplayFor(modelitem => item.nameLanguage)
                 </dd>
             </dl>

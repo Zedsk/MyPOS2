@@ -24,7 +24,6 @@ namespace MyPOS2.Controllers
         public ActionResult Index()
         {
             DateTime date = DateTime.Today;
-            //var transactions = db.TRANSACTIONSs.Include(t => t.CUSTOMER).Include(t => t.SHOP).Include(t => t.STATUS).Include(t => t.TERMINAL).Include(t => t.USERINFO);
             var transactions = db.TRANSACTIONSs.Where(t => t.transactionDateEnd.Year == date.Year && t.transactionDateEnd.Month == date.Month && t.transactionDateEnd.Day == date.Day).Include(t => t.CUSTOMER).Include(t => t.SHOP).Include(t => t.STATUS).Include(t => t.TERMINAL).Include(t => t.USERINFO).Include(t => t.SHOP.SHOP_TRANSLATION).ToList();
             
             return View(transactions.ToList());
@@ -45,21 +44,6 @@ namespace MyPOS2.Controllers
             {
                 return HttpNotFound();
             }
-            //if (Session["Language"] == null)
-            //{
-            //    Session["Language"] = ConfigurationManager.AppSettings["Language"];
-            //}
-            //string language = Session["Language"].ToString();
-            //int lang;
-            //if (int.TryParse(language, out int codeL))
-            //{
-            //    lang = codeL;
-            //}
-            //else
-            //{
-            //    lang = LanguageBL.FindIdLanguageByShortForm(language);
-            //}
-            //ViewBag.language = lang;
             return View(transaction);
         }
 
@@ -165,7 +149,6 @@ namespace MyPOS2.Controllers
                 transaction.cancelDescritpion = tr.cancelDescritpion;
                 transaction.statusId = db.STATUSs.Where(s => s.nameStatus == "deleted").Select(st => st.idStatus).Single();
                 db.Entry(transaction).State = EntityState.Modified;
-                //db.TRANSACTIONSs.Remove(transaction);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

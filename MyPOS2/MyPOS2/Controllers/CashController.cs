@@ -63,10 +63,8 @@ namespace MyPOS2.Controllers
         //[Authorize(Roles = "vendor")]
         public ActionResult Create()
         {
-            //ViewBag.terminalId = new SelectList(db.TERMINALs, "idTerminal", "nameTerminal");
             if (Session["sessTerminalId"] == null)
             {
-                //ViewBag.terminalId = ConfigurationManager.AppSettings["Terminal"];
                 int terminalOk = TerminalBL.CheckTerminalName();
                 if (terminalOk == 0)
                 {
@@ -87,7 +85,6 @@ namespace MyPOS2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "dateDay,terminalId,beginningCash")] CASH_BOTTOM_DAY cashDay)
         public ActionResult Create([Bind(Include = "dateDay,beginningCash")] CASH_BOTTOM_DAY cashDay)
         {
             if (ModelState.IsValid)
@@ -97,9 +94,6 @@ namespace MyPOS2.Controllers
                     cashDay.terminalId = Convert.ToInt32(Session["sessTerminalId"]);
                     db.CASH_BOTTOM_DAYs.Add(cashDay);
                     db.SaveChanges();
-                    //Session["sessTerminalId"] = cashDay.terminalId;
-                    //var tId = cashDay.terminalId;
-                    //return RedirectToAction("Index", "Transaction", new { terminal = tId });
                     return RedirectToAction("Index", "Transaction");
                 }
                 catch (Exception ex)
@@ -196,7 +190,6 @@ namespace MyPOS2.Controllers
             var id2 = Session["sessTerminalId"];
             if (id1 == null || id2 == null)
             {
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 TempData["Error"] = "Le terminal n'a pas été trouvé, existe-t-il un fond de caisse sur ce terminal pour cette date?";
                 return RedirectToAction("Transaction", "Home");
             }

@@ -5,8 +5,6 @@
 }
 
 .titles {
-    /*border: 5px solid orange;
-    border-radius: 5px;*/
     text-align: center;
 }
 .titlesButtons {
@@ -57,10 +55,6 @@
 	justify-content: space-around;
 }
     
-    /*#header1 > div {
-	    padding: 1%;
-    }*/
-
         #header1 > div > label {
 	        color: white;
         }
@@ -96,7 +90,6 @@
 
 #nameItem {
     max-width: 100px;
-    /*word-break: break-all;*/
     word-break: keep-all;
 }
 
@@ -246,10 +239,6 @@
 .btn.active.hover {
     border-color: orange;
 }
-
-/*#ButtonTestCard{
-    background-color:orange;
-}*/
 
 #respBank {
     font-size: xx-large;

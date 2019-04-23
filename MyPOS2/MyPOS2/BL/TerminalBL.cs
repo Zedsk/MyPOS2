@@ -52,7 +52,6 @@ namespace MyPOS2.BL
             using (IDalTerminal dal = new DalTerminal())
             {
                 string T = System.Net.Dns.GetHostName();
-                //IList<string> listNames = dal.GetAllTerminalNames();
                 List<TERMINAL> terminals = dal.GetAllTerminals();
                 foreach (var item in terminals)
                 {

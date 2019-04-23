@@ -23,7 +23,6 @@
         </script>*@
 }
 
-@*@using (Html.BeginForm("Index", "Transaction", FormMethod.Post, new { @onsubmit = "return confirm('Confirmez-vous votre action?');" }))*@
 @using (Html.BeginForm("Index", "Transaction", FormMethod.Post))
 {
     <div id="page">
@@ -62,7 +61,6 @@
                         <input id="addProduct" type="text" placeholder="Ajouter.." onfocus="SetSessionFocus(this)">
                         <button type="button" id="ButtonAddP" class="fct_btn" value="" onclick="ButtonAddProduct_Click()">Ajouter</button>
                     </div>
-                    @*@Html.ValidationMessageFor(m => m.AddProduct, "", new { @class = "text-danger" })*@
                     <span id="errorAddProduct" class="text-danger" style=" visibility:hidden"></span>
 
                 </div>

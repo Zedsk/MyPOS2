@@ -16,7 +16,7 @@ namespace MyPOS2.Controllers
     {
         private Pos1Entities db = new Pos1Entities();
 
-        // GET: Brands
+        //// GET: Brands
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Index(string sortOrder, string searchString)
@@ -40,7 +40,7 @@ namespace MyPOS2.Controllers
             return View(brands);
         }
 
-        // GET: Brands/Details/5
+        //// GET: Brands/Details/5
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Details(int? id)
@@ -57,7 +57,7 @@ namespace MyPOS2.Controllers
             return View(bRAND);
         }
 
-        // GET: Brands/Create
+        //// GET: Brands/Create
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Create()
@@ -65,7 +65,7 @@ namespace MyPOS2.Controllers
             return View();
         }
 
-        // POST: Brands/Create
+        //// POST: Brands/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -82,7 +82,7 @@ namespace MyPOS2.Controllers
             return View(bRAND);
         }
 
-        // GET: Brands/Edit/5
+        //// GET: Brands/Edit/5
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Edit(int? id)
@@ -99,7 +99,7 @@ namespace MyPOS2.Controllers
             return View(bRAND);
         }
 
-        // POST: Brands/Edit/5
+        //// POST: Brands/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -115,7 +115,7 @@ namespace MyPOS2.Controllers
             return View(bRAND);
         }
 
-        // GET: Brands/Delete/5
+        //// GET: Brands/Delete/5
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Delete(int? id)
@@ -132,7 +132,7 @@ namespace MyPOS2.Controllers
             return View(bRAND);
         }
 
-        // POST: Brands/Delete/5
+        //// POST: Brands/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

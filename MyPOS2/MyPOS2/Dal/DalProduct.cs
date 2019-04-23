@@ -33,11 +33,6 @@ namespace MyPOS2.Dal
             throw new NotImplementedException();
         }
 
-        //public List<PRODUCT> GetAllProductByCode(string codeProduct)
-        //{
-        //    return db.PRODUCTs.Where(p => p.barcode.Contains(codeProduct)).ToList();
-        //}
-
         public List<SPP_ProductTrans_Result> GetAllProductByCode(string codeProduct, int language)
         {
             List<SPP_ProductTrans_Result> productList = new List<SPP_ProductTrans_Result>();

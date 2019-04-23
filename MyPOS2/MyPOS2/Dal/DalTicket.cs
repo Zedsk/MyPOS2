@@ -24,21 +24,6 @@ namespace MyPOS2.Dal
         }
         #endregion
 
-        //public int CreateTicket()
-        //{
-        //    // to do --> provisoire messageId = 1 , languageId = 1
-        //    TICKET t = new TICKET { messageId = 1, languageId = 1 };
-        //    db.TICKETs.Add(t);
-        //    db.SaveChanges();
-        //    return t.idTicket;
-        //}
-
-        //public string GetTicketMessagesByIdsAndLanguage(int messageId, int languageMessage)
-        //{
-        //    var ticket = db.TICKET_MESSAGEs.Where(t => t.idMessages == messageId && t.languageId == languageMessage).Single();
-        //    return ticket.message;
-        //}
-
         public string GetTicketMessageTransByIdAndLanguage(int idMessage, int languageMessage)
         {
             var ticket = db.MESSAGE_TRANSLATIONs.Where(t => t.messageId == idMessage && t.languageId == languageMessage).Single();
@@ -97,8 +82,6 @@ namespace MyPOS2.Dal
             db.TRANSACTIONS_MESSAGEs.Add(tMessage);
             db.SaveChanges();
         }
-
-
 
         //public IList<int> GetTicket(DateTime date)
         //{
@@ -200,26 +183,6 @@ namespace MyPOS2.Dal
             }
             return result;
         }
-
-        //public IList<int> GetTicket(DateTime dateMin, DateTime dateMax, int nbItem, int idLanguage, int idMethodP)
-        //{
-        //    IList<int> result = new List<int>();
-        //    // statusId = 2  = transaction end   +  isReturn = false  = is not a Transtacion return
-        //    IList<int> transacs = GetTicket(dateMin, dateMax);
-
-        //    return result;
-        //}
-
-        //public IList<int> GetTicket(DateTime dateMin, DateTime dateMax, decimal total, int nbItem, int idLanguage, int idMethodP)
-        //{
-        //    IList<int> result = new List<int>();
-        //    // statusId = 2  = transaction end   +  isReturn = false  = is not a Transtacion return
-        //    IList<int> transacs = GetTicket(dateMin, dateMax, total);
-
-        //    return result;
-        //}
-
-
     }
 }
 

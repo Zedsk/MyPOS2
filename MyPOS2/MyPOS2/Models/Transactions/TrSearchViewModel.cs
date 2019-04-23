@@ -10,7 +10,6 @@ namespace MyPOS2.Models.Transactions
     {
         public string Product { get; set; }
 
-        //public IList<PRODUCT> Products { get; set; }
         public IList<SPP_ProductTrans_Result> Products { get; set; }
 
         public string Price { get; set; }
@@ -27,7 +26,6 @@ namespace MyPOS2.Models.Transactions
 
         public IList<AGE> Ages { get; set; }
 
-        //public IList<CATEGORY> Cats { get; set; }
         public IList<SPP_ParentCategoriesTransDistinct_Result> Cats { get; set; }
 
         public IList<SPP_ChildCategoriesOfParent_Result> CatsChild { get; set; }

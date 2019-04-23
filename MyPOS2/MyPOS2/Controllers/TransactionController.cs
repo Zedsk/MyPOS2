@@ -18,43 +18,6 @@ namespace MyPOS2.Controllers
     [Authorize]
     public class TransactionController : Controller
     {
-        //private ApplicationSignInManager _signInManager;
-        //private ApplicationUserManager _userManager;
-
-        //public TransactionController()
-        //{
-        //}
-
-        //public TransactionController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        //{
-        //    UserManager = userManager;
-        //    SignInManager = signInManager;
-        //}
-
-        //public ApplicationSignInManager SignInManager
-        //{
-        //    get
-        //    {
-        //        return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-        //    }
-        //    private set
-        //    {
-        //        _signInManager = value;
-        //    }
-        //}
-
-        //public ApplicationUserManager UserManager
-        //{
-        //    get
-        //    {
-        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        //    }
-        //    private set
-        //    {
-        //        _userManager = value;
-        //    }
-        //}
-
         #region Index
         [HttpGet]
         public ActionResult Index()
@@ -63,8 +26,6 @@ namespace MyPOS2.Controllers
             {
                 //récupération du terminal
                 int terminal = 0;
-
-                //var T = System.Net.Dns.GetHostName();
 
                 if (Session["sessTerminalId"] != null)
                 {
@@ -83,10 +44,6 @@ namespace MyPOS2.Controllers
                     Session["Language"] = ConfigurationManager.AppSettings["Language"];
                 }
 
-                //string L = ConfigurationManager.AppSettings["Language"];
-                //ConfigurationManager.AppSettings["Language"] = "Nl";
-                //var L2 = ConfigurationManager.AppSettings["Language"];
-                
                 //récupération de l'utilisateur
                 string currentId = User.Identity.GetUserId();
                 TrIndexViewModel vm = new TrIndexViewModel
@@ -95,7 +52,7 @@ namespace MyPOS2.Controllers
                     TerminalId = terminal,
 
                     ////transaction num = id
-                    // to do --> provisoire vendorId = 1, shopId = 1, customerId = 1
+                    // to do --> provisoire shopId = 1, customerId = 1
                     NumTransaction = TransactionBL.InitializeNewTransaction(terminal, currentId),
 
                     // to do --> quid date et heure?
@@ -158,7 +115,6 @@ namespace MyPOS2.Controllers
                 var transac = TransactionBL.FindTransactionById(vmodel.NumTransaction);
                 TrIndexViewModel vm = new TrIndexViewModel
                 {
-                    //vm.TerminalId = terminal;
                     NumTransaction = transac.idTransaction.ToString(),
                     TerminalId = transac.terminalId,
                     GlobalTot = transac.total.ToString(),
@@ -185,7 +141,6 @@ namespace MyPOS2.Controllers
                 var e8 = ex.GetType(); // --> log
                 var e9 = ex.GetType().Name; // --> log
                 //NumTransaction not valid
-                //return RedirectToAction("Index", "Pay", numTransac);
                 return RedirectToAction("Index", "Pay", vmodel);
             }
             catch (Exception ex)
@@ -251,8 +206,6 @@ namespace MyPOS2.Controllers
                 if (ModelState.IsValid)
                 {
                     ////Add detail
-                    //to do --> provisoire language = 1 = French
-                    //var language = "1";
                     if (Session["Language"] == null)
                     {
                         Session["Language"] = ConfigurationManager.AppSettings["Language"];
@@ -311,7 +264,6 @@ namespace MyPOS2.Controllers
                     string language = Session["Language"].ToString();
                     if (int.TryParse(product, out int codeP))
                     {
-                        //vm.Products = ProductBL.FindAllProductByCode(product);
                         vm.Products = ProductBL.FindAllProductByCode(product, language);
                     }
                     else
@@ -407,7 +359,6 @@ namespace MyPOS2.Controllers
 
         private ActionResult SearchByCat(TrSearchViewModel vm, string language)
         {
-            //vm.Cats = SearchBL.FindCatsParentList();
             vm.Cats = SearchBL.FindCatsParentList(language);
             return PartialView("_PartialTransactionSearch", vm);
         }
@@ -477,21 +428,18 @@ namespace MyPOS2.Controllers
 
         private ActionResult ProductByBrand(string argument, TrSearchViewModel vmodel, string language)
         {
-            //vmodel.Products = SearchBL.FindProductListByIdBrand(argument);
             vmodel.Products = SearchBL.FindProductListByIdBrand(argument, language);
             return PartialView("_PartialTransactionSearch", vmodel);
         }
 
         private ActionResult ProductByHero(string argument, TrSearchViewModel vmodel, string language)
         {
-            //vmodel.Products = SearchBL.FindProductListByIdHero(argument);
             vmodel.Products = SearchBL.FindProductListByIdHero(argument,language);
             return PartialView("_PartialTransactionSearch", vmodel);
         }
 
         private ActionResult ProductByAge(string argument, TrSearchViewModel vmodel, string language)
         {
-            //vmodel.Products = SearchBL.FindProductListByIdAge(argument);
             vmodel.Products = SearchBL.FindProductListByIdAge(argument, language);
             return PartialView("_PartialTransactionSearch", vmodel);
         }
@@ -502,7 +450,6 @@ namespace MyPOS2.Controllers
             var children = SearchBL.FindCatsChildList(argument, language);
             if (children.Count() == 0)
             {
-                //vmodel.Products = SearchBL.FindProductListByIdCat(argument);
                 vmodel.Products = SearchBL.FindProductListByIdCat(argument, language);
             }
             else
@@ -539,17 +486,6 @@ namespace MyPOS2.Controllers
             {
                 //save part of transaction
                 TransactionBL.SaveTransactionProductBack(vmodel.NumTransaction, vmodel.GlobalTot);
-                //TrProductBackViewModel vm = new TrProductBackViewModel();
-                //if (Session["Language"] == null)
-                //{
-                //    Session["Language"] = ConfigurationManager.AppSettings["Language"];
-                //}
-                //string language = Session["Language"].ToString();
-                ////to do --> change init isChange..
-                //bool isChange = false;
-                //vm.Ticket = TicketBL.FillTicket(vmodel.NumTransaction, language, isChange);
-                //vm.Language = language;
-                //return View(vm);
                 string gTot = vmodel.GlobalTot;
                 string nTransac = vmodel.NumTransaction;
                 return RedirectToAction("ProductBack", "Pay", new { nTransac });

@@ -89,7 +89,7 @@
     @if (Model.CatsChild != null)
     {
         @*<button onclick="goBack()">Go Back</button>*@
-        <button id="goBack" class="btn" data-target=""><span class="glyphicon glyphicon-menu-left"></span>Précédent</button>
+        @*<button id="goBack" class="btn" data-target=""><span class="glyphicon glyphicon-menu-left"></span>Précédent</button>*@
         foreach (var cat in Model.CatsChild)
         {
             <button type="button" class="close-image buttonProd" value="@cat.idCategory" onclick="ProductBy(this, 'cat')">
@@ -103,14 +103,12 @@
     @if (Model.Products != null)
     {
         @*<button onclick="goBack()">Go Back</button>*@
-        <button id="goBack" class="btn" onclick="FindCat()"><span class="glyphicon glyphicon-menu-left"></span>Précédent</button>
+        @*<button id="goBack" class="btn" onclick="FindCat()"><span class="glyphicon glyphicon-menu-left"></span>Précédent</button>*@
         foreach (var item in Model.Products)
         {
             <button type="button" class="close-image buttonProd" onclick="AddItem(@item.barcode)">
-                @*@Html.Display(item.barcode)*@
                 <p>@item.nameProduct</p>
                 <img src="@Url.Content(item.imageProduct)" alt="image du jouet" />
-                @*@Html.Display((item.salesPrice).ToString())*@
                 <p>@item.salesPrice<span class="glyphicon glyphicon-euro"></span></p>
             </button>
         }

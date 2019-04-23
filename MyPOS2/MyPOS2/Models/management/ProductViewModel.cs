@@ -50,9 +50,6 @@ namespace MyPOS2.Models.management
 
         public IList<HERO_TRANSLATION> HeroesTrans { get; set; }
 
-        //[Display(Name = "TVA")]
-        //public string Vat { get; set; }
-
         [Display(Name = "TVA")]
         public string Vat { get { return "2"; } }
 

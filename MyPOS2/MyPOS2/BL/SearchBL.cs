@@ -17,21 +17,11 @@ namespace MyPOS2.BL
             }
         }
 
-        //internal static IList<PRODUCT> FindProductListByIdBrand(string argument)
-        //{
-        //    using (IDalSearch dal = new DalSearch())
-        //    {
-        //        int id = int.Parse(argument);
-        //        return dal.GetAllProductByIdBrand(id);
-        //    }
-        //}
-
         internal static IList<SPP_ProductTrans_Result> FindProductListByIdBrand(string argument, string language)
         {
             using (IDalSearch dal = new DalSearch())
             {
                 int id = int.Parse(argument);
-                //find idLanguage by shortForm
                 int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllProductByIdBrand(id, lang);
             }
@@ -46,21 +36,11 @@ namespace MyPOS2.BL
             }
         }
 
-        //internal static IList<PRODUCT> FindProductListByIdHero(string argument)
-        //{
-        //    using (IDalSearch dal = new DalSearch())
-        //    {
-        //        int id = int.Parse(argument);
-        //        return dal.GetAllProductByIdHero(id);
-        //    }
-        //}
-
         internal static IList<SPP_ProductTrans_Result> FindProductListByIdHero(string argument, string language)
         {
             using (IDalSearch dal = new DalSearch())
             {
                 int id = int.Parse(argument);
-                //find idLanguage by shortForm
                 int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllProductByIdHero(id, lang);
             }
@@ -74,21 +54,11 @@ namespace MyPOS2.BL
             }
         }
 
-        //internal static IList<PRODUCT> FindProductListByIdAge(string argument)
-        //{
-        //    using (IDalSearch dal = new DalSearch())
-        //    {
-        //        int id = int.Parse(argument);
-        //        return dal.GetAllProductByIdAge(id);
-        //    }
-        //}
-
         internal static IList<SPP_ProductTrans_Result> FindProductListByIdAge(string argument, string language)
         {
             using (IDalSearch dal = new DalSearch())
             {
                 int id = int.Parse(argument);
-                //find idLanguage by shortForm
                 int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllProductByIdAge(id, lang);
             }
@@ -106,7 +76,6 @@ namespace MyPOS2.BL
         {
             using (IDalSearch dal = new DalSearch())
             {
-                //find idLanguage by shortForm
                 int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllCats(lang);
             }
@@ -117,27 +86,16 @@ namespace MyPOS2.BL
             using (IDalSearch dal = new DalSearch())
             {
                 int id = int.Parse(argument);
-                //find idLanguage by shortForm
                 int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllCats(id, lang);
             }
         }
-
-        //internal static IList<PRODUCT> FindProductListByIdCat(string argument)
-        //{
-        //    using (IDalSearch dal = new DalSearch())
-        //    {
-        //        int id = int.Parse(argument);
-        //        return dal.GetAllProductByIdCat(id);
-        //    }
-        //}
 
         internal static IList<SPP_ProductTrans_Result> FindProductListByIdCat(string argument, string language)
         {
             using (IDalSearch dal = new DalSearch())
             {
                 int id = int.Parse(argument);
-                //find idLanguage by shortForm
                 int lang = LanguageBL.FindIdLanguageByShortForm(language);
                 return dal.GetAllProductByIdCat(id, lang);
             }

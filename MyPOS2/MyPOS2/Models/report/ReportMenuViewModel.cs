@@ -30,10 +30,6 @@ namespace MyPOS2.Models.report
 
         public string TotTotalSales { get; set; }
 
-        //public IList<SPP_ReportTotalSalesTransDistinct_Result> ReportTotalSales { get; set; }
-
-        //public IList<SPP_ReportTotalSalesByProductsTransDistinct_Result> ReportTotalSalesByProduct { get; set; }
-
         public RTotalSalesViewModel ReportTotalSales { get; set; }
 
         public RTotalSalesByProductViewModel ReportTotalSalesByProduct { get; set; }

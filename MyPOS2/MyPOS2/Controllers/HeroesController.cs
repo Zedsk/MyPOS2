@@ -22,31 +22,12 @@ namespace MyPOS2.Controllers
         //[Authorize(Roles = "admin")]
         //[Authorize(Roles = "manager")]
         public ActionResult Index(string sortOrder, string searchString)
-        {
-            ////return View(db.HEROs.ToList());
-            //if (Session["Language"] == null)
-            //{
-            //    Session["Language"] = ConfigurationManager.AppSettings["Language"];
-            //}
-            //string language = Session["Language"].ToString();
-            //int lang;
-            //if (int.TryParse(language, out int codeL))
-            //{
-            //    lang = codeL;
-            //}
-            //else
-            //{
-            //    lang = LanguageBL.FindIdLanguageByShortForm(language);
-            //}
-            
+        {            
             int lang = LanguageBL.CheckLanguageSession();
-            //var heroesT = db.SPP_HeroesTrans().Where(h => h.languageId == lang).ToList();
             var heroesT = db.SPP_HeroesTransDistinct(lang).ToList();
-
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             if (!String.IsNullOrEmpty((searchString)))
             {
-                //heroesT = heroesT.Where(s => s.nameHero == searchString).ToList();
                 heroesT = heroesT.Where(s => s.nameHero.ToLower().StartsWith(searchString.ToLower())).ToList();
             }
             switch (sortOrder)
@@ -71,13 +52,6 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //HERO hERO = db.HEROs.Find(id);
-            //if (hERO == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(hERO);
-
             IList<SPP_HeroesTrans_Result> heroes = db.SPP_HeroesTrans().Where(h => h.idHero == id).ToList();
             return View(heroes);
         }
@@ -93,23 +67,6 @@ namespace MyPOS2.Controllers
             };
             return View(vm);
         }
-
-        //// POST: Heroes/Create
-        //// Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        //// plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "idHero,imageHero")] HERO hERO)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.HEROs.Add(hERO);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(hERO);
-        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -152,19 +109,6 @@ namespace MyPOS2.Controllers
                                     i--;
                                 }
                             }
-                            //foreach (var item in tempHeroesT)
-                            //{
-                            //    if (item.nameHero != null)
-                            //    {
-                            //        item.heroId = id;
-                            //        //change language with universal
-                            //        item.languageId = LanguageBL.FindIdLanguageByShortForm("all");
-                            //    }
-                            //    else
-                            //    {
-                            //        heroesT.Remove(item);
-                            //    }
-                            //}
                         }
                         else
                         {
@@ -225,36 +169,12 @@ namespace MyPOS2.Controllers
                     translation.Add(empty);
                 }
             }
-            //else
-            //{
-            //    //ListLang = LanguageBL.FindLanguageListWithoutUniversal(),
-            //    vm.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
-            //}
-
             ViewBag.isUniversal = isUniversal;
             vm.ListLang = LanguageBL.FindLanguageListWithoutUniversal();
             vm.Hero = hERO;
             vm.HeroesTrans = translation;
-            //IList<SPP_HeroesTrans_Result> heroes = db.SPP_HeroesTrans().Where(h => h.idHero == id).ToList();
-
             return View(vm);
         }
-
-        //// POST: Heroes/Edit/5
-        //// Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        //// plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "idHero,imageHero")] HERO hERO)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(hERO).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(hERO);
-        //}
 
         // POST: 
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
@@ -322,14 +242,6 @@ namespace MyPOS2.Controllers
         {
             string path = ImportBL.ImportImage(file, source);
 
-            //string src = source.ToLower();
-            ////string path = Server.MapPath("~/Content/image/" + src + "/" + filename);
-            //string path = "~/Content/image/" + src + "/" + file.FileName;
-            //if (System.IO.File.Exists(path))
-            //{
-            //    System.IO.File.Delete(path);
-            //}
-            ////file.SaveAs(path);
             file.SaveAs(Server.MapPath(path));
 
             ViewBag.path = path;
