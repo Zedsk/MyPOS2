@@ -4,10 +4,14 @@
     ViewBag.Title = "Details";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Details</h2>
 
 <div>
-    <h4>CASH_BOTTOM_DAY</h4>
+    <h4>Fond de caisse</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -15,7 +19,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.beginningCash)
+            @Html.DisplayFor(model => model.beginningCash)€
         </dd>
 
         <dt>
@@ -23,7 +27,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.endCash)
+            @Html.DisplayFor(model => model.endCash)€
         </dd>
 
         <dt>
@@ -37,6 +41,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editer", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Retour à la Liste", "Index")
 </p>

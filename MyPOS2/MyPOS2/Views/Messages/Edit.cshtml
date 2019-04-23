@@ -5,12 +5,16 @@
     ViewBag.Title = "Edit";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Editer</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>MESSAGE</h4>
         <hr />

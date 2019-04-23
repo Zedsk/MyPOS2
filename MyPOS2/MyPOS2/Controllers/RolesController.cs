@@ -30,7 +30,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetRoles role = db.AspNetRoles.Find(id);
+            AspNetRoles role = db.AspNetRoles.Find(id.ToString());
             if (role == null)
             {
                 return HttpNotFound();
@@ -70,7 +70,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetRoles role = db.AspNetRoles.Find(id);
+            AspNetRoles role = db.AspNetRoles.Find(id.ToString());
             if (role == null)
             {
                 return HttpNotFound();
@@ -102,7 +102,7 @@ namespace MyPOS2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetRoles role = db.AspNetRoles.Find(id);
+            AspNetRoles role = db.AspNetRoles.Find(id.ToString());
             if (role == null)
             {
                 return HttpNotFound();
@@ -115,7 +115,7 @@ namespace MyPOS2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AspNetRoles role = db.AspNetRoles.Find(id);
+            AspNetRoles role = db.AspNetRoles.Find(id.ToString());
             db.AspNetRoles.Remove(role);
             db.SaveChanges();
             return RedirectToAction("Index");

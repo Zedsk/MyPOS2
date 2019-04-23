@@ -30,8 +30,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                    @*<li>@Html.ActionLink("À propos de", "About", "Home")</li>
+                    @*<li>@Html.ActionLink("Accueil", "Index", "Home")</li>
+                    <li>@Html.ActionLink("À propos de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
 
                     <li class="dropdown">
@@ -41,10 +41,10 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu disabled">
-                            <li>@Html.ActionLink("Fr", "Transaction", "Home")</li>
-                            <li>@Html.ActionLink("Nl", "Transaction", "Home")</li>
-                            <li>@Html.ActionLink("De", "Transaction", "Home")</li>
-                            <li>@Html.ActionLink("En", "Transaction", "Home")</li>
+                            <li>@Html.ActionLink("Fr", "Default", "Languages", new { lang = "Fr", id = 0 }, "")</li>
+                            <li>@Html.ActionLink("Nl", "Default", "Languages", new { lang = "Nl", id = 0 }, "")</li>
+                            <li>@Html.ActionLink("De", "Default", "Languages", new { lang = "De", id = 0 }, "")</li>
+                            <li>@Html.ActionLink("En", "Default", "Languages", new { lang = "En", id = 0 }, "")</li>
                         </ul>
                     </li>
                 </ul>
@@ -56,7 +56,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - MyPOS ASP.NET MVC Application</p>
+            <p>&copy; 2019 - MyPOS</p>
         </footer>
     </div>
 

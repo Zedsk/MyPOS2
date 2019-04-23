@@ -4,6 +4,10 @@
     ViewBag.Title = "Index";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Paramètres</h2>
 
 <p>
@@ -20,20 +24,21 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nameSetting)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.valueSetting)
-        </td>
-        <td>
-            @Html.ActionLink("Editer", "Edit", new { id=item.idSetting })
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameSetting)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valueSetting)
+            </td>
+            <td>
+                @Html.ActionLink("Editer", "Edit", new { id = item.idSetting })
 
 
-        </td>
-    </tr>
-}
+            </td>
+        </tr>
+    }
 
 </table>

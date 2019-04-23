@@ -4,39 +4,43 @@
     ViewBag.Title = "End";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Fin de journée</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>FOND DE CAISSE</h4>
-    <hr />
-    <span class="text-danger">@ViewBag.Error</span>
+    <div class="form-horizontal">
+        <h4>Fond de caisse</h4>
+        <hr />
+        <span class="text-danger">@ViewBag.Error</span>
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    
-    @Html.HiddenFor(model => model.dateDay)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @Html.HiddenFor(model => model.terminalId)
+        @Html.HiddenFor(model => model.dateDay)
 
-    @Html.HiddenFor(model => model.beginningCash);
+        @Html.HiddenFor(model => model.terminalId)
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Montant</label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.endCash, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.endCash, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.beginningCash);
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Montant</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.endCash, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.endCash, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="End" class="btn btn-default" />
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="End" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <div>

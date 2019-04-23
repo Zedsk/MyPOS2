@@ -4,6 +4,10 @@
     ViewBag.Title = "Index";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Gestion des utilisateurs</h2>
 
 <span><a class="btn btn-default" href="../Account/Register">Ajouter un nouvel utilisateur &raquo;</a></span>
@@ -42,7 +46,7 @@
 
                             @Html.ActionLink("Modifier", "Edit", new { id = item.userId }) |
                             @Html.ActionLink("Supprimer", "Delete", new { id = item.userId }, new { onclick = "return confirm('Êtes-vous sur de vouloir supprimer cet utilisateur?');" }) |
-                            @Html.ActionLink("Bloquer", "", new { id = item.userId })
+                            @Html.ActionLink("Bloquer", "", new { id = item.userId }, new { @disabled = "disabled" })
                         </td>
                     </tr>
                 }

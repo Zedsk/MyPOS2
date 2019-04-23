@@ -4,6 +4,10 @@
     ViewBag.Title = "Index";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Transaction du jour</h2>
 
 <p>
@@ -36,24 +40,25 @@
             Statut de la transaction
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.isReturn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CUSTOMER.customerId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SHOP.phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TERMINAL.nameTerminal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.USERINFO.nameUser)
-        </th>*@
+                @Html.DisplayNameFor(model => model.isReturn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CUSTOMER.customerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SHOP.phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TERMINAL.nameTerminal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.USERINFO.nameUser)
+            </th>*@
         <th></th>
     </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(model => item.idTransaction)
@@ -69,7 +74,7 @@
             </td>
             @if (item.discountGlobal == null)
             {
-                <td >
+                <td>
                     -
                 </td>
             }
@@ -83,20 +88,20 @@
                 @Html.DisplayFor(modelItem => item.STATUS.nameStatus)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.isReturn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CUSTOMER.customerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SHOP.phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TERMINAL.nameTerminal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.USERINFO.nameUser)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.isReturn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUSTOMER.customerId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SHOP.phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TERMINAL.nameTerminal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERINFO.nameUser)
+                </td>*@
             <td>
                 @*@Html.ActionLink("Editer", "Edit", new { id = item.idTransaction }) |*@
                 @Html.ActionLink("Details", "Details", new { id = item.idTransaction }) |

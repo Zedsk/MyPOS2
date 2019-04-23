@@ -4,11 +4,15 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
 
-<h3>Are you sure you want to delete this?</h3>
+<h2>Supprimer</h2>
+
+<h3>Etes-vous sur de vouloir le supprimer?</h3>
 <div>
-    <h4>CASH_BOTTOM_DAY</h4>
+    <h4>Fond de caisse</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -37,12 +41,13 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" onclick="return confirm('Etes-vous sur de vouloir supprimer?');" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Supprimer" class="btn btn-default" onclick="return confirm('Etes-vous sur de vouloir supprimer?');" /> |
+            @Html.ActionLink("Retour à la Liste", "Index")
         </div>
     }
 </div>

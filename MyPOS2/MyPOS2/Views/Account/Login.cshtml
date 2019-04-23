@@ -4,6 +4,10 @@
     ViewBag.Title = "Connexion";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>@ViewBag.Title.</h2>
 <div class="row">
     <div class="col-md-8">
@@ -42,8 +46,8 @@
                     </div>
                 </div>
                 @*<p>
-                    @Html.ActionLink("S'inscrire comme nouvel utilisateur", "Register")
-                </p>*@
+                        @Html.ActionLink("S'inscrire comme nouvel utilisateur", "Register")
+                    </p>*@
                 @* Activer ceci une fois que la confirmation de votre compte est activée pour la fonctionnalité de réinitialisation du mot de passe
                     <p>
                         @Html.ActionLink("Vous avez oublié votre mot de passe ?", "ForgotPassword")
@@ -53,8 +57,8 @@
     </div>
     <div class="col-md-4">
         @*<section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>*@
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>*@
     </div>
 </div>
 

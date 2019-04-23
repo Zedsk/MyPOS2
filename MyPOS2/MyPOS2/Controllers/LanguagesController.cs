@@ -130,11 +130,19 @@ namespace MyPOS2.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Default(int? id)
+        public ActionResult Default(int? id, string lang)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            string actionName = this.ControllerContext.RouteData.Values["action"].ToString();
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+            //action comming from de Nav Bar --> id = 0
+            if (id == 0)
+            {
+                id = LanguageBL.FindIdLanguageByShortForm(lang);
             }
             //to do --> modify  nameSet
             string nameSet = "Language";
@@ -145,7 +153,15 @@ namespace MyPOS2.Controllers
                 result.valueSetting = val;
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            if (actionName == "Default")
+            {
+                return RedirectToAction("Index", controllerName);
+            }
+            else
+            {
+                return RedirectToAction(actionName, controllerName);
+            }
+            
         }
 
         protected override void Dispose(bool disposing)

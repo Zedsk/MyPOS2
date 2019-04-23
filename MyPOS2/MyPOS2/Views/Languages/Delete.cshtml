@@ -4,6 +4,10 @@
     ViewBag.Title = "Delete";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Supprimer</h2>
 
 <h3>Etes-vous sur de vouloir le supprimer?</h3>
@@ -21,11 +25,12 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Supprimer" class="btn btn-default" onclick="return confirm('Etes-vous sur de vouloir supprimer?');"/> |
+            <input type="submit" value="Supprimer" class="btn btn-default" onclick="return confirm('Etes-vous sur de vouloir supprimer?');" /> |
             @Html.ActionLink("Retour à la Liste", "Index")
         </div>
     }

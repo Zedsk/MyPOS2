@@ -4,6 +4,10 @@
     ViewBag.Title = "Index";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Content/pos2.css")" rel="stylesheet" type="text/css" />
+}
+
 <h2>Fond de caisse</h2>
 
 <p>
@@ -43,10 +47,10 @@
                 @Html.DisplayFor(modelItem => item.dateDay, new { placeholder = "DD/MM/YYY", type = "date" })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.beginningCash)
+                @Html.DisplayFor(modelItem => item.beginningCash)€
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.endCash)
+                @Html.DisplayFor(modelItem => item.endCash)€
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TERMINAL.nameTerminal)
