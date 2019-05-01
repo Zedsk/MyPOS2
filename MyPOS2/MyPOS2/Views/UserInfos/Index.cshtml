@@ -32,23 +32,46 @@
                 foreach (var item in Model.UserList)
                 {
                     i++;
-                    <tr>
-                        <td>@i</td>
-                        <td>@item.nameUser</td>
-                        <td>@item.firstname</td>
-                        <td>@item.street</td>
-                        <td>@item.zipCode</td>
-                        <td>@item.city</td>
-                        <td>@item.phone</td>
-                        <td>@item.creationDate</td>
-                        <td>@item.role</td>
-                        <td>
-
-                            @Html.ActionLink("Modifier", "Edit", new { id = item.userId }) |
-                            @Html.ActionLink("Supprimer", "Delete", new { id = item.userId }, new { onclick = "return confirm('Êtes-vous sur de vouloir supprimer cet utilisateur?');" }) |
-                            @Html.ActionLink("Bloquer", "", new { id = item.userId }, new { @disabled = "disabled" })
-                        </td>
-                    </tr>
+                    if (item.isBlocked && item.LockoutEndDateUtc != null)
+                    {
+                        <tr style="color:darkorange">
+                            <td>@i</td>
+                            <td>@item.nameUser</td>
+                            <td>@item.firstname</td>
+                            <td>@item.street</td>
+                            <td>@item.zipCode</td>
+                            <td>@item.city</td>
+                            <td>@item.phone</td>
+                            <td>@item.creationDate</td>
+                            <td>@item.role</td>
+                            <td>
+                                @Html.ActionLink("Modifier", "Edit", new { id = item.userId }) |
+                                @*@Html.ActionLink("Supprimer", "#", new { id = item.userId }, new { onclick = "return confirm('Êtes-vous sur de vouloir supprimer cet utilisateur?');"}) |*@
+                                @Html.ActionLink("Bloquer", "BlockUser", new { id = item.userId }) |
+                                @Html.ActionLink("Débloquer", "UnblockUser", new { id = item.userId })
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@item.nameUser</td>
+                            <td>@item.firstname</td>
+                            <td>@item.street</td>
+                            <td>@item.zipCode</td>
+                            <td>@item.city</td>
+                            <td>@item.phone</td>
+                            <td>@item.creationDate</td>
+                            <td>@item.role</td>
+                            <td>
+                                @Html.ActionLink("Modifier", "Edit", new { id = item.userId }) |
+                                @*@Html.ActionLink("Supprimer", "#", new { id = item.userId }, new { onclick = "return confirm('Êtes-vous sur de vouloir supprimer cet utilisateur?');"}) |*@
+                                @Html.ActionLink("Bloquer", "BlockUser", new { id = item.userId }) |
+                                @Html.ActionLink("Débloquer", "UnblockUser", new { id = item.userId })
+                            </td>
+                        </tr>
+                    }
                 }
             }
         </tbody>

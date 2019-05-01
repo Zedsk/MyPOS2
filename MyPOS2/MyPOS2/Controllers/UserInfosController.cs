@@ -1,4 +1,5 @@
-﻿using MyPOS2.BL;
+﻿using Microsoft.AspNet.Identity.Owin;
+using MyPOS2.BL;
 using MyPOS2.Models;
 using MyPOS2.Models.management;
 using System;
@@ -64,6 +65,28 @@ namespace MyPOS2.Controllers
             }
             vmodel.Roles = UserBL.FindAllRole();
             return View(vmodel);
+        }
+
+        public ActionResult BlockUser(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            UserBL.BlockUser(userManager, id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult UnBlockUser(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            UserBL.UnBlockUser(userManager, id);
+            return RedirectToAction("Index");
         }
     }
 }

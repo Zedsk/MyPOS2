@@ -2490,6 +2490,8 @@
           <Property Type="String" Name="phone" Nullable="false" MaxLength="40" />
           <Property Type="DateTime" Name="creationDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="role" Nullable="false" MaxLength="256" />
+          <Property Type="Boolean" Name="isBlocked" Nullable="false" />
+          <Property Type="DateTime" Name="LockoutEndDateUtc" Nullable="true" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3119,6 +3121,8 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="creationDate" ColumnName="creationDate" />
                 <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="isBlocked" ColumnName="isBlocked" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

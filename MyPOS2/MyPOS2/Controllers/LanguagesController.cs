@@ -130,15 +130,54 @@ namespace MyPOS2.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Default(int? id, string lang)
+        //public ActionResult Default(int? id, string lang)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    string actionName = this.ControllerContext.RouteData.Values["action"].ToString();
+        //    string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+        //    //action comming from de Nav Bar --> id = 0
+        //    if (id == 0)
+        //    {
+        //        id = LanguageBL.FindIdLanguageByShortForm(lang);
+        //    }
+        //    //to do --> modify  nameSet
+        //    string nameSet = "Language";
+        //    string val = LanguageBL.FindShortFormById(id);
+        //    var result = db.SETTINGs.SingleOrDefault(s => s.nameSetting == nameSet);
+        //    if (result != null)
+        //    {
+        //        result.valueSetting = val;
+        //        db.SaveChanges();
+        //    }
+        //    if (actionName == "Default")
+        //    {
+        //        return RedirectToAction("Index", controllerName);
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction(actionName, controllerName);
+        //    }
+
+        //}
+
+        public ActionResult Default(int? id, string lang, string controllerName, string actionName)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            string actionName = this.ControllerContext.RouteData.Values["action"].ToString();
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
+            if (controllerName == null)
+            {
+                controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            }
+            if (actionName == null)
+            {
+                actionName = this.ControllerContext.RouteData.Values["action"].ToString();
+            }
             //action comming from de Nav Bar --> id = 0
             if (id == 0)
             {
@@ -152,6 +191,7 @@ namespace MyPOS2.Controllers
             {
                 result.valueSetting = val;
                 db.SaveChanges();
+                Session["Language"] = val;
             }
             if (actionName == "Default")
             {
@@ -161,7 +201,7 @@ namespace MyPOS2.Controllers
             {
                 return RedirectToAction(actionName, controllerName);
             }
-            
+
         }
 
         protected override void Dispose(bool disposing)

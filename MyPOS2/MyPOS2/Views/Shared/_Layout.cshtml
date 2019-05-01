@@ -40,11 +40,16 @@
                             <span class="glyphicon glyphicon-th-list"></span>
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu disabled">
-                            <li>@Html.ActionLink("Fr", "Default", "Languages", new { lang = "Fr", id = 0 }, "")</li>
+                        <ul class="dropdown-menu ">
+                            @*<li>@Html.ActionLink("Fr", "Default", "Languages", new { lang = "Fr", id = 0 }, "")</li>
                             <li>@Html.ActionLink("Nl", "Default", "Languages", new { lang = "Nl", id = 0 }, "")</li>
                             <li>@Html.ActionLink("De", "Default", "Languages", new { lang = "De", id = 0 }, "")</li>
-                            <li>@Html.ActionLink("En", "Default", "Languages", new { lang = "En", id = 0 }, "")</li>
+                            <li>@Html.ActionLink("En", "Default", "Languages", new { lang = "En", id = 0 }, "")</li>*@
+
+                            <li><a id="LangFr" href="#" onclick="LanguageDefault('Fr')">Fr</a></li>
+                            <li><a id="LangNl" href="#" onclick="LanguageDefault('Nl')">Nl</a></li>
+                            <li><a id="LangDe" href="#" onclick="LanguageDefault('De')">De</a></li>
+                            <li><a id="LangEn" href="#" onclick="LanguageDefault('En')">En</a></li>
                         </ul>
                     </li>
                 </ul>

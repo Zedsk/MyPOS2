@@ -399,7 +399,7 @@ namespace MyPOS2.Controllers
             {
                 TrRprintTicketViewModel vm = new TrRprintTicketViewModel();
                 vm.MethodsP = PaymentBL.FindMethodsList();
-                vm.Languages = LanguageBL.FindLanguageList();
+                vm.Languages = LanguageBL.FindLanguageListWithoutUniversal();
                 ViewBag.ticket = false;
                 return View(vm);
             }
@@ -429,13 +429,13 @@ namespace MyPOS2.Controllers
                     {
                         Tickets = TicketBL.FindTicket(vmodel),
                         MethodsP = PaymentBL.FindMethodsList(),
-                        Languages = LanguageBL.FindLanguageList()
+                        Languages = LanguageBL.FindLanguageListWithoutUniversal()
                     };
                     ViewBag.ticket = true;
                     return View(vm);
                 }
                 vmodel.MethodsP = PaymentBL.FindMethodsList();
-                vmodel.Languages = LanguageBL.FindLanguageList();
+                vmodel.Languages = LanguageBL.FindLanguageListWithoutUniversal();
                 ViewBag.ticket = false;
                 return View(vmodel);
             }

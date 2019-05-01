@@ -22,5 +22,7 @@ namespace MyPOS2.Data.Entity
         public string phone { get; set; }
         public System.DateTime creationDate { get; set; }
         public string role { get; set; }
+        public bool isBlocked { get; set; }
+        public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
     }
 }

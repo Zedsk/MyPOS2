@@ -553,3 +553,22 @@ function CheckReasonDeleteTransac() {
         return document.Forms[0].submit.false;
     }
 }
+
+function LanguageDefault(lang) {
+    //find controller name
+    var c = window.location.pathname.split("/");
+    var controller = c[1];
+    var action = c[2];
+    var id = 0;
+
+    var xhr = new XMLHttpRequest();
+    //Post Method
+    var url = "/Languages/Default";
+    var param = "Id=" + id
+        + "&Lang=" + lang
+        + "&ControllerName=" + controller
+        + "&ActionName=" + action;
+    xhr.open("POST", url);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(param);
+}

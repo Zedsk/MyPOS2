@@ -106,5 +106,24 @@ namespace MyPOS2.Dal
         {
             return db.AspNetRoles.Where(r => r.Name == nameRole).Select(s => s.Id).ToString();
         }
+
+        public void BlockUser(string id)
+        {
+            AspNetUsers user = db.AspNetUsers.Where(u => u.Id == id).Single();
+            user.LockoutEnabled = false;
+            db.SaveChanges();
+        }
+
+        public void UnBlockUser(string id)
+        {
+            AspNetUsers user = db.AspNetUsers.Where(u => u.Id == id).Single();
+            user.LockoutEnabled = true;
+            db.SaveChanges();
+        }
+
+        public AspNetUsers GetAspUserInfoById(string id)
+        {
+            return db.AspNetUsers.Where(u => u.Id == id).Single();
+        }
     }
 }

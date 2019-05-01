@@ -1,4 +1,6 @@
-﻿using MyPOS2.Dal;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using MyPOS2.Dal;
 using MyPOS2.Data.Entity;
 using MyPOS2.Models;
 using System;
@@ -93,7 +95,7 @@ namespace MyPOS2.BL
                 dal.UpdateUserInfo(uInfo, userInfo.role);
             }
         }
-
+        
         internal static string FindIdRoleByName(string role)
         {
             using (IDalUser dal = new DalUser())
@@ -122,7 +124,6 @@ namespace MyPOS2.BL
         {
             using (IDalUser dal = new DalUser())
             {
-
                 return dal.GetRoleByAspId(aspId);
             }
            
@@ -133,6 +134,32 @@ namespace MyPOS2.BL
             using (IDalUser dal = new DalUser())
             {
                 return dal.GetAllRole();
+            }
+        }
+
+        internal static void BlockUser(ApplicationUserManager userManager, string id)
+        {
+            using (IDalUser dal = new DalUser())
+            {
+                //dal.BlockUser(id);
+                AspNetUsers user = dal.GetAspUserInfoById(id);
+                
+                userManager.SetLockoutEnabled(user.Id, true);
+                userManager.SetLockoutEndDate(user.Id, DateTime.MaxValue);
+            }
+        }
+
+
+        internal static void UnBlockUser(ApplicationUserManager userManager, string id)
+        {
+            using (IDalUser dal = new DalUser())
+            {
+                //dal.UnBlockUser(id);
+
+                AspNetUsers user = dal.GetAspUserInfoById(id);
+                //DateTime? date = null;
+                userManager.SetLockoutEnabled(user.Id, false);
+                //userManager.SetLockoutEndDate(user.Id, date.Value);
             }
         }
     }

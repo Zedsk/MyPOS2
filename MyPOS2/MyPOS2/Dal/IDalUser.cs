@@ -23,5 +23,8 @@ namespace MyPOS2.Dal
         IList<AspNetRoles> GetAllRole();
         void UpdateUserInfo(USERINFO userInfo, string role);
         string GetIdRoleByName(string nameRole);
+        void BlockUser(string id);
+        void UnBlockUser(string id);
+        AspNetUsers GetAspUserInfoById(string id);
     }
 }
