@@ -215,7 +215,8 @@ function ProductBy(id, meth) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('containerRight').innerHTML = xhr.responseText + '<a href="javascript:window.history.back();">Retour</a>';
+            //document.getElementById('containerRight').innerHTML = xhr.responseText + '<a href="javascript:window.history.back();">Retour</a>';
+            document.getElementById('containerRight').innerHTML = xhr.responseText;
         }
     }
 
